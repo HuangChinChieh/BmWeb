@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>九盈 VIP CLUB</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=yes">
+    <link rel="shortcut icon" href="images/ico.png" />
+    <link rel="Bookmark" href="images/ico.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/App_144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/App_144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/App_72.png">
+    <link rel="apple-touch-icon-precomposed" href="images/App_72.png">
+
+    <!-- CSS -->
+    <link href="css/404page.css" rel="stylesheet" type="text/css">
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" href="ico/favicon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="ico/apple-touch-icon-57-precomposed.png">
+    
+    <script type="text/javascript" src="Scripts/Common.js"></script>
+    <script language="javascript" src="Scripts/MultiLanguage.js"></script>
+    <script language="javascript">
+        var c = new common();
+        var mlp;
+        var Lang;
+
+
+        function init() {
+            Lang = c.getParameter("lang");
+
+            if ((Lang == "") || (Lang == null)) {
+                Lang = "ENG";
+            }
+
+            mlp = new multiLanguage();
+            mlp.loadLanguage(Lang, null);
+        }
+
+        window.onload = init;
+    </script>
+</head>
+
+<body>
+	<div class="P404_wrapper">
+		<div class="P404_Div">
+			<div class="P404_img"><img src="images/login.png"></div>
+			<div class="P404_F1a"><span class="language_replace">SORRY</span></div>
+			<div class="P404_F2"><span class="language_replace">System maintenance.</span></div>
+			<div class="P404_F3"><span class="language_replace">We will be back soon</span></div>
+		</div>
+	</div>
+</body>
+</html>

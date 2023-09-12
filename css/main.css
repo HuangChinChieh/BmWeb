@@ -1,0 +1,575 @@
+@charset "UTF-8";
+* {
+    font-family: "微軟正黑體";
+    color: #fff;
+    user-select: none;
+}
+
+body {
+    margin: 0;
+    background-color: #000;
+    position: relative;
+}
+
+body .bg {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url(../images/bg.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+.main{
+    position: relative;
+    background-color: rgba(33, 33, 33, 0.3);
+    background-image: url("../images/overlay-2.png");
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    overflow-x: hidden;
+}
+
+.tab{
+    position: absolute;
+    left: 0;
+    top: -60px;
+    width: 200px;
+    height: 60px;
+    line-height: 60px;
+    background: rgba(30, 30, 30, 0.75);
+    border-radius: 16px 16px 0 0;
+    text-align: center;
+}
+.tab.active{
+    background: rgba(255,204,102,0.75);
+}
+
+.tab1{
+    left: 200px;
+}
+
+.bgShadow{
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 65%;
+    max-width: 800px;
+    padding: 48px;
+    background: rgba(30, 30, 30, 0.75);
+    border-radius: 0 16px 16px;
+    text-align: left;
+}
+
+.mainBox {
+    width: 100%;
+    display: inline-flex;
+    display: -o-inline-flex;
+    display: -ms-inline-flex;
+    display: -moz-inline-flex;
+    display: -webkit-inline-flex;
+    justify-content: space-between;
+    text-align: center;
+    padding-bottom: 135px;
+}
+.mainBox.hide{
+    display: none;
+}
+
+.mainBox .title {
+    width: 45%;
+    white-space: nowrap;
+    text-align: left;
+}
+
+.mainBox .title h1 {
+    margin: 0 0 8px;
+    vertical-align: top;
+    line-height: 1;
+    font-size: 40px;
+}
+
+.mainBox .title p {
+    display: inline-block;
+    color: #fc6;
+    font-size: 16px;
+    margin: 0;
+}
+
+.mainBox .title p span {
+    color: #fc6;
+    font-size: 16px;
+    margin: 0;
+}
+
+.mainBox .title .line {
+    position: relative;
+    display: inline-block;
+    width: 65%;
+    height: 1px;
+    margin-left: 1%;
+    background-color: #fc6;
+}
+
+.mainBox .title .line .light {
+    position: absolute;
+    top: -24px;
+    left: 91%;
+    background: url(../images/light.png) no-repeat center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    -webkit-animation: light 10s linear alternate;
+    animation: light 10s linear alternate;
+}
+
+@-webkit-keyframes light {
+    0% {
+        -webkit-transform: scale(1) translateX(-480%);
+        -ms-transform: scale(1) translateX(-480%);
+        -o-transform: scale(1) translateX(-480%);
+        transform: scale(1) translateX(-480%);
+    }
+    20% {
+        -webkit-transform: scale(1.5);
+        -ms-transform: scale(1.5);
+        -o-transform: scale(1.5);
+        transform: scale(1.5);
+    }
+    100% {
+        -webkit-transform: scale(1.3) translateX(0%);
+        -ms-transform: scale(1.3) translateX(0%);
+        -o-transform: scale(1.3) translateX(0%);
+        transform: scale(1.3) translateX(0%);
+    }
+}
+@keyframes light {
+    0% {
+        -webkit-transform: scale(1) translateX(-480%);
+        -ms-transform: scale(1) translateX(-480%);
+        -o-transform: scale(1) translateX(-480%);
+        transform: scale(1) translateX(-480%);
+    }
+    20% {
+        -webkit-transform: scale(1.5);
+        -ms-transform: scale(1.5);
+        -o-transform: scale(1.5);
+        transform: scale(1.5);
+    }
+    100% {
+        -webkit-transform: scale(1.3) translateX(0%);
+        -ms-transform: scale(1.3) translateX(0%);
+        -o-transform: scale(1.3) translateX(0%);
+        transform: scale(1.3) translateX(0%);
+    }
+}
+
+.buttonGroup {
+    display: inline-flex;
+    display: -o-inline-flex;
+    display: -ms-inline-flex;
+    display: -moz-inline-flex;
+    display: -webkit-inline-flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 65%;
+}
+
+.mainBox .buttonGroup button {
+    width: calc(100% / 2);
+    height: 55px;
+    margin-right: 16px;
+    margin-top: 80px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    border: 2px solid #ffcc66;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffcc66;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.mainBox .buttonGroup button:hover {
+    color: #212121;
+    background: #ffcc66;
+}
+
+.mainBox .buttonGroup button .button_inner {
+    display: inline-flex;
+    display: -o-inline-flex;
+    display: -ms-inline-flex;
+    display: -moz-inline-flex;
+    display: -webkit-inline-flex;
+    justify-content: center;
+    align-items: center;
+    -ms-align-items: center;
+    position: absolute;
+    width: calc((100% - 16px * 2) / 3);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.mainBox .qrCodeGroup {
+    position: relative;
+    font-size: 0;
+}
+
+.mainBox .qrCodeGroup .img {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    border-radius: 10px;
+    box-shadow: inset 1px 2px 1px 1px rgba(0, 0, 0, 0.1), 0px 8px 20px 2px rgba(0, 0, 0, 0.8);
+    z-index: -1;
+}
+
+.mainBox .qrCodeGroup::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 220px;
+    height: 220px;
+    background: url("../images/logo_qrcode.png");
+    background-size: 50px;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.APPICON img {
+    /* box-shadow: 0 0 20px 0px rgba(60, 50, 245, 0.3), 0 0 120px 0px rgba(120, 50, 245, 0.7); */
+    box-shadow: 0 0 20px 0px rgba(255, 255, 255, 0.3), 0 0 120px 0px rgba(218, 207, 238, 0.6)
+}
+
+button img {
+    width: 25px;
+    height: 25px;
+	margin-right: 2px;
+}
+
+button span {
+    color: #ffcc66;
+}
+
+button:hover span {
+    color: #fff;
+}
+
+#ios2.deactive,
+#ios2.deactive:hover {
+    cursor: not-allowed;
+    border-color: #444;
+    background: rgba(0, 0, 0, 0.5);
+    outline: 0;
+}
+
+#ios2.deactive img {
+    opacity: 0.2;
+}
+
+#ios2.deactive span {
+    color: #444;
+}
+
+.buttonTitle img{
+	position: relative;
+	top:2px;
+	width: auto;
+	height:20px;
+	margin-right: 5px;
+	display: none;
+}
+
+.languageSwitch{
+    position: absolute;
+    left: 50%;
+    top: calc(45% + 280px);
+    transform: translate(-50%,-50%);
+    font-size: 0;
+    width: 400px;
+}
+.btn_lang{
+    display: inline-block;
+    width: 20%;
+    text-align: center;
+    opacity: 0.5;
+}
+.btn_lang span{
+    display: block;
+    margin-top: 4px;
+    font-size: 16px;
+}
+.btn_lang img{border: 2px solid transparent; width: 40px;}
+.btn_lang.active{opacity: 1;}
+.btn_lang.active img{border-color: #ffcc66; border-radius: 50%;}
+.btn_lang.active span{color: #ffcc66;}
+
+@media screen and (min-width: 769px) {
+    .APPICON img {
+        position: absolute;
+        top: 48px;
+        left: 48px;
+        width: 70px;
+        height: 70px;
+        border-radius: 16px;
+    }
+    .title {
+        padding-left: 80px;
+    }
+    .buttonTitle{
+        position: absolute;
+        left: 0;
+        bottom: 56px;
+        font-size: 22px;
+    }
+    .mainBox .buttonGroup button:last-child {
+        margin-right: 0;
+    }
+}
+/* deskop & laptop */
+@media (min-device-width: 1024px) and (max-device-width: 1280px) and (-webkit-max-device-pixel-ratio: 1){
+    .bg, .main{min-width: 1024px;}
+    .downloadGroup{
+        display: inline-flex;
+        display: -o-inline-flex;
+        display: -ms-inline-flex;
+        display: -moz-inline-flex;
+        display: -webkit-inline-flex;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+    .downloadGroup:last-child{
+        bottom: -140px;
+    }
+    .APPICON img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 70px;
+        height: 70px;
+        border-radius: 15px;
+    }
+    .title {
+        padding-left: 80px;
+    }
+    .buttonTitle{
+        position: absolute;
+        left: 0;
+        bottom: 56px;
+        font-size: 22px;
+    }
+    .mainBox .buttonGroup button:last-child {
+        margin-right: 0;
+    }
+}
+/* include ipad & ipad pro */
+@media (max-device-width: 1366px) and (max-device-height: 1366px) and (-webkit-min-device-pixel-ratio: 2){
+    /*.downloadGroup:last-child{display: none;}*/
+}
+@media (min-device-width: 1024px){
+    .downloadGroup{
+        display: inline-flex;
+        display: -o-inline-flex;
+        display: -ms-inline-flex;
+        display: -moz-inline-flex;
+        display: -webkit-inline-flex;
+        position: absolute;
+        bottom: 48px;
+        left: 48px;
+        width: 100%;
+    }
+    #andriodAPP{
+        bottom: 183px;
+    }
+}
+@media screen and (max-width: 768px) and (-webkit-min-device-pixel-ratio: 2){
+    .mainBox {
+        width: 100%;
+        display: initial;
+    }
+    .mainBox {
+        margin: 0 auto;
+        text-align: center;
+    }
+    .mainBox .title {
+        width: auto;
+        text-align: center;
+    }
+    .mainBox .title h1 {
+        font-size: 30px;
+    }
+    .mainBox .title p {
+        display: block;
+        margin: 0 auto;
+        font-size: 16px;
+    }
+    .mainBox .title line {
+        display: block;
+        margin: 0 auto;
+    }
+    .buttonGroup {
+        position: initial;
+        /* display: block; */
+        margin: 0 auto;
+    }
+    .mainBox .buttonGroup button {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 45px;
+        font-size: 16px;
+        z-index: 100;
+        margin: 0 8px 16px;
+    }
+    .mainBox .buttonGroup button .button_inner {
+        width: 100%;
+    }
+    .APPICON img {
+        width: 90px;
+        height: 90px;
+        border-radius: 15px;
+        margin-bottom: 10px;
+    }
+    .APPICON h1 {
+        display: block;
+    }
+    .mainBox .qrCodeGroup {
+        margin: 12px;
+    }
+    .mainBox .qrCodeGroup .img {
+        width: 200px;
+        height: 200px;
+    }
+    .mainBox .qrCodeGroup::after {
+        width: 200px;
+        height: 200px;
+    }
+    .buttonGroup{
+        width: 90%;
+    }
+    .button_inner span{font-size: 14px;}
+    .bgShadow{top: 48%;}
+    .languageSwitch{top: calc(48% + 420px);}
+}
+
+@media (max-device-width: 500px) and (-webkit-min-device-pixel-ratio: 2){
+    .tab{top: -30px; width: 50%; height: 48px; line-height: 48px; border-radius: 0;}
+    .tab1{left: 50%;}
+    .buttonTitle{margin: 24px 0 12px; font-size: 18px;}
+    .button_inner img{display: none;}
+    .button_inner span{font-size: 14px;}
+	.buttonTitle img{
+        position: relative;
+        top:2px;
+        width: auto;
+        height:20px;
+        margin-right: 5px;
+        display: inline-block;
+    }
+    .mainBox .buttonGroup button{margin: 0 8px;}
+    .bgShadow{background: transparent;}
+    .languageSwitch{top: calc(48% + 320px); margin-bottom: 48px;}
+    .btn_lang img{width: 36px;}
+    .btn_lang span{font-size: 12px;}
+    @-webkit-keyframes light {
+        0% {
+            -webkit-transform: scale(1) translateX(-370%);
+            -ms-transform: scale(1) translateX(-370%);
+            -o-transform: scale(1) translateX(-370%);
+            transform: scale(1) translateX(-370%);
+        }
+        20% {
+            -webkit-transform: scale(1.5);
+            -ms-transform: scale(1.5);
+            -o-transform: scale(1.5);
+            transform: scale(1.5);
+        }
+        100% {
+            -webkit-transform: scale(1.3) translateX(-10%);
+            -ms-transform: scale(1.3) translateX(-10%);
+            -o-transform: scale(1.3) translateX(-10%);
+            transform: scale(1.3) translateX(-10%);
+        }
+    }
+    @keyframes light {
+        0% {
+            -webkit-transform: scale(1) translateX(-370%);
+            -ms-transform: scale(1) translateX(-370%);
+            -o-transform: scale(1) translateX(-370%);
+            transform: scale(1) translateX(-370%);
+        }
+        20% {
+            -webkit-transform: scale(1.5);
+            -ms-transform: scale(1.5);
+            -o-transform: scale(1.5);
+            transform: scale(1.5);
+        }
+        100% {
+            -webkit-transform: scale(1.3) translateX(-10%);
+            -ms-transform: scale(1.3) translateX(-10%);
+            -o-transform: scale(1.3) translateX(-10%);
+            transform: scale(1.3) translateX(-10%);
+        }
+    }
+}
+@media (max-width: 375px) and (-webkit-min-device-pixel-ratio: 2){
+    .bgShadow{top: 53%;}
+    .languageSwitch{width: 360px; top: calc(53% + 320px);}
+    @-webkit-keyframes light {
+        0% {
+            -webkit-transform: scale(1) translateX(-350%);
+            -ms-transform: scale(1) translateX(-350%);
+            -o-transform: scale(1) translateX(-350%);
+            transform: scale(1) translateX(-350%);
+        }
+        20% {
+            -webkit-transform: scale(1.5);
+            -ms-transform: scale(1.5);
+            -o-transform: scale(1.5);
+            transform: scale(1.5);
+        }
+        100% {
+            -webkit-transform: scale(1.3) translateX(-10%);
+            -ms-transform: scale(1.3) translateX(-10%);
+            -o-transform: scale(1.3) translateX(-10%);
+            transform: scale(1.3) translateX(-10%);
+        }
+    }
+    @keyframes light {
+        0% {
+            -webkit-transform: scale(1) translateX(-350%);
+            -ms-transform: scale(1) translateX(-350%);
+            -o-transform: scale(1) translateX(-350%);
+            transform: scale(1) translateX(-350%);
+        }
+        20% {
+            -webkit-transform: scale(1.5);
+            -ms-transform: scale(1.5);
+            -o-transform: scale(1.5);
+            transform: scale(1.5);
+        }
+        100% {
+            -webkit-transform: scale(1.3) translateX(-10%);
+            -ms-transform: scale(1.3) translateX(-10%);
+            -o-transform: scale(1.3) translateX(-10%);
+            transform: scale(1.3) translateX(-10%);
+        }
+    }
+}

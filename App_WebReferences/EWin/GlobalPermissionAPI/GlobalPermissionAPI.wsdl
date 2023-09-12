@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HeartBeat">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EchoString" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HeartBeatResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HeartBeatResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="APIResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Result" type="tns:enumResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="enumResult">
+        <s:restriction base="s:string">
+          <s:enumeration value="OK" />
+          <s:enumeration value="ERR" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="AddAccessLog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ASID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserIP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAccessLogResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddAccessLogResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetASIDInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ASID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetASIDInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetASIDInfoResult" type="tns:ASIDInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ASIDInfo">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ASID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LoginDate" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="CheckPermission">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ASID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PageName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PagePermissionName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckPermissionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckPermissionResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="APIResult" nillable="true" type="tns:APIResult" />
+      <s:element name="ASIDInfo" nillable="true" type="tns:ASIDInfo" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HeartBeatSoapIn">
+    <wsdl:part name="parameters" element="tns:HeartBeat" />
+  </wsdl:message>
+  <wsdl:message name="HeartBeatSoapOut">
+    <wsdl:part name="parameters" element="tns:HeartBeatResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddAccessLogSoapIn">
+    <wsdl:part name="parameters" element="tns:AddAccessLog" />
+  </wsdl:message>
+  <wsdl:message name="AddAccessLogSoapOut">
+    <wsdl:part name="parameters" element="tns:AddAccessLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetASIDInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetASIDInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetASIDInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetASIDInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckPermissionSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckPermission" />
+  </wsdl:message>
+  <wsdl:message name="CheckPermissionSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckPermissionResponse" />
+  </wsdl:message>
+  <wsdl:message name="HeartBeatHttpGetIn">
+    <wsdl:part name="EchoString" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HeartBeatHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="AddAccessLogHttpGetIn">
+    <wsdl:part name="ASID" type="s:string" />
+    <wsdl:part name="Description" type="s:string" />
+    <wsdl:part name="UserIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddAccessLogHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="GetASIDInfoHttpGetIn">
+    <wsdl:part name="ASID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetASIDInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:ASIDInfo" />
+  </wsdl:message>
+  <wsdl:message name="CheckPermissionHttpGetIn">
+    <wsdl:part name="ASID" type="s:string" />
+    <wsdl:part name="CompanyCode" type="s:string" />
+    <wsdl:part name="AppName" type="s:string" />
+    <wsdl:part name="PageName" type="s:string" />
+    <wsdl:part name="PagePermissionName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckPermissionHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="HeartBeatHttpPostIn">
+    <wsdl:part name="EchoString" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HeartBeatHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="AddAccessLogHttpPostIn">
+    <wsdl:part name="ASID" type="s:string" />
+    <wsdl:part name="Description" type="s:string" />
+    <wsdl:part name="UserIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddAccessLogHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="GetASIDInfoHttpPostIn">
+    <wsdl:part name="ASID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetASIDInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:ASIDInfo" />
+  </wsdl:message>
+  <wsdl:message name="CheckPermissionHttpPostIn">
+    <wsdl:part name="ASID" type="s:string" />
+    <wsdl:part name="CompanyCode" type="s:string" />
+    <wsdl:part name="AppName" type="s:string" />
+    <wsdl:part name="PageName" type="s:string" />
+    <wsdl:part name="PagePermissionName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckPermissionHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:portType name="GlobalPermissionAPISoap">
+    <wsdl:operation name="HeartBeat">
+      <wsdl:input message="tns:HeartBeatSoapIn" />
+      <wsdl:output message="tns:HeartBeatSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAccessLog">
+      <wsdl:input message="tns:AddAccessLogSoapIn" />
+      <wsdl:output message="tns:AddAccessLogSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetASIDInfo">
+      <wsdl:input message="tns:GetASIDInfoSoapIn" />
+      <wsdl:output message="tns:GetASIDInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckPermission">
+      <wsdl:input message="tns:CheckPermissionSoapIn" />
+      <wsdl:output message="tns:CheckPermissionSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="GlobalPermissionAPIHttpGet">
+    <wsdl:operation name="HeartBeat">
+      <wsdl:input message="tns:HeartBeatHttpGetIn" />
+      <wsdl:output message="tns:HeartBeatHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAccessLog">
+      <wsdl:input message="tns:AddAccessLogHttpGetIn" />
+      <wsdl:output message="tns:AddAccessLogHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetASIDInfo">
+      <wsdl:input message="tns:GetASIDInfoHttpGetIn" />
+      <wsdl:output message="tns:GetASIDInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckPermission">
+      <wsdl:input message="tns:CheckPermissionHttpGetIn" />
+      <wsdl:output message="tns:CheckPermissionHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="GlobalPermissionAPIHttpPost">
+    <wsdl:operation name="HeartBeat">
+      <wsdl:input message="tns:HeartBeatHttpPostIn" />
+      <wsdl:output message="tns:HeartBeatHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAccessLog">
+      <wsdl:input message="tns:AddAccessLogHttpPostIn" />
+      <wsdl:output message="tns:AddAccessLogHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetASIDInfo">
+      <wsdl:input message="tns:GetASIDInfoHttpPostIn" />
+      <wsdl:output message="tns:GetASIDInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckPermission">
+      <wsdl:input message="tns:CheckPermissionHttpPostIn" />
+      <wsdl:output message="tns:CheckPermissionHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GlobalPermissionAPISoap" type="tns:GlobalPermissionAPISoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HeartBeat">
+      <soap:operation soapAction="http://tempuri.org/HeartBeat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAccessLog">
+      <soap:operation soapAction="http://tempuri.org/AddAccessLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetASIDInfo">
+      <soap:operation soapAction="http://tempuri.org/GetASIDInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPermission">
+      <soap:operation soapAction="http://tempuri.org/CheckPermission" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GlobalPermissionAPISoap12" type="tns:GlobalPermissionAPISoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HeartBeat">
+      <soap12:operation soapAction="http://tempuri.org/HeartBeat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAccessLog">
+      <soap12:operation soapAction="http://tempuri.org/AddAccessLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetASIDInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetASIDInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPermission">
+      <soap12:operation soapAction="http://tempuri.org/CheckPermission" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GlobalPermissionAPIHttpGet" type="tns:GlobalPermissionAPIHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HeartBeat">
+      <http:operation location="/HeartBeat" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAccessLog">
+      <http:operation location="/AddAccessLog" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetASIDInfo">
+      <http:operation location="/GetASIDInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPermission">
+      <http:operation location="/CheckPermission" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GlobalPermissionAPIHttpPost" type="tns:GlobalPermissionAPIHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HeartBeat">
+      <http:operation location="/HeartBeat" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAccessLog">
+      <http:operation location="/AddAccessLog" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetASIDInfo">
+      <http:operation location="/GetASIDInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckPermission">
+      <http:operation location="/CheckPermission" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GlobalPermissionAPI">
+    <wsdl:port name="GlobalPermissionAPISoap" binding="tns:GlobalPermissionAPISoap">
+      <soap:address location="http://ewin.dev.mts.idv.tw/API/GlobalPermissionAPI.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GlobalPermissionAPISoap12" binding="tns:GlobalPermissionAPISoap12">
+      <soap12:address location="http://ewin.dev.mts.idv.tw/API/GlobalPermissionAPI.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GlobalPermissionAPIHttpGet" binding="tns:GlobalPermissionAPIHttpGet">
+      <http:address location="http://ewin.dev.mts.idv.tw/API/GlobalPermissionAPI.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GlobalPermissionAPIHttpPost" binding="tns:GlobalPermissionAPIHttpPost">
+      <http:address location="http://ewin.dev.mts.idv.tw/API/GlobalPermissionAPI.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

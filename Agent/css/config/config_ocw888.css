@@ -1,0 +1,41 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+html,body{
+    font-family: Georgia,"MS Gothic", "游明朝", "Yu Mincho", "游明朝体", YuMincho, "ヒラギノ明朝 Pro", "Hiragino Mincho ProN", "MS P明朝", "MS PMincho", HGS明朝E, "MS Mincho", serif,Helvetica Neue, Arial, -apple-system, BlinkMacSystemFont, Microsoft JhengHei, "Noto Sans TC", "Segoe UI", Roboto, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* 隱藏header 多重帳號功能ICON */
+#btnSwitchAccount{
+    display: none!important;      
+}
+
+#idUserAccountAgentMulti {
+    display: none !important;
+}
+
+/* 隱藏header 新增帳號功能ICON */
+#btnCreateAccount{
+/*    display: none!important;      */
+}
+
+/* 隱藏feeValue */
+
+
+/* 隱藏header搜尋 */
+/* 11/11 BO哥看不到下線資料 */
+/*#idSearchButton {
+    display: none !important;
+}*/
+
+.config_none {
+    display: none !important;
+}
+
+.config_flex {
+    display: flex !important;
+}
+
+.config_inline {
+    display: inline-block !important;
+}

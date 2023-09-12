@@ -1,0 +1,16 @@
+{
+  "會員轉帳": "Transfer Service",
+  "轉出金額": "Transfer Amount",
+  "錢包密碼": "Wallet Password",
+  "確認轉出": "Confirm",
+  "錯誤": "System Message",
+  "轉帳完成": "Your transfer has been completed.",
+  "網路異常, 請稍後再嘗試": "Network exception, please try again later.",
+  "轉帳金額不足!!": "Insufficient balance to complete this action, please check your wallet balance.",
+  "無可用錢包!!": "No available wallet, please check your wallet status.",
+  "請輸入轉出金額!!": "Please enter the transfer amount.",
+  "轉出金額輸入錯誤!!": " The transfer amount is incorrect, please check.",
+  "轉出金額不可輸入負數!!": " The transfer amount cannot be minus, please check.",
+  "轉出金額超過可轉金額!!": " The transfer amount exceeds the wallet balance.",
+  "提醒": "System Message"
+}

@@ -1,0 +1,13 @@
+﻿################################################################################
+# 這個 .gitignore 檔案由 Microsoft(R) Visual Studio 自動建立。
+################################################################################
+
+/.vs/BmWeb/v15
+/.vs/BmWeb/config
+/.vs/BmWeb/OCW_PH
+/.vs
+/.vs/ProjectSettings.json
+/.vs/slnx.sqlite
+/.vs/VSWorkspaceState.json
+/.vscode
+*.config

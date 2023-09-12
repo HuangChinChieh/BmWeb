@@ -1,0 +1,1020 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HeartBeat">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EchoString" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HeartBeatResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HeartBeatResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMyIP">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetMyIPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMyIPResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGeoCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserIP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGeoCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGeoCodeResult" type="tns:GeoClass" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GeoClass">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GeoCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GeoCountry" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GeoName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GeoNameCN" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GPS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Timezone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ISPName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ASN" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateLoginGUID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateLoginGUIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateLoginGUIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetValidateImage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginGUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetValidateImageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetValidateImageResult" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RefreshValidateImage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginGUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RefreshValidateImageResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UserLoginByPhoneNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginGUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ContactPhonePrefix" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ContactPhoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ImageCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserIP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserLoginByPhoneNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserLoginByPhoneNumberResult" type="tns:LoginResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LoginResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Result">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CT" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RecoverToken" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LoginURL" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Result">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ResultState" type="tns:enumResultState" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="enumResultState">
+        <s:restriction base="s:string">
+          <s:enumeration value="OK" />
+          <s:enumeration value="ERR" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="UserLoginByEMail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginGUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EMail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ImageCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserIP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserLoginByEMailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserLoginByEMailResult" type="tns:LoginResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginGUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ImageCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserIP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserLoginResult" type="tns:LoginResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserLoginByCustomValidate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserIP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserLoginByCustomValidateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserLoginByCustomValidateResult" type="tns:LoginResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RecoverLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RecoverToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserIP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RecoverLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RecoverLoginResult" type="tns:LoginResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="GeoClass" nillable="true" type="tns:GeoClass" />
+      <s:element name="base64Binary" nillable="true" type="s:base64Binary" />
+      <s:element name="LoginResult" nillable="true" type="tns:LoginResult" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HeartBeatSoapIn">
+    <wsdl:part name="parameters" element="tns:HeartBeat" />
+  </wsdl:message>
+  <wsdl:message name="HeartBeatSoapOut">
+    <wsdl:part name="parameters" element="tns:HeartBeatResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMyIPSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMyIP" />
+  </wsdl:message>
+  <wsdl:message name="GetMyIPSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMyIPResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGeoCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGeoCode" />
+  </wsdl:message>
+  <wsdl:message name="GetGeoCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGeoCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateLoginGUIDSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateLoginGUID" />
+  </wsdl:message>
+  <wsdl:message name="CreateLoginGUIDSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateLoginGUIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetValidateImageSoapIn">
+    <wsdl:part name="parameters" element="tns:GetValidateImage" />
+  </wsdl:message>
+  <wsdl:message name="GetValidateImageSoapOut">
+    <wsdl:part name="parameters" element="tns:GetValidateImageResponse" />
+  </wsdl:message>
+  <wsdl:message name="RefreshValidateImageSoapIn">
+    <wsdl:part name="parameters" element="tns:RefreshValidateImage" />
+  </wsdl:message>
+  <wsdl:message name="RefreshValidateImageSoapOut">
+    <wsdl:part name="parameters" element="tns:RefreshValidateImageResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginByPhoneNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:UserLoginByPhoneNumber" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginByPhoneNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:UserLoginByPhoneNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginByEMailSoapIn">
+    <wsdl:part name="parameters" element="tns:UserLoginByEMail" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginByEMailSoapOut">
+    <wsdl:part name="parameters" element="tns:UserLoginByEMailResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:UserLogin" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:UserLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginByCustomValidateSoapIn">
+    <wsdl:part name="parameters" element="tns:UserLoginByCustomValidate" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginByCustomValidateSoapOut">
+    <wsdl:part name="parameters" element="tns:UserLoginByCustomValidateResponse" />
+  </wsdl:message>
+  <wsdl:message name="RecoverLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:RecoverLogin" />
+  </wsdl:message>
+  <wsdl:message name="RecoverLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:RecoverLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="HeartBeatHttpGetIn">
+    <wsdl:part name="EchoString" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HeartBeatHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMyIPHttpGetIn" />
+  <wsdl:message name="GetMyIPHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGeoCodeHttpGetIn">
+    <wsdl:part name="UserIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGeoCodeHttpGetOut">
+    <wsdl:part name="Body" element="tns:GeoClass" />
+  </wsdl:message>
+  <wsdl:message name="CreateLoginGUIDHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateLoginGUIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetValidateImageHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="LoginGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetValidateImageHttpGetOut">
+    <wsdl:part name="Body" element="tns:base64Binary" />
+  </wsdl:message>
+  <wsdl:message name="RefreshValidateImageHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="LoginGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RefreshValidateImageHttpGetOut" />
+  <wsdl:message name="UserLoginByPhoneNumberHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="LoginGUID" type="s:string" />
+    <wsdl:part name="ContactPhonePrefix" type="s:string" />
+    <wsdl:part name="ContactPhoneNumber" type="s:string" />
+    <wsdl:part name="LoginPassword" type="s:string" />
+    <wsdl:part name="CompanyCode" type="s:string" />
+    <wsdl:part name="ImageCode" type="s:string" />
+    <wsdl:part name="UserIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginByPhoneNumberHttpGetOut">
+    <wsdl:part name="Body" element="tns:LoginResult" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginByEMailHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="LoginGUID" type="s:string" />
+    <wsdl:part name="EMail" type="s:string" />
+    <wsdl:part name="LoginPassword" type="s:string" />
+    <wsdl:part name="CompanyCode" type="s:string" />
+    <wsdl:part name="ImageCode" type="s:string" />
+    <wsdl:part name="UserIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginByEMailHttpGetOut">
+    <wsdl:part name="Body" element="tns:LoginResult" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="LoginGUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="LoginPassword" type="s:string" />
+    <wsdl:part name="CompanyCode" type="s:string" />
+    <wsdl:part name="ImageCode" type="s:string" />
+    <wsdl:part name="UserIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginHttpGetOut">
+    <wsdl:part name="Body" element="tns:LoginResult" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginByCustomValidateHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="LoginPassword" type="s:string" />
+    <wsdl:part name="CompanyCode" type="s:string" />
+    <wsdl:part name="UserIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginByCustomValidateHttpGetOut">
+    <wsdl:part name="Body" element="tns:LoginResult" />
+  </wsdl:message>
+  <wsdl:message name="RecoverLoginHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="RecoverToken" type="s:string" />
+    <wsdl:part name="UserIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RecoverLoginHttpGetOut">
+    <wsdl:part name="Body" element="tns:LoginResult" />
+  </wsdl:message>
+  <wsdl:message name="HeartBeatHttpPostIn">
+    <wsdl:part name="EchoString" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HeartBeatHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMyIPHttpPostIn" />
+  <wsdl:message name="GetMyIPHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGeoCodeHttpPostIn">
+    <wsdl:part name="UserIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGeoCodeHttpPostOut">
+    <wsdl:part name="Body" element="tns:GeoClass" />
+  </wsdl:message>
+  <wsdl:message name="CreateLoginGUIDHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateLoginGUIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetValidateImageHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="LoginGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetValidateImageHttpPostOut">
+    <wsdl:part name="Body" element="tns:base64Binary" />
+  </wsdl:message>
+  <wsdl:message name="RefreshValidateImageHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="LoginGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RefreshValidateImageHttpPostOut" />
+  <wsdl:message name="UserLoginByPhoneNumberHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="LoginGUID" type="s:string" />
+    <wsdl:part name="ContactPhonePrefix" type="s:string" />
+    <wsdl:part name="ContactPhoneNumber" type="s:string" />
+    <wsdl:part name="LoginPassword" type="s:string" />
+    <wsdl:part name="CompanyCode" type="s:string" />
+    <wsdl:part name="ImageCode" type="s:string" />
+    <wsdl:part name="UserIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginByPhoneNumberHttpPostOut">
+    <wsdl:part name="Body" element="tns:LoginResult" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginByEMailHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="LoginGUID" type="s:string" />
+    <wsdl:part name="EMail" type="s:string" />
+    <wsdl:part name="LoginPassword" type="s:string" />
+    <wsdl:part name="CompanyCode" type="s:string" />
+    <wsdl:part name="ImageCode" type="s:string" />
+    <wsdl:part name="UserIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginByEMailHttpPostOut">
+    <wsdl:part name="Body" element="tns:LoginResult" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="LoginGUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="LoginPassword" type="s:string" />
+    <wsdl:part name="CompanyCode" type="s:string" />
+    <wsdl:part name="ImageCode" type="s:string" />
+    <wsdl:part name="UserIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginHttpPostOut">
+    <wsdl:part name="Body" element="tns:LoginResult" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginByCustomValidateHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="LoginPassword" type="s:string" />
+    <wsdl:part name="CompanyCode" type="s:string" />
+    <wsdl:part name="UserIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UserLoginByCustomValidateHttpPostOut">
+    <wsdl:part name="Body" element="tns:LoginResult" />
+  </wsdl:message>
+  <wsdl:message name="RecoverLoginHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="RecoverToken" type="s:string" />
+    <wsdl:part name="UserIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RecoverLoginHttpPostOut">
+    <wsdl:part name="Body" element="tns:LoginResult" />
+  </wsdl:message>
+  <wsdl:portType name="LoginAPISoap">
+    <wsdl:operation name="HeartBeat">
+      <wsdl:input message="tns:HeartBeatSoapIn" />
+      <wsdl:output message="tns:HeartBeatSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMyIP">
+      <wsdl:input message="tns:GetMyIPSoapIn" />
+      <wsdl:output message="tns:GetMyIPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGeoCode">
+      <wsdl:input message="tns:GetGeoCodeSoapIn" />
+      <wsdl:output message="tns:GetGeoCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateLoginGUID">
+      <wsdl:input message="tns:CreateLoginGUIDSoapIn" />
+      <wsdl:output message="tns:CreateLoginGUIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetValidateImage">
+      <wsdl:input message="tns:GetValidateImageSoapIn" />
+      <wsdl:output message="tns:GetValidateImageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RefreshValidateImage">
+      <wsdl:input message="tns:RefreshValidateImageSoapIn" />
+      <wsdl:output message="tns:RefreshValidateImageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByPhoneNumber">
+      <wsdl:input message="tns:UserLoginByPhoneNumberSoapIn" />
+      <wsdl:output message="tns:UserLoginByPhoneNumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByEMail">
+      <wsdl:input message="tns:UserLoginByEMailSoapIn" />
+      <wsdl:output message="tns:UserLoginByEMailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <wsdl:input message="tns:UserLoginSoapIn" />
+      <wsdl:output message="tns:UserLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByCustomValidate">
+      <wsdl:input message="tns:UserLoginByCustomValidateSoapIn" />
+      <wsdl:output message="tns:UserLoginByCustomValidateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RecoverLogin">
+      <wsdl:input message="tns:RecoverLoginSoapIn" />
+      <wsdl:output message="tns:RecoverLoginSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="LoginAPIHttpGet">
+    <wsdl:operation name="HeartBeat">
+      <wsdl:input message="tns:HeartBeatHttpGetIn" />
+      <wsdl:output message="tns:HeartBeatHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMyIP">
+      <wsdl:input message="tns:GetMyIPHttpGetIn" />
+      <wsdl:output message="tns:GetMyIPHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGeoCode">
+      <wsdl:input message="tns:GetGeoCodeHttpGetIn" />
+      <wsdl:output message="tns:GetGeoCodeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateLoginGUID">
+      <wsdl:input message="tns:CreateLoginGUIDHttpGetIn" />
+      <wsdl:output message="tns:CreateLoginGUIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetValidateImage">
+      <wsdl:input message="tns:GetValidateImageHttpGetIn" />
+      <wsdl:output message="tns:GetValidateImageHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RefreshValidateImage">
+      <wsdl:input message="tns:RefreshValidateImageHttpGetIn" />
+      <wsdl:output message="tns:RefreshValidateImageHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByPhoneNumber">
+      <wsdl:input message="tns:UserLoginByPhoneNumberHttpGetIn" />
+      <wsdl:output message="tns:UserLoginByPhoneNumberHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByEMail">
+      <wsdl:input message="tns:UserLoginByEMailHttpGetIn" />
+      <wsdl:output message="tns:UserLoginByEMailHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <wsdl:input message="tns:UserLoginHttpGetIn" />
+      <wsdl:output message="tns:UserLoginHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByCustomValidate">
+      <wsdl:input message="tns:UserLoginByCustomValidateHttpGetIn" />
+      <wsdl:output message="tns:UserLoginByCustomValidateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RecoverLogin">
+      <wsdl:input message="tns:RecoverLoginHttpGetIn" />
+      <wsdl:output message="tns:RecoverLoginHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="LoginAPIHttpPost">
+    <wsdl:operation name="HeartBeat">
+      <wsdl:input message="tns:HeartBeatHttpPostIn" />
+      <wsdl:output message="tns:HeartBeatHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMyIP">
+      <wsdl:input message="tns:GetMyIPHttpPostIn" />
+      <wsdl:output message="tns:GetMyIPHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGeoCode">
+      <wsdl:input message="tns:GetGeoCodeHttpPostIn" />
+      <wsdl:output message="tns:GetGeoCodeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateLoginGUID">
+      <wsdl:input message="tns:CreateLoginGUIDHttpPostIn" />
+      <wsdl:output message="tns:CreateLoginGUIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetValidateImage">
+      <wsdl:input message="tns:GetValidateImageHttpPostIn" />
+      <wsdl:output message="tns:GetValidateImageHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RefreshValidateImage">
+      <wsdl:input message="tns:RefreshValidateImageHttpPostIn" />
+      <wsdl:output message="tns:RefreshValidateImageHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByPhoneNumber">
+      <wsdl:input message="tns:UserLoginByPhoneNumberHttpPostIn" />
+      <wsdl:output message="tns:UserLoginByPhoneNumberHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByEMail">
+      <wsdl:input message="tns:UserLoginByEMailHttpPostIn" />
+      <wsdl:output message="tns:UserLoginByEMailHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <wsdl:input message="tns:UserLoginHttpPostIn" />
+      <wsdl:output message="tns:UserLoginHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByCustomValidate">
+      <wsdl:input message="tns:UserLoginByCustomValidateHttpPostIn" />
+      <wsdl:output message="tns:UserLoginByCustomValidateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RecoverLogin">
+      <wsdl:input message="tns:RecoverLoginHttpPostIn" />
+      <wsdl:output message="tns:RecoverLoginHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LoginAPISoap" type="tns:LoginAPISoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HeartBeat">
+      <soap:operation soapAction="http://tempuri.org/HeartBeat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMyIP">
+      <soap:operation soapAction="http://tempuri.org/GetMyIP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGeoCode">
+      <soap:operation soapAction="http://tempuri.org/GetGeoCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateLoginGUID">
+      <soap:operation soapAction="http://tempuri.org/CreateLoginGUID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetValidateImage">
+      <soap:operation soapAction="http://tempuri.org/GetValidateImage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RefreshValidateImage">
+      <soap:operation soapAction="http://tempuri.org/RefreshValidateImage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByPhoneNumber">
+      <soap:operation soapAction="http://tempuri.org/UserLoginByPhoneNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByEMail">
+      <soap:operation soapAction="http://tempuri.org/UserLoginByEMail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <soap:operation soapAction="http://tempuri.org/UserLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByCustomValidate">
+      <soap:operation soapAction="http://tempuri.org/UserLoginByCustomValidate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecoverLogin">
+      <soap:operation soapAction="http://tempuri.org/RecoverLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LoginAPISoap12" type="tns:LoginAPISoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HeartBeat">
+      <soap12:operation soapAction="http://tempuri.org/HeartBeat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMyIP">
+      <soap12:operation soapAction="http://tempuri.org/GetMyIP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGeoCode">
+      <soap12:operation soapAction="http://tempuri.org/GetGeoCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateLoginGUID">
+      <soap12:operation soapAction="http://tempuri.org/CreateLoginGUID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetValidateImage">
+      <soap12:operation soapAction="http://tempuri.org/GetValidateImage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RefreshValidateImage">
+      <soap12:operation soapAction="http://tempuri.org/RefreshValidateImage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByPhoneNumber">
+      <soap12:operation soapAction="http://tempuri.org/UserLoginByPhoneNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByEMail">
+      <soap12:operation soapAction="http://tempuri.org/UserLoginByEMail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <soap12:operation soapAction="http://tempuri.org/UserLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByCustomValidate">
+      <soap12:operation soapAction="http://tempuri.org/UserLoginByCustomValidate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecoverLogin">
+      <soap12:operation soapAction="http://tempuri.org/RecoverLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LoginAPIHttpGet" type="tns:LoginAPIHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HeartBeat">
+      <http:operation location="/HeartBeat" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMyIP">
+      <http:operation location="/GetMyIP" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGeoCode">
+      <http:operation location="/GetGeoCode" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateLoginGUID">
+      <http:operation location="/CreateLoginGUID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetValidateImage">
+      <http:operation location="/GetValidateImage" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RefreshValidateImage">
+      <http:operation location="/RefreshValidateImage" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByPhoneNumber">
+      <http:operation location="/UserLoginByPhoneNumber" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByEMail">
+      <http:operation location="/UserLoginByEMail" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <http:operation location="/UserLogin" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByCustomValidate">
+      <http:operation location="/UserLoginByCustomValidate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecoverLogin">
+      <http:operation location="/RecoverLogin" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LoginAPIHttpPost" type="tns:LoginAPIHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HeartBeat">
+      <http:operation location="/HeartBeat" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMyIP">
+      <http:operation location="/GetMyIP" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGeoCode">
+      <http:operation location="/GetGeoCode" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateLoginGUID">
+      <http:operation location="/CreateLoginGUID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetValidateImage">
+      <http:operation location="/GetValidateImage" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RefreshValidateImage">
+      <http:operation location="/RefreshValidateImage" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByPhoneNumber">
+      <http:operation location="/UserLoginByPhoneNumber" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByEMail">
+      <http:operation location="/UserLoginByEMail" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLogin">
+      <http:operation location="/UserLogin" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserLoginByCustomValidate">
+      <http:operation location="/UserLoginByCustomValidate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RecoverLogin">
+      <http:operation location="/RecoverLogin" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LoginAPI">
+    <wsdl:port name="LoginAPISoap" binding="tns:LoginAPISoap">
+      <soap:address location="http://ewin.dev.mts.idv.tw/API/LoginAPI.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LoginAPISoap12" binding="tns:LoginAPISoap12">
+      <soap12:address location="http://ewin.dev.mts.idv.tw/API/LoginAPI.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LoginAPIHttpGet" binding="tns:LoginAPIHttpGet">
+      <http:address location="http://ewin.dev.mts.idv.tw/API/LoginAPI.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LoginAPIHttpPost" binding="tns:LoginAPIHttpPost">
+      <http:address location="http://ewin.dev.mts.idv.tw/API/LoginAPI.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

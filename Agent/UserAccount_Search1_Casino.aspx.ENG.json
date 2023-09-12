@@ -1,0 +1,20 @@
+{
+  "錯誤": "System Message",
+  "最少須輸入3個字元": "At least 3 characters are required",
+  "網路異常, 請稍後重新嘗試": "Network exception, please try again.",
+  "一般帳戶": "Member",
+  "代理": "Agent",
+  "股東": "Shareholder",
+  "正常": "Normal",
+  "停用": "Deactivated",
+  "提醒": "System Message",
+  "無數據": "There is no any information so far.",
+  "團隊帳號": "Team Account",
+  "帳號": "Account",
+  "確認": "OK",
+  "類型": "Type",
+  "狀態": "Status",
+  "最後登入時間": "Last Login Time",
+  "建立時間": "Created Date",
+  "查看更多": "More"
+}

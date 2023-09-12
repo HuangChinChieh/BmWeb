@@ -1,0 +1,108 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/* UserAccount_Add.aspx 調整上線佔成 上線碼佣提示樣式 */
+.ADJ_userRate{
+    position: relative;
+}
+
+.ADJ_userRate .form-control:optional ~ label{
+    background: rgba(0,0,0,0.0);
+    width: auto;
+    opacity: 0;
+    border-radius: 5px;
+    padding-top: 0px !important;
+    height: auto;
+    line-height: 26px;
+    /* padding: 0px 15px; */
+    padding-left: 6px;
+    top: 30px!important;
+}
+
+.ADJ_userRate .form-control:optional ~ label::after{
+    content: "";
+    position: absolute;
+    opacity: 0;
+    top: -7px;
+    left: 11px;
+    width: 0;
+    height: 0;
+    border-width: 0 6px 7px;
+    border-style: solid;
+    border-color: transparent transparent rgba(0,0,0,0);    
+}
+
+.ADJ_userRate .form-control:focus ~ label{
+    background: rgba(0,0,0,0.9);
+    width: auto;
+    opacity: 1;
+    top: 36px!important
+}
+.ADJ_userRate .form-control:focus ~ label::after{
+    content: "";
+    position: absolute;
+    opacity: 1;
+    top: -7px;
+    left: 11px;
+    width: 0;
+    height: 0;
+    border-width: 0 6px 7px;
+    border-style: solid;
+    border-color: transparent transparent rgba(0,0,0,.9);    
+}
+
+
+.form-control-hidden .form-control.input-hidden-default:required ~ .form-label, .form-control-hidden .form-control.input-hidden-default:optional ~ .form-label, .form-control-hidden .form-control.input-hidden-default:focus ~ .form-label, .form-control-hidden .form-control.input-hidden-default:required:valid ~ .form-label, .form-control-hidden .form-control.input-hidden-default:optional:focus ~ .form-label, .form-control-hidden .form-control.input-hidden-default:optional:not(:placeholder-shown) ~ .form-label{
+    background: none;
+}
+
+
+ 
+@media screen and (min-width: 568px){
+    .wallet_PointList .tbody__tr:last-child .ADJ_userRate .form-control:optional ~ label{
+        background: rgba(0,0,0,0.0);
+        width: auto;
+        opacity: 0;
+        border-radius: 5px;
+        padding-top: 0px !important;
+        height: auto;
+        line-height: 26px;
+        /* padding: 0px 15px; */
+        padding-left: 6px;
+        top: -22px !important;
+    }
+
+    .wallet_PointList .tbody__tr:last-child .ADJ_userRate .form-control:optional ~ label::after{
+        content: "";
+        position: absolute;
+        opacity: 0;
+        top: 26px;
+        left: 11px;
+        width: 0;
+        height: 0;
+        border-width: 0 6px 7px;
+        border-style: solid;
+        border-color: transparent transparent rgba(0,0,0,0);   
+        transform: rotate(180deg);
+    }
+
+    .wallet_PointList .tbody__tr:last-child .ADJ_userRate .form-control:focus ~ label{
+        background: rgba(0,0,0,0.9);
+        width: auto;
+        opacity: 1;
+        top: -28px !important;
+    }
+    .wallet_PointList .tbody__tr:last-child .ADJ_userRate .form-control:focus ~ label::after{
+        content: "";
+        position: absolute;
+        opacity: 1;
+        top: 26px;
+        left: 11px;
+        width: 0;
+        height: 0;
+        border-width: 0 6px 7px;
+        border-style: solid;
+        border-color: transparent transparent rgba(0,0,0,.9);    
+    }
+}

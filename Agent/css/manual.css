@@ -1,0 +1,17 @@
+/*=================== fonts ====================*/
+@import url("https://fonts.googleapis.com/css?family=Heebo:300,400,700,900|Roboto:300,400,500,700");
+/* animation =================================
+animation:name duration | timing-function | delay | iteration-count | direction | fill-mode | play-state; */
+.title {
+  padding: 1rem 0;
+  border-bottom: solid 1px rgba(50, 54, 71, 0.2);
+  margin-bottom: 1rem; }
+
+.footer {
+  text-align: center;
+  background: #323647;
+  color: rgba(255, 255, 255, 0.45);
+  padding: 0.6rem 0; }
+  .footer .copyright {
+    margin-bottom: 0;
+    font-size: 0.75rem; }

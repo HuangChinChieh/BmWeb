@@ -1,0 +1,212 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* reset */
+html,body,h1,h2,h3,h4,h5,h6,div,dl,dt,dd,ul,ol,li,p,blockquote,pre,hr,figure,table,caption,th,td,form,fieldset,legend,input,button,textarea,menu{margin:0;padding:0;}
+header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}
+table{border-collapse:collapse;border-spacing:0;}
+caption,th{text-align:left;font-weight:normal;}
+html,body,fieldset,img,iframe,abbr{border:0;}
+i,cite,em,var,address,dfn{font-style:normal;}
+[hidefocus],summary{outline:0;}
+li{list-style:none;}
+h1,h2,h3,h4,h5,h6,small{font-size:100%;}
+sup,sub{font-size:83%;}
+pre,code,kbd,samp{font-family:inherit;}
+q:before,q:after{content:none;}
+textarea{overflow:auto;resize:none;}
+label,summary{cursor:default;}
+a,button{cursor:pointer;}
+h1,h2,h3,h4,h5,h6,em,strong,b{font-weight:bold;}
+del,ins,u,s,a,a:hover{text-decoration:none;}
+body,textarea,input,button,select,keygen,legend{font:12px/1.14 arial,\5b8b\4f53;outline:0;}
+html, body {font-family: '微軟正黑體', sans-serif, Helvetica Neue, Helvetica, Arial;background: #373b4e;	width:100%;height:100%;}
+
+.sl_wrapper{
+	display: -webkit-flex; /* Safari */
+    -webkit-align-items: center; /* Safari 7.0+ */
+	-webkit-justify-content: center;
+	display: -moz-flex; /* Safari */
+    -moz-align-items: center; /* Safari 7.0+ */
+	-moz-justify-content: center;
+	display: -ms-flex; /* Safari */
+    -ms-align-items: center; /* Safari 7.0+ */
+	-ms-justify-content: center;
+	display: -o-flex; /* Safari */
+    -o-align-items: center; /* Safari 7.0+ */
+	-o-justify-content: center;
+    display: flex;
+    align-items: center;
+	justify-content: center;
+	flex-wrap: nowrap;
+	width:100%;
+	height:100%;
+	background: #373b4e;	
+}
+
+.sl_loginCon{
+	width:calc(90% - 40px);
+	height:calc(90% - 70px);
+	padding:30px 20px 40px;
+	background:-webkit-linear-gradient(135deg,#343434,#222);
+	background:-moz-linear-gradient(135deg,#343434,#222);
+	background:-o-linear-gradient(135deg,#343434,#222);
+	background:linear-gradient(135deg,#343434,#222);
+	border-radius: 20px;
+	max-width: 500px;
+	
+}
+.sl_loginConLogo img{
+	width: 50%;
+	height: auto;	
+}
+.sl_loginConLogo{
+	padding-bottom:10px;
+	border-bottom: 0.5px dashed rgba(100,100,100,0.3);
+	margin-bottom: 5px;
+}
+.sl_loginConNotice{
+	display: block;
+	text-align: center;
+	color: #c1a678;
+	padding: 10px 0px;
+	font-size: 1.8em;
+	font-weight: bold;
+}
+.sl_loginConNotice2{
+	display: block;
+	color: #999;
+	padding: 5px 0px;
+}
+.sl_loginConNoticeText{
+	display: block;
+	line-height: 1.4em;
+	padding: 10px;
+	background:rgba(0,0,0,0.1);
+	border-radius: 3px;
+	color: #039ec8;
+	-webkit-box-shadow: inset 0px 0px 20px rgba(0,0,0,0.2);
+	-moz-box-shadow: inset 0px 0px 20px rgba(0,0,0,0.2);
+	-o-box-shadow: inset 0px 0px 20px rgba(0,0,0,0.2);
+	box-shadow: inset 0px 0px 20px rgba(0,0,0,0.2);
+	margin-bottom: 20px;
+	
+}
+
+.WeChatBTN,.LineBTN,.KakaoTalkBTN{
+	display: block;
+	margin-top:15px;
+	display: -o-flex; /* Safari */
+    -o-align-items: center; /* Safari 7.0+ */
+	-o-justify-content: center;
+	display: -ms-flex; /* Safari */
+    -ms-align-items: center; /* Safari 7.0+ */
+	-ms-justify-content: center;
+	display: -moz-flex; /* Safari */
+    -moz-align-items: center; /* Safari 7.0+ */
+	-moz-justify-content: center;
+	display: -webkit-flex; /* Safari */
+    -webkit-align-items: center; /* Safari 7.0+ */
+	-webkit-justify-content: center;
+    display: flex;
+    align-items: center;
+	justify-content: center;
+	flex-wrap: nowrap;
+	background: #c1a678;
+	height: 50px;
+	cursor: pointer;
+	border-radius: 6px;
+	color: #fff;
+	font-size: 1.4em;
+	font-weight: bold;
+}
+.outlineBTN{
+	display: block;
+	margin-top:15px;
+	display: -o-flex; /* Safari */
+    -o-align-items: center; /* Safari 7.0+ */
+	-o-justify-content: center;
+	display: -ms-flex; /* Safari */
+    -ms-align-items: center; /* Safari 7.0+ */
+	-ms-justify-content: center;
+	display: -moz-flex; /* Safari */
+    -moz-align-items: center; /* Safari 7.0+ */
+	-moz-justify-content: center;
+	display: -webkit-flex; /* Safari */
+    -webkit-align-items: center; /* Safari 7.0+ */
+	-webkit-justify-content: center;
+    display: flex;
+    align-items: center;
+	justify-content: center;
+	flex-wrap: nowrap;
+	background: none;
+	height: 50px;
+	cursor: pointer;
+	border-radius: 6px;
+	font-size: 1em;
+	font-weight: bold;
+	border: 1px solid #c1a678;
+	color: #c1a678;
+}
+
+
+.WeChatBTN img,.LineBTN img,.KakaoTalkBTN img{
+	height: 30px;
+	width: auto;
+	margin-right: 2px;
+}
+
+/*.WeChatBTN{
+	background: #2cbb00;
+	color: #fff;
+}
+.LineBTN{
+	background: #41c006;
+	color: #fff;
+}
+.KakaoTalkBTN{
+	background: #fdfa12
+}*/
+
+.sl_loginCon input{
+	width:calc(100% - 99px);
+	padding-right: 90px;
+}
+#idQRImage{
+	display: none;
+}
+.sl_walletCon{
+	position: relative;
+	padding-top: 15px;
+	color: #aaa;
+}
+.sl_walletConMainOption{
+	display: block;
+	padding-top: 10px;
+	color: #aaa;
+}
+.login_QRcode_con_m{
+	position: absolute;
+	top:35px;
+	right: 0px;
+	width: 80px;
+	height: calc(100% - 41px);
+	background: rgba(0,0,0,0.2);
+	background: linear-gradient(135deg,rgba(100,100,100,0.1),rgba(100,100,100,0.5));
+	border-radius: 0px 5px 5px 0px;
+	color: #c1a678;
+}
+.QRcodeFileBtn_m{
+	display: block;
+	text-align: center;
+	line-height: 48px;
+	vertical-align: middle;
+}
+.QRcodeFileBtn_m .icon{
+	vertical-align: middle;
+	font-size: 1.8em;
+}
+.sl_Notice{
+	line-height: 30px;
+	color: #039ec8;
+}

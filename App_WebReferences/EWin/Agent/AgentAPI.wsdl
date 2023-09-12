@@ -1,0 +1,2862 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HeartBeat">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Echo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HeartBeatResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HeartBeatResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="APIResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ResultState" type="tns:enumResultState" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="enumResultState">
+        <s:restriction base="s:string">
+          <s:enumeration value="OK" />
+          <s:enumeration value="ERR" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="AgentLoginByPhoneNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginGUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ContactPhonePrefix" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ContactPhoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MainAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserIP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgentLoginByPhoneNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AgentLoginByPhoneNumberResult" type="tns:LoginResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="LoginResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AgentURL" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="AgentLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoginGUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="LoginType" type="tns:enumLoginType" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MainAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserIP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="enumLoginType">
+        <s:restriction base="s:string">
+          <s:enumeration value="MainAccount" />
+          <s:enumeration value="AgentLogin" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="AgentLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AgentLoginResult" type="tns:LoginResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUserBankCard">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="PaymentMethod" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BranchName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AccountName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankProvince" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankCity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUserBankCardResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddUserBankCardResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveUserBankCard">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankCardGUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveUserBankCardResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RemoveUserBankCardResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateUserBankCard">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankCardGUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="PaymentMethod" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BranchName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AccountName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankProvince" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankCity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateUserBankCardResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateUserBankCardResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserBankCard">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserBankCardResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserBankCardResult" type="tns:UserBankCardListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UserBankCardListResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="BankCardList" type="tns:ArrayOfUserBankCard" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfUserBankCard">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserBankCard" nillable="true" type="tns:UserBankCard" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserBankCard">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="BankCardGUID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="BankCardState" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PaymentMethod" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BankName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BranchName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BankNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BankProvince" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BankCity" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="QueryReportInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReportGUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryReportInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryReportInfoResult" type="tns:QueryReportResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="QueryReportResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ReportGUID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ReportName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Version" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ParamList" type="tns:ArrayOfQueryReportParam" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfQueryReportParam">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="QueryReportParam" nillable="true" type="tns:QueryReportParam" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="QueryReportParam">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DataType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DefaultValue" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RunReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReportGUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Param" type="tns:ArrayOfReportParam" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfReportParam">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ReportParam" nillable="true" type="tns:ReportParam" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReportParam">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RunReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RunReportResult" type="tns:ReportResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ReportResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Report" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="UpdateDeviceInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DeviceGUID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="PushType" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="DeviceName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DeviceKey" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DeviceType" type="tns:enumDeviceType" />
+            <s:element minOccurs="0" maxOccurs="1" name="NotifyToken" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GPSPosition" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserAgent" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="enumDeviceType">
+        <s:restriction base="s:string">
+          <s:enumeration value="PC" />
+          <s:enumeration value="Mobile" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="UpdateDeviceInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateDeviceInfoResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidatePassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="PasswordType" type="tns:enumPasswordType" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="enumPasswordType">
+        <s:restriction base="s:string">
+          <s:enumeration value="LoginPassword" />
+          <s:enumeration value="WalletPassword" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="ValidatePasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidatePasswordResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetETHCoinTxLog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="BeginDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="EndDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetETHCoinTxLogResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetETHCoinTxLogResult" type="tns:ETHCoinTxResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ETHCoinTxResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="QueryBeginDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="QueryEndDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DetailList" type="tns:ArrayOfCoinTxDetail" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfCoinTxDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CoinTxDetail" nillable="true" type="tns:CoinTxDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CoinTxDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ETHCoinTxID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RealName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserAccountID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CompanyID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ETHContractAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TxType" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProcessType" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BitCoinValueState" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FromAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ToAddress" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TxValue" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="TxHashETH" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TxHashCoin" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TxNonce" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BlockNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreateDate" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ETHBitCoinTx">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="WalletPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ToAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ETHBitCoinTxResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ETHBitCoinTxResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ETHCheckBitCoinTxState">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ETHCheckBitCoinTxStateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ETHCheckBitCoinTxStateResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KeepAID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KeepAIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KeepAIDResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrderSummary">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="QueryBeginDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="QueryEndDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrderSummaryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrderSummaryResult" type="tns:OrderSummaryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="OrderSummaryResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="QueryBeginDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="QueryEndDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SummaryList" type="tns:ArrayOfOrderSummary" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfOrderSummary">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OrderSummary" nillable="true" type="tns:OrderSummary" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OrderSummary">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SummaryDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameAccountingCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RewardValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValidBetValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalRewardValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalValidBetValue" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetOrderDetail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="QueryDate" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="OrderType" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOrderDetailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOrderDetailResult" type="tns:OrderDetailListResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="OrderDetailListResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="DetailList" type="tns:ArrayOfOrderDetail" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfOrderDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OrderDetail" nillable="true" type="tns:OrderDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OrderDetail">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="OrderID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrderDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrderTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RoundDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RoundTime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SummaryDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RoundInfo" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RoundState" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AreaCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CardInfo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResultDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResultTime" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GameSetID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserAccountID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RealName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrderType" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrderCmd" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AddChip" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TipsValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrderBanker" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrderPlayer" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrderTie" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrderBankerPair" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrderPlayerPair" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResultBanker" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResultPlayer" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResultTie" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResultBankerPair" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResultPlayerPair" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValidBet" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalOrder" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="WinValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="LoseValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="BuyChipValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="LendChipTax" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="BeforePoint" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserIP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SnapshotName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCompanyInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCompanyInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCompanyInfoResult" type="tns:CompanyInfoResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CompanyInfoResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="BetLimitMin" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="BetLimitCount" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="AgentCreateAccount" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="AllowQRCodeType0" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="AllowQRCodeType1" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="AllowQRCodeType2" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="CashUnit" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="MarqueeText" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DomainURL" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="AgentURL" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="QRCodeURL" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DefaultCurrencyType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DefaultRoadMapAreaCode" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PaymentParent" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="PaymentGPay" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="PaymentBitCoin" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="PaymentBankCard" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="ServiceChatType" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="CommissionType" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="DownlineBuyChipRateType" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="UserMinBetPlayer" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="UserMinBetBanker" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="UserMaxBet" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="UserMinBetTie" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="UserMaxBetTie" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="UserMinBetPair" type="s:decimal" />
+              <s:element minOccurs="1" maxOccurs="1" name="UserMaxBetPair" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="ReportList" type="tns:ArrayOfReportInfo" />
+              <s:element minOccurs="0" maxOccurs="1" name="CompanyGameCodeList" type="tns:ArrayOfCompanyGameCode" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfReportInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ReportInfo" nillable="true" type="tns:ReportInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReportInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReportName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Version" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCompanyGameCode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CompanyGameCode" nillable="true" type="tns:CompanyGameCode" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CompanyGameCode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GameCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="GameID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameCategoryCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameCategorySubCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameBrand" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameAccountingCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DisableChildUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DisableChildUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DisableChildUserResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryChildUserAccountList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ParentLoginAccount" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryChildUserAccountListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryChildUserAccountListResult" type="tns:ChildUserAccountResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ChildUserAccountResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ParentPath" type="tns:ArrayOfString" />
+              <s:element minOccurs="0" maxOccurs="1" name="UserAccountList" type="tns:ArrayOfUserAccountInfo" />
+              <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RealName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PersonCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="WalletList" type="tns:ArrayOfWallet" />
+              <s:element minOccurs="0" maxOccurs="1" name="GameCodeList" type="tns:ArrayOfUserAccountGameCode" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfUserAccountInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserAccountInfo" nillable="true" type="tns:UserAccountInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserAccountInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="UserAccountID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserAccountState" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserAccountType" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CompanyClassID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RealName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PersonCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastLoginDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreateDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SortKey" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="InsideLevel" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="HasChilden" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="WalletList" type="tns:ArrayOfWallet" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameCodeList" type="tns:ArrayOfUserAccountGameCode" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfWallet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Wallet" nillable="true" type="tns:Wallet" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Wallet">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValueType" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="PointState" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalCreditValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="PointValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="TotalChildPointValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserRate" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="BuyChipRate" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfUserAccountGameCode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserAccountGameCode" nillable="true" type="tns:UserAccountGameCode" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserAccountGameCode">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameAccountingCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserRate" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="BuyChipRate" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddMultiLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddMultiLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddMultiLoginResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetMultiLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetMultiLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetMultiLoginResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveMultiLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveMultiLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RemoveMultiLoginResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryUserInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryUserInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryUserInfoResult" type="tns:UserInfoResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UserInfoResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RealName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Birthday" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PersonCode" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="CompanyClassID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="UserAccountState" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="UserAccountType" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="AllowTransfer" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="AllowRecycle" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="RequireWithdrawalCount" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="LastRequireWithdrawalID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="WalletList" type="tns:ArrayOfWallet" />
+              <s:element minOccurs="0" maxOccurs="1" name="GameCodeList" type="tns:ArrayOfUserAccountGameCode" />
+              <s:element minOccurs="0" maxOccurs="1" name="MultiLoginList" type="tns:ArrayOfMultiLogin" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfMultiLogin">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MultiLogin" nillable="true" type="tns:MultiLogin" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MultiLogin">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetWalletHistory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EndDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ActionType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetWalletHistoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetWalletHistoryResult" type="tns:WalletHistoryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="WalletHistoryResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="WalletHistoryList" type="tns:ArrayOfWalletHistoryDetail" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfWalletHistoryDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="WalletHistoryDetail" nillable="true" type="tns:WalletHistoryDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WalletHistoryDetail">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LastBalanceRecord" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="WalletHistoryID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserAccountID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CompanyID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActionType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Balance" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Time" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAccountingSummary">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="QueryBeginDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="QueryEndDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountingSummaryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAccountingSummaryResult" type="tns:AccountingSummaryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AccountingSummaryResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="QueryBeginDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="QueryEndDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SummaryList" type="tns:ArrayOfAccountingSummary" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfAccountingSummary">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AccountingSummary" nillable="true" type="tns:AccountingSummary" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AccountingSummary">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AccountingDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameAccountingCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RewardValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValidBetValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="AccountingValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="CommissionValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProfitAccountingValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProfitCommissionValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="CompanyAccountingValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="CompanyCommissionValue" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="APIResult" nillable="true" type="tns:APIResult" />
+      <s:element name="LoginResult" nillable="true" type="tns:LoginResult" />
+      <s:element name="UserBankCardListResult" nillable="true" type="tns:UserBankCardListResult" />
+      <s:element name="QueryReportResult" nillable="true" type="tns:QueryReportResult" />
+      <s:element name="ETHCoinTxResult" nillable="true" type="tns:ETHCoinTxResult" />
+      <s:element name="OrderSummaryResult" nillable="true" type="tns:OrderSummaryResult" />
+      <s:element name="OrderDetailListResult" nillable="true" type="tns:OrderDetailListResult" />
+      <s:element name="CompanyInfoResult" nillable="true" type="tns:CompanyInfoResult" />
+      <s:element name="ChildUserAccountResult" nillable="true" type="tns:ChildUserAccountResult" />
+      <s:element name="UserInfoResult" nillable="true" type="tns:UserInfoResult" />
+      <s:element name="WalletHistoryResult" nillable="true" type="tns:WalletHistoryResult" />
+      <s:element name="AccountingSummaryResult" nillable="true" type="tns:AccountingSummaryResult" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HeartBeatSoapIn">
+    <wsdl:part name="parameters" element="tns:HeartBeat" />
+  </wsdl:message>
+  <wsdl:message name="HeartBeatSoapOut">
+    <wsdl:part name="parameters" element="tns:HeartBeatResponse" />
+  </wsdl:message>
+  <wsdl:message name="AgentLoginByPhoneNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:AgentLoginByPhoneNumber" />
+  </wsdl:message>
+  <wsdl:message name="AgentLoginByPhoneNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:AgentLoginByPhoneNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="AgentLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:AgentLogin" />
+  </wsdl:message>
+  <wsdl:message name="AgentLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:AgentLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddUserBankCardSoapIn">
+    <wsdl:part name="parameters" element="tns:AddUserBankCard" />
+  </wsdl:message>
+  <wsdl:message name="AddUserBankCardSoapOut">
+    <wsdl:part name="parameters" element="tns:AddUserBankCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserBankCardSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveUserBankCard" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserBankCardSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveUserBankCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserBankCardSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateUserBankCard" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserBankCardSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateUserBankCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserBankCardSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserBankCard" />
+  </wsdl:message>
+  <wsdl:message name="GetUserBankCardSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserBankCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryReportInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryReportInfo" />
+  </wsdl:message>
+  <wsdl:message name="QueryReportInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryReportInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="RunReportSoapIn">
+    <wsdl:part name="parameters" element="tns:RunReport" />
+  </wsdl:message>
+  <wsdl:message name="RunReportSoapOut">
+    <wsdl:part name="parameters" element="tns:RunReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDeviceInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateDeviceInfo" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDeviceInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateDeviceInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidatePasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidatePassword" />
+  </wsdl:message>
+  <wsdl:message name="ValidatePasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidatePasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetETHCoinTxLogSoapIn">
+    <wsdl:part name="parameters" element="tns:GetETHCoinTxLog" />
+  </wsdl:message>
+  <wsdl:message name="GetETHCoinTxLogSoapOut">
+    <wsdl:part name="parameters" element="tns:GetETHCoinTxLogResponse" />
+  </wsdl:message>
+  <wsdl:message name="ETHBitCoinTxSoapIn">
+    <wsdl:part name="parameters" element="tns:ETHBitCoinTx" />
+  </wsdl:message>
+  <wsdl:message name="ETHBitCoinTxSoapOut">
+    <wsdl:part name="parameters" element="tns:ETHBitCoinTxResponse" />
+  </wsdl:message>
+  <wsdl:message name="ETHCheckBitCoinTxStateSoapIn">
+    <wsdl:part name="parameters" element="tns:ETHCheckBitCoinTxState" />
+  </wsdl:message>
+  <wsdl:message name="ETHCheckBitCoinTxStateSoapOut">
+    <wsdl:part name="parameters" element="tns:ETHCheckBitCoinTxStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="KeepAIDSoapIn">
+    <wsdl:part name="parameters" element="tns:KeepAID" />
+  </wsdl:message>
+  <wsdl:message name="KeepAIDSoapOut">
+    <wsdl:part name="parameters" element="tns:KeepAIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderSummarySoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrderSummary" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderSummarySoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrderSummaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderDetailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOrderDetail" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderDetailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOrderDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCompanyInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCompanyInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="DisableChildUserSoapIn">
+    <wsdl:part name="parameters" element="tns:DisableChildUser" />
+  </wsdl:message>
+  <wsdl:message name="DisableChildUserSoapOut">
+    <wsdl:part name="parameters" element="tns:DisableChildUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryChildUserAccountListSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryChildUserAccountList" />
+  </wsdl:message>
+  <wsdl:message name="QueryChildUserAccountListSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryChildUserAccountListResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddMultiLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:AddMultiLogin" />
+  </wsdl:message>
+  <wsdl:message name="AddMultiLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:AddMultiLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetMultiLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:SetMultiLogin" />
+  </wsdl:message>
+  <wsdl:message name="SetMultiLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:SetMultiLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveMultiLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveMultiLogin" />
+  </wsdl:message>
+  <wsdl:message name="RemoveMultiLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveMultiLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetWalletHistorySoapIn">
+    <wsdl:part name="parameters" element="tns:GetWalletHistory" />
+  </wsdl:message>
+  <wsdl:message name="GetWalletHistorySoapOut">
+    <wsdl:part name="parameters" element="tns:GetWalletHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountingSummarySoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountingSummary" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountingSummarySoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountingSummaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="HeartBeatHttpGetIn">
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="Echo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HeartBeatHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="AgentLoginByPhoneNumberHttpGetIn">
+    <wsdl:part name="LoginGUID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="ContactPhonePrefix" type="s:string" />
+    <wsdl:part name="ContactPhoneNumber" type="s:string" />
+    <wsdl:part name="LoginPassword" type="s:string" />
+    <wsdl:part name="MainAccount" type="s:string" />
+    <wsdl:part name="UserIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AgentLoginByPhoneNumberHttpGetOut">
+    <wsdl:part name="Body" element="tns:LoginResult" />
+  </wsdl:message>
+  <wsdl:message name="AgentLoginHttpGetIn">
+    <wsdl:part name="LoginGUID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginType" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="LoginPassword" type="s:string" />
+    <wsdl:part name="MainAccount" type="s:string" />
+    <wsdl:part name="UserIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AgentLoginHttpGetOut">
+    <wsdl:part name="Body" element="tns:LoginResult" />
+  </wsdl:message>
+  <wsdl:message name="AddUserBankCardHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+    <wsdl:part name="PaymentMethod" type="s:string" />
+    <wsdl:part name="BankName" type="s:string" />
+    <wsdl:part name="BranchName" type="s:string" />
+    <wsdl:part name="BankNumber" type="s:string" />
+    <wsdl:part name="AccountName" type="s:string" />
+    <wsdl:part name="BankProvince" type="s:string" />
+    <wsdl:part name="BankCity" type="s:string" />
+    <wsdl:part name="Description" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddUserBankCardHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserBankCardHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="BankCardGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserBankCardHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserBankCardHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="BankCardGUID" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+    <wsdl:part name="PaymentMethod" type="s:string" />
+    <wsdl:part name="BankName" type="s:string" />
+    <wsdl:part name="BranchName" type="s:string" />
+    <wsdl:part name="BankNumber" type="s:string" />
+    <wsdl:part name="AccountName" type="s:string" />
+    <wsdl:part name="BankProvince" type="s:string" />
+    <wsdl:part name="BankCity" type="s:string" />
+    <wsdl:part name="Description" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserBankCardHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="GetUserBankCardHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserBankCardHttpGetOut">
+    <wsdl:part name="Body" element="tns:UserBankCardListResult" />
+  </wsdl:message>
+  <wsdl:message name="QueryReportInfoHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="ReportGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryReportInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:QueryReportResult" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDeviceInfoHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="DeviceGUID" type="s:string" />
+    <wsdl:part name="PushType" type="s:string" />
+    <wsdl:part name="DeviceName" type="s:string" />
+    <wsdl:part name="DeviceKey" type="s:string" />
+    <wsdl:part name="DeviceType" type="s:string" />
+    <wsdl:part name="NotifyToken" type="s:string" />
+    <wsdl:part name="GPSPosition" type="s:string" />
+    <wsdl:part name="UserAgent" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDeviceInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="ValidatePasswordHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="PasswordType" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidatePasswordHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="GetETHCoinTxLogHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="BeginDate" type="s:string" />
+    <wsdl:part name="EndDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetETHCoinTxLogHttpGetOut">
+    <wsdl:part name="Body" element="tns:ETHCoinTxResult" />
+  </wsdl:message>
+  <wsdl:message name="ETHBitCoinTxHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="WalletPassword" type="s:string" />
+    <wsdl:part name="ToAddress" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+    <wsdl:part name="Amount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ETHBitCoinTxHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="ETHCheckBitCoinTxStateHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ETHCheckBitCoinTxStateHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="KeepAIDHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="KeepAIDHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderSummaryHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="QueryBeginDate" type="s:string" />
+    <wsdl:part name="QueryEndDate" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderSummaryHttpGetOut">
+    <wsdl:part name="Body" element="tns:OrderSummaryResult" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderDetailHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="QueryDate" type="s:string" />
+    <wsdl:part name="OrderType" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderDetailHttpGetOut">
+    <wsdl:part name="Body" element="tns:OrderDetailListResult" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyInfoHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:CompanyInfoResult" />
+  </wsdl:message>
+  <wsdl:message name="DisableChildUserHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DisableChildUserHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="QueryChildUserAccountListHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="ParentLoginAccount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryChildUserAccountListHttpGetOut">
+    <wsdl:part name="Body" element="tns:ChildUserAccountResult" />
+  </wsdl:message>
+  <wsdl:message name="AddMultiLoginHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="LoginPassword" type="s:string" />
+    <wsdl:part name="Description" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddMultiLoginHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="SetMultiLoginHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="Description" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetMultiLoginHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="RemoveMultiLoginHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveMultiLoginHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserInfoHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserInfoHttpGetOut">
+    <wsdl:part name="Body" element="tns:UserInfoResult" />
+  </wsdl:message>
+  <wsdl:message name="GetWalletHistoryHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="StartDate" type="s:string" />
+    <wsdl:part name="EndDate" type="s:string" />
+    <wsdl:part name="ActionType" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetWalletHistoryHttpGetOut">
+    <wsdl:part name="Body" element="tns:WalletHistoryResult" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountingSummaryHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="QueryBeginDate" type="s:string" />
+    <wsdl:part name="QueryEndDate" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountingSummaryHttpGetOut">
+    <wsdl:part name="Body" element="tns:AccountingSummaryResult" />
+  </wsdl:message>
+  <wsdl:message name="HeartBeatHttpPostIn">
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="Echo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HeartBeatHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="AgentLoginByPhoneNumberHttpPostIn">
+    <wsdl:part name="LoginGUID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="ContactPhonePrefix" type="s:string" />
+    <wsdl:part name="ContactPhoneNumber" type="s:string" />
+    <wsdl:part name="LoginPassword" type="s:string" />
+    <wsdl:part name="MainAccount" type="s:string" />
+    <wsdl:part name="UserIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AgentLoginByPhoneNumberHttpPostOut">
+    <wsdl:part name="Body" element="tns:LoginResult" />
+  </wsdl:message>
+  <wsdl:message name="AgentLoginHttpPostIn">
+    <wsdl:part name="LoginGUID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginType" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="LoginPassword" type="s:string" />
+    <wsdl:part name="MainAccount" type="s:string" />
+    <wsdl:part name="UserIP" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AgentLoginHttpPostOut">
+    <wsdl:part name="Body" element="tns:LoginResult" />
+  </wsdl:message>
+  <wsdl:message name="AddUserBankCardHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+    <wsdl:part name="PaymentMethod" type="s:string" />
+    <wsdl:part name="BankName" type="s:string" />
+    <wsdl:part name="BranchName" type="s:string" />
+    <wsdl:part name="BankNumber" type="s:string" />
+    <wsdl:part name="AccountName" type="s:string" />
+    <wsdl:part name="BankProvince" type="s:string" />
+    <wsdl:part name="BankCity" type="s:string" />
+    <wsdl:part name="Description" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddUserBankCardHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserBankCardHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="BankCardGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserBankCardHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserBankCardHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="BankCardGUID" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+    <wsdl:part name="PaymentMethod" type="s:string" />
+    <wsdl:part name="BankName" type="s:string" />
+    <wsdl:part name="BranchName" type="s:string" />
+    <wsdl:part name="BankNumber" type="s:string" />
+    <wsdl:part name="AccountName" type="s:string" />
+    <wsdl:part name="BankProvince" type="s:string" />
+    <wsdl:part name="BankCity" type="s:string" />
+    <wsdl:part name="Description" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserBankCardHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="GetUserBankCardHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserBankCardHttpPostOut">
+    <wsdl:part name="Body" element="tns:UserBankCardListResult" />
+  </wsdl:message>
+  <wsdl:message name="QueryReportInfoHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="ReportGUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryReportInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:QueryReportResult" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDeviceInfoHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="DeviceGUID" type="s:string" />
+    <wsdl:part name="PushType" type="s:string" />
+    <wsdl:part name="DeviceName" type="s:string" />
+    <wsdl:part name="DeviceKey" type="s:string" />
+    <wsdl:part name="DeviceType" type="s:string" />
+    <wsdl:part name="NotifyToken" type="s:string" />
+    <wsdl:part name="GPSPosition" type="s:string" />
+    <wsdl:part name="UserAgent" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDeviceInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="ValidatePasswordHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="PasswordType" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ValidatePasswordHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="GetETHCoinTxLogHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="BeginDate" type="s:string" />
+    <wsdl:part name="EndDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetETHCoinTxLogHttpPostOut">
+    <wsdl:part name="Body" element="tns:ETHCoinTxResult" />
+  </wsdl:message>
+  <wsdl:message name="ETHBitCoinTxHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="WalletPassword" type="s:string" />
+    <wsdl:part name="ToAddress" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+    <wsdl:part name="Amount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ETHBitCoinTxHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="ETHCheckBitCoinTxStateHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ETHCheckBitCoinTxStateHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="KeepAIDHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="KeepAIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderSummaryHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="QueryBeginDate" type="s:string" />
+    <wsdl:part name="QueryEndDate" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderSummaryHttpPostOut">
+    <wsdl:part name="Body" element="tns:OrderSummaryResult" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderDetailHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="QueryDate" type="s:string" />
+    <wsdl:part name="OrderType" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderDetailHttpPostOut">
+    <wsdl:part name="Body" element="tns:OrderDetailListResult" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyInfoHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:CompanyInfoResult" />
+  </wsdl:message>
+  <wsdl:message name="DisableChildUserHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DisableChildUserHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="QueryChildUserAccountListHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="ParentLoginAccount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryChildUserAccountListHttpPostOut">
+    <wsdl:part name="Body" element="tns:ChildUserAccountResult" />
+  </wsdl:message>
+  <wsdl:message name="AddMultiLoginHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="LoginPassword" type="s:string" />
+    <wsdl:part name="Description" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddMultiLoginHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="SetMultiLoginHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="Description" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetMultiLoginHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="RemoveMultiLoginHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveMultiLoginHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserInfoHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserInfoHttpPostOut">
+    <wsdl:part name="Body" element="tns:UserInfoResult" />
+  </wsdl:message>
+  <wsdl:message name="GetWalletHistoryHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="StartDate" type="s:string" />
+    <wsdl:part name="EndDate" type="s:string" />
+    <wsdl:part name="ActionType" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetWalletHistoryHttpPostOut">
+    <wsdl:part name="Body" element="tns:WalletHistoryResult" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountingSummaryHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="QueryBeginDate" type="s:string" />
+    <wsdl:part name="QueryEndDate" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountingSummaryHttpPostOut">
+    <wsdl:part name="Body" element="tns:AccountingSummaryResult" />
+  </wsdl:message>
+  <wsdl:portType name="AgentAPISoap">
+    <wsdl:operation name="HeartBeat">
+      <wsdl:input message="tns:HeartBeatSoapIn" />
+      <wsdl:output message="tns:HeartBeatSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AgentLoginByPhoneNumber">
+      <wsdl:input message="tns:AgentLoginByPhoneNumberSoapIn" />
+      <wsdl:output message="tns:AgentLoginByPhoneNumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AgentLogin">
+      <wsdl:input message="tns:AgentLoginSoapIn" />
+      <wsdl:output message="tns:AgentLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserBankCard">
+      <wsdl:input message="tns:AddUserBankCardSoapIn" />
+      <wsdl:output message="tns:AddUserBankCardSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserBankCard">
+      <wsdl:input message="tns:RemoveUserBankCardSoapIn" />
+      <wsdl:output message="tns:RemoveUserBankCardSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserBankCard">
+      <wsdl:input message="tns:UpdateUserBankCardSoapIn" />
+      <wsdl:output message="tns:UpdateUserBankCardSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserBankCard">
+      <wsdl:input message="tns:GetUserBankCardSoapIn" />
+      <wsdl:output message="tns:GetUserBankCardSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryReportInfo">
+      <wsdl:input message="tns:QueryReportInfoSoapIn" />
+      <wsdl:output message="tns:QueryReportInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RunReport">
+      <wsdl:input message="tns:RunReportSoapIn" />
+      <wsdl:output message="tns:RunReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDeviceInfo">
+      <wsdl:input message="tns:UpdateDeviceInfoSoapIn" />
+      <wsdl:output message="tns:UpdateDeviceInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePassword">
+      <wsdl:input message="tns:ValidatePasswordSoapIn" />
+      <wsdl:output message="tns:ValidatePasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetETHCoinTxLog">
+      <wsdl:input message="tns:GetETHCoinTxLogSoapIn" />
+      <wsdl:output message="tns:GetETHCoinTxLogSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ETHBitCoinTx">
+      <wsdl:input message="tns:ETHBitCoinTxSoapIn" />
+      <wsdl:output message="tns:ETHBitCoinTxSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ETHCheckBitCoinTxState">
+      <wsdl:input message="tns:ETHCheckBitCoinTxStateSoapIn" />
+      <wsdl:output message="tns:ETHCheckBitCoinTxStateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KeepAID">
+      <wsdl:input message="tns:KeepAIDSoapIn" />
+      <wsdl:output message="tns:KeepAIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderSummary">
+      <wsdl:input message="tns:GetOrderSummarySoapIn" />
+      <wsdl:output message="tns:GetOrderSummarySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderDetail">
+      <wsdl:input message="tns:GetOrderDetailSoapIn" />
+      <wsdl:output message="tns:GetOrderDetailSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <wsdl:input message="tns:GetCompanyInfoSoapIn" />
+      <wsdl:output message="tns:GetCompanyInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DisableChildUser">
+      <wsdl:input message="tns:DisableChildUserSoapIn" />
+      <wsdl:output message="tns:DisableChildUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryChildUserAccountList">
+      <wsdl:input message="tns:QueryChildUserAccountListSoapIn" />
+      <wsdl:output message="tns:QueryChildUserAccountListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddMultiLogin">
+      <wsdl:input message="tns:AddMultiLoginSoapIn" />
+      <wsdl:output message="tns:AddMultiLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetMultiLogin">
+      <wsdl:input message="tns:SetMultiLoginSoapIn" />
+      <wsdl:output message="tns:SetMultiLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveMultiLogin">
+      <wsdl:input message="tns:RemoveMultiLoginSoapIn" />
+      <wsdl:output message="tns:RemoveMultiLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserInfo">
+      <wsdl:input message="tns:QueryUserInfoSoapIn" />
+      <wsdl:output message="tns:QueryUserInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWalletHistory">
+      <wsdl:input message="tns:GetWalletHistorySoapIn" />
+      <wsdl:output message="tns:GetWalletHistorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountingSummary">
+      <wsdl:input message="tns:GetAccountingSummarySoapIn" />
+      <wsdl:output message="tns:GetAccountingSummarySoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="AgentAPIHttpGet">
+    <wsdl:operation name="HeartBeat">
+      <wsdl:input message="tns:HeartBeatHttpGetIn" />
+      <wsdl:output message="tns:HeartBeatHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AgentLoginByPhoneNumber">
+      <wsdl:input message="tns:AgentLoginByPhoneNumberHttpGetIn" />
+      <wsdl:output message="tns:AgentLoginByPhoneNumberHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AgentLogin">
+      <wsdl:input message="tns:AgentLoginHttpGetIn" />
+      <wsdl:output message="tns:AgentLoginHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserBankCard">
+      <wsdl:input message="tns:AddUserBankCardHttpGetIn" />
+      <wsdl:output message="tns:AddUserBankCardHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserBankCard">
+      <wsdl:input message="tns:RemoveUserBankCardHttpGetIn" />
+      <wsdl:output message="tns:RemoveUserBankCardHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserBankCard">
+      <wsdl:input message="tns:UpdateUserBankCardHttpGetIn" />
+      <wsdl:output message="tns:UpdateUserBankCardHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserBankCard">
+      <wsdl:input message="tns:GetUserBankCardHttpGetIn" />
+      <wsdl:output message="tns:GetUserBankCardHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryReportInfo">
+      <wsdl:input message="tns:QueryReportInfoHttpGetIn" />
+      <wsdl:output message="tns:QueryReportInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDeviceInfo">
+      <wsdl:input message="tns:UpdateDeviceInfoHttpGetIn" />
+      <wsdl:output message="tns:UpdateDeviceInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePassword">
+      <wsdl:input message="tns:ValidatePasswordHttpGetIn" />
+      <wsdl:output message="tns:ValidatePasswordHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetETHCoinTxLog">
+      <wsdl:input message="tns:GetETHCoinTxLogHttpGetIn" />
+      <wsdl:output message="tns:GetETHCoinTxLogHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ETHBitCoinTx">
+      <wsdl:input message="tns:ETHBitCoinTxHttpGetIn" />
+      <wsdl:output message="tns:ETHBitCoinTxHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ETHCheckBitCoinTxState">
+      <wsdl:input message="tns:ETHCheckBitCoinTxStateHttpGetIn" />
+      <wsdl:output message="tns:ETHCheckBitCoinTxStateHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KeepAID">
+      <wsdl:input message="tns:KeepAIDHttpGetIn" />
+      <wsdl:output message="tns:KeepAIDHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderSummary">
+      <wsdl:input message="tns:GetOrderSummaryHttpGetIn" />
+      <wsdl:output message="tns:GetOrderSummaryHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderDetail">
+      <wsdl:input message="tns:GetOrderDetailHttpGetIn" />
+      <wsdl:output message="tns:GetOrderDetailHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <wsdl:input message="tns:GetCompanyInfoHttpGetIn" />
+      <wsdl:output message="tns:GetCompanyInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DisableChildUser">
+      <wsdl:input message="tns:DisableChildUserHttpGetIn" />
+      <wsdl:output message="tns:DisableChildUserHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryChildUserAccountList">
+      <wsdl:input message="tns:QueryChildUserAccountListHttpGetIn" />
+      <wsdl:output message="tns:QueryChildUserAccountListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddMultiLogin">
+      <wsdl:input message="tns:AddMultiLoginHttpGetIn" />
+      <wsdl:output message="tns:AddMultiLoginHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetMultiLogin">
+      <wsdl:input message="tns:SetMultiLoginHttpGetIn" />
+      <wsdl:output message="tns:SetMultiLoginHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveMultiLogin">
+      <wsdl:input message="tns:RemoveMultiLoginHttpGetIn" />
+      <wsdl:output message="tns:RemoveMultiLoginHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserInfo">
+      <wsdl:input message="tns:QueryUserInfoHttpGetIn" />
+      <wsdl:output message="tns:QueryUserInfoHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWalletHistory">
+      <wsdl:input message="tns:GetWalletHistoryHttpGetIn" />
+      <wsdl:output message="tns:GetWalletHistoryHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountingSummary">
+      <wsdl:input message="tns:GetAccountingSummaryHttpGetIn" />
+      <wsdl:output message="tns:GetAccountingSummaryHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="AgentAPIHttpPost">
+    <wsdl:operation name="HeartBeat">
+      <wsdl:input message="tns:HeartBeatHttpPostIn" />
+      <wsdl:output message="tns:HeartBeatHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AgentLoginByPhoneNumber">
+      <wsdl:input message="tns:AgentLoginByPhoneNumberHttpPostIn" />
+      <wsdl:output message="tns:AgentLoginByPhoneNumberHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AgentLogin">
+      <wsdl:input message="tns:AgentLoginHttpPostIn" />
+      <wsdl:output message="tns:AgentLoginHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserBankCard">
+      <wsdl:input message="tns:AddUserBankCardHttpPostIn" />
+      <wsdl:output message="tns:AddUserBankCardHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserBankCard">
+      <wsdl:input message="tns:RemoveUserBankCardHttpPostIn" />
+      <wsdl:output message="tns:RemoveUserBankCardHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserBankCard">
+      <wsdl:input message="tns:UpdateUserBankCardHttpPostIn" />
+      <wsdl:output message="tns:UpdateUserBankCardHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserBankCard">
+      <wsdl:input message="tns:GetUserBankCardHttpPostIn" />
+      <wsdl:output message="tns:GetUserBankCardHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryReportInfo">
+      <wsdl:input message="tns:QueryReportInfoHttpPostIn" />
+      <wsdl:output message="tns:QueryReportInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDeviceInfo">
+      <wsdl:input message="tns:UpdateDeviceInfoHttpPostIn" />
+      <wsdl:output message="tns:UpdateDeviceInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePassword">
+      <wsdl:input message="tns:ValidatePasswordHttpPostIn" />
+      <wsdl:output message="tns:ValidatePasswordHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetETHCoinTxLog">
+      <wsdl:input message="tns:GetETHCoinTxLogHttpPostIn" />
+      <wsdl:output message="tns:GetETHCoinTxLogHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ETHBitCoinTx">
+      <wsdl:input message="tns:ETHBitCoinTxHttpPostIn" />
+      <wsdl:output message="tns:ETHBitCoinTxHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ETHCheckBitCoinTxState">
+      <wsdl:input message="tns:ETHCheckBitCoinTxStateHttpPostIn" />
+      <wsdl:output message="tns:ETHCheckBitCoinTxStateHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KeepAID">
+      <wsdl:input message="tns:KeepAIDHttpPostIn" />
+      <wsdl:output message="tns:KeepAIDHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderSummary">
+      <wsdl:input message="tns:GetOrderSummaryHttpPostIn" />
+      <wsdl:output message="tns:GetOrderSummaryHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderDetail">
+      <wsdl:input message="tns:GetOrderDetailHttpPostIn" />
+      <wsdl:output message="tns:GetOrderDetailHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <wsdl:input message="tns:GetCompanyInfoHttpPostIn" />
+      <wsdl:output message="tns:GetCompanyInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DisableChildUser">
+      <wsdl:input message="tns:DisableChildUserHttpPostIn" />
+      <wsdl:output message="tns:DisableChildUserHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryChildUserAccountList">
+      <wsdl:input message="tns:QueryChildUserAccountListHttpPostIn" />
+      <wsdl:output message="tns:QueryChildUserAccountListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddMultiLogin">
+      <wsdl:input message="tns:AddMultiLoginHttpPostIn" />
+      <wsdl:output message="tns:AddMultiLoginHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetMultiLogin">
+      <wsdl:input message="tns:SetMultiLoginHttpPostIn" />
+      <wsdl:output message="tns:SetMultiLoginHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveMultiLogin">
+      <wsdl:input message="tns:RemoveMultiLoginHttpPostIn" />
+      <wsdl:output message="tns:RemoveMultiLoginHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserInfo">
+      <wsdl:input message="tns:QueryUserInfoHttpPostIn" />
+      <wsdl:output message="tns:QueryUserInfoHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWalletHistory">
+      <wsdl:input message="tns:GetWalletHistoryHttpPostIn" />
+      <wsdl:output message="tns:GetWalletHistoryHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountingSummary">
+      <wsdl:input message="tns:GetAccountingSummaryHttpPostIn" />
+      <wsdl:output message="tns:GetAccountingSummaryHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AgentAPISoap" type="tns:AgentAPISoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HeartBeat">
+      <soap:operation soapAction="http://tempuri.org/HeartBeat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgentLoginByPhoneNumber">
+      <soap:operation soapAction="http://tempuri.org/AgentLoginByPhoneNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgentLogin">
+      <soap:operation soapAction="http://tempuri.org/AgentLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserBankCard">
+      <soap:operation soapAction="http://tempuri.org/AddUserBankCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserBankCard">
+      <soap:operation soapAction="http://tempuri.org/RemoveUserBankCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserBankCard">
+      <soap:operation soapAction="http://tempuri.org/UpdateUserBankCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserBankCard">
+      <soap:operation soapAction="http://tempuri.org/GetUserBankCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryReportInfo">
+      <soap:operation soapAction="http://tempuri.org/QueryReportInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunReport">
+      <soap:operation soapAction="http://tempuri.org/RunReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDeviceInfo">
+      <soap:operation soapAction="http://tempuri.org/UpdateDeviceInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePassword">
+      <soap:operation soapAction="http://tempuri.org/ValidatePassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetETHCoinTxLog">
+      <soap:operation soapAction="http://tempuri.org/GetETHCoinTxLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ETHBitCoinTx">
+      <soap:operation soapAction="http://tempuri.org/ETHBitCoinTx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ETHCheckBitCoinTxState">
+      <soap:operation soapAction="http://tempuri.org/ETHCheckBitCoinTxState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KeepAID">
+      <soap:operation soapAction="http://tempuri.org/KeepAID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderSummary">
+      <soap:operation soapAction="http://tempuri.org/GetOrderSummary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderDetail">
+      <soap:operation soapAction="http://tempuri.org/GetOrderDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <soap:operation soapAction="http://tempuri.org/GetCompanyInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisableChildUser">
+      <soap:operation soapAction="http://tempuri.org/DisableChildUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryChildUserAccountList">
+      <soap:operation soapAction="http://tempuri.org/QueryChildUserAccountList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddMultiLogin">
+      <soap:operation soapAction="http://tempuri.org/AddMultiLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetMultiLogin">
+      <soap:operation soapAction="http://tempuri.org/SetMultiLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveMultiLogin">
+      <soap:operation soapAction="http://tempuri.org/RemoveMultiLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserInfo">
+      <soap:operation soapAction="http://tempuri.org/QueryUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWalletHistory">
+      <soap:operation soapAction="http://tempuri.org/GetWalletHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountingSummary">
+      <soap:operation soapAction="http://tempuri.org/GetAccountingSummary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AgentAPISoap12" type="tns:AgentAPISoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HeartBeat">
+      <soap12:operation soapAction="http://tempuri.org/HeartBeat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgentLoginByPhoneNumber">
+      <soap12:operation soapAction="http://tempuri.org/AgentLoginByPhoneNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgentLogin">
+      <soap12:operation soapAction="http://tempuri.org/AgentLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserBankCard">
+      <soap12:operation soapAction="http://tempuri.org/AddUserBankCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserBankCard">
+      <soap12:operation soapAction="http://tempuri.org/RemoveUserBankCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserBankCard">
+      <soap12:operation soapAction="http://tempuri.org/UpdateUserBankCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserBankCard">
+      <soap12:operation soapAction="http://tempuri.org/GetUserBankCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryReportInfo">
+      <soap12:operation soapAction="http://tempuri.org/QueryReportInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunReport">
+      <soap12:operation soapAction="http://tempuri.org/RunReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDeviceInfo">
+      <soap12:operation soapAction="http://tempuri.org/UpdateDeviceInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePassword">
+      <soap12:operation soapAction="http://tempuri.org/ValidatePassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetETHCoinTxLog">
+      <soap12:operation soapAction="http://tempuri.org/GetETHCoinTxLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ETHBitCoinTx">
+      <soap12:operation soapAction="http://tempuri.org/ETHBitCoinTx" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ETHCheckBitCoinTxState">
+      <soap12:operation soapAction="http://tempuri.org/ETHCheckBitCoinTxState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KeepAID">
+      <soap12:operation soapAction="http://tempuri.org/KeepAID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderSummary">
+      <soap12:operation soapAction="http://tempuri.org/GetOrderSummary" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderDetail">
+      <soap12:operation soapAction="http://tempuri.org/GetOrderDetail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetCompanyInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisableChildUser">
+      <soap12:operation soapAction="http://tempuri.org/DisableChildUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryChildUserAccountList">
+      <soap12:operation soapAction="http://tempuri.org/QueryChildUserAccountList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddMultiLogin">
+      <soap12:operation soapAction="http://tempuri.org/AddMultiLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetMultiLogin">
+      <soap12:operation soapAction="http://tempuri.org/SetMultiLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveMultiLogin">
+      <soap12:operation soapAction="http://tempuri.org/RemoveMultiLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserInfo">
+      <soap12:operation soapAction="http://tempuri.org/QueryUserInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWalletHistory">
+      <soap12:operation soapAction="http://tempuri.org/GetWalletHistory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountingSummary">
+      <soap12:operation soapAction="http://tempuri.org/GetAccountingSummary" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AgentAPIHttpGet" type="tns:AgentAPIHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HeartBeat">
+      <http:operation location="/HeartBeat" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgentLoginByPhoneNumber">
+      <http:operation location="/AgentLoginByPhoneNumber" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgentLogin">
+      <http:operation location="/AgentLogin" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserBankCard">
+      <http:operation location="/AddUserBankCard" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserBankCard">
+      <http:operation location="/RemoveUserBankCard" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserBankCard">
+      <http:operation location="/UpdateUserBankCard" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserBankCard">
+      <http:operation location="/GetUserBankCard" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryReportInfo">
+      <http:operation location="/QueryReportInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDeviceInfo">
+      <http:operation location="/UpdateDeviceInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePassword">
+      <http:operation location="/ValidatePassword" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetETHCoinTxLog">
+      <http:operation location="/GetETHCoinTxLog" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ETHBitCoinTx">
+      <http:operation location="/ETHBitCoinTx" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ETHCheckBitCoinTxState">
+      <http:operation location="/ETHCheckBitCoinTxState" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KeepAID">
+      <http:operation location="/KeepAID" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderSummary">
+      <http:operation location="/GetOrderSummary" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderDetail">
+      <http:operation location="/GetOrderDetail" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <http:operation location="/GetCompanyInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisableChildUser">
+      <http:operation location="/DisableChildUser" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryChildUserAccountList">
+      <http:operation location="/QueryChildUserAccountList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddMultiLogin">
+      <http:operation location="/AddMultiLogin" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetMultiLogin">
+      <http:operation location="/SetMultiLogin" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveMultiLogin">
+      <http:operation location="/RemoveMultiLogin" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserInfo">
+      <http:operation location="/QueryUserInfo" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWalletHistory">
+      <http:operation location="/GetWalletHistory" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountingSummary">
+      <http:operation location="/GetAccountingSummary" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AgentAPIHttpPost" type="tns:AgentAPIHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HeartBeat">
+      <http:operation location="/HeartBeat" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgentLoginByPhoneNumber">
+      <http:operation location="/AgentLoginByPhoneNumber" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgentLogin">
+      <http:operation location="/AgentLogin" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserBankCard">
+      <http:operation location="/AddUserBankCard" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserBankCard">
+      <http:operation location="/RemoveUserBankCard" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserBankCard">
+      <http:operation location="/UpdateUserBankCard" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserBankCard">
+      <http:operation location="/GetUserBankCard" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryReportInfo">
+      <http:operation location="/QueryReportInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDeviceInfo">
+      <http:operation location="/UpdateDeviceInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidatePassword">
+      <http:operation location="/ValidatePassword" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetETHCoinTxLog">
+      <http:operation location="/GetETHCoinTxLog" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ETHBitCoinTx">
+      <http:operation location="/ETHBitCoinTx" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ETHCheckBitCoinTxState">
+      <http:operation location="/ETHCheckBitCoinTxState" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KeepAID">
+      <http:operation location="/KeepAID" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderSummary">
+      <http:operation location="/GetOrderSummary" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderDetail">
+      <http:operation location="/GetOrderDetail" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyInfo">
+      <http:operation location="/GetCompanyInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DisableChildUser">
+      <http:operation location="/DisableChildUser" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryChildUserAccountList">
+      <http:operation location="/QueryChildUserAccountList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddMultiLogin">
+      <http:operation location="/AddMultiLogin" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetMultiLogin">
+      <http:operation location="/SetMultiLogin" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveMultiLogin">
+      <http:operation location="/RemoveMultiLogin" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserInfo">
+      <http:operation location="/QueryUserInfo" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWalletHistory">
+      <http:operation location="/GetWalletHistory" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountingSummary">
+      <http:operation location="/GetAccountingSummary" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AgentAPI">
+    <wsdl:port name="AgentAPISoap" binding="tns:AgentAPISoap">
+      <soap:address location="https://ewin.dev.mts.idv.tw/API/AgentAPI.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AgentAPISoap12" binding="tns:AgentAPISoap12">
+      <soap12:address location="https://ewin.dev.mts.idv.tw/API/AgentAPI.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AgentAPIHttpGet" binding="tns:AgentAPIHttpGet">
+      <http:address location="https://ewin.dev.mts.idv.tw/API/AgentAPI.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AgentAPIHttpPost" binding="tns:AgentAPIHttpPost">
+      <http:address location="https://ewin.dev.mts.idv.tw/API/AgentAPI.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,12 @@
+{
+  "錯誤": "System Message",
+  "請輸入登入帳號": "Please enter the account.",
+  "請輸入登入密碼": "Please enter the password.",
+  "請輸入公司代碼": "Please enter the company code.",
+  "登入失敗,帳號或密碼錯誤": "User login failed. The account/passwod is incorrect, please check.",
+  "登入失敗": "User login failed, please check the information you entered.",
+  "帳號鎖定, 請等待 10 分鐘後再嘗試登入": "The account is locked, please wait 10 minutes to try again.",
+  "帳號鎖定,請等待10分鐘後再嘗試登入": "The account is locked, please wait 10 minutes to try again.",
+  "此帳號無使用權限": "You don't have permission to use the agent app, please contact customer service. Thank you!",
+  "提醒": "System Message"
+}

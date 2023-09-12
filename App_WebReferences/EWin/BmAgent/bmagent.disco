@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://ewin.dev.mts.idv.tw/api/partner/bmagent.asmx?wsdl" docRef="https://ewin.dev.mts.idv.tw/api/partner/bmagent.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://ewin.dev.mts.idv.tw/api/partner/bmagent.asmx" xmlns:q1="http://tempuri.org/" binding="q1:BmAgentSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://ewin.dev.mts.idv.tw/api/partner/bmagent.asmx" xmlns:q2="http://tempuri.org/" binding="q2:BmAgentSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

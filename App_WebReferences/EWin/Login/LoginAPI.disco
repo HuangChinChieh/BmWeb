@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://ewin.dev.mts.idv.tw/API/LoginAPI.asmx?wsdl" docRef="http://ewin.dev.mts.idv.tw/API/LoginAPI.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://ewin.dev.mts.idv.tw/API/LoginAPI.asmx" xmlns:q1="http://tempuri.org/" binding="q1:LoginAPISoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://ewin.dev.mts.idv.tw/API/LoginAPI.asmx" xmlns:q2="http://tempuri.org/" binding="q2:LoginAPISoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

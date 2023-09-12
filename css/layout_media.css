@@ -1,0 +1,83 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*   PC端樣式    */
+@media (min-width: 768px) {
+	input[type="text"], 
+	input[type="password"], 
+	textarea, 
+	textarea.form-control{}	
+	.version_con_m{
+		position: absolute;
+		width: 100%;
+		height: 50px;
+		line-height: 50px;
+		left: 0px;
+		bottom: -52px;
+		color: rgba(255,255,255,0.3);
+    }
+	.wrapper_login{
+		width: 100%;
+		height: calc(100% - 50px);
+		padding-top: 50px;
+		background: #373b4e;
+    }
+}
+
+/*   移動端樣式    */
+@media (max-width: 767px) {
+	.wrapper_login{
+		width: 100%;
+		height: calc(100% - 60px);
+		padding-top: 8px;
+    }
+	#myForm{
+		height: 100%;
+	}
+	.login_con{
+		display: block;
+		margin: auto;
+		width: 90%;
+		height: 90%;
+		min-height: 510px;
+		background-color: #333;
+		background: linear-gradient(170deg ,#444 ,#222);
+		border-radius: 20px;
+	}
+	.login_con2{
+		display: block;
+		margin: auto;
+		width: 90%;
+		height: 90%;
+		min-height: 510px;
+		background-color: #333;
+		background: linear-gradient(170deg ,#444 ,#222);
+		border-radius: 20px;
+	}
+	.login_con2 br{display: none;}
+	.registePage .login_con{
+		min-height: 560px;
+	}
+	.login_logo{
+		margin-top: 10px;
+		width: 100%;
+		height: 45px;;
+		background: url("/Game/images/m_logo.png") center center no-repeat;
+		background-size: auto 20px;
+		background-position: 17px 20px;
+    }
+	.login_btn_con{}
+	.version_con_m{
+		position: absolute;
+		width: 100%;
+		height: 50px;
+		margin: 0px auto;
+		line-height: 50px;
+		left: 0px;
+		bottom: 0px;
+		color: rgba(255,255,255,0.3);
+	}
+	.version_wrapper_m{
+		border-top:1px dashed #444;
+	}
+}
