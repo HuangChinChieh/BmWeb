@@ -43,7 +43,6 @@
 
         if (ASS != null) {
             if (ASS.Result ==  EWin.BmAgent.enumResult.OK) {
-                api.CreateUserAccountPoint(ASS.AID,EWinWeb.ConvertCurrencyType);
                 Response.SetCookie(new HttpCookie("ASID", ASS.AID));
                 Response.Redirect("Index.aspx?DefaultCompany=" + DefaultCompany + "&Lang=" + Lang);
             } else {

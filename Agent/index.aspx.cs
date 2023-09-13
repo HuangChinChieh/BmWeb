@@ -12,14 +12,5 @@ using System.Web;
 /// index 的摘要描述
 /// </summary>
 public partial class index : System.Web.UI.Page {
-    [WebMethod]
-    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public static EWin.BmAgent.APIResult CreateGameAccount(string AID) {
-        EWin.BmAgent.BmAgent api = new EWin.BmAgent.BmAgent();
-        EWin.BmAgent.APIResult RetValue = new EWin.BmAgent.APIResult();
 
-        RetValue = api.CreateGameAccount(AID);
-
-        return RetValue;
-    }
 }

@@ -7,7 +7,6 @@
     string AgentURL = Request["AgentURL"];
     string Lang = Request["Lang"];
     string AgentVersion = EWinWeb.AgentVersion;
-    string AlreadyHaveGameAccount = string.Empty;
     string UserLevel = "0";
     EWin.BmAgent.BmAgent api = new EWin.BmAgent.BmAgent();
     EWin.BmAgent.AgentSessionResult ASR = null;
@@ -28,12 +27,6 @@
         }
     } else {
         ASI = ASR.AgentSessionInfo;
-
-        UPR = api.GetUserAccountProperty(ASID, System.Guid.NewGuid().ToString(), "AlreadyHaveGameAccount");
-
-        if (UPR!=null && UPR.Result == EWin.BmAgent.enumResult.OK) {
-            AlreadyHaveGameAccount = UPR.PropertyValue;
-        }
 
         var GetUserLevel= api.GetUserLevel(ASID);
         if ( GetUserLevel.Result== EWin.BmAgent.enumResult.OK)
@@ -103,7 +96,6 @@
     var hasCryptoWallet = false;
     var AgentURL = "";
     var InAppMode = false;
-    var AlreadyHaveGameAccount = "<%=AlreadyHaveGameAccount%>";
     var lobbyClient;
 
     var EWinInfo = {
@@ -815,36 +807,6 @@
         el.parentNode.classList.add("active");
     }
 
-    function CreateGameAccount() {
-        var postObj;
-
-        postObj = {
-            AID: EWinInfo.ASID
-        };
-
-        c.callService("index.aspx/CreateGameAccount", postObj, function (success, o) {
-            if (success) {
-                var obj = c.getJSON(o);
-
-                if (obj.Result == 0) {
-                    API_ShowMessageOK(mlp.getLanguageKey("完成"), mlp.getLanguageKey("遊玩帳號")+" : "+obj.Message, function () {
-                        $("#idCreateGameAccount").hide();
-                        $("#liTrade").show();
-                    })
-                } else {
-                    API_ShowMessageOK(mlp.getLanguageKey("錯誤"), obj.Message);
-                }
-            } else {
-                if (o == "Timeout") {
-                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請稍後重新嘗試"));
-                } else {
-                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), o);
-                }
-            }
-        });
-
-    }
-
     function init() {
         lang = window.localStorage.getItem("agent_lang");
 
@@ -863,14 +825,6 @@
                     });                        
                  }
             });
-
-            if (AlreadyHaveGameAccount == "") {
-                $("#idCreateGameAccount").show();
-                $("#liTrade").show();
-            } else {
-                $("#idCreateGameAccount").hide();
-                $("#liTrade").show();
-            }
 
             window.setInterval(function () {
                 if (EWinInfo.ASID != null && EWinInfo.ASID != "") {
@@ -1094,38 +1048,6 @@
                                             <i class="icon icon-mask icon-ewin-assisant"></i>
                                             <span class="language_replace">傭金結算查詢</span></a>
                                     </li>
-                                
-                                </ul>
-                            </li>
-                            <li class="nav-item navbarMenu__catagory" id="liTrade">
-                                <span class="catagory-item"><span class="language_replace">交易</span></span>
-                                <ul class="catagory">
-                                    <li class="nav-item submenu dropdown">
-                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('設定錢包密碼'), 'SetWalletPassword.aspx');ItemClick(this);">
-                                            <i class="icon icon-mask icon-ewin-transfer"></i>
-                                            <span class="language_replace">設定錢包密碼</span></a>
-                                    </li>
-                                    <li class="nav-item submenu dropdown">
-                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('設定出款卡'), 'BankCard_Maint.aspx');ItemClick(this);">
-                                            <i class="icon icon-mask icon-ewin-transfer"></i>
-                                            <span class="language_replace">設定出款卡</span></a>
-                                    </li>
-                                     <li class="nav-item submenu dropdown">
-                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('出款'), 'WithdrawAgent.aspx');ItemClick(this);">
-                                            <i class="icon icon-mask icon-ewin-transfer"></i>
-                                            <span class="language_replace">出款</span></a>
-                                    </li>
-                                       <li class="nav-item submenu dropdown">
-                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('出款紀錄'), 'PaymentHistory.aspx');ItemClick(this);">
-                                            <i class="icon icon-mask icon-ewin-transfer"></i>
-                                            <span class="language_replace">出款紀錄</span></a>
-                                    </li>
-                                    <li class="nav-item submenu dropdown" id="btnTransfer">
-                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('轉帳至遊戲帳戶'), 'UserAccountWallet_Transfer.aspx');ItemClick(this);">
-                                            <i class="icon icon-mask icon-ewin-transfer"></i>
-                                            <span class="language_replace">轉帳至遊戲帳戶</span></a>
-                                    </li>
-                             
                                 </ul>
                             </li>
                             <li class="nav-item navbarMenu__catagory">
@@ -1188,9 +1110,6 @@
                                                 </li>
                                                 <li id="idMyQRCode" class="nav-item" style="display:none">
                                                     <a class="nav-link icon icon-ewin-default-myQrCode language_replace" onclick="showQRCode()" target="mainiframe">我的推廣碼</a>
-                                                </li>
-                                                <li id="idCreateGameAccount" class="nav-item" style="display:none">
-                                                    <a class="nav-link icon icon-ewin-default-myQrCode language_replace" onclick="CreateGameAccount()" target="mainiframe">新增遊玩帳號</a>
                                                 </li>
                                             </ul>
                                         </li>

@@ -30,6 +30,114 @@
           <s:enumeration value="ERR" />
         </s:restriction>
       </s:simpleType>
+      <s:element name="GetPaymentGiftHistory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="QueryDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPaymentGiftHistoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPaymentGiftHistoryResult" type="tns:PaymentGiftHistoryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PaymentGiftHistoryResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="List" type="tns:ArrayOfPaymentGiftHistory" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfPaymentGiftHistory">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PaymentGiftHistory" nillable="true" type="tns:PaymentGiftHistory" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PaymentGiftHistory">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PaymentGiftID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PaymentGiftCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PaymentGiftStatus" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SummaryDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreateDate" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPaymentGiftByCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GiftCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPaymentGiftByCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPaymentGiftByCodeResult" type="tns:PaymentGiftResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PaymentGiftResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="PaymentGiftCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="PaymentGiftStatus" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="PaymentGiftUsed">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GiftCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PaymentGiftUsedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PaymentGiftUsedResult" type="tns:PaymentGiftResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PaymentGiftCreate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PaymentGiftCreateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PaymentGiftCreateResult" type="tns:PaymentGiftResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="ClearGameAcl">
         <s:complexType>
           <s:sequence>
@@ -1071,6 +1179,31 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="AddUserBankCardResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUserBankCardByLoginAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="PaymentMethod" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BranchName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AccountName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankProvince" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankCity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUserBankCardByLoginAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddUserBankCardByLoginAccountResult" type="tns:APIResult" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -2357,6 +2490,8 @@
         </s:sequence>
       </s:complexType>
       <s:element name="APIResult" nillable="true" type="tns:APIResult" />
+      <s:element name="PaymentGiftHistoryResult" nillable="true" type="tns:PaymentGiftHistoryResult" />
+      <s:element name="PaymentGiftResult" nillable="true" type="tns:PaymentGiftResult" />
       <s:element name="RankInfoResult" nillable="true" type="tns:RankInfoResult" />
       <s:element name="PaymentChannelResult" nillable="true" type="tns:PaymentChannelResult" />
       <s:element name="UserAccountAddRateList" nillable="true" type="tns:UserAccountAddRateList" />
@@ -2404,6 +2539,30 @@
   </wsdl:message>
   <wsdl:message name="HeartBeatSoapOut">
     <wsdl:part name="parameters" element="tns:HeartBeatResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPaymentGiftHistorySoapIn">
+    <wsdl:part name="parameters" element="tns:GetPaymentGiftHistory" />
+  </wsdl:message>
+  <wsdl:message name="GetPaymentGiftHistorySoapOut">
+    <wsdl:part name="parameters" element="tns:GetPaymentGiftHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPaymentGiftByCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPaymentGiftByCode" />
+  </wsdl:message>
+  <wsdl:message name="GetPaymentGiftByCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPaymentGiftByCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="PaymentGiftUsedSoapIn">
+    <wsdl:part name="parameters" element="tns:PaymentGiftUsed" />
+  </wsdl:message>
+  <wsdl:message name="PaymentGiftUsedSoapOut">
+    <wsdl:part name="parameters" element="tns:PaymentGiftUsedResponse" />
+  </wsdl:message>
+  <wsdl:message name="PaymentGiftCreateSoapIn">
+    <wsdl:part name="parameters" element="tns:PaymentGiftCreate" />
+  </wsdl:message>
+  <wsdl:message name="PaymentGiftCreateSoapOut">
+    <wsdl:part name="parameters" element="tns:PaymentGiftCreateResponse" />
   </wsdl:message>
   <wsdl:message name="ClearGameAclSoapIn">
     <wsdl:part name="parameters" element="tns:ClearGameAcl" />
@@ -2620,6 +2779,12 @@
   </wsdl:message>
   <wsdl:message name="AddUserBankCardSoapOut">
     <wsdl:part name="parameters" element="tns:AddUserBankCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddUserBankCardByLoginAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:AddUserBankCardByLoginAccount" />
+  </wsdl:message>
+  <wsdl:message name="AddUserBankCardByLoginAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:AddUserBankCardByLoginAccountResponse" />
   </wsdl:message>
   <wsdl:message name="SetUserBankCardStateSoapIn">
     <wsdl:part name="parameters" element="tns:SetUserBankCardState" />
@@ -2867,6 +3032,43 @@
   </wsdl:message>
   <wsdl:message name="HeartBeatHttpGetOut">
     <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="GetPaymentGiftHistoryHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="SID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="QueryDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPaymentGiftHistoryHttpGetOut">
+    <wsdl:part name="Body" element="tns:PaymentGiftHistoryResult" />
+  </wsdl:message>
+  <wsdl:message name="GetPaymentGiftByCodeHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="GiftCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPaymentGiftByCodeHttpGetOut">
+    <wsdl:part name="Body" element="tns:PaymentGiftResult" />
+  </wsdl:message>
+  <wsdl:message name="PaymentGiftUsedHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="SID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="GiftCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PaymentGiftUsedHttpGetOut">
+    <wsdl:part name="Body" element="tns:PaymentGiftResult" />
+  </wsdl:message>
+  <wsdl:message name="PaymentGiftCreateHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="SID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+    <wsdl:part name="Amount" type="s:string" />
+    <wsdl:part name="Description" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PaymentGiftCreateHttpGetOut">
+    <wsdl:part name="Body" element="tns:PaymentGiftResult" />
   </wsdl:message>
   <wsdl:message name="ClearGameAclHttpGetIn">
     <wsdl:part name="Token" type="s:string" />
@@ -3208,6 +3410,23 @@
     <wsdl:part name="Description" type="s:string" />
   </wsdl:message>
   <wsdl:message name="AddUserBankCardHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="AddUserBankCardByLoginAccountHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+    <wsdl:part name="PaymentMethod" type="s:string" />
+    <wsdl:part name="BankName" type="s:string" />
+    <wsdl:part name="BranchName" type="s:string" />
+    <wsdl:part name="BankNumber" type="s:string" />
+    <wsdl:part name="AccountName" type="s:string" />
+    <wsdl:part name="BankProvince" type="s:string" />
+    <wsdl:part name="BankCity" type="s:string" />
+    <wsdl:part name="Description" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddUserBankCardByLoginAccountHttpGetOut">
     <wsdl:part name="Body" element="tns:APIResult" />
   </wsdl:message>
   <wsdl:message name="SetUserBankCardStateHttpGetIn">
@@ -3583,6 +3802,43 @@
   <wsdl:message name="HeartBeatHttpPostOut">
     <wsdl:part name="Body" element="tns:APIResult" />
   </wsdl:message>
+  <wsdl:message name="GetPaymentGiftHistoryHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="SID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="QueryDate" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPaymentGiftHistoryHttpPostOut">
+    <wsdl:part name="Body" element="tns:PaymentGiftHistoryResult" />
+  </wsdl:message>
+  <wsdl:message name="GetPaymentGiftByCodeHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="GiftCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPaymentGiftByCodeHttpPostOut">
+    <wsdl:part name="Body" element="tns:PaymentGiftResult" />
+  </wsdl:message>
+  <wsdl:message name="PaymentGiftUsedHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="SID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="GiftCode" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PaymentGiftUsedHttpPostOut">
+    <wsdl:part name="Body" element="tns:PaymentGiftResult" />
+  </wsdl:message>
+  <wsdl:message name="PaymentGiftCreateHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="SID" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+    <wsdl:part name="Amount" type="s:string" />
+    <wsdl:part name="Description" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PaymentGiftCreateHttpPostOut">
+    <wsdl:part name="Body" element="tns:PaymentGiftResult" />
+  </wsdl:message>
   <wsdl:message name="ClearGameAclHttpPostIn">
     <wsdl:part name="Token" type="s:string" />
     <wsdl:part name="SID" type="s:string" />
@@ -3923,6 +4179,23 @@
     <wsdl:part name="Description" type="s:string" />
   </wsdl:message>
   <wsdl:message name="AddUserBankCardHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="AddUserBankCardByLoginAccountHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+    <wsdl:part name="PaymentMethod" type="s:string" />
+    <wsdl:part name="BankName" type="s:string" />
+    <wsdl:part name="BranchName" type="s:string" />
+    <wsdl:part name="BankNumber" type="s:string" />
+    <wsdl:part name="AccountName" type="s:string" />
+    <wsdl:part name="BankProvince" type="s:string" />
+    <wsdl:part name="BankCity" type="s:string" />
+    <wsdl:part name="Description" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddUserBankCardByLoginAccountHttpPostOut">
     <wsdl:part name="Body" element="tns:APIResult" />
   </wsdl:message>
   <wsdl:message name="SetUserBankCardStateHttpPostIn">
@@ -4296,6 +4569,22 @@
       <wsdl:input message="tns:HeartBeatSoapIn" />
       <wsdl:output message="tns:HeartBeatSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetPaymentGiftHistory">
+      <wsdl:input message="tns:GetPaymentGiftHistorySoapIn" />
+      <wsdl:output message="tns:GetPaymentGiftHistorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentGiftByCode">
+      <wsdl:input message="tns:GetPaymentGiftByCodeSoapIn" />
+      <wsdl:output message="tns:GetPaymentGiftByCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PaymentGiftUsed">
+      <wsdl:input message="tns:PaymentGiftUsedSoapIn" />
+      <wsdl:output message="tns:PaymentGiftUsedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PaymentGiftCreate">
+      <wsdl:input message="tns:PaymentGiftCreateSoapIn" />
+      <wsdl:output message="tns:PaymentGiftCreateSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="ClearGameAcl">
       <wsdl:input message="tns:ClearGameAclSoapIn" />
       <wsdl:output message="tns:ClearGameAclSoapOut" />
@@ -4439,6 +4728,10 @@
     <wsdl:operation name="AddUserBankCard">
       <wsdl:input message="tns:AddUserBankCardSoapIn" />
       <wsdl:output message="tns:AddUserBankCardSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserBankCardByLoginAccount">
+      <wsdl:input message="tns:AddUserBankCardByLoginAccountSoapIn" />
+      <wsdl:output message="tns:AddUserBankCardByLoginAccountSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="SetUserBankCardState">
       <wsdl:input message="tns:SetUserBankCardStateSoapIn" />
@@ -4606,6 +4899,22 @@
       <wsdl:input message="tns:HeartBeatHttpGetIn" />
       <wsdl:output message="tns:HeartBeatHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetPaymentGiftHistory">
+      <wsdl:input message="tns:GetPaymentGiftHistoryHttpGetIn" />
+      <wsdl:output message="tns:GetPaymentGiftHistoryHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentGiftByCode">
+      <wsdl:input message="tns:GetPaymentGiftByCodeHttpGetIn" />
+      <wsdl:output message="tns:GetPaymentGiftByCodeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PaymentGiftUsed">
+      <wsdl:input message="tns:PaymentGiftUsedHttpGetIn" />
+      <wsdl:output message="tns:PaymentGiftUsedHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PaymentGiftCreate">
+      <wsdl:input message="tns:PaymentGiftCreateHttpGetIn" />
+      <wsdl:output message="tns:PaymentGiftCreateHttpGetOut" />
+    </wsdl:operation>
     <wsdl:operation name="ClearGameAcl">
       <wsdl:input message="tns:ClearGameAclHttpGetIn" />
       <wsdl:output message="tns:ClearGameAclHttpGetOut" />
@@ -4741,6 +5050,10 @@
     <wsdl:operation name="AddUserBankCard">
       <wsdl:input message="tns:AddUserBankCardHttpGetIn" />
       <wsdl:output message="tns:AddUserBankCardHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserBankCardByLoginAccount">
+      <wsdl:input message="tns:AddUserBankCardByLoginAccountHttpGetIn" />
+      <wsdl:output message="tns:AddUserBankCardByLoginAccountHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="SetUserBankCardState">
       <wsdl:input message="tns:SetUserBankCardStateHttpGetIn" />
@@ -4900,6 +5213,22 @@
       <wsdl:input message="tns:HeartBeatHttpPostIn" />
       <wsdl:output message="tns:HeartBeatHttpPostOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetPaymentGiftHistory">
+      <wsdl:input message="tns:GetPaymentGiftHistoryHttpPostIn" />
+      <wsdl:output message="tns:GetPaymentGiftHistoryHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentGiftByCode">
+      <wsdl:input message="tns:GetPaymentGiftByCodeHttpPostIn" />
+      <wsdl:output message="tns:GetPaymentGiftByCodeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PaymentGiftUsed">
+      <wsdl:input message="tns:PaymentGiftUsedHttpPostIn" />
+      <wsdl:output message="tns:PaymentGiftUsedHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PaymentGiftCreate">
+      <wsdl:input message="tns:PaymentGiftCreateHttpPostIn" />
+      <wsdl:output message="tns:PaymentGiftCreateHttpPostOut" />
+    </wsdl:operation>
     <wsdl:operation name="ClearGameAcl">
       <wsdl:input message="tns:ClearGameAclHttpPostIn" />
       <wsdl:output message="tns:ClearGameAclHttpPostOut" />
@@ -5035,6 +5364,10 @@
     <wsdl:operation name="AddUserBankCard">
       <wsdl:input message="tns:AddUserBankCardHttpPostIn" />
       <wsdl:output message="tns:AddUserBankCardHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserBankCardByLoginAccount">
+      <wsdl:input message="tns:AddUserBankCardByLoginAccountHttpPostIn" />
+      <wsdl:output message="tns:AddUserBankCardByLoginAccountHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="SetUserBankCardState">
       <wsdl:input message="tns:SetUserBankCardStateHttpPostIn" />
@@ -5193,6 +5526,42 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="HeartBeat">
       <soap:operation soapAction="http://tempuri.org/HeartBeat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentGiftHistory">
+      <soap:operation soapAction="http://tempuri.org/GetPaymentGiftHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentGiftByCode">
+      <soap:operation soapAction="http://tempuri.org/GetPaymentGiftByCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PaymentGiftUsed">
+      <soap:operation soapAction="http://tempuri.org/PaymentGiftUsed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PaymentGiftCreate">
+      <soap:operation soapAction="http://tempuri.org/PaymentGiftCreate" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -5517,6 +5886,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddUserBankCard">
       <soap:operation soapAction="http://tempuri.org/AddUserBankCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserBankCardByLoginAccount">
+      <soap:operation soapAction="http://tempuri.org/AddUserBankCardByLoginAccount" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -5896,6 +6274,42 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetPaymentGiftHistory">
+      <soap12:operation soapAction="http://tempuri.org/GetPaymentGiftHistory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentGiftByCode">
+      <soap12:operation soapAction="http://tempuri.org/GetPaymentGiftByCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PaymentGiftUsed">
+      <soap12:operation soapAction="http://tempuri.org/PaymentGiftUsed" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PaymentGiftCreate">
+      <soap12:operation soapAction="http://tempuri.org/PaymentGiftCreate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ClearGameAcl">
       <soap12:operation soapAction="http://tempuri.org/ClearGameAcl" style="document" />
       <wsdl:input>
@@ -6213,6 +6627,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddUserBankCard">
       <soap12:operation soapAction="http://tempuri.org/AddUserBankCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserBankCardByLoginAccount">
+      <soap12:operation soapAction="http://tempuri.org/AddUserBankCardByLoginAccount" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -6592,6 +7015,42 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetPaymentGiftHistory">
+      <http:operation location="/GetPaymentGiftHistory" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentGiftByCode">
+      <http:operation location="/GetPaymentGiftByCode" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PaymentGiftUsed">
+      <http:operation location="/PaymentGiftUsed" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PaymentGiftCreate">
+      <http:operation location="/PaymentGiftCreate" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ClearGameAcl">
       <http:operation location="/ClearGameAcl" />
       <wsdl:input>
@@ -6891,6 +7350,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddUserBankCard">
       <http:operation location="/AddUserBankCard" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserBankCardByLoginAccount">
+      <http:operation location="/AddUserBankCardByLoginAccount" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -7252,6 +7720,42 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetPaymentGiftHistory">
+      <http:operation location="/GetPaymentGiftHistory" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentGiftByCode">
+      <http:operation location="/GetPaymentGiftByCode" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PaymentGiftUsed">
+      <http:operation location="/PaymentGiftUsed" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PaymentGiftCreate">
+      <http:operation location="/PaymentGiftCreate" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ClearGameAcl">
       <http:operation location="/ClearGameAcl" />
       <wsdl:input>
@@ -7551,6 +8055,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddUserBankCard">
       <http:operation location="/AddUserBankCard" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserBankCardByLoginAccount">
+      <http:operation location="/AddUserBankCardByLoginAccount" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
