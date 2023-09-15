@@ -33,6 +33,7 @@
         var EWinInfo;
         var api;
         var lang;
+        var SelectedWallet;
 
         function changeTab(type) {
             switch (type) {
@@ -63,6 +64,9 @@
                     window.parent.API_CloseLoading();
                     if (success) {
                         var o = c.getJSON(obj);
+
+                        $("#idUserList").empty();
+                        $("#idAgentList").empty();
 
                         if (o.Result == 0) {
                             setItem(o.Datas);
@@ -163,7 +167,7 @@
                 }
 
                 for (var j = 0; j < k.WalletList.length; j++) {
-                    if (k.WalletList[j].CurrencyType == EWinInfo.CurrencyType) {
+                    if (k.WalletList[j].CurrencyType == SelectedWallet) {
                         c.setClassText(temp, "CurrencyType", null, k.WalletList[j].CurrencyType + mlp.getLanguageKey("可用餘額"));
                         c.setClassText(temp, "WalletBalance", null, c.toCurrency(k.WalletList[j].PointValue));
                     }
@@ -173,11 +177,13 @@
                     let kk = k.GameCodeList[l];
                     let t = c.getTemplate("tempGameAccountingCode");
 
-                    c.setClassText(t, "GameAccountingCode", null, mlp.getLanguageKey(kk.GameAccountingCode));
-                    c.setClassText(t, "UserRate", null, c.toCurrency(kk.UserRate));
-                    c.setClassText(t, "BuyChipRate", null, c.toCurrency(kk.BuyChipRate));
+                    if (k.GameCodeList[j].CurrencyType == SelectedWallet) {
+                        c.setClassText(t, "GameAccountingCode", null, mlp.getLanguageKey(kk.GameAccountingCode));
+                        c.setClassText(t, "UserRate", null, c.toCurrency(kk.UserRate));
+                        c.setClassText(t, "BuyChipRate", null, c.toCurrency(kk.BuyChipRate));
 
-                    $(temp).children().find(".GameAccountingCodeList").append(t);
+                        $(temp).children().find(".GameAccountingCodeList").append(t);
+                    }
                 }
 
                 $(temp).find('.ModifyRemarkBtn').click(function () {
@@ -202,7 +208,7 @@
                 }.bind(temp));
 
 
-                if (k.GameCodeList.length == 0) {
+                if ($(temp).children().find(".GameAccountingCodeList").children().length == 0) {
                     $(temp).find('.btnOpen').hide();
                     $(temp).find('.btnClose').hide();
                 } else {
@@ -272,12 +278,22 @@
             mlp.loadLanguage(lang, function () {
 
                 //$("#idParentPath").text(EWinInfo.LoginAccount);
+                SelectedWallet = parent.API_GetSelectedWallet();
 
                 searchUser();
 
                 window.parent.API_CloseLoading();
 
             });
+        }
+
+        function EWinEventNotify(eventName, isDisplay, param) {
+            switch (eventName) {
+                case "SelectedWallet":
+                    SelectedWallet = param;
+                    searchUser();
+                    break;
+            }
         }
 
         window.onload = init;

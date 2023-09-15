@@ -10,12 +10,9 @@
 
     ASR = api.GetAgentSessionByID(ASID);
 
-    if (ASR.Result != EWin.BmAgent.enumResult.OK)
-    {
+    if (ASR.Result != EWin.BmAgent.enumResult.OK) {
         Response.Redirect("login.aspx");
-    }
-    else
-    {
+    } else {
         ASI = ASR.AgentSessionInfo;
     }
 
@@ -65,7 +62,7 @@
 <script type="text/javascript" src="/Scripts/bignumber.min.js"></script>
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
 <script type="text/javascript" src="Scripts/MultiLanguage.js"></script>
-    <script type="text/javascript" src="../Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="../Scripts/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="js/date.js"></script>
 <script>
     var ApiUrl = "GetPlayerTotalDepositSummary_Casino.aspx";
@@ -77,6 +74,7 @@
     var lang;
     var RowsPage = 50;
     var PageNumber = 1;
+    var SelectedWallet;
     function querySelfData() {
         PageNumber = 1;
         queryData(EWinInfo.UserInfo.LoginAccount);
@@ -99,26 +97,14 @@
         startDate = document.getElementById("startDate");
         endDate = document.getElementById("endDate");
         targetLoginAccount = document.getElementById("loginAccount").value.trim();
-        currencyTypeDom = document.getElementsByName("chkCurrencyType");
 
-        if (currencyTypeDom) {
-            if (currencyTypeDom.length > 0) {
-                for (i = 0; i < currencyTypeDom.length; i++) {
-                    if (currencyTypeDom[i].checked == true) {
-                        currencyType = currencyTypeDom[i].value;
-                        break;
-                    }
-                }
-            }
-        }
-
-        if (currencyType != "") {
+        if (SelectedWallet != "") {
             postData = {
                 AID: EWinInfo.ASID,
                 TargetLoginAccount: targetLoginAccount,
                 QueryBeginDate: startDate.value,
                 QueryEndDate: endDate.value,
-                CurrencyType: currencyType
+                CurrencyType: SelectedWallet
             };
 
             if (new Date(postData.QueryBeginDate) <= new Date(postData.QueryEndDate)) {
@@ -126,7 +112,7 @@
                 window.parent.API_ShowLoading();
 
                 if (targetLoginAccount) {
-               
+
                     c.callService(ApiUrl + "/GetSearchPlayerTotalDepositSummary", postData, function (success, o) {
                         if (success) {
                             var obj = c.getJSON(o);
@@ -153,7 +139,7 @@
                         LoginAccount: LoginAccount,
                         QueryBeginDate: startDate.value,
                         QueryEndDate: endDate.value,
-                        CurrencyType: currencyType,
+                        CurrencyType: SelectedWallet,
                         RowsPage: RowsPage, //一頁顯示的比數
                         PageNumber: PageNumber
                     };
@@ -192,7 +178,7 @@
         var idList = document.getElementById("idList");
         var hasData = false;
 
-        if (PageNumber== 1) {
+        if (PageNumber == 1) {
             c.clearChildren(idList);
         }
 
@@ -213,7 +199,7 @@
                 c.setClassText(t, "LoginAccount", null, item.LoginAccount);
                 c.setClassText(t, "ParentLoginAccount", null, item.ParentLoginAccount);
                 c.setClassText(t, "InsideLevel", null, DealUserAccountInsideLevel);
-                c.setClassText(t, "CurrencyType", null, item.CurrencyType);
+                c.setClassText(t, "CurrencyType", null, SelectedWallet);
                 //c.setClassText(t, "DepositValue", null, c.toCurrency(item.DepositValue));
                 //c.setClassText(t, "FirstDepositValue", null, c.toCurrency(item.FirstDepositValue));;
                 //c.setClassText(t, "DepositPaymentCount", null, item.DepositPaymentCount);
@@ -291,13 +277,14 @@
                 idList.appendChild(t);
             }
 
-            if (o.Message =="HasNextPage") {
+            if (o.Message == "HasNextPage") {
                 $("#btnShowNextData").show();
             } else {
                 $("#btnShowNextData").hide();
             }
         } else {
             var div = document.createElement("DIV");
+            c.clearChildren(idList);
 
             div.id = "hasNoData_DIV"
             div.innerHTML = mlp.getLanguageKey("無數據");
@@ -386,32 +373,6 @@
 
         document.getElementById("startDate").value = getFirstDayOfWeek(Date.today()).toString("yyyy-MM-dd");
         document.getElementById("endDate").value = getLastDayOfWeek(Date.today()).toString("yyyy-MM-dd");
-
-        if (EWinInfo.UserInfo != null) {
-            if (EWinInfo.UserInfo.WalletList != null) {
-                pi = EWinInfo.UserInfo.WalletList;
-                if (pi.length > 0) {
-                    for (var i = 0; i < pi.length; i++) {
-                        templateDiv = c.getTemplate("templateDiv");
-
-                        tempCurrencyRadio = c.getFirstClassElement(templateDiv, "tempRadio");
-                        tempCurrencyName = c.getFirstClassElement(templateDiv, "tempName");
-                        tempCurrencyRadio.value = pi[i].CurrencyType;
-                        tempCurrencyRadio.name = "chkCurrencyType";
-                        tempCurrencyName.innerText = pi[i].CurrencyType;
-
-                        if (i == 0) {
-                            tempCurrencyRadio.checked = true;
-                        }
-
-                        tempCurrencyRadio.classList.remove("tempRadio");
-                        tempCurrencyName.classList.remove("tempName");
-
-                        CurrencyTypeDiv.appendChild(templateDiv);
-                    }
-                }
-            }
-        }
     }
 
     function getFirstDayOfWeek(d) {
@@ -459,6 +420,7 @@
         mlp.loadLanguage(lang, function () {
             //queryOrderSummary(qYear, qMon);
             window.parent.API_CloseLoading();
+            SelectedWallet = parent.API_GetSelectedWallet();
             queryData(EWinInfo.UserInfo.LoginAccount);
             ac.dataToggleCollapseInit();
         });
@@ -469,6 +431,10 @@
             case "WindowFocus":
                 //updateBaseInfo();
                 ac.dataToggleCollapseInit();
+                break;
+            case "SelectedWallet":
+                SelectedWallet = param;
+                queryData(EWinInfo.UserInfo.LoginAccount);
                 break;
         }
     }
@@ -489,9 +455,10 @@
                         <div id="divSearchContent" class="row searchListContent">
                             <div id="idSearchButton" class="col-12 col-md-6 col-lg-3 col-xl-2">
                                 <div class="form-group form-group-s2 ">
-                                    <div class="title hidden shown-md"><span class="language_replace">帳號</span>
-                                         <btn style="font-size: 12px; right: 5px; position: absolute; border: 2px solid; width: 22px; text-align: center; border-radius: 11px; color: #bba480; cursor: pointer;" onclick="showSearchAccountPrecautions()">!</btn>
-										 </div>
+                                    <div class="title hidden shown-md">
+                                        <span class="language_replace">帳號</span>
+                                        <btn style="font-size: 12px; right: 5px; position: absolute; border: 2px solid; width: 22px; text-align: center; border-radius: 11px; color: #bba480; cursor: pointer;" onclick="showSearchAccountPrecautions()">!</btn>
+                                    </div>
 
                                     <div class="form-control-underline iconCheckAnim placeholder-move-right zIndex_overMask_SafariFix">
                                         <input type="text" class="form-control" id="loginAccount" value="" />
@@ -663,12 +630,12 @@
                     <!-- 表格上下滑動框 -->
                     <div class="tbody" id="idList">
                     </div>
-                        <div class="row" style="position: absolute;left:0;right:0;margin:0 auto;padding-top: 40px;">
-                    <div class="col-12" id="btnShowNextData" style="display:none;">
-                        <div class="form-group wrapper_center dataList-process">
-                            <button style="max-width: 30%;" class="btn btn-full-main btn-roundcorner " onclick="showNextData()"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">查看更多</span></button>
+                    <div class="row" style="position: absolute; left: 0; right: 0; margin: 0 auto; padding-top: 40px;">
+                        <div class="col-12" id="btnShowNextData" style="display: none;">
+                            <div class="form-group wrapper_center dataList-process">
+                                <button style="max-width: 30%;" class="btn btn-full-main btn-roundcorner " onclick="showNextData()"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">查看更多</span></button>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>

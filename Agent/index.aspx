@@ -97,6 +97,7 @@
     var AgentURL = "";
     var InAppMode = false;
     var lobbyClient;
+    var SelectCurrencyType = "";
 
     var EWinInfo = {
         ASID: "<%=ASI.AgentSessionID%>",
@@ -299,6 +300,10 @@
             maskOverlay(mask_overlay);
         }
 
+    }
+
+    function API_GetSelectedWallet() {
+        return SelectCurrencyType;
     }
 
     function refreshWindow(reloadLastWindow) {
@@ -807,6 +812,12 @@
         el.parentNode.classList.add("active");
     }
 
+    function SelectWalletMethod() {
+        SelectCurrencyType = $("#selectedWallet").val();
+
+        notifyWindowEvent("SelectedWallet", SelectCurrencyType);
+    }
+
     function init() {
         lang = window.localStorage.getItem("agent_lang");
 
@@ -815,6 +826,15 @@
         mlp.loadLanguage(lang, function () {
             api = new AgentAPI(apiUrl);
             lobbyClient = new LobbyAPI("/API/LobbyAPI.asmx");
+
+            if (EWinInfo.MainCurrencyType) {
+                let currencys = EWinInfo.MainCurrencyType.split(';');
+
+                for (var i = 0; i < currencys.length; i++) {
+                    SelectCurrencyType = currencys[0];
+                      $('#selectedWallet').append(`<option  value="${currencys[i]}">${currencys[i]}</option>`);
+                }
+            }
             
             getCompanyInfo(function (success) {
                 if (success) {
@@ -1095,6 +1115,11 @@
                             <div class="header_loginInUser">
                                 <div class="offset">
                                     <ul class="nav">
+                                        <li id="btnWallet" class="navbar-member nav-item submenu dropdown">
+                                           <select name="ContactPhonePrefix" id="selectedWallet" class="custom-select" onchange="SelectWalletMethod()">
+                                              
+                                           </select>
+                                        </li>
                                         
                                         <li id="idSearchButton" class="navbar-search nav-item ">
                                             <a href="#" class="btn btn-search btn-round nav-link" role="button" onclick="API_NewWindow(mlp.getLanguageKey('團隊帳號'), 'UserAccount_Search1_Casino.aspx');"></a>

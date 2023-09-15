@@ -109,6 +109,7 @@
     var currencyType = "";
     var PageNumber = 1;
     //var hasDataExpand;
+        var SelectedWallet = "";
 
     function agentExpand(SortKey) {
         var expandBtn = event.currentTarget;
@@ -197,24 +198,24 @@
 
         startDate = document.getElementById("startDate");
         endDate = document.getElementById("endDate");
-        currencyTypeDom = document.getElementsByName("chkCurrencyType");
+        //currencyTypeDom = document.getElementsByName("chkCurrencyType");
 
-        if (currencyTypeDom) {
-            if (currencyTypeDom.length > 0) {
-                for (i = 0; i < currencyTypeDom.length; i++) {
-                    if (currencyTypeDom[i].checked == true) {
-                        currencyType = currencyTypeDom[i].value;
-                        break;
-                    }
-                }
-            }
-        }
+        //if (currencyTypeDom) {
+        //    if (currencyTypeDom.length > 0) {
+        //        for (i = 0; i < currencyTypeDom.length; i++) {
+        //            if (currencyTypeDom[i].checked == true) {
+        //                currencyType = currencyTypeDom[i].value;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
 
         queryData();
     }
 
     function queryData() {
-        if (currencyType != "") {
+        if (SelectedWallet != "") {
             var LoginAccount = "";
 
             if (loginAccount.value.trim() != '') {
@@ -227,7 +228,7 @@
                 LoginAccount: EWinInfo.UserInfo.LoginAccount,
                 RowsPage: 50, //一頁顯示的比數
                 PageNumber: PageNumber,
-                CurrencyType: currencyType
+                CurrencyType: SelectedWallet
             };
             window.parent.API_ShowLoading();
             c.callService(ApiUrl + "/GetUserAccountSummary", postData, function (success, o) {
@@ -273,7 +274,7 @@
                 c.setClassText(t, "LoginAccount", null, item.LoginAccount);
                 c.setClassText(t, "InsideLevel", null, DealUserAccountInsideLevel);
                 c.setClassText(t, "ParentLoginAccount", null, item.ParentLoginAccount);
-                c.setClassText(t, "CurrencyType", null, item.CurrencyType);
+                c.setClassText(t, "CurrencyType", null, SelectedWallet);
                 c.setClassText(t, "PointValue", null, c.toCurrency(item.PointValue));
 
                 var stateDom = t.querySelector(".UserAccountState");
@@ -388,31 +389,31 @@
         document.getElementById("startDate").value = getFirstDayOfWeek(Date.today()).toString("yyyy-MM-dd");
         document.getElementById("endDate").value = getLastDayOfWeek(Date.today()).toString("yyyy-MM-dd");
 
-        if (EWinInfo.UserInfo != null) {
-            if (EWinInfo.UserInfo.WalletList != null) {
-                pi = EWinInfo.UserInfo.WalletList;
-                if (pi.length > 0) {
-                    for (var i = 0; i < pi.length; i++) {
-                        templateDiv = c.getTemplate("templateDiv");
+        //if (EWinInfo.UserInfo != null) {
+        //    if (EWinInfo.UserInfo.WalletList != null) {
+        //        pi = EWinInfo.UserInfo.WalletList;
+        //        if (pi.length > 0) {
+        //            for (var i = 0; i < pi.length; i++) {
+        //                templateDiv = c.getTemplate("templateDiv");
 
-                        tempCurrencyRadio = c.getFirstClassElement(templateDiv, "tempRadio");
-                        tempCurrencyName = c.getFirstClassElement(templateDiv, "tempName");
-                        tempCurrencyRadio.value = pi[i].CurrencyType;
-                        tempCurrencyRadio.name = "chkCurrencyType";
-                        tempCurrencyName.innerText = pi[i].CurrencyType;
+        //                tempCurrencyRadio = c.getFirstClassElement(templateDiv, "tempRadio");
+        //                tempCurrencyName = c.getFirstClassElement(templateDiv, "tempName");
+        //                tempCurrencyRadio.value = pi[i].CurrencyType;
+        //                tempCurrencyRadio.name = "chkCurrencyType";
+        //                tempCurrencyName.innerText = pi[i].CurrencyType;
 
-                        if (i == 0) {
-                            tempCurrencyRadio.checked = true;
-                        }
+        //                if (i == 0) {
+        //                    tempCurrencyRadio.checked = true;
+        //                }
 
-                        tempCurrencyRadio.classList.remove("tempRadio");
-                        tempCurrencyName.classList.remove("tempName");
+        //                tempCurrencyRadio.classList.remove("tempRadio");
+        //                tempCurrencyName.classList.remove("tempName");
 
-                        CurrencyTypeDiv.appendChild(templateDiv);
-                    }
-                }
-            }
-        }
+        //                CurrencyTypeDiv.appendChild(templateDiv);
+        //            }
+        //        }
+        //    }
+        //}
     }
 
     function getFirstDayOfWeek(d) {
@@ -466,6 +467,7 @@
             //queryOrderSummary(qYear, qMon);
             window.parent.API_CloseLoading();
             //queryData(EWinInfo.UserInfo.LoginAccount);
+            SelectedWallet = parent.API_GetSelectedWallet();
             querySelfData();
             ac.dataToggleCollapseInit();
         });
@@ -476,6 +478,10 @@
             case "WindowFocus":
                 //updateBaseInfo();
                 ac.dataToggleCollapseInit();
+                break;
+            case "SelectedWallet":
+                SelectedWallet = param;
+                querySelfData();
                 break;
         }
     }
@@ -561,9 +567,9 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6 col-lg-4 col-xl-auto" style="display: none">
+                            <div class="col-12 col-md-6 col-lg-4 col-xl-auto">
                                 <!-- 幣別 -->
-                                <div class="form-group form-group-s2 ">
+                                <div class="form-group form-group-s2 " style ="display:none">
                                     <div class="title"><span class="language_replace">幣別</span></div>
                                     <div id="CurrencyTypeDiv" class="content">
                                     </div>

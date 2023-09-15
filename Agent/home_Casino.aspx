@@ -141,12 +141,14 @@
                         $("#idPromotionCode").text(EWinInfo.UserInfo.PersonCode);
                         $('#QRCodeimg').attr("src", `/GetQRCode.aspx?QRCode=${EWinInfo.CompanyInfo.QRCodeURL}?PCode=${EWinInfo.UserInfo.PersonCode}&Download=2`);
                         $(".spanUrlLink1").text(EWinInfo.CompanyInfo.QRCodeURL + "?PCode=" + EWinInfo.UserInfo.PersonCode);
+                        $("#idWalletBalance").text(0);
+                        $("#tb_GameAccountingCode").empty();
 
                         // build wallet list
                         if (o.WalletList != null) {
                             for (var i = 0; i < o.WalletList.length; i++) {
                                 var w = o.WalletList[i];
-                                if (w.CurrencyType != EWinInfo.MainCurrencyType) {
+                                if (w.CurrencyType != DefaultCurrencyType) {
                                     continue;
                                 }
 
@@ -162,7 +164,7 @@
                         if (o.GameCodeList != null) {
                             for (var l = 0; l < o.GameCodeList.length; l++) {
                                 let kk = o.GameCodeList[l];
-                                if (kk.CurrencyType == EWinInfo.MainCurrencyType) {
+                                if (kk.CurrencyType == DefaultCurrencyType) {
                                     let t = c.getTemplate("tempGameAccountingCode");
 
                                     c.setClassText(t, "GameAccountingCode", null, mlp.getLanguageKey(kk.GameAccountingCode));
@@ -310,6 +312,8 @@
                     let ActiveUser = 0;
                     let TotalLineRebateUserRate = 0;
                     let TotalLineRebateCommission = 0;
+
+                    $("#tb_TopTenOrderUser").empty();
 
                     if (o.Result == 0) {
                         $(".FirstDepositCount").text(toCurrency(o.FirstDepositCount));
@@ -568,9 +572,20 @@
                 lang = window.localStorage.getItem("agent_lang");
                 mlp = new multiLanguage();
                 mlp.loadLanguage(lang, function () {
+                    DefaultCurrencyType = parent.API_GetSelectedWallet();
                     queryUserInfo();
                     getChildUserData();
                 });
+            }
+        }
+
+        function EWinEventNotify(eventName, isDisplay, param) {
+            switch (eventName) {
+                case "SelectedWallet":
+                    DefaultCurrencyType = param;
+                    queryUserInfo();
+                    getChildUserData();
+                    break;
             }
         }
 
