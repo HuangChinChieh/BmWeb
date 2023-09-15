@@ -107,24 +107,24 @@ body {
 }
 
 .width-wrap .width-wrap__login {
-  position: absolute;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-      -ms-transform: translateY(-50%);
-          transform: translateY(-50%);
-  right: 0;
-  padding: 30px 15px;
-  width: 320px;
-  background-color: rgba(5, 13, 94, 0.8);
-  border: 1px transparent solid;
-  -webkit-border-image: -webkit-linear-gradient(to left, #d9c38f 40%, #f4e7c8 60%);
-  -o-border-image: -o-linear-gradient(right, #d9c38f 40%, #f4e7c8 60%);
-     border-image: -webkit-gradient(linear, right top, left top, color-stop(40%, #d9c38f), color-stop(60%, #f4e7c8));
-     border-image: linear-gradient(to left, #d9c38f 40%, #f4e7c8 60%);
-  -webkit-border-image-slice: 2;
-  border-image-slice: 2;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 0;
+    padding: 30px 15px;
+    width: 320px;
+    background-color: rgba(8, 7, 6, 0.8);
+    border: 1px transparent solid;
+    -webkit-border-image: -webkit-linear-gradient(to left, #d9c38f 40%, #f4e7c8 60%);
+    -o-border-image: -o-linear-gradient(right, #d9c38f 40%, #f4e7c8 60%);
+    border-image: -webkit-gradient(linear, right top, left top, color-stop(40%, #d9c38f), color-stop(60%, #f4e7c8));
+    border-image: linear-gradient(to left, #d9c38f 40%, #f4e7c8 60%);
+    -webkit-border-image-slice: 2;
+    border-image-slice: 2;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 @media only screen and (max-width: 1200px) {

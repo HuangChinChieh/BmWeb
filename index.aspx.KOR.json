@@ -1,4 +1,5 @@
 ﻿{
+  "Register": "등록하다",
   "Scan for mobile phones": "모바일버전-QR코드 스캔",
   "Account": "Account",
   "Please Input Account": "계정을 입력해 주세요",
@@ -50,6 +51,6 @@
   "AccountLock": "계정잠금",
   "AccountDisable": "계정 정지사용",
   "InvalidImageCode": "그림 인증번호 틀렸습니다",
-  "APP Download":"APP 다운로드"
+  "APP Download": "APP 다운로드"
 
 }

@@ -1,0 +1,2486 @@
+@charset "UTF-8";
+/* CSS Document */
+/* reset */
+html, body, h1, h2, h3, h4, h5, h6, div, dl, dt, dd, ul, ol, li, p, blockquote, pre, hr, figure, table, caption, th, td, form, fieldset, legend, input, button, textarea, menu {
+  margin: 0;
+  padding: 0;
+}
+
+header, footer, section, article, aside, nav, hgroup, address, figure, figcaption, menu, details {
+  display: block;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th {
+  text-align: left;
+  font-weight: normal;
+}
+
+html, body, fieldset, img, iframe, abbr {
+  border: 0;
+}
+
+i, cite, em, var, address, dfn {
+  font-style: normal;
+}
+
+[hidefocus], summary {
+  outline: 0;
+}
+
+li {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6, small {
+  font-size: 100%;
+}
+
+sup, sub {
+  font-size: 83%;
+}
+
+pre, code, kbd, samp {
+  font-family: inherit;
+}
+
+q:before, q:after {
+  content: none;
+}
+
+textarea {
+  overflow: auto;
+  resize: none;
+}
+
+label, summary {
+  cursor: default;
+}
+
+a, button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+h1, h2, h3, h4, h5, h6, em, strong, b {
+  font-weight: bold;
+}
+
+del, ins, u, s, a, a:hover {
+  text-decoration: none;
+}
+
+body, textarea, input, button, select, keygen, legend {
+  font: 12px/1.14 arial, 宋体;
+  outline: 0;
+}
+
+input[type=text],
+input[type=password],
+textarea,
+textarea.form-control {
+  box-sizing: border-box;
+  margin: 10px auto;
+  padding: 0 8px;
+  vertical-align: middle;
+  background: none;
+  border: 1px solid #999;
+  font-family: "微軟正黑體", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+  /*max-width:350px;*/
+  width: 100%;
+  height: 45px;
+  border-radius: 5px;
+  box-shadow: none;
+  transition: all 0.3s;
+}
+
+input[type=text]:hover,
+input[type=password]:hover,
+textarea:hover,
+textarea.form-control:hover {
+  outline: 0;
+  border: 1px solid #c62828;
+  box-shadow: none;
+}
+
+input[type=text]:focus,
+input[type=password]:focus,
+textarea:focus,
+textarea.form-control:focus {
+  outline: 0;
+  border: 1px solid #c62828;
+  background: #222;
+  box-shadow: none;
+  box-shadow: inset 0 0 0 2px #c62828;
+}
+
+input[type=text]:-moz-placeholder, textarea:-moz-placeholder, textarea.form-control:-moz-placeholder {
+  color: #777;
+}
+
+input[type=text]:-ms-input-placeholder, textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder {
+  color: #777;
+}
+
+input[type=text]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder {
+  color: #777;
+}
+
+input[type=password]:-moz-placeholder, textarea:-moz-placeholder, textarea.form-control:-moz-placeholder {
+  color: #777;
+}
+
+input[type=password]:-ms-input-placeholder, textarea:-ms-input-placeholder, textarea.form-control:-ms-input-placeholder {
+  color: #777;
+}
+
+input[type=password]::-webkit-input-placeholder, textarea::-webkit-input-placeholder, textarea.form-control::-webkit-input-placeholder {
+  color: #777;
+}
+
+input[type=text],
+input[type=password] {
+  position: relative;
+}
+
+input[type=text].checked,
+input[type=password].checked {
+  background-image: url(/images/icon_checked.svg);
+  background-position-x: right;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position: calc(100% - 8px);
+}
+
+input[type=text].denied,
+input[type=password].denied {
+  background-image: url(/images/icon_denied.svg);
+  background-position-x: right;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  background-position: calc(100% - 8px);
+}
+
+.clearfix::after {
+  width: 100%;
+  content: "";
+  display: block;
+  height: 0px;
+  clear: both;
+}
+
+/*checkBox*/
+input[type=radio], input[type=checkbox] {
+  display: none;
+}
+
+.radioBoxBtn {
+  position: relative;
+  color: #888;
+  height: 40px;
+  line-height: 40px;
+  width: calc(100% - 40px);
+  margin-left: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+.radioBoxBtn:hover {
+  color: #fff;
+}
+
+input[type=radio]:checked ~ .radioBoxBtn, input[type=checkbox]:checked ~ .radioBoxBtn {
+  color: #fff;
+}
+
+.selectCon {
+  margin-top: 10px;
+}
+
+.radioBoxicon {
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.03);
+  position: absolute;
+  top: 10px;
+  left: -30px;
+}
+
+.radioBoxBtn:hover .radioBoxicon {
+  background-image: url(../images/icon_checked_w20PC.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+input[type=radio]:checked ~ .radioBoxBtn .radioBoxicon, input[type=checkbox]:checked ~ .radioBoxBtn .radioBoxicon {
+  background-image: url(../images/icon_checked_gW.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 0px solid rgba(255, 255, 255, 0.5);
+}
+
+.optionInput {
+  position: relative;
+  width: calc(100% - 120px);
+  margin-left: 120px;
+}
+
+.dropdownMenu {
+  position: absolute;
+  left: -120px;
+  top: 10px;
+  padding: 0 8px;
+  vertical-align: middle;
+  background: none;
+  border: 1px solid #999;
+  font-family: "微軟正黑體", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+  max-width: 90px;
+  width: 90px;
+  height: 43px;
+  line-height: 43px;
+  border-radius: 5px;
+  box-shadow: none;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.dropdownMenu select {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  width: 90px;
+  line-height: 50px;
+  background: transparent;
+  color: #fff;
+  border: none;
+}
+
+.dropdownMenu option {
+  color: #999;
+}
+
+/* Style the arrow inside the select element: */
+.dropdownMenu :after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+.ReferralCode {
+  margin: 10px auto;
+  padding: 0 8px;
+  vertical-align: middle;
+  background: rgba(255, 255, 255, 0.05);
+  font-family: "微軟正黑體", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #9c8866;
+  width: 90%;
+  height: 43px;
+  line-height: 43px;
+  border-radius: 5px;
+  box-shadow: none;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.ReferralCodeInput {
+  position: relative;
+  color: #fff;
+}
+
+.ReferralCodeInput .scanBtn {
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  width: 50px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  background: #c62828;
+  border-radius: 0px 5px 5px 0px;
+}
+
+.ReferralCodeInput .scanBtn input {
+  display: none;
+}
+
+.ReferralCodeInput .scanBtn i {
+  margin-top: 12px;
+  font-size: 1.5em;
+}
+
+a {
+  color: #c62828;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+a:hover, a:focus {
+  color: #ff4444;
+  text-decoration: none;
+}
+
+html, body {
+  position: relative;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  /* background: #eee;*/
+  font-family: "微軟正黑體", sans-serif, Helvetica Neue, Helvetica, Arial;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.box {
+  display: inline-block;
+  margin: 0px;
+}
+
+button {
+  transition: all 0.3s ease-out;
+}
+button i {
+  margin-right: 5px;
+}
+
+.btnTypeA button {
+  padding: 10px 20px;
+  border-radius: 3px;
+}
+.btnTypeA .btn-default {
+  border: solid 1px #c62828;
+  background-color: #c62828;
+  color: #fff;
+}
+.btnTypeA .btn-default:hover {
+  border: solid 1px #ff4444;
+  background-color: #ff4444;
+}
+
+button.btn-customerservice {
+  /* padding: 0;
+  border: none; */
+  background-size: 63% !important;
+  transition-property: background-color;
+}
+
+[class*=btn-icon] {
+  /* background-color: rgba(255, 255, 255, 0.1) !important; */
+  /* background-color: rgba(0, 0, 0, 0.8) !important; */
+  background-repeat: no-repeat !important;
+}
+
+[class^=icon12one-]:before,
+[class*=" icon12one-"]:before {
+  color: #ffffff;
+}
+
+.icon-service {
+  /* background-image: url(../images/icon_service.svg) !important; */
+  background-image: url(../images/icon_service_w.svg) !important;
+}
+
+.icon-service:hover {
+  background-image: url(../images/icon_service_w.svg) !important;
+}
+
+.btn-icon-round {
+  position: relative;
+  width: 33px;
+  height: 33px;
+  color: transparent !important;
+  background-position: center center !important;
+  /* background-size: 63% !important; */
+  padding: 0 !important;
+  border-radius: 50% !important;
+  margin: 0 5px;
+  display: inline-flex !important;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon-round:not([class*=ico-flag-]):hover {
+  background-color: #b2a276;
+  /* background-color: rgba(198, 40, 40, 0.808) !important; */
+  /* background-color: rgba(255, 255, 255, 1) !important; */
+  color: #9c8866;
+}
+
+/* ICON ============================================*/
+[class*=ico-] {
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+[class*=ico-before-]:before {
+  content: "";
+  display: inline-block;
+  margin-right: 5px;
+  vertical-align: text-bottom;
+}
+
+[class*=ico-after-]:after {
+  content: "";
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.ico-before-star:before {
+  content: "*";
+  width: 10px;
+  height: 10px;
+  color: red;
+}
+
+[class*=ico-flag-] {
+  background-size: 33px !important;
+  width: 33px !important;
+  height: 33px !important;
+  color: #ffffff;
+}
+
+/* 未登入版頭 */
+.loginBrn_div .btn-icon-round {
+  background-color: rgba(156, 136, 102, 0.9);
+}
+
+/* 已登入版頭 */
+.header-tit-user-login-wrapper {
+  float: right;
+}
+.header-tit-user-login-wrapper .btn-icon-round {
+  background-color: rgba(156, 136, 102, 0.9);
+}
+
+[class*=ico-before-flag-] {
+  /* background-size: 33px !important;
+  width: 33px !important;
+  height: 33px !important; */
+  /* color: #ffffff !important; */
+  font-family: inherit;
+}
+
+[class*=ico-before-flag-]::before {
+  width: 100%;
+  height: 100%;
+  /* display: inline-flex;
+  align-content: center; */
+  color: #ffffff !important;
+  font-size: 16px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0;
+  top: 7px;
+}
+
+[class*=ico-flag-]:hover {
+  /* background-color: inherit !important; */
+}
+
+.ico-flag-cn,
+.ico-before-flag-cn:before {
+  /* background: url(../images/icon/icon_cn.svg) center center no-repeat; */
+  /* background-color: #d80027 !important; */
+  content: "简";
+}
+
+.ico-flag-jp,
+.ico-before-flag-jp:before {
+  /* background: url(../images/icon/icon_jp.svg) center center no-repeat; */
+  /* background-color: #ffffff !important; */
+  content: "あ";
+}
+
+.ico-flag-hk,
+.ico-before-flag-hk:before {
+  /* background: url(../images/icon/icon_hk.svg) center center no-repeat; */
+  /* background-color: #d80027 !important; */
+  content: "繁";
+}
+
+.ico-flag-en,
+.ico-before-flag-en:before {
+  /* background: url(../images/icon/icon_en.svg) center center no-repeat; */
+  /* background-color: #d80027 !important; */
+  content: "En";
+}
+
+.ico-flag-kr,
+.ico-before-flag-kr:before {
+  /* background: url(../images/icon/icon_kr.svg) center center no-repeat; */
+  /* background-color: #f0f0f0 !important; */
+  content: "한";
+}
+
+.ico-flag-vn,
+.ico-before-flag-vn:before {
+  /* background: url(../images/icon/icon_vn.svg) center center no-repeat; */
+  content: "vê";
+  /* background-color: #e70012 !important; */
+}
+
+.ico-flag-in,
+.ico-before-flag-in:before {
+  /* background: url(../images/icon/icon_vn.svg) center center no-repeat; */
+  content: "ॐ";
+  /* background-color: #e70012 !important; */
+}
+
+.wrapper {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.header-con {
+  position: relative;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 899px) {
+  .header-con {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    background: rgba(0, 0, 0, 0.9);
+  }
+}
+.btn-gradient-golden {
+  background: radial-gradient(ellipse farthest-corner at right bottom, #80662c 0%, #735b27 8%, #80662c 30%, #7e642b 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+  border-color: #93732b;
+  color: #fff;
+  background-size: 100% 100%;
+  transition: all 0.3s ease;
+}
+.btn-gradient-golden:hover {
+  background-size: 350% 100%;
+  background-position: 0 0;
+}
+
+.icon-large {
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.header {
+  width: 100%;
+  /* height: 150px; */
+}
+.header button {
+  display: inline-flex;
+  align-items: center;
+  height: 35px;
+}
+.header button + button {
+  margin-left: 8px;
+}
+.header .loginBrn_div {
+  display: flex;
+  align-items: center;
+}
+
+.header-tit-info {
+  float: left;
+  height: 50px;
+}
+@keyframes dropdownDiv-down-an {
+  0% {
+    height: 30px;
+  }
+  80% {
+    height: 358px;
+  }
+  100% {
+    height: auto;
+  }
+}
+.user-level {
+  width: 50px;
+  display: block;
+  margin-left: 2px;
+  margin-top: 8px;
+  background: #9c8866;
+  border-radius: 20px;
+  text-align: center;
+  padding: 2px 5px;
+  color: #FFF;
+  font-size: 12px;
+}
+
+.user-ID {
+  margin-top: 4px;
+  font-size: 18px;
+  padding-left: 5px;
+  color: #fff;
+  text-align: center;
+}
+
+.header-tit-point-wrapper .btn-pointRefresh {
+  font-size: 16px;
+  width: 23px;
+  height: 23px;
+  margin: 0;
+}
+.header-tit-point-wrapper .btn-pointRefresh .tooltip {
+  display: none !important;
+}
+.header-tit-point-wrapper .btn-pointRefresh::before {
+  color: #c62828;
+}
+.header-tit-point-wrapper .btn-pointRefresh:hover {
+  background: none;
+}
+.header-tit-point-wrapper .btn-pointRefresh:hover::before {
+  color: #ff4444;
+}
+
+.header-tit-point {
+  display: flex;
+  align-items: center;
+}
+
+.header-tit-point:before {
+  content: "";
+  height: 50px;
+  width: 50px;
+  position: absolute;
+}
+
+.header-tit-point-bg {
+  display: inline-flex;
+  align-items: center;
+}
+.header-tit-point-bg::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 20px;
+  background: rgba(156, 136, 102, 0.3);
+  margin: 0 6px;
+}
+
+.user-pointType {
+  height: 40px;
+  line-height: 38px;
+  color: #9c8866;
+  margin-right: 5px;
+}
+
+.user-pointV {
+  color: #FFF;
+  margin-right: 8px;
+}
+
+.user-email i {
+  font-size: 0.8em;
+  margin-left: 5px;
+  padding: 0px 10px;
+  background: #c62828;
+  color: #fff;
+  border-radius: 10px;
+}
+
+.header-tit-con {
+  position: relative;
+}
+
+.header-nav-logo {
+  /* padding-top: 5px; */
+}
+
+.header-nav img {
+  /* padding-top:14px; */
+  /* width: 70%; */
+  /* height: auto; */
+  max-width: 100%;
+}
+
+.btn-logout {
+  margin-top: 8px;
+}
+
+.swiper-container {
+  position: relative;
+  max-width: 1280px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swiper-tit {
+  position: absolute;
+  top: 0px;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/***** 跑馬燈 *****/
+.marquee {
+  width: 100%;
+  height: 50px;
+  margin: auto;
+  margin-top: -8px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.marquee_form {
+  margin: 0 auto;
+  margin-top: 8px;
+  height: 50px;
+  max-width: 1280px;
+}
+
+.marquee_form_left {
+  padding: 1px;
+  line-height: 50px;
+  float: left;
+  font-size: 40px;
+}
+
+.marquee_form_left a {
+  display: block;
+  height: 40px;
+  line-height: 50px;
+  font-size: 25px;
+}
+
+.marquee_form_right {
+  float: right;
+  margin-top: 15px;
+  margin-right: 20px;
+}
+
+.marquee_form_right a {
+  padding: 5px 10px;
+  background: #c62828;
+  color: #fff;
+  border-radius: 5px;
+  border: solid 1px #c62828;
+}
+
+.marquee_form_right a:hover {
+  background-color: #ff4040;
+  color: #fff;
+  border-radius: 5px;
+  border: solid 1px #ff4040;
+}
+
+.navbar-Marquee {
+  width: 60%;
+  float: left;
+  text-align: left;
+  border-radius: 50px;
+  line-height: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 5px 20px;
+}
+
+.ann {
+  overflow: hidden;
+  height: 20px;
+}
+
+.ann a {
+  color: #fff;
+}
+
+.ann a i {
+  color: #c1aa88;
+  font-style: normal;
+}
+
+/***** 網站內容介紹 *****/
+.game-list-com h1 {
+  font-size: 35px;
+  color: #fff;
+  padding-bottom: 10px;
+  text-shadow: 3px 3px 5px rgba(30, 8, 0, 0.9), 0px 0px 4px rgba(0, 0, 0, 0.7);
+}
+
+.game-list-com p {
+  color: #1f1b14;
+  padding-bottom: 5px;
+  text-shadow: 3px 3px 5px rgba(255, 205, 100, 0.9), 0px 0px 3px white, 0px 0px 2px white;
+}
+
+.mobileAPP-con h1 {
+  padding-top: 60px;
+  font-size: 25px;
+  color: #FFF;
+}
+
+.mobileAPP-con h2 {
+  font-size: 20px;
+  color: #FFF;
+}
+
+.mobileAPP-con p {
+  padding-top: 5px;
+  color: #9c8866;
+}
+
+.mobileAPP-con a {
+  display: block;
+}
+
+.mobileAPP-con img {
+  width: 180px;
+  height: auto;
+}
+
+.download-icon {
+  color: #888;
+  font-size: 80px;
+}
+
+.main-footer {
+  width: 100%;
+  height: 150px;
+  background: rgba(12, 10, 8, 0.8);
+}
+
+/**/
+.popupFrame {
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  padding: 20px 0px;
+  /*background: rgba(20,20,20,0.9);*/
+  z-index: 9;
+  animation-name: popupFrame;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+}
+
+/* */
+@keyframes popupFrame {}
+/* */
+.popup {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  background: rgba(20, 20, 20, 0.9);
+  z-index: 9;
+  animation-name: popup;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+}
+
+@keyframes popup {
+  0% {
+    background: rgba(20, 20, 20, 0);
+  }
+  100% {
+    background: rgba(20, 20, 20, 0.9);
+  }
+}
+.popup.show {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  background: rgba(20, 20, 20, 0.9);
+  z-index: 9;
+}
+
+.popupWrapper {
+    width: calc(100% - 80px);
+    height: auto;
+    margin: 0px auto;
+    padding: 20px 0px;
+    max-width: 400px;
+    padding: 20px;
+    background: rgba(8, 7, 6, 0.95);
+    border-radius: 10px;
+    animation-name: popupWrapper;
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+}
+
+@keyframes popupWrapper {
+  0% {
+    margin-top: 5px;
+    opacity: 0;
+  }
+  100% {
+    margin-top: 20px;
+    opacity: 1;
+  }
+}
+.popup input {
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ReferralCode {
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.popupHeader {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  color: #fff;
+  border-bottom: 0.5px solid #9c8866;
+}
+
+.popupBtn_close {
+  position: absolute;
+  top: -25px;
+  right: -25px;
+  background: #9c8866;
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 50px;
+}
+
+.popupBtn_red {
+  margin: 8px auto;
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  background: #c62828;
+  color: #fff;
+  line-height: 40px;
+  text-align: center;
+}
+
+.popupBtn_redOL {
+  margin: 10px auto;
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid #c62828;
+  color: #c62828;
+  line-height: 40px;
+  text-align: center;
+}
+
+.popupBtn_gray {
+  margin: 10px auto;
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.2);
+  line-height: 40px;
+  text-align: center;
+}
+
+.popup_notice {
+  position: relative;
+  top: -6px;
+  font-size: 12px;
+  color: #c62828;
+  vertical-align: middle;
+}
+
+.popup_notice i {
+  position: relative;
+  top: -1px;
+  font-size: 15px;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.ValidateDiv {
+  width: 100%;
+  height: 65px;
+  position: relative;
+}
+
+.ValidateImg {
+  position: absolute;
+  top: 18px;
+  right: 45px;
+  z-index: 2;
+}
+
+.ValidateImg img {
+  border-radius: 5px;
+}
+
+@media (max-width: 450px) {
+  .ValidateImg img {
+    border-radius: 3px;
+    height: 25px;
+    padding-top: 2px;
+  }
+}
+.popupBtn_reF {
+  position: absolute;
+  top: 0px;
+  right: -35px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: #fff;
+  border-radius: 50px;
+  background: #c62828;
+}
+
+.popupText {
+  padding: 10px 0px;
+  min-height: 100px;
+  line-height: 40px;
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+}
+
+/*  內容頁樣式 */
+.pageWrapper {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+}
+
+@media (min-width: 900px) {
+  .pageWrapper {
+    padding-top: 20px;
+  }
+}
+@media (max-width: 899px) {
+  .pageWrapper {
+    padding: 20px 0px;
+  }
+}
+.pageWrapper div {
+  box-sizing: border-box;
+}
+
+.pageMain {
+  width: calc(100% - 40px);
+  max-width: 900px;
+  margin: 0px auto;
+}
+
+.pageHeader {
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.backBtn {
+  display: inline;
+}
+
+.pageTitle {
+  display: inline;
+}
+
+.switchTagDiv {
+  position: relative;
+}
+
+.switchTagDiv::after {
+  width: 100%;
+  content: "";
+  display: block;
+  height: 0px;
+  clear: both;
+}
+
+.switchTagBtn {
+  float: left;
+  padding: 15px 20px 8px 20px;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 5px 5px 0px 0px;
+  color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+
+@media (max-width: 450px) {
+  .switchTagBtn {
+    padding: 15px 10px 8px 10px;
+  }
+}
+@media (max-width: 370px) {
+  .switchTagBtn {
+    padding: 15px 5px 8px 5px;
+  }
+}
+.switchTagBtn.active {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  color: #9c8866;
+}
+
+.switchTagBtn.active::after {
+  content: "";
+  position: absolute;
+  width: calc(100% - 20px);
+  left: 10px;
+  bottom: 1px;
+  height: 2px;
+  background: #9c8866;
+}
+
+.pageMainCon {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0px 0px 5px 5px;
+}
+
+.switchTagBtn:hover {
+  color: #fff;
+}
+
+.pageMainCon {
+  position: relative;
+  width: 100%;
+  padding: 20px 20px;
+}
+
+.pageMainCon::after {
+  width: 100%;
+  content: "";
+  display: block;
+  height: 0px;
+  clear: both;
+}
+
+.pageMainCon .rowHalf {
+  position: relative;
+  animation: pageMainConUp 0.4s ease-in;
+}
+
+@media (min-width: 900px) {
+  .pageMainCon .rowHalf:first-child {
+    float: left;
+    width: 48%;
+  }
+
+  .pageMainCon .rowHalf:nth-child(2) {
+    float: right;
+    width: 48%;
+  }
+}
+@media (max-width: 899px) {
+  .pageMainCon .rowHalf:first-child {
+    width: 100%;
+  }
+
+  .pageMainCon .rowHalf:nth-child(2) {
+    margin-top: 20px;
+    width: 100%;
+  }
+}
+.pageMainCon .rowOne {
+  width: 100%;
+  position: relative;
+  animation: pageMainConUp 0.4s ease-in;
+}
+
+.pageFooter {
+  position: relative;
+  float: left;
+  width: 100%;
+  margin-top: 40px;
+  animation: pageMainConUp 0.4s ease-in;
+}
+
+.rowList ol {
+  padding-left: 20px;
+}
+
+.rowList ol li {
+  list-style: decimal;
+  margin-top: 10px;
+  line-height: 20px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@keyframes pageMainConUp {
+  0% {
+    top: 5px;
+    opacity: 0;
+  }
+  100% {
+    top: 0px;
+    opacity: 1;
+  }
+}
+.rowTitle {
+  width: 100%;
+  line-height: 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.rowElm {
+  position: relative;
+  width: 100%;
+  line-height: 50px;
+  padding-left: 10px;
+}
+
+.rowElm::after {
+  width: 100%;
+  content: "";
+  display: block;
+  height: 0px;
+  clear: both;
+}
+
+.rowEdit {
+  position: relative;
+  width: 100%;
+  line-height: 50px;
+  padding-left: 10px;
+}
+
+.rowEdit::after {
+  width: 100%;
+  content: "";
+  display: block;
+  height: 0px;
+  clear: both;
+}
+
+.pageWrapper input {
+  /*height:45px;
+  margin:10px auto;*/
+  height: 35px;
+  margin: 5px auto;
+}
+
+.rowLeft {
+  float: left;
+  width: 30%;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.rowRight {
+  float: left;
+  width: 70%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rowElm2L {
+  position: relative;
+  width: 100%;
+  line-height: 28px;
+  padding: 8px 0px 8px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rowElm2L ~ .rowTitle {
+  margin-top: 20px;
+}
+
+.rowElm2L::after {
+  width: 100%;
+  content: "";
+  display: block;
+  height: 0px;
+  clear: both;
+}
+
+.rowLeft1T {
+  float: left;
+  width: 40%;
+  color: #9c8866;
+}
+
+.rowRight1T {
+  float: left;
+  width: 60%;
+}
+
+.rowLeft2T {
+  float: left;
+  width: 40%;
+}
+
+.rowRight2T {
+  float: left;
+  width: 60%;
+}
+
+.rowLeft1T {
+  float: left;
+  width: 40%;
+  color: #9c8866;
+}
+
+.rowRight1T {
+  float: left;
+  width: 60%;
+}
+
+.rowLeft2T {
+  float: left;
+  width: 40%;
+}
+
+.rowRight2T {
+  float: left;
+  width: 60%;
+}
+
+@media (min-width: 900px) {
+  .row3XL1A, .row3XL1B, .row3XL1C, .row3XL2A, .row3XL2B, .row3XL2C {
+    float: left;
+    width: calc(100% / 3);
+  }
+
+  .row3XL1A {
+    font-size: 1.3em;
+    color: #9c8866;
+  }
+
+  .row3XL2A, .row3XL2B, .row3XL2C {
+    color: #777;
+  }
+
+  .row3XL1B, .row3XL1C {
+    font-size: 1.3em;
+  }
+}
+@media (max-width: 899px) {
+  .row3XL1A {
+    float: left;
+    width: 35%;
+  }
+
+  .row3XL1B {
+    float: left;
+    width: 65%;
+  }
+
+  .row3XL2B, .row3XL2C {
+    float: left;
+    width: 100%;
+  }
+
+  .row3XL1C, .row3XL2A {
+    width: 100%;
+  }
+
+  .row3XL1A {
+    font-size: 1.3em;
+    color: #9c8866;
+  }
+
+  .row3XL2A, .row3XL2B, .row3XL2C {
+    color: #777;
+  }
+
+  .row3XL1B {
+    text-align: right;
+    font-size: 1.1em;
+  }
+
+  .row3XL1C {
+    font-size: 1.5em;
+  }
+}
+.row3XL2A span:last-child, .row3XL2B span:last-child, .row3XL2C span:last-child {
+  color: #aaa;
+  margin-left: 3px;
+}
+
+.row1R3X {
+  float: left;
+  width: calc(100% / 3);
+}
+
+.rowRight img {
+  position: relative;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+}
+
+.rowBtnFull {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
+}
+
+.rowBtnFull span {
+  padding: 5px 10px;
+  background: #c62828;
+  border-radius: 3px;
+}
+
+.rowBtnOutline {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
+}
+
+.rowBtnOutline span {
+  padding: 5px 10px;
+  color: #c62828;
+  border: 1px solid #c62828;
+  border-radius: 3px;
+}
+
+.rowBtnGray {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.rowBtnGray span {
+  padding: 5px 10px;
+  color: #666;
+  border: 1px solid #666;
+  border-radius: 3px;
+}
+
+.rowElm2L .rowBtnFull, .rowElm2L .rowBtnOutline, .rowElm2L .rowBtnGray {
+  top: 8px;
+}
+
+.rowStatusBtn {
+  position: absolute;
+  right: 0px;
+  cursor: pointer;
+}
+
+.rowStatusBtn span {
+  padding: 5px 10px;
+  color: #fff;
+  border-radius: 3px;
+  border: 1px solid #ff4444;
+  background: #ff4444;
+}
+
+.rowStatusFail {
+  position: absolute;
+  right: 0px;
+  cursor: pointer;
+}
+
+.rowStatusFail span {
+  padding: 5px 10px;
+  color: #ff4444;
+  border-radius: 3px;
+  border: 1px solid #ff4444;
+}
+
+.rowStatusSucc {
+  position: absolute;
+  right: 0px;
+  cursor: pointer;
+}
+
+.rowStatusSucc span {
+  padding: 5px 10px;
+  color: #2ecf8a;
+  border-radius: 3px;
+  border: 1px solid #2ecf8a;
+}
+
+.rowStatusCheck {
+  position: absolute;
+  right: 0px;
+  cursor: pointer;
+}
+
+.rowStatusCheck span {
+  padding: 5px 10px;
+  color: #9c8866;
+  border-radius: 3px;
+  border: 1px solid #9c8866;
+}
+
+.rowStatusGray {
+  position: absolute;
+  right: 0px;
+  cursor: pointer;
+}
+
+.rowStatusGray span {
+  padding: 5px 10px;
+  color: #777;
+  border-radius: 3px;
+  border: 1px solid #777;
+}
+
+@media (max-width: 899px) {
+  .rowStatusFail, .rowStatusSucc, .rowStatusCheck, .rowStatusGray {
+    bottom: 10px;
+  }
+}
+.rowDropBtn {
+  position: relative;
+  box-sizing: border-box;
+  line-height: 24px;
+  margin: 9px auto;
+  padding: 5px 0px;
+  background: #333;
+  border-radius: 5px;
+  padding-left: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.rowDropBtn:hover {
+  background: #383838;
+}
+
+.rowDropBtn div:first-child {
+  color: #9c8866;
+}
+
+.rowDropBtn::after {
+  position: absolute;
+  top: 20px;
+  right: 12px;
+  width: 18px;
+  height: 18px;
+  content: "";
+  background-image: url(../images/icon_dropdown_R.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.rowBtnCon {
+  text-align: right;
+}
+
+.sBtnOutline {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.sBtnFull {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.sBtnOutline span {
+  padding: 6px 10px;
+  color: #c62828;
+  border-radius: 3px;
+  margin-left: 5px;
+  border: 1px solid #c62828;
+}
+
+.sBtnFull span {
+  padding: 6px 10px;
+  background: #c62828;
+  border-radius: 3px;
+  margin-left: 5px;
+  border: 1px solid #c62828;
+}
+
+.pageConMask {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background: #222;
+  z-index: 2;
+}
+
+.pageConMaskMain {
+  width: 90%;
+  max-width: 350px;
+  margin: 10px auto;
+  text-align: center;
+}
+
+.pageConMasktit {
+  margin: 20px 0px 0px;
+}
+
+.myQRCODE img {
+  margin: 20px auto;
+  border-radius: 10px;
+  width: 200px;
+  height: 200px;
+}
+
+.pageDataBar {
+  box-sizing: border-box;
+  padding: 10px 20px 10px;
+  margin: 0px auto;
+  background: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03));
+}
+
+@media (max-width: 899px) {
+  .pageDataBar {
+    padding-bottom: 15px;
+  }
+}
+.pageDataBar input[type=date] {
+  height: auto;
+  border: none;
+  padding: 5px 5px;
+  border-radius: 3px;
+  background: #333;
+  color: #9c8866;
+  letter-spacing: 1px;
+}
+
+.pageDataBar form {
+  display: inline-block;
+}
+
+.pageStartData, .pageEndData {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.pageDSreachBtn {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.pageDSreachBtn::after {
+  position: absolute;
+  top: 0px;
+  left: 12px;
+  width: 16px;
+  height: 16px;
+  content: "";
+  background-image: url(../images/icon_search_w.svg);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.pageDSreachBtn span {
+  padding: 6px 10px 6px 22px;
+  color: #fff;
+  border-radius: 3px;
+  margin-left: 5px;
+  background: #c62828;
+  border: 1px solid #c62828;
+}
+
+@media (max-width: 899px) {
+  .pageDSreachBtn {
+    margin-top: 20px;
+    display: table;
+    cursor: pointer;
+  }
+}
+.pageDDataSwitchBar {
+  display: inline-block;
+  float: right;
+  margin-top: 10px;
+}
+
+@media (max-width: 899px) {
+  .pageDDataSwitchBar {
+    margin-top: -16px;
+  }
+}
+.pageDDataBtn {
+  display: inline-block;
+  cursor: pointer;
+  color: #aaa;
+  margin-left: -5px;
+}
+
+.pageDDataBtn span {
+  padding: 6px 20px;
+  margin: 0px;
+  background: none;
+  border: 1px solid #c62828;
+  border-right: 0px solid #c62828;
+}
+
+form label:first-child .pageDDataBtn span {
+  border-radius: 8px 0px 0px 8px;
+}
+
+form label:last-child .pageDDataBtn span {
+  border-radius: 0px 8px 8px 0px;
+  border-right: 1px solid #c62828;
+}
+
+input[type=radio]:checked ~ .pageDDataBtn, input[type=checkbox]:checked ~ .pageDDataBtn {
+  color: #fff;
+  position: relative;
+}
+
+input[type=radio]:checked ~ .pageDDataBtn span, input[type=checkbox]:checked ~ .pageDDataBtn span {
+  position: relative;
+  background: #c62828;
+  transition: all 0.1s ease-in;
+}
+
+input[type=radio]:checked ~ .pageDDataBtn::after, input[type=checkbox]:checked ~ .pageDDataBtn::after {
+  position: absolute;
+  top: 2px;
+  left: 8px;
+  width: 12px;
+  height: 12px;
+  content: "";
+  background-image: url(../images/icon_checked_wR.svg);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.infoBar {
+  width: 100%;
+  line-height: 20px;
+  margin-bottom: 10px;
+}
+
+.infoDiv {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.infoDiv span:first-child {
+  color: #888;
+}
+
+.infoDiv span:last-child {
+  margin-left: 3px;
+}
+
+.win {
+  text-align: right;
+  color: #2ecf8a;
+}
+
+.lose {
+  color: #ff4444;
+}
+
+@media (max-width: 899px) {
+  .win {
+    text-align: left;
+    color: #2ecf8a;
+  }
+}
+/* gamelobby */
+/*    body .gamePage {
+        position: relative;
+        width: 100%;
+        height:100%;
+        background: -webkit-radial-gradient(center, ellipse, #99958d 0%, #0d0b0b 100%);
+        background: -o-radial-gradient(center, ellipse, #99958d 0%, #0d0b0b 100%);
+        background: radial-gradient(ellipse at center, #99958d 0%, #0d0b0b 100%);
+        overflow: hidden;
+        color:#fff;
+    }
+
+        body .gamePage .gameBg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 505px;
+            background: url(../images/lobby/gameBg.png) no-repeat center center;
+            z-index: 1;
+        }
+
+        body .gamePage .gamePageBox {
+            position: relative;
+            width: 1300px;
+            margin: 0 auto;
+            padding: 10px 0px;
+            z-index: 10;
+        }
+
+    @media screen and (max-width: 1460px) {
+        body .gamePage .gamePageBox {
+            width: 1100px;
+        }
+    }
+
+    body .gamePage .gamePageBox .marqueeBox {
+        position: relative;
+        width: 100%;
+        height: 30px;
+        background-color: rgba(0, 0, 0, 0.6);
+        border-radius: 50px;
+        line-height: 30px;
+        font-size: 12px;
+        padding: 0 50px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+        body .gamePage .gamePageBox .marqueeBox .marqueeIcon {
+            position: absolute;
+            top: 0;
+            left: 10px;
+            background: url(../images/lobby/marqueeIcon.png) no-repeat center center;
+            width: 30px;
+            height: 30px;
+        }
+
+    body .gamePage .gamePageBox .gameMain {
+        position: relative;
+        background-color: rgba(26, 23, 23, 0.8);
+        width: 100%;
+        border: 1px solid #9c8866;
+        border-radius: 5px;
+        padding: 15px 30px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    body .gamePage .gamePageBox .gameMain .gameBtnBox {
+        position: absolute;
+        left: -56px;
+    }
+
+        body .gamePage .gamePageBox .gameMain .gameBtnBox ul li {
+            position: relative;
+            width: 55px;
+            height: 60px;
+            border-radius: 5px 0 0 5px;
+            background-color: #1c1712;
+            -webkit-box-shadow: -1px 4px 2px rgba(34, 39, 53, 0.5);
+            box-shadow: -1px 4px 2px rgba(34, 39, 53, 0.5);
+            margin-top: 22px;
+            -webkit-transition: 0.2s;
+            -o-transition: 0.2s;
+            transition: 0.2s;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+
+            body .gamePage .gamePageBox .gameMain .gameBtnBox ul li:hover {
+                width: 75px;
+                border-top: 1px solid #9c8866;
+                border-left: 1px solid #9c8866;
+                border-bottom: 1px solid #9c8866;
+                background-color: #211e1d;
+                -webkit-transform: translateX(-25%);
+                -ms-transform: translateX(-25%);
+                transform: translateX(-25%);
+            }
+
+            body .gamePage .gamePageBox .gameMain .gameBtnBox ul li.active {
+                width: 75px;
+                border-top: 1px solid #9c8866;
+                border-left: 1px solid #9c8866;
+                border-bottom: 1px solid #9c8866;
+                background-color: rgba(26, 23, 23, 0.8);
+                -webkit-transform: translateX(-25%);
+                -ms-transform: translateX(-25%);
+                transform: translateX(-25%);
+            }
+
+                body .gamePage .gamePageBox .gameMain .gameBtnBox ul li.active::after {
+                    content: "";
+                    position: absolute;
+                    top: 20px;
+                    right: 0px;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    border-width: 8px 0 8px 15px;
+                    border-color: transparent transparent transparent #ff3333;
+                    -webkit-animation: red1 1.5s linear infinite;
+                    animation: red1 1.5s linear infinite;
+                }
+
+    @-webkit-keyframes red1 {
+        0% {
+            -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotateX(360deg);
+            transform: rotateX(360deg);
+        }
+    }
+
+    @keyframes red1 {
+        0% {
+            -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+        }
+
+        100% {
+            -webkit-transform: rotateX(360deg);
+            transform: rotateX(360deg);
+        }
+    }
+
+    body .gamePage .gamePageBox .gameMain .gameBtnBox ul li .gameBtn {
+        position: absolute;
+        top: 16px;
+        left: 12px;
+        background: url(../images/lobby/gameBtn.png) no-repeat;
+        background-size: 500%;
+        width: 30px;
+        height: 30px;
+    }
+
+        body .gamePage .gamePageBox .gameMain .gameBtnBox ul li .gameBtn.slot {
+            background-position-x: 25%;
+        }
+
+        body .gamePage .gamePageBox .gameMain .gameBtnBox ul li .gameBtn.live {
+            background-position-x: 50%;
+        }
+
+        body .gamePage .gamePageBox .gameMain .gameBtnBox ul li .gameBtn.fish {
+            background-position-x: 75%;
+        }
+
+        body .gamePage .gamePageBox .gameMain .gameBtnBox ul li .gameBtn.sport {
+            background-position-x: 100%;
+        }
+
+    body .gamePage .gamePageBox .gameMain .gameTop {
+        width: 100%;
+    }
+
+        body .gamePage .gamePageBox .gameMain .gameTop::after {
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+        }
+
+        body .gamePage .gamePageBox .gameMain .gameTop .gameTitle {
+            float: left;
+            color:#fff;
+        }
+
+            body .gamePage .gamePageBox .gameMain .gameTop .gameTitle .line {
+                display: inline-block;
+                vertical-align: middle;
+                width: 4px;
+                height: 30px;
+                border-radius: 5px;
+                background-color: #9c8866;
+            }
+
+            body .gamePage .gamePageBox .gameMain .gameTop .gameTitle h1 {
+                display: inline-block;
+                vertical-align: middle;
+                font-size: 32px;
+                font-weight: bold;
+                margin-left: 10px;
+            }
+
+            body .gamePage .gamePageBox .gameMain .gameTop .gameTitle .gameIcon {
+                display: inline-block;
+                vertical-align: middle;
+                background: url(../images/lobby/liveTitleIcon.png) no-repeat;
+                width: 45px;
+                height: 45px;
+            }
+
+        body .gamePage .gamePageBox .gameMain .gameTop .gameSearch {
+            position: relative;
+            float: right;
+            margin-top: 5px;
+        }
+
+            body .gamePage .gamePageBox .gameMain .gameTop .gameSearch .searchIcon {
+                position: absolute;
+                top: 0;
+                right: 10px;
+                font-size: 24px;
+                color: #9c8866;
+                -webkit-transform: rotate(180deg);
+                -ms-transform: rotate(180deg);
+                transform: rotate(180deg);
+            }
+
+            body .gamePage .gamePageBox .gameMain .gameTop .gameSearch input {
+                width: 200px;
+                height: 30px;
+                border-radius: 50px;
+                background-color: rgba(255, 255, 255, 0.1);
+                border: 0;
+                outline: none;
+                padding: 0 30px 0 15px;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+                margin:0px auto;
+            }
+
+                body .gamePage .gamePageBox .gameMain .gameTop .gameSearch input:focus {
+                    border: 1px solid #9c8866;
+                    box-shadow:inset 0px 0px 0px 1px #9c8866;
+                }
+
+    body .gamePage .gamePageBox .gameMain .liveArea {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+        body .gamePage .gamePageBox .gameMain .liveArea ul {
+            font-size: 0;
+        }
+
+            body .gamePage .gamePageBox .gameMain .liveArea ul li {
+                display: inline-block;
+                vertical-align: middle;
+                width: 31%;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+                body .gamePage .gamePageBox .gameMain .liveArea ul li:nth-child(3n+2) {
+                    margin: 0px 40px;
+                    margin-bottom: 20px;
+                }
+
+    @media screen and (max-width: 1460px) {
+        body .gamePage .gamePageBox .gameMain .liveArea ul li:nth-child(3n+2) {
+            margin: 0px 33px;
+            margin-bottom: 20px;
+        }
+    }
+
+    body .gamePage .gamePageBox .gameMain .liveArea ul li .nogmaeBox {
+        position: relative;
+        width: 100%;
+        height: 150px;
+        line-height:150px;
+        background-color: #191615;
+        border-radius: 5px;
+    }
+
+        body .gamePage .gamePageBox .gameMain .liveArea ul li .nogmaeBox .nogameIcon {
+            width: 80px;
+            height: 150px;
+            background: url(../images/lobby/nogmaeIcon.png) no-repeat;
+            background-size:80px 80px;
+            background-position:center;
+            margin:0px auto;
+            text-align: center;
+        }
+
+            body .gamePage .gamePageBox .gameMain .liveArea ul li .nogmaeBox .nogameIcon p {                           
+                white-space: nowrap;
+                color: rgba(255, 255, 255, 0.5);
+            }
+
+    body .gamePage .gamePageBox .gameMain .liveArea ul li .liveImgBox {
+        position: relative;
+        width: 100%;
+        height: 150px;
+        background: -webkit-gradient(linear, left top, left bottom, from(#6e6662), to(#3b3232));
+        background: -webkit-linear-gradient(top, #6e6662 0%, #3b3232 100%);
+        background: -o-linear-gradient(top, #6e6662 0%, #3b3232 100%);
+        background: linear-gradient(to bottom, #6e6662 0%, #3b3232 100%);
+        border: 1px solid #998c7a;
+        border-radius: 5px;
+        -webkit-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        overflow: hidden;
+        cursor: pointer;
+        -webkit-transition: 0.3s;
+        -o-transition: 0.3s;
+        transition: 0.3s;
+    }
+
+        body .gamePage .gamePageBox .gameMain .liveArea ul li .liveImgBox:hover {
+            background: -webkit-gradient(linear, left top, right top, from(#fcdbb0), to(#d3a26a));
+            background: -webkit-linear-gradient(left, #fcdbb0 0%, #d3a26a 100%);
+            background: -o-linear-gradient(left, #fcdbb0 0%, #d3a26a 100%);
+            background: linear-gradient(to right, #fcdbb0 0%, #d3a26a 100%);
+            -webkit-box-shadow: 0 0px 10px rgba(247, 224, 201, 0.4);
+            box-shadow: 0 0px 10px rgba(247, 224, 201, 0.4);
+        }
+
+            body .gamePage .gamePageBox .gameMain .liveArea ul li .liveImgBox:hover .liveImgBg {
+                -webkit-transform: scale(1.1);
+                -ms-transform: scale(1.1);
+                transform: scale(1.1);
+            }
+
+        body .gamePage .gamePageBox .gameMain .liveArea ul li .liveImgBox .glass {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 180px 0 0 385px;
+            border-color: transparent transparent transparent rgba(255, 255, 255, 0.1);
+        }
+
+        body .gamePage .gamePageBox .gameMain .liveArea ul li .liveImgBox .liveImgBg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 230px;
+            height: 150px;
+            background: url(../images/lobby/liveimg.png) no-repeat;
+            background-size: 400%;
+            -webkit-transition: 0.3s;
+            -o-transition: 0.3s;
+            transition: 0.3s;
+        }
+
+            body .gamePage .gamePageBox .gameMain .liveArea ul li .liveImgBox .liveImgBg.pt {
+                background-position-x: 33.3%;
+            }
+
+            body .gamePage .gamePageBox .gameMain .liveArea ul li .liveImgBox .liveImgBg.ag {
+                background-position-x: 66.6%;
+            }
+
+            body .gamePage .gamePageBox .gameMain .liveArea ul li .liveImgBox .liveImgBg.cq9 {
+                background-position-x: 100%;
+            }
+
+        body .gamePage .gamePageBox .gameMain .liveArea ul li .liveImgBox .liveLogo {
+            position: absolute;
+            top: 17px;
+            right: 35px;
+            width: 110px;
+            height: 110px;
+            background: url(../images/lobby/liveLogo.png) no-repeat;
+            background-size: 400%;
+        }
+
+            body .gamePage .gamePageBox .gameMain .liveArea ul li .liveImgBox .liveLogo.pt {
+                background-position-x: 33.3%;
+            }
+
+            body .gamePage .gamePageBox .gameMain .liveArea ul li .liveImgBox .liveLogo.ag {
+                background-position-x: 66.6%;
+            }
+
+            body .gamePage .gamePageBox .gameMain .liveArea ul li .liveImgBox .liveLogo.cq9 {
+                background-position-x: 100%;
+            }
+
+    body .gamePage .gamePageBox .gameMain .liveArea ul li p {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    @media screen and (max-width: 1300px) {
+
+        body .gamePage .gamePageBox {
+            width: 950px;
+        }
+
+            body .gamePage .gamePageBox .gameMain .liveArea ul li:nth-child(3n+2) {
+                margin: 0px 28px;
+                margin-bottom: 20px;
+            }
+
+            body .gamePage .gamePageBox .gameMain .liveArea ul li .liveImgBox .liveLogo {
+                right: 5px;
+                width: 100px;
+                height: 100px;
+            }
+    }*/
+@media screen and (max-width: 899px) {
+  .header {
+    height: 115px;
+  }
+
+  .header-con.login .header {
+    height: 170px;
+  }
+
+  .DivContent {
+    margin-top: 115px;
+  }
+
+  .header-con.login + .DivContent {
+    margin-top: 170px;
+  }
+
+  .NotLogin > .DivContent {
+    margin-top: 135px;
+  }
+}
+/* Custom Input ============================================  */
+.form-group {
+  position: relative;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.custom-control {
+  position: relative;
+  display: block;
+  min-height: 1.5rem;
+  padding-left: 1.75rem;
+}
+
+.form-group *, .form-group *:before, .form-group *:after {
+  box-sizing: border-box;
+}
+
+.custom-control-inline {
+  display: inline-flex;
+  margin-right: 1rem;
+}
+
+/* 語系 ============================================  */
+.form-group-lang {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  margin-top: 15px;
+}
+
+.custom-radio-lang {
+  margin: 0;
+  padding-left: 0;
+  width: 33.333%;
+  justify-content: flex-start;
+  margin-bottom: 25px;
+}
+
+.custom-radio-lang .custom-control-label-lang {
+  cursor: pointer;
+  font-size: 12px;
+  text-align: center;
+  line-height: 2;
+}
+
+.custom-radio-lang .custom-control-label-lang span {
+  /* color: transparent; */
+}
+
+.custom-radio-lang .custom-control-label-lang span::-webkit-selection {
+  /* color: transparent; */
+}
+
+.custom-radio-lang .custom-control-label-lang span::selection {
+  /* color: transparent; */
+}
+
+.custom-radio-lang .custom-control-label-lang::before {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: all 0.15s ease;
+  display: block;
+  opacity: 0.3;
+  margin: 0 auto 10px;
+}
+
+.custom-radio-lang .custom-control-input-hidden:checked ~ .custom-control-label-lang::before {
+  opacity: 1;
+}
+
+/* 語系 Button =========================================  */
+.popup-lang {
+  margin-top: 20px;
+  margin-bottom: 35px;
+}
+
+.custom-input {
+  position: relative;
+  margin-bottom: 0;
+  display: inline-block;
+}
+
+.custom-input::before {
+  content: "";
+  position: absolute;
+  top: 0.125rem;
+  left: -1.75rem;
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+  background-color: #dee2e6;
+  border: solid 1px #fff;
+  background-color: transparent;
+}
+
+.custom-input::after, .custom-input::before, .custom-file-label, .custom-select {
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.custom-input.radio-button::before {
+  border-radius: 50%;
+}
+
+[class*=custom-radioValue], [class*=custom-radioValue] * {
+  cursor: pointer;
+}
+
+[class*=custom-radioValue] label {
+  margin: 0;
+}
+
+.custom-radioValue-button {
+  padding-left: 0;
+  margin-right: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.custom-radioValue-button, .custom-radioValue-button * {
+  transition: all ease 0.25s;
+}
+
+.custom-radioValue-button .custom-control-label {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.custom-radioValue-button .radio-button {
+  border: solid 1px rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.7);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  padding-left: calc( 1.75rem + 10px);
+  border-radius: 50px;
+  font-size: 16px;
+  line-height: 1.5;
+  min-width: 120px;
+}
+
+.custom-radioValue-button .radio-button::before {
+  left: 10px;
+  top: 13px;
+  border-color: rgba(255, 255, 255, 0);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.custom-radioValue-button .radio-button .iconCheck {
+  position: relative;
+}
+
+.custom-radioValue-button .radio-button .iconCheck::before, .custom-radioValue-button .radio-button .iconCheck::after {
+  box-sizing: border-box;
+  content: " ";
+  position: absolute;
+  height: 0;
+  width: 2px;
+  display: inline-block;
+  transform-origin: left top;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.custom-radioValue-button .radio-button .iconCheck::before {
+  height: 5px;
+  top: calc(0.125rem + 8.966px);
+  left: calc(-1.75rem + 3.998px);
+  transform: rotate(-45deg);
+  border-radius: 10px 10px 0 0;
+}
+
+.custom-radioValue-button .radio-button .iconCheck::after {
+  height: 10px;
+  top: calc(0.125rem + 14px);
+  left: calc(-1.75rem + 9px);
+  transform: rotate(-135deg);
+  border-radius: 10px 0 10px 10px;
+}
+
+.custom-radioValue-button .custom-control-input-hidden:checked ~ .radio-button {
+  color: white;
+  background-color: #9c8866;
+  border-color: #9c8866;
+}
+
+.custom-radioValue-button .custom-control-input-hidden:checked ~ .radio-button::before {
+  border-color: #ffffff;
+  background-color: #ffffff;
+}
+
+.custom-radioValue-button .custom-control-input-hidden:checked ~ .radio-button .iconCheck::before, .custom-radioValue-button .custom-control-input-hidden:checked ~ .radio-button .iconCheck::after {
+  background-color: #9c8866;
+}
+
+.custom-radioValue-button .custom-control-input-hidden:focus ~ .radio-button::before {
+  box-shadow: none;
+}
+
+.custom-radioValue-button .custom-control-input-hidden:disabled:checked ~ .custom-control-label::before {
+  background-color: rgba(0, 123, 255, 0.5);
+}
+
+.custom-radioValue-button:hover .custom-control-input-hidden:not(:checked) ~ .radio-button {
+  border-color: rgba(255, 255, 255, 0.7);
+  color: white;
+  box-shadow: inset 0px 0px 0px 1.5px #9c8866, 0px 4px 6px 2px rgba(0, 0, 0, 0.3);
+}
+
+.custom-radioValue-button:hover .radio-button::before {
+  background-color: #9c8866;
+  border-color: #9c8866;
+}
+
+.custom-radioValue-button:hover .radio-button .iconCheck::before, .custom-radioValue-button:hover .radio-button .iconCheck::after {
+  background-color: white;
+}

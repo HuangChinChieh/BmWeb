@@ -1,4 +1,5 @@
 ﻿{
+  "Register": "注册",
   "Scan for mobile phones": "手机版扫码",
   "Account": "帐号",
   "Please Input Account": "请输入帐号",
@@ -7,7 +8,7 @@
   "LOGIN": "登录",
   "QR CODE LOGIN": "扫码登录",
   "GUEST LOGIN": "访客登录",
-  "Code": "验证码",
+  "Code": "验证码",  
   "Please Input Code": "请输入验证码",
   "CONFIRM": "确认",
   "CANCEL": "取消",
@@ -50,5 +51,5 @@
   "AccountLock": "帐户被锁定",
   "AccountDisable": "帐户停用",
   "InvalidImageCode": "图片验证码错误",
-  "APP Download":"APP 下载"	
+  "APP Download": "APP 下载"
 }

@@ -1,4 +1,5 @@
 ﻿{
+  "Register": "Register",
   "Scan for mobile phones": "Scan for mobile phones",
   "Account": "Account",
   "Please Input Account": "Please Input Account",
@@ -50,5 +51,5 @@
   "AccountLock": "ACCOUNT LOCKED",
   "AccountDisable": "ACCOUNT SUSPENDED",
   "InvalidImageCode": "INVALID VERIFICATION CODE IMAGE",
-  "APP Download":"APP Download"	
+  "APP Download": "APP Download"
 }
