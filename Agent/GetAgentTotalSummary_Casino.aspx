@@ -98,6 +98,7 @@
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
 <script type="text/javascript" src="Scripts/MultiLanguage.js"></script>
 <script type="text/javascript" src="js/date.js"></script>
+<script type="text/javascript" src="../Scripts/jquery-3.3.1.min.js"></script>
 <script>
     var ApiUrl = "GetAgentTotalSummary_Casino.aspx";
     var c = new common();
@@ -240,6 +241,7 @@
             if (new Date(postData.QueryBeginDate) <= new Date(postData.QueryEndDate)) {
 
                 window.parent.API_ShowLoading();
+            $("#btnSearch").prop('disabled', true);
                 c.callService(ApiUrl + "/GetAgentTotalOrderSummary", postData, function (success, o) {
                     if (success) {
                         var obj = c.getJSON(o);
@@ -257,7 +259,8 @@
                             window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), o);
                         }
                     }
-
+                    
+                $("#btnSearch").prop('disabled', false);
                     window.parent.API_CloseLoading();
                 });
             } else {
@@ -282,6 +285,7 @@
             if (new Date(postData.QueryBeginDate) <= new Date(postData.QueryEndDate)) {
 
                 window.parent.API_ShowLoading();
+                $("#btnSearch").prop('disabled', true);
                 c.callService(ApiUrl + "/GetAgentTotalOrderSummaryBySearch", postData, function (success, o) {
                     if (success) {
                         var obj = c.getJSON(o);
@@ -300,6 +304,7 @@
                         }
                     }
 
+                    $("#btnSearch").prop('disabled', false);
                     window.parent.API_CloseLoading();
                 });
             } else {
@@ -792,7 +797,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group wrapper_center dataList-process">
-                                    <button class="btn btn-full-main btn-roundcorner " onclick="querySelfData()"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">確認</span></button>
+                                    <button class="btn btn-full-main btn-roundcorner " onclick="querySelfData()" id="btnSearch"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">確認</span></button>
                                 </div>
                             </div>
                             <!-- iOS Safari Virtual Keyboard Fix--------------->

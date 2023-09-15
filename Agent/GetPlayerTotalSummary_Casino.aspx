@@ -93,6 +93,7 @@
         if (SelectedWallet != "") {
 
             window.parent.API_ShowLoading();
+            $("#btnSearch").prop('disabled', true);
 
             if (targetLoginAccount) {
                 postData = {
@@ -121,7 +122,8 @@
                             window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), o);
                         }
                     }
-
+                    
+                $("#btnSearch").prop('disabled', false);
                     window.parent.API_CloseLoading();
                 });
             } else {
@@ -152,7 +154,8 @@
                             window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), o);
                         }
                     }
-
+                    
+                $("#btnSearch").prop('disabled', false);
                     window.parent.API_CloseLoading();
                 });
             }
@@ -486,7 +489,7 @@
                             <div class="col-12">
                                 <div class="form-group wrapper_center dataList-process">
                                     <%--<button class="btn btn-outline-main" onclick="MaskPopUp(this)">取消</button>--%>
-                                    <button class="btn btn-full-main btn-roundcorner " onclick="querySelfData()"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">確認</span></button>
+                                    <button class="btn btn-full-main btn-roundcorner " onclick="querySelfData()" id="btnSearch"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">確認</span></button>
                                 </div>
                             </div>
                             <!-- iOS Safari Virtual Keyboard Fix--------------->
