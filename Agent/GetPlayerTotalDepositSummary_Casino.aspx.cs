@@ -26,7 +26,7 @@ public partial class GetPlayerTotalDepositSummary_Casino : System.Web.UI.Page
         JObject redisSaveData = new JObject();
         int ExpireTimeoutSeconds = 300;
 
-        strRedisData = RedisCache.Agent.GetPlayerTotalDepositSummaryByLoginAccount(LoginAccount, QueryBeginDate, QueryEndDate);
+        strRedisData = RedisCache.Agent.GetPlayerTotalDepositSummaryByLoginAccount(LoginAccount, QueryBeginDate, QueryEndDate, CurrencyType);
 
         if (string.IsNullOrEmpty(strRedisData))
         {
@@ -55,7 +55,7 @@ public partial class GetPlayerTotalDepositSummary_Casino : System.Web.UI.Page
                     }
                 }
 
-                RedisCache.Agent.UpdatePlayerTotalDepositSummaryByLoginAccount(JsonConvert.SerializeObject(redisSaveData), QueryBeginDate, QueryEndDate, LoginAccount, ExpireTimeoutSeconds);
+                RedisCache.Agent.UpdatePlayerTotalDepositSummaryByLoginAccount(JsonConvert.SerializeObject(redisSaveData), QueryBeginDate, QueryEndDate, LoginAccount, ExpireTimeoutSeconds, CurrencyType);
 
                 tmpRetValue = JsonConvert.DeserializeObject<List<EWin.BmAgent.DepositeSummary>>((string)redisSaveData[PageNumber.ToString()]);
                 if (redisSaveData[(PageNumber + 1).ToString()] != null)

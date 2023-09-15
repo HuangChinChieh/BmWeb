@@ -147,6 +147,10 @@
                                 <span class="td__content"><span class="LoginAccount">${data.LoginAccount}</span></span>
                             </div>
                              <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">貨幣</span></span>
+                                <span class="td__content"><span class="RewardValue">${data.CurrencyType}</span></span>
+                            </div>
+                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">團隊輸贏數</span></span>
                                 <span class="td__content"><span class="RewardValue">${toCurrency(data.TotalRewardValue)}</span></span>
                             </div>
@@ -254,6 +258,10 @@
                                 <span class="td__content"><span class="LoginAccount">CON5</span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">貨幣</span></span>
+                                <span class="td__content"><span class="CurrencyType"></span></span>
+                            </div>
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">總輸贏</span></span>
                                 <span class="td__content"><span class="RewardValue"></span></span>
                             </div>
@@ -284,6 +292,7 @@
                         <!--標題項目單行 -->
                         <div class="thead__tr">
                             <div class="thead__th"><span class="language_replace">帳號</span></div>
+                            <div class="thead__th"><span class="language_replace">貨幣</span></div>
                             <div class="thead__th"><span class="language_replace">總輸贏</span></div>
                             <div class="thead__th"><span class="language_replace">總轉碼</span></div>
                             <div class="thead__th"><span class="language_replace">應付傭金</span></div>

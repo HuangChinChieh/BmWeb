@@ -10,12 +10,9 @@
 
     ASR = api.GetAgentSessionByID(ASID);
 
-    if (ASR.Result != EWin.BmAgent.enumResult.OK)
-    {
+    if (ASR.Result != EWin.BmAgent.enumResult.OK) {
         Response.Redirect("login.aspx");
-    }
-    else
-    {
+    } else {
         ASI = ASR.AgentSessionInfo;
     }
 
@@ -105,6 +102,7 @@
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
 <script type="text/javascript" src="Scripts/MultiLanguage.js"></script>
 <script type="text/javascript" src="js/date.js"></script>
+<script type="text/javascript" src="../Scripts/jquery-3.3.1.min.js"></script>
 <script>
     var ApiUrl = "GetAgentTotalDepositeSummary_Casino.aspx";
     var c = new common();
@@ -116,6 +114,7 @@
     var startDate;
     var endDate;
     var currencyType = "";
+    var SelectedWallet;
 
     function agentExpand(SortKey, UserAccountID) {
         var expandBtn = event.currentTarget;
@@ -215,19 +214,6 @@
 
         startDate = document.getElementById("startDate");
         endDate = document.getElementById("endDate");
-        currencyTypeDom = document.getElementsByName("chkCurrencyType");
-
-        if (currencyTypeDom) {
-            if (currencyTypeDom.length > 0) {
-                for (i = 0; i < currencyTypeDom.length; i++) {
-                    if (currencyTypeDom[i].checked == true) {
-                        currencyType = currencyTypeDom[i].value;
-                        break;
-                    }
-                }
-            }
-        }
-
 
         if (loginAccount.value.trim() != '') {
             querySearchData(loginAccount.value);
@@ -237,7 +223,7 @@
     }
 
     function queryData(targetUserAccountID, targetDom) {
-        if (currencyType != "") {
+        if (SelectedWallet != "") {
             var UserAccountID;
 
             if (targetUserAccountID) {
@@ -251,12 +237,13 @@
                 TargetUserAccountID: UserAccountID,
                 QueryBeginDate: startDate.value,
                 QueryEndDate: endDate.value,
-                CurrencyType: currencyType,
+                CurrencyType: SelectedWallet,
             };
 
             if (new Date(postData.QueryBeginDate) <= new Date(postData.QueryEndDate)) {
 
                 window.parent.API_ShowLoading();
+            $("#btnSearch").prop('disabled', true);
                 c.callService(ApiUrl + "/GetAgentTotalDepositeSummary", postData, function (success, o) {
                     if (success) {
                         var obj = c.getJSON(o);
@@ -274,7 +261,8 @@
                             window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), o);
                         }
                     }
-
+                    
+                $("#btnSearch").prop('disabled', false);
                     window.parent.API_CloseLoading();
                 });
             } else {
@@ -287,18 +275,19 @@
     }
 
     function querySearchData(LoginAccount) {
-        if (currencyType != "") {
+        if (SelectedWallet != "") {
             var postData = {
                 AID: EWinInfo.ASID,
                 TargetLoginAccount: LoginAccount,
                 QueryBeginDate: startDate.value,
                 QueryEndDate: endDate.value,
-                CurrencyType: currencyType
+                CurrencyType: SelectedWallet
             };
 
             if (new Date(postData.QueryBeginDate) <= new Date(postData.QueryEndDate)) {
 
                 window.parent.API_ShowLoading();
+            $("#btnSearch").prop('disabled', true);
                 c.callService(ApiUrl + "/GetAgentTotalDepositeSummaryBySearch", postData, function (success, o) {
                     if (success) {
                         var obj = c.getJSON(o);
@@ -316,7 +305,8 @@
                             window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), o);
                         }
                     }
-
+                    
+                $("#btnSearch").prop('disabled', false);
                     window.parent.API_CloseLoading();
                 });
             } else {
@@ -389,7 +379,7 @@
                 c.setClassText(t, "LoginAccount", null, item.LoginAccount);
                 c.setClassText(t, "ParentLoginAccount", null, item.ParentLoginAccount);
                 c.setClassText(t, "InsideLevel", null, DealUserAccountInsideLevel);
-                c.setClassText(t, "CurrencyType", null, item.CurrencyType);
+                c.setClassText(t, "CurrencyType", null, SelectedWallet);
                 c.setClassText(t, "DepositValue", null, c.toCurrency(item.DepositValue));
                 c.setClassText(t, "FirstDepositValue", null, c.toCurrency(item.FirstDepositValue));;
                 c.setClassText(t, "DepositPaymentCount", null, item.DepositPaymentCount);
@@ -443,6 +433,7 @@
         } else {
             if (!targetDom) {
                 var div = document.createElement("DIV");
+                c.clearChildren(idList);
 
                 div.id = "hasNoData_DIV"
                 div.innerHTML = mlp.getLanguageKey("無數據");
@@ -451,7 +442,7 @@
                 idList.classList.add("tbody__hasNoData");
                 idList.appendChild(div);
                 window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("無數據"));
-            }           
+            }
         }
     }
     function updateSearchList(o) {
@@ -476,7 +467,7 @@
                 c.setClassText(t, "LoginAccount", null, item.LoginAccount);
                 c.setClassText(t, "ParentLoginAccount", null, item.ParentLoginAccount);
                 c.setClassText(t, "InsideLevel", null, DealUserAccountInsideLevel);
-                c.setClassText(t, "CurrencyType", null, item.CurrencyType);
+                c.setClassText(t, "CurrencyType", null, SelectedWallet);
                 c.setClassText(t, "DepositValue", null, c.toCurrency(item.DepositValue));
                 c.setClassText(t, "FirstDepositValue", null, c.toCurrency(item.FirstDepositValue));;
                 c.setClassText(t, "DepositPaymentCount", null, item.DepositPaymentCount);
@@ -535,16 +526,17 @@
                 idList.appendChild(t);
             }
         } else {
-                var div = document.createElement("DIV");
+            var div = document.createElement("DIV");
+            c.clearChildren(idList);
 
-                div.id = "hasNoData_DIV"
-                div.innerHTML = mlp.getLanguageKey("無數據");
-                div.classList.add("td__content", "td__hasNoData");
-                document.getElementById("idResultTable").classList.add("MT_tableDiv__hasNoData");
-                idList.classList.add("tbody__hasNoData");
-                idList.appendChild(div);
-                window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("無數據"));
-            
+            div.id = "hasNoData_DIV"
+            div.innerHTML = mlp.getLanguageKey("無數據");
+            div.classList.add("td__content", "td__hasNoData");
+            document.getElementById("idResultTable").classList.add("MT_tableDiv__hasNoData");
+            idList.classList.add("tbody__hasNoData");
+            idList.appendChild(div);
+            window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("無數據"));
+
         }
     }
 
@@ -624,32 +616,6 @@
 
         document.getElementById("startDate").value = getFirstDayOfWeek(Date.today()).toString("yyyy-MM-dd");
         document.getElementById("endDate").value = getLastDayOfWeek(Date.today()).toString("yyyy-MM-dd");
-
-        if (EWinInfo.UserInfo != null) {
-            if (EWinInfo.UserInfo.WalletList != null) {
-                pi = EWinInfo.UserInfo.WalletList;
-                if (pi.length > 0) {
-                    for (var i = 0; i < pi.length; i++) {
-                        templateDiv = c.getTemplate("templateDiv");
-
-                        tempCurrencyRadio = c.getFirstClassElement(templateDiv, "tempRadio");
-                        tempCurrencyName = c.getFirstClassElement(templateDiv, "tempName");
-                        tempCurrencyRadio.value = pi[i].CurrencyType;
-                        tempCurrencyRadio.name = "chkCurrencyType";
-                        tempCurrencyName.innerText = pi[i].CurrencyType;
-
-                        if (i == 0) {
-                            tempCurrencyRadio.checked = true;
-                        }
-
-                        tempCurrencyRadio.classList.remove("tempRadio");
-                        tempCurrencyName.classList.remove("tempName");
-
-                        CurrencyTypeDiv.appendChild(templateDiv);
-                    }
-                }
-            }
-        }
     }
 
     function getFirstDayOfWeek(d) {
@@ -697,6 +663,7 @@
         mlp.loadLanguage(lang, function () {
             //queryOrderSummary(qYear, qMon);
             window.parent.API_CloseLoading();
+            SelectedWallet = parent.API_GetSelectedWallet();
             querySelfData();
             ac.dataToggleCollapseInit();
         });
@@ -707,6 +674,10 @@
             case "WindowFocus":
                 //updateBaseInfo();
                 ac.dataToggleCollapseInit();
+                break;
+            case "SelectedWallet":
+                SelectedWallet = param;
+                querySelfData();
                 break;
         }
     }
@@ -727,9 +698,10 @@
                         <div id="divSearchContent" class="row searchListContent">
                             <div id="idSearchButton" class="col-12 col-md-4 col-lg-2 col-xl-2">
                                 <div class="form-group form-group-s2 ">
-                                    <div class="title hidden shown-md"><span class="language_replace">帳號</span>
-                                         <btn style="font-size: 12px; right: 5px; position: absolute; border: 2px solid; width: 22px; text-align: center; border-radius: 11px; color: #bba480; cursor: pointer;" onclick="showSearchAccountPrecautions()">!</btn>
-										 </div>
+                                    <div class="title hidden shown-md">
+                                        <span class="language_replace">帳號</span>
+                                        <btn style="font-size: 12px; right: 5px; position: absolute; border: 2px solid; width: 22px; text-align: center; border-radius: 11px; color: #bba480; cursor: pointer;" onclick="showSearchAccountPrecautions()">!</btn>
+                                    </div>
 
                                     <div class="form-control-underline iconCheckAnim placeholder-move-right zIndex_overMask_SafariFix">
                                         <input type="text" class="form-control" id="loginAccount" value="" />
@@ -764,7 +736,7 @@
                                 </div>
 
                             </div>
-               <%--             <div id="expandDiv" class="col-12 col-md-3 col-lg-1 col-xl-1">
+                            <%--             <div id="expandDiv" class="col-12 col-md-3 col-lg-1 col-xl-1">
                                 <div class="form-group wrapper_center row">
                                     <button class="btn2 btn-outline-main language_replace col-6 col-md-12 col-lg-12" onclick="toggleAllRow(true)">展開</button>
                                     <button class="btn2 btn-outline-main language_replace col-6 col-md-12 col-lg-12" onclick="toggleAllRow(false)">收合</button>
@@ -817,7 +789,7 @@
                             <div class="col-12">
                                 <div class="form-group wrapper_center dataList-process">
                                     <%--<button class="btn btn-outline-main" onclick="MaskPopUp(this)">取消</button>--%>
-                                    <button class="btn btn-full-main btn-roundcorner " onclick="querySelfData()"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">確認</span></button>
+                                    <button class="btn btn-full-main btn-roundcorner " onclick="querySelfData()" id="btnSearch"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">確認</span></button>
                                 </div>
                             </div>
                             <!-- iOS Safari Virtual Keyboard Fix--------------->
@@ -908,12 +880,12 @@
                 </div>
             </div>
         </div>
-                <div id="templateMoreRow" style="display: none;">
-                   <div class="tbody__tr td-non-underline-last-2">
-                            <div class="tbody__td date td-100 nonTitle expand_tr">
-                                  <button class="moreBtn btn2 btn-outline-main language_replace">更多</button>
-                            </div>                           
-                        </div>
+        <div id="templateMoreRow" style="display: none;">
+            <div class="tbody__tr td-non-underline-last-2">
+                <div class="tbody__td date td-100 nonTitle expand_tr">
+                    <button class="moreBtn btn2 btn-outline-main language_replace">更多</button>
+                </div>
+            </div>
         </div>
     </main>
 </body>

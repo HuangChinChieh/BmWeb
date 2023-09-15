@@ -10,12 +10,9 @@
 
     ASR = api.GetAgentSessionByID(ASID);
 
-    if (ASR.Result != EWin.BmAgent.enumResult.OK)
-    {
+    if (ASR.Result != EWin.BmAgent.enumResult.OK) {
         Response.Redirect("login.aspx");
-    }
-    else
-    {
+    } else {
         ASI = ASR.AgentSessionInfo;
     }
 
@@ -76,6 +73,7 @@
     var api;
     var lang;
     var PageNumber = 1;
+    var SelectedWallet;
 
     function querySelfData() {
         PageNumber = 1;
@@ -87,28 +85,15 @@
         var endDate;
         var targetLoginAccount;
         var idList = document.getElementById("idList");
-        var currencyTypeDom = "";
-        var currencyType = "";
 
         startDate = document.getElementById("startDate");
         endDate = document.getElementById("endDate");
         targetLoginAccount = document.getElementById("loginAccount").value.trim();
-        currencyTypeDom = document.getElementsByName("chkCurrencyType");
 
-        if (currencyTypeDom) {
-            if (currencyTypeDom.length > 0) {
-                for (i = 0; i < currencyTypeDom.length; i++) {
-                    if (currencyTypeDom[i].checked == true) {
-                        currencyType = currencyTypeDom[i].value;
-                        break;
-                    }
-                }
-            }
-        }
+        if (SelectedWallet != "") {
 
-        if (currencyType != "") {
-   
             window.parent.API_ShowLoading();
+            $("#btnSearch").prop('disabled', true);
 
             if (targetLoginAccount) {
                 postData = {
@@ -116,7 +101,7 @@
                     TargetLoginAccount: targetLoginAccount,
                     QueryBeginDate: startDate.value,
                     QueryEndDate: endDate.value,
-                    CurrencyType: currencyType
+                    CurrencyType: SelectedWallet
                 };
 
 
@@ -137,7 +122,8 @@
                             window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), o);
                         }
                     }
-
+                    
+                $("#btnSearch").prop('disabled', false);
                     window.parent.API_CloseLoading();
                 });
             } else {
@@ -146,7 +132,7 @@
                     LoginAccount: LoginAccount,
                     QueryBeginDate: startDate.value,
                     QueryEndDate: endDate.value,
-                    CurrencyType: currencyType,
+                    CurrencyType: SelectedWallet,
                     RowsPage: 50, //一頁顯示的比數
                     PageNumber: PageNumber
                 };
@@ -168,7 +154,8 @@
                             window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), o);
                         }
                     }
-
+                    
+                $("#btnSearch").prop('disabled', false);
                     window.parent.API_CloseLoading();
                 });
             }
@@ -203,7 +190,7 @@
 
                 c.setClassText(t, "LoginAccount", null, item.LoginAccount);
                 c.setClassText(t, "ParentLoginAccount", null, item.ParentLoginAccount);
-                c.setClassText(t, "CurrencyType", null, item.CurrencyType);
+                c.setClassText(t, "CurrencyType", null, SelectedWallet);
                 c.setClassText(t, "InsideLevel", null, DealUserAccountInsideLevel);
                 //if (parseFloat(item.TotalRewardValue) < 0) {
                 //    t.getElementsByClassName("RewardValue")[0].classList.add("num-negative");
@@ -240,6 +227,7 @@
 
         } else {
             var div = document.createElement("DIV");
+            c.clearChildren(idList);
 
             div.id = "hasNoData_DIV"
             div.innerHTML = mlp.getLanguageKey("無數據");
@@ -327,32 +315,7 @@
 
         document.getElementById("startDate").value = getFirstDayOfWeek(Date.today()).toString("yyyy-MM-dd");
         document.getElementById("endDate").value = getLastDayOfWeek(Date.today()).toString("yyyy-MM-dd");
-
-        if (EWinInfo.UserInfo != null) {
-            if (EWinInfo.UserInfo.WalletList != null) {
-                pi = EWinInfo.UserInfo.WalletList;
-                if (pi.length > 0) {
-                    for (var i = 0; i < pi.length; i++) {
-                        templateDiv = c.getTemplate("templateDiv");
-
-                        tempCurrencyRadio = c.getFirstClassElement(templateDiv, "tempRadio");
-                        tempCurrencyName = c.getFirstClassElement(templateDiv, "tempName");
-                        tempCurrencyRadio.value = pi[i].CurrencyType;
-                        tempCurrencyRadio.name = "chkCurrencyType";
-                        tempCurrencyName.innerText = pi[i].CurrencyType;
-
-                        if (i == 0) {
-                            tempCurrencyRadio.checked = true;
-                        }
-
-                        tempCurrencyRadio.classList.remove("tempRadio");
-                        tempCurrencyName.classList.remove("tempName");
-
-                        CurrencyTypeDiv.appendChild(templateDiv);
-                    }
-                }
-            }
-        }
+        
     }
 
     function getFirstDayOfWeek(d) {
@@ -405,6 +368,7 @@
         mlp.loadLanguage(lang, function () {
             //queryOrderSummary(qYear, qMon);
             window.parent.API_CloseLoading();
+            SelectedWallet = parent.API_GetSelectedWallet();
             queryData(EWinInfo.UserInfo.LoginAccount);
             ac.dataToggleCollapseInit();
 
@@ -416,6 +380,10 @@
             case "WindowFocus":
                 //updateBaseInfo();
                 ac.dataToggleCollapseInit();
+                break;
+            case "SelectedWallet":
+                SelectedWallet = param;
+                queryData(EWinInfo.UserInfo.LoginAccount);
                 break;
         }
     }
@@ -434,11 +402,12 @@
                     <!-- collapse內容 由此開始 ========== -->
                     <div id="searchList" class="collapse-content collapse show">
                         <div id="divSearchContent" class="row searchListContent">
-                              <div id="idSearchButton" class="col-12 col-md-6 col-lg-3 col-xl-2">
+                            <div id="idSearchButton" class="col-12 col-md-6 col-lg-3 col-xl-2">
                                 <div class="form-group form-group-s2 ">
-                                    <div class="title hidden shown-md"><span class="language_replace">帳號</span>
-                                         <btn style="font-size: 12px; right: 5px; position: absolute; border: 2px solid; width: 22px; text-align: center; border-radius: 11px; color: #bba480; cursor: pointer;" onclick="showSearchAccountPrecautions()">!</btn>
-										 </div>
+                                    <div class="title hidden shown-md">
+                                        <span class="language_replace">帳號</span>
+                                        <btn style="font-size: 12px; right: 5px; position: absolute; border: 2px solid; width: 22px; text-align: center; border-radius: 11px; color: #bba480; cursor: pointer;" onclick="showSearchAccountPrecautions()">!</btn>
+                                    </div>
 
                                     <div class="form-control-underline iconCheckAnim placeholder-move-right zIndex_overMask_SafariFix">
                                         <input type="text" class="form-control" id="loginAccount" value="" />
@@ -447,7 +416,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-12 col-md-6 col-lg-4 col-xl-3" style="display:none">
+                            <div class="col-12 col-md-6 col-lg-4 col-xl-3" style="display: none">
                                 <!-- 起始日期 / 結束日期 -->
                                 <div class="form-group search_date">
                                     <div class="starDate">
@@ -474,7 +443,7 @@
 
                             </div>
 
-                             <div class="col-12 col-md-12 col-lg-5 col-xl-7">
+                            <div class="col-12 col-md-12 col-lg-5 col-xl-7">
                                 <div id="idTabMainContent">
                                     <ul class="nav-tabs-block nav nav-tabs tab-items-6" role="tablist">
                                         <li class="nav-item">
@@ -520,7 +489,7 @@
                             <div class="col-12">
                                 <div class="form-group wrapper_center dataList-process">
                                     <%--<button class="btn btn-outline-main" onclick="MaskPopUp(this)">取消</button>--%>
-                                    <button class="btn btn-full-main btn-roundcorner " onclick="querySelfData()"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">確認</span></button>
+                                    <button class="btn btn-full-main btn-roundcorner " onclick="querySelfData()" id="btnSearch"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">確認</span></button>
                                 </div>
                             </div>
                             <!-- iOS Safari Virtual Keyboard Fix--------------->
@@ -550,7 +519,7 @@
                                     <span class="ParentLoginAccount">CON5</span>
                                 </span>
                             </div>
-                                                        <div class="tbody__td td-3 nonTitle">
+                            <div class="tbody__td td-3 nonTitle">
                                 <span class="td__title"><span class="language_replace">層級</span></span>
                                 <span class="td__content"><i class="icon icon-s icon-before"></i><span class="InsideLevel"></span></span>
                             </div>
@@ -558,7 +527,7 @@
                                 <span class="td__title"><span class="language_replace">貨幣</span></span>
                                 <span class="td__content"><i class="icon icon-ewin-default-currencyType icon-s icon-before"></i><span class="CurrencyType">CON3</span></span>
                             </div>
- <%--                           <div class="tbody__td td-number td-3 td-vertical">
+                            <%--                           <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><i class="icon icon-ewin-default-totalWinLose icon-s icon-before"></i><span class="language_replace">團隊輸贏數</span></span>
                                 <span class="td__content"><span class="RewardValue">CON4</span></span>
                             </div>
@@ -590,9 +559,9 @@
                         <div class="thead__tr">
                             <div class="thead__th"><span class="language_replace">帳號</span></div>
                             <div class="thead__th"><span class="language_replace">上線帳號</span></div>
-                                                       <div class="thead__th"><span class="language_replace">層級</span></div>
+                            <div class="thead__th"><span class="language_replace">層級</span></div>
                             <div class="thead__th"><span class="language_replace">貨幣</span></div>
-<%--                            <div class="thead__th"><span class="language_replace">團隊輸贏數</span></div>
+                            <%--                            <div class="thead__th"><span class="language_replace">團隊輸贏數</span></div>
                             <div class="thead__th"><span class="language_replace">團隊有效注額</span></div>
                             <div class="thead__th"><span class="language_replace">團隊投注筆數</span></div>--%>
                             <div class="thead__th"><span class="language_replace">個人輸贏數</span></div>
@@ -603,12 +572,12 @@
                     <!-- 表格上下滑動框 -->
                     <div class="tbody" id="idList">
                     </div>
-                        <div class="row" style="position: absolute;left:0;right:0;margin:0 auto;padding-top: 40px;">
-                    <div class="col-12" id="btnShowNextData" style="display:none;">
-                        <div class="form-group wrapper_center dataList-process">
-                            <button style="max-width: 30%;" class="btn btn-full-main btn-roundcorner " onclick="showNextData()"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">查看更多</span></button>
+                    <div class="row" style="position: absolute; left: 0; right: 0; margin: 0 auto; padding-top: 40px;">
+                        <div class="col-12" id="btnShowNextData" style="display: none;">
+                            <div class="form-group wrapper_center dataList-process">
+                                <button style="max-width: 30%;" class="btn btn-full-main btn-roundcorner " onclick="showNextData()"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">查看更多</span></button>
+                            </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>

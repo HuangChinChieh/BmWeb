@@ -10,12 +10,9 @@
 
     ASR = api.GetAgentSessionByID(ASID);
 
-    if (ASR.Result != EWin.BmAgent.enumResult.OK)
-    {
+    if (ASR.Result != EWin.BmAgent.enumResult.OK) {
         Response.Redirect("login.aspx");
-    }
-    else
-    {
+    } else {
         ASI = ASR.AgentSessionInfo;
     }
 
@@ -98,6 +95,7 @@
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
 <script type="text/javascript" src="Scripts/MultiLanguage.js"></script>
 <script type="text/javascript" src="js/date.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
 <script>
     var ApiUrl = "UserAccountAgent_Maint2_Casino.aspx";
     var c = new common();
@@ -110,7 +108,8 @@
     var endDate;
     var currencyType = "";
     var basicInsideLevel;
-    var basicSortKey;    
+    var basicSortKey;
+    var SelectedWallet;
 
     function agentExpand(SortKey, UserAccountID) {
         var expandBtn = event.currentTarget;
@@ -124,7 +123,7 @@
                     checkParentLoginAccountExists(SortKey);
                 } else {
                     queryData(UserAccountID, 1, expandBtn.parentElement.parentElement.parentElement);
-                }                
+                }
             } else {
                 //c
                 expandBtn.innerText = "+";
@@ -162,31 +161,19 @@
         queryData(userAccountID, (page + 1), targetDom);
     }
 
-    function querySelfData() {       
+    function querySelfData() {
         startDate = document.getElementById("startDate");
         endDate = document.getElementById("endDate");
-        currencyTypeDom = document.getElementsByName("chkCurrencyType");
-
-        if (currencyTypeDom) {
-            if (currencyTypeDom.length > 0) {
-                for (i = 0; i < currencyTypeDom.length; i++) {
-                    if (currencyTypeDom[i].checked == true) {
-                        currencyType = currencyTypeDom[i].value;
-                        break;
-                    }
-                }
-            }
-        }
 
         if (loginAccount.value.trim() != '') {
-           querySearchData(loginAccount.value);
+            querySearchData(loginAccount.value);
         } else {
             queryData(0, 1, null);
-        }        
+        }
     }
 
     function queryData(targetUserAccountID, page, targetDom) {
-        if (currencyType != "") {
+        if (SelectedWallet != "") {
             var LoginAccount = "";
             var UserAccountID;
 
@@ -205,13 +192,14 @@
                 TargetUserAccountID: UserAccountID,
                 QueryBeginDate: startDate.value,
                 QueryEndDate: endDate.value,
-                CurrencyType: currencyType,
+                CurrencyType: SelectedWallet,
                 Page: page
             };
 
             if (new Date(postData.QueryBeginDate) <= new Date(postData.QueryEndDate)) {
 
                 window.parent.API_ShowLoading();
+                $("#btnSearch").prop('disabled', true);
                 c.callService(ApiUrl + "/GetUserAccountSummary", postData, function (success, o) {
                     if (success) {
                         var obj = c.getJSON(o);
@@ -230,6 +218,7 @@
                         }
                     }
 
+                    $("#btnSearch").prop('disabled', false);
                     window.parent.API_CloseLoading();
                 });
             } else {
@@ -242,18 +231,19 @@
     }
 
     function querySearchData(LoginAccount) {
-        if (currencyType != "") {
+        if (SelectedWallet != "") {
             var postData = {
                 AID: EWinInfo.ASID,
                 TargetLoginAccount: LoginAccount,
                 QueryBeginDate: startDate.value,
                 QueryEndDate: endDate.value,
-                CurrencyType: currencyType
+                CurrencyType: SelectedWallet
             };
 
             if (new Date(postData.QueryBeginDate) <= new Date(postData.QueryEndDate)) {
 
                 window.parent.API_ShowLoading();
+                $("#btnSearch").prop('disabled', true);
                 c.callService(ApiUrl + "/GetUserAccountSummaryBySearch", postData, function (success, o) {
                     if (success) {
                         var obj = c.getJSON(o);
@@ -272,6 +262,7 @@
                         }
                     }
 
+                    $("#btnSearch").prop('disabled', false);
                     window.parent.API_CloseLoading();
                 });
             } else {
@@ -289,7 +280,7 @@
             basicInsideLevel = o.SelfInsideLevel;
             basicSortKey = o.SelfSortKey;
         }
-      
+
         var moreBtnRowDom;
         var moreBtnDom;
 
@@ -355,7 +346,7 @@
                 c.setClassText(t, "LoginAccount", null, item.LoginAccount);
                 c.setClassText(t, "InsideLevel", null, item.UserAccountInsideLevel);
                 c.setClassText(t, "ParentLoginAccount", null, item.ParentAccount);
-                c.setClassText(t, "CurrencyType", null, item.CurrencyType);
+                c.setClassText(t, "CurrencyType", null, SelectedWallet);
                 c.setClassText(t, "AgentCount", null, item.AgentCount);
                 c.setClassText(t, "PlayerCount", null, item.PlayerCount);
                 c.setClassText(t, "NewUserCount", null, item.NewUserCount);
@@ -420,21 +411,21 @@
                 }
                 window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("已查無數據"));
             } else {
-            var div = document.createElement("DIV");
+                var div = document.createElement("DIV");
 
-            div.id = "hasNoData_DIV"
-            div.innerHTML = mlp.getLanguageKey("無數據");
-            div.classList.add("td__content", "td__hasNoData");
-            document.getElementById("idResultTable").classList.add("MT_tableDiv__hasNoData");
-            idList.classList.add("tbody__hasNoData");
-            idList.appendChild(div);
+                div.id = "hasNoData_DIV"
+                div.innerHTML = mlp.getLanguageKey("無數據");
+                div.classList.add("td__content", "td__hasNoData");
+                document.getElementById("idResultTable").classList.add("MT_tableDiv__hasNoData");
+                idList.classList.add("tbody__hasNoData");
+                idList.appendChild(div);
                 window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("無數據"));
-            }           
+            }
         }
     }
 
     function updateSearchList(o) {
-        var idList = document.getElementById("idList");        
+        var idList = document.getElementById("idList");
         c.clearChildren(idList);
         //expandDiv.style.display = "none";
 
@@ -456,7 +447,7 @@
                 c.setClassText(t, "LoginAccount", null, item.LoginAccount);
                 c.setClassText(t, "InsideLevel", null, item.UserAccountInsideLevel);
                 c.setClassText(t, "ParentLoginAccount", null, item.ParentAccount);
-                c.setClassText(t, "CurrencyType", null, item.CurrencyType);
+                c.setClassText(t, "CurrencyType", null, SelectedWallet);
                 c.setClassText(t, "AgentCount", null, item.AgentCount);
                 c.setClassText(t, "PlayerCount", null, item.PlayerCount);
                 c.setClassText(t, "NewUserCount", null, item.NewUserCount);
@@ -511,8 +502,8 @@
 
                 if (item.UserAccountSortKey == o.SelfSortKey) {
                     t.style.display = "table-row";
-                    t.classList.add("searchTarget");                  
-                } 
+                    t.classList.add("searchTarget");
+                }
 
                 idList.appendChild(t);
             }
@@ -598,7 +589,6 @@
     function setSearchFrame() {
         var pi = null;
         var templateDiv;
-        var CurrencyTypeDiv = document.getElementById("CurrencyTypeDiv");
         var tempCurrencyRadio;
         var tempCurrencyName;
 
@@ -606,31 +596,6 @@
         document.getElementById("startDate").value = getFirstDayOfWeek(Date.today()).toString("yyyy-MM-dd");
         document.getElementById("endDate").value = getLastDayOfWeek(Date.today()).toString("yyyy-MM-dd");
 
-        if (EWinInfo.UserInfo != null) {
-            if (EWinInfo.UserInfo.WalletList != null) {
-                pi = EWinInfo.UserInfo.WalletList;
-                if (pi.length > 0) {
-                    for (var i = 0; i < pi.length; i++) {
-                        templateDiv = c.getTemplate("templateDiv");
-
-                        tempCurrencyRadio = c.getFirstClassElement(templateDiv, "tempRadio");
-                        tempCurrencyName = c.getFirstClassElement(templateDiv, "tempName");
-                        tempCurrencyRadio.value = pi[i].CurrencyType;
-                        tempCurrencyRadio.name = "chkCurrencyType";
-                        tempCurrencyName.innerText = pi[i].CurrencyType;
-
-                        if (i == 0) {
-                            tempCurrencyRadio.checked = true;
-                        }
-
-                        tempCurrencyRadio.classList.remove("tempRadio");
-                        tempCurrencyName.classList.remove("tempName");
-
-                        CurrencyTypeDiv.appendChild(templateDiv);
-                    }
-                }
-            }
-        }
     }
 
     function getFirstDayOfWeek(d) {
@@ -679,6 +644,7 @@
             //queryOrderSummary(qYear, qMon);
             window.parent.API_CloseLoading();
             //queryData(EWinInfo.UserInfo.LoginAccount);
+            SelectedWallet = parent.API_GetSelectedWallet();
             querySelfData();
 
             ac.dataToggleCollapseInit();
@@ -690,6 +656,10 @@
             case "WindowFocus":
                 //updateBaseInfo();
                 ac.dataToggleCollapseInit();
+                break;
+            case "SelectedWallet":
+                SelectedWallet = param;
+                querySelfData();
                 break;
         }
     }
@@ -710,9 +680,10 @@
                         <div id="divSearchContent" class="row searchListContent">
                             <div id="idSearchButton" class="col-12 col-md-4 col-lg-2 col-xl-2">
                                 <div class="form-group form-group-s2 ">
-                                    <div class="title hidden shown-md"><span class="language_replace">帳號</span>
-                                         <btn style="font-size: 12px; right: 5px; position: absolute; border: 2px solid; width: 22px; text-align: center; border-radius: 11px; color: #bba480; cursor: pointer;" onclick="showSearchAccountPrecautions()">!</btn>
-										 </div>
+                                    <div class="title hidden shown-md">
+                                        <span class="language_replace">帳號</span>
+                                        <btn style="font-size: 12px; right: 5px; position: absolute; border: 2px solid; width: 22px; text-align: center; border-radius: 11px; color: #bba480; cursor: pointer;" onclick="showSearchAccountPrecautions()">!</btn>
+                                    </div>
 
                                     <div class="form-control-underline iconCheckAnim placeholder-move-right zIndex_overMask_SafariFix">
                                         <input type="text" class="form-control" id="loginAccount" value="" />
@@ -721,7 +692,7 @@
 
                                 </div>
                             </div>
-                             <div class="col-12 col-md-5 col-lg-4 col-xl-3">
+                            <div class="col-12 col-md-5 col-lg-4 col-xl-3">
                                 <!-- 起始日期 / 結束日期 -->
                                 <div class="form-group search_date">
                                     <div class="starDate">
@@ -748,14 +719,14 @@
 
                             </div>
 
-<%--                          <div id="expandDiv" class="col-12 col-md-3 col-lg-1 col-xl-1">
+                            <%--                          <div id="expandDiv" class="col-12 col-md-3 col-lg-1 col-xl-1">
                                 <div class="form-group wrapper_center row">
                                     <button class="btn2 btn-outline-main language_replace col-6 col-md-12 col-lg-12" onclick="toggleAllRow(true)">展開</button>
                                     <button class="btn2 btn-outline-main language_replace col-6 col-md-12 col-lg-12" onclick="toggleAllRow(false)">收合</button>
                                 </div>
                             </div>--%>
 
-                          
+
                             <div class="col-12 col-md-12 col-lg-5 col-xl-6">
                                 <div id="idTabMainContent">
                                     <ul class="nav-tabs-block nav nav-tabs tab-items-6" role="tablist">
@@ -801,7 +772,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group wrapper_center dataList-process">
-                                    <button class="btn btn-full-main btn-roundcorner " onclick="querySelfData()"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">確認</span></button>
+                                    <button class="btn btn-full-main btn-roundcorner " onclick="querySelfData()" id="btnSearch"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">確認</span></button>
                                 </div>
                             </div>
                             <!-- iOS Safari Virtual Keyboard Fix--------------->
@@ -839,11 +810,11 @@
                                 <span class="td__title"><span class="language_replace">貨幣</span></span>
                                 <span class="td__content"><i class="icon icon-ewin-default-currencyType icon-s icon-before"></i><span class="CurrencyType"></span></span>
                             </div>
-                            <div class="tbody__td td-number td-3 td-vertical" >
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><i class="icon icon-ewin-default-totalWinLose icon-s icon-before"></i><span class="language_replace">團隊代理數</span></span>
                                 <span class="td__content"><span class="AgentCount"></span></span>
                             </div>
-                            <div class="tbody__td td-number td-3 td-vertical" >
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><i class="icon icon-ewin-default-totalRolling icon-s icon-before"></i><span class="language_replace">團隊會員數</span></span>
                                 <span class="td__content"><span class="PlayerCount"></span></span>
                             </div>
@@ -898,11 +869,11 @@
             </div>
         </div>
         <div id="templateMoreRow" style="display: none;">
-                   <div class="tbody__tr td-non-underline-last-2">
-                            <div class="tbody__td date td-100 nonTitle expand_tr">
-                                  <button class="moreBtn btn2 btn-outline-main language_replace">更多</button>
-                            </div>                           
-                        </div>
+            <div class="tbody__tr td-non-underline-last-2">
+                <div class="tbody__td date td-100 nonTitle expand_tr">
+                    <button class="moreBtn btn2 btn-outline-main language_replace">更多</button>
+                </div>
+            </div>
         </div>
     </main>
 </body>

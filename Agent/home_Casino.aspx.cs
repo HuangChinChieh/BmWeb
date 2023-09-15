@@ -44,19 +44,19 @@ public partial class home_Casino : System.Web.UI.Page {
         EWin.BmAgent.BmAgent api = new EWin.BmAgent.BmAgent();
         string RedisTmp = string.Empty;
 
-        RedisTmp = RedisCache.Agent.GetHomeAccountDetailByLoginAccount(LoginAccount, QueryBeginDate, QueryEndDate);
+        RedisTmp = RedisCache.Agent.GetHomeAccountDetailByLoginAccount(LoginAccount, QueryBeginDate, QueryEndDate, CurrencyType);
 
         if (string.IsNullOrEmpty(RedisTmp)) {
             RetValue = api.GetOrderSummary(AID, QueryBeginDate, QueryEndDate, CurrencyType);
 
-            RedisCache.Agent.UpdateHomeAccountDetailByLoginAccount(Newtonsoft.Json.JsonConvert.SerializeObject(RetValue), LoginAccount, QueryBeginDate, QueryEndDate);
+            RedisCache.Agent.UpdateHomeAccountDetailByLoginAccount(Newtonsoft.Json.JsonConvert.SerializeObject(RetValue), LoginAccount, QueryBeginDate, QueryEndDate, CurrencyType);
         } else {
             RetValue = Newtonsoft.Json.JsonConvert.DeserializeObject<EWin.BmAgent.TotalSummaryResult>(RedisTmp);
 
             if (RetValue.Result == EWin.BmAgent.enumResult.ERR) {
                 RetValue = api.GetOrderSummary(AID, QueryBeginDate, QueryEndDate, CurrencyType);
 
-                RedisCache.Agent.UpdateHomeAccountDetailByLoginAccount(Newtonsoft.Json.JsonConvert.SerializeObject(RetValue), LoginAccount, QueryBeginDate, QueryEndDate);
+                RedisCache.Agent.UpdateHomeAccountDetailByLoginAccount(Newtonsoft.Json.JsonConvert.SerializeObject(RetValue), LoginAccount, QueryBeginDate, QueryEndDate, CurrencyType);
             }
         }
         

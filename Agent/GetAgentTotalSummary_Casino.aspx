@@ -98,6 +98,7 @@
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
 <script type="text/javascript" src="Scripts/MultiLanguage.js"></script>
 <script type="text/javascript" src="js/date.js"></script>
+<script type="text/javascript" src="../Scripts/jquery-3.3.1.min.js"></script>
 <script>
     var ApiUrl = "GetAgentTotalSummary_Casino.aspx";
     var c = new common();
@@ -111,6 +112,7 @@
     var currencyType = "";
     var basicInsideLevel;
     var basicSortKey;    
+        var SelectedWallet;
 
     function agentExpand(SortKey, UserAccountID) {
         var expandBtn = event.currentTarget;
@@ -207,23 +209,9 @@
 
 
     function querySelfData() {
-        var currencyTypeDom = "";
 
         startDate = document.getElementById("startDate");
         endDate = document.getElementById("endDate");
-        currencyTypeDom = document.getElementsByName("chkCurrencyType");
-
-        if (currencyTypeDom) {
-            if (currencyTypeDom.length > 0) {
-                for (i = 0; i < currencyTypeDom.length; i++) {
-                    if (currencyTypeDom[i].checked == true) {
-                        currencyType = currencyTypeDom[i].value;
-                        break;
-                    }
-                }
-            }
-        }
-
 
         if (loginAccount.value.trim() != '') {
             querySearchData(loginAccount.value);
@@ -233,7 +221,7 @@
     }
 
     function queryData(targetUserAccountID, targetDom) {
-        if (currencyType != "") {
+        if (SelectedWallet != "") {
             var UserAccountID;
 
             if (targetUserAccountID) {
@@ -247,12 +235,13 @@
                 TargetUserAccountID: UserAccountID,
                 QueryBeginDate: startDate.value,
                 QueryEndDate: endDate.value,
-                CurrencyType: currencyType,
+                CurrencyType: SelectedWallet,
             };
 
             if (new Date(postData.QueryBeginDate) <= new Date(postData.QueryEndDate)) {
 
                 window.parent.API_ShowLoading();
+            $("#btnSearch").prop('disabled', true);
                 c.callService(ApiUrl + "/GetAgentTotalOrderSummary", postData, function (success, o) {
                     if (success) {
                         var obj = c.getJSON(o);
@@ -270,7 +259,8 @@
                             window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), o);
                         }
                     }
-
+                    
+                $("#btnSearch").prop('disabled', false);
                     window.parent.API_CloseLoading();
                 });
             } else {
@@ -283,18 +273,19 @@
     }
 
     function querySearchData(LoginAccount) {
-        if (currencyType != "") {
+        if (SelectedWallet != "") {
             var postData = {
                 AID: EWinInfo.ASID,
                 TargetLoginAccount: LoginAccount,
                 QueryBeginDate: startDate.value,
                 QueryEndDate: endDate.value,
-                CurrencyType: currencyType
+                CurrencyType: SelectedWallet
             };
 
             if (new Date(postData.QueryBeginDate) <= new Date(postData.QueryEndDate)) {
 
                 window.parent.API_ShowLoading();
+                $("#btnSearch").prop('disabled', true);
                 c.callService(ApiUrl + "/GetAgentTotalOrderSummaryBySearch", postData, function (success, o) {
                     if (success) {
                         var obj = c.getJSON(o);
@@ -313,6 +304,7 @@
                         }
                     }
 
+                    $("#btnSearch").prop('disabled', false);
                     window.parent.API_CloseLoading();
                 });
             } else {
@@ -379,7 +371,7 @@
                 c.setClassText(t, "LoginAccount", null, item.LoginAccount);
                 c.setClassText(t, "ParentLoginAccount", null, item.ParentLoginAccount);
                 c.setClassText(t, "InsideLevel", null, DealUserAccountInsideLevel);
-                c.setClassText(t, "CurrencyType", null, item.CurrencyType);
+                c.setClassText(t, "CurrencyType", null, SelectedWallet);
 
                 if (parseFloat(item.TotalRewardValue) < 0) {
                     t.getElementsByClassName("RewardValue")[0].classList.add("num-negative");
@@ -443,6 +435,7 @@
             }
         } else {
             if (!targetDom) {               
+                c.clearChildren(idList);
                 var div = document.createElement("DIV");
 
                 div.id = "hasNoData_DIV"
@@ -478,7 +471,7 @@
                 c.setClassText(t, "LoginAccount", null, item.LoginAccount);
                 c.setClassText(t, "ParentLoginAccount", null, item.ParentLoginAccount);
                 c.setClassText(t, "InsideLevel", null, DealUserAccountInsideLevel);
-                c.setClassText(t, "CurrencyType", null, item.CurrencyType);
+                c.setClassText(t, "CurrencyType", null, SelectedWallet);
 
                 if (parseFloat(item.TotalRewardValue) < 0) {
                     t.getElementsByClassName("RewardValue")[0].classList.add("num-negative");
@@ -548,6 +541,7 @@
             }
         } else {
             if (!targetDom) {
+                c.clearChildren(idList);
                 var div = document.createElement("DIV");
 
                 div.id = "hasNoData_DIV"
@@ -630,39 +624,13 @@
     function setSearchFrame() {
         var pi = null;
         var templateDiv;
-        var CurrencyTypeDiv = document.getElementById("CurrencyTypeDiv");
         var tempCurrencyRadio;
         var tempCurrencyName;
 
 
         document.getElementById("startDate").value = getFirstDayOfWeek(Date.today()).toString("yyyy-MM-dd");
         document.getElementById("endDate").value = getLastDayOfWeek(Date.today()).toString("yyyy-MM-dd");
-
-        if (EWinInfo.UserInfo != null) {
-            if (EWinInfo.UserInfo.WalletList != null) {
-                pi = EWinInfo.UserInfo.WalletList;
-                if (pi.length > 0) {
-                    for (var i = 0; i < pi.length; i++) {
-                        templateDiv = c.getTemplate("templateDiv");
-
-                        tempCurrencyRadio = c.getFirstClassElement(templateDiv, "tempRadio");
-                        tempCurrencyName = c.getFirstClassElement(templateDiv, "tempName");
-                        tempCurrencyRadio.value = pi[i].CurrencyType;
-                        tempCurrencyRadio.name = "chkCurrencyType";
-                        tempCurrencyName.innerText = pi[i].CurrencyType;
-
-                        if (i == 0) {
-                            tempCurrencyRadio.checked = true;
-                        }
-
-                        tempCurrencyRadio.classList.remove("tempRadio");
-                        tempCurrencyName.classList.remove("tempName");
-
-                        CurrencyTypeDiv.appendChild(templateDiv);
-                    }
-                }
-            }
-        }
+        
     }
 
     function getFirstDayOfWeek(d) {
@@ -711,6 +679,7 @@
             //queryOrderSummary(qYear, qMon);
             window.parent.API_CloseLoading();
             //queryData(EWinInfo.UserInfo.LoginAccount);
+                SelectedWallet = parent.API_GetSelectedWallet();
             querySelfData();
             ac.dataToggleCollapseInit();
         });
@@ -722,6 +691,10 @@
                 //updateBaseInfo();
                 ac.dataToggleCollapseInit();
                 break;
+                case "SelectedWallet":
+                    SelectedWallet = param;
+                    querySelfData();
+                    break;
         }
     }
 
@@ -824,7 +797,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="form-group wrapper_center dataList-process">
-                                    <button class="btn btn-full-main btn-roundcorner " onclick="querySelfData()"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">確認</span></button>
+                                    <button class="btn btn-full-main btn-roundcorner " onclick="querySelfData()" id="btnSearch"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">確認</span></button>
                                 </div>
                             </div>
                             <!-- iOS Safari Virtual Keyboard Fix--------------->
