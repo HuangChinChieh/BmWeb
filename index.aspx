@@ -237,6 +237,8 @@
             Lang = "ENG";
         }
 
+
+        document.getElementById("idlangSel").value = Lang;
         mlp = new multiLanguage();
         setLanguage(Lang, function () {
             //createValidateImage();
@@ -428,7 +430,7 @@
                         <img src="images/indexQRCode.png">
                     </div>
                     <div class="langSel_container">
-                        <select class="langSel" onchange="langSelChange(event)">
+                        <select id="idlangSel" class="langSel" onchange="langSelChange(event)">
                             <option value="ENG">English</option>
                             <option value="CHS">简体中文</option>
                             <option value="JPN">日本語</option>

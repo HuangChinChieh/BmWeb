@@ -63,5 +63,6 @@
   "電話驗證碼有誤": "Phone verification code is incorrect.",
   "簡訊驗證碼為空": "SMS verification code is empty.",
   "找不到可用的 QRcode，請重新確認": "No available QR code found. Please recheck.",
+  "返回登入": "Back to Login",
   "帳號含有限制開頭BMH，請使用其他帳號，如有疑問請聯繫客服。": "Account starts with restricted characters BMH. Please use a different account. If you have questions, please contact customer service."
 }

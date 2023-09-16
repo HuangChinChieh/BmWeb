@@ -537,7 +537,7 @@
     }
 
     function init() {
-        lang = sessionStorage.getItem("lang");
+        lang = localStorage.getItem("Lang");
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
             p = new LobbyAPI("/API/LobbyAPI.asmx");
@@ -595,7 +595,7 @@
                                 </select>
                             </div>
                             <!-- 檢查正確請加上"checked" 檢查未通過請加上"denied" -->
-                            <input id="idPhoneNumber" type="text" placeholder="輸入電話" name="UserPhoneNo" onblur="CheckAccountPhoneExist()">
+                            <input id="idPhoneNumber" type="text" language_replace="placeholder"  placeholder="輸入電話" name="UserPhoneNo" onblur="CheckAccountPhoneExist()">
                             <div id="idPhoneNumberDenied" class="popup_notice" style="display: none"><i class="fa fa-info-circle"></i><span class="language_replace">電話已存在</span></div>
                         </div>
                         <div>
