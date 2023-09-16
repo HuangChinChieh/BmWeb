@@ -55,5 +55,13 @@
   "輸入錯誤": "Error",
   "註冊": "Register",
   "輸入驗證碼": "Enter confirmation code",
-  "確認": "Confirm"
+  "確認": "Confirm",
+  "請先輸入手機號碼，與完成相關檢查": "Please enter your mobile phone number and complete the relevant checks.",
+  "電話格式有誤": "Phone number format is incorrect.",
+  "註冊成功，確認後返回登入頁進行登入": "Registration successful. Please confirm and return to the login page to log in.",
+  "電話號碼已存在，請勿重複註冊": "Phone number already exists. Please do not register again.",
+  "電話驗證碼有誤": "Phone verification code is incorrect.",
+  "簡訊驗證碼為空": "SMS verification code is empty.",
+  "找不到可用的 QRcode，請重新確認": "No available QR code found. Please recheck.",
+  "帳號含有限制開頭BMH，請使用其他帳號，如有疑問請聯繫客服。": "Account starts with restricted characters BMH. Please use a different account. If you have questions, please contact customer service."
 }

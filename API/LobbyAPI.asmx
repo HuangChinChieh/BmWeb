@@ -40,7 +40,7 @@ public class LobbyAPI : System.Web.Services.WebService
         return lobbyAPI.HeartBeat(GUID, Echo);
     }
 
-  
+
 
 
     [WebMethod]
@@ -329,7 +329,7 @@ public class LobbyAPI : System.Web.Services.WebService
         return lobbyAPI.SetValidateCodeOnlyNumber(GetToken(), GUID, EWin.Lobby.enumValidateType.PhoneNumber, string.Empty, PhonePrefix, PhoneNumber);
     }
 
-            [WebMethod]
+    [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public EWin.Lobby.APIResult CheckValidateCodeOnlyNumber(string GUID, string PhonePrefix, string PhoneNumber, string ValidateCode)
     {
@@ -341,13 +341,24 @@ public class LobbyAPI : System.Web.Services.WebService
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public EWin.Lobby.APIResult CreateAccount(string GUID, string LoginAccount, string LoginPassword, string ParentPersonCode, EWin.Lobby.PropertySet[] PS)
     {
-        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();     
-        EWin.Lobby.APIResult R = new EWin.Lobby.APIResult();        
-        System.Data.DataTable DT = null;        
-        string ParentLoginAccount = string.Empty;        
+        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+        EWin.Lobby.APIResult R = new EWin.Lobby.APIResult();
+        System.Data.DataTable DT = null;
+        string ParentLoginAccount = string.Empty;
         string Birthday = DateTime.Now.ToString("yyyy/MM/dd");
-        
-        R = lobbyAPI.CreateAccount(GetToken(), GUID, LoginAccount, LoginPassword, ParentPersonCode, EWinWeb.MainCurrencyType, PS);
+        string PCode = null;
+
+        if (string.IsNullOrEmpty(ParentPersonCode))
+        {
+            if (!EWinWeb.IsTestSite)
+                PCode = "S63417708510759";
+        }
+        else {
+            PCode = ParentPersonCode;
+        }
+
+
+        R = lobbyAPI.CreateAccount(GetToken(), GUID, LoginAccount, LoginPassword, PCode, EWinWeb.MainCurrencyType, PS);
 
         return R;
     }

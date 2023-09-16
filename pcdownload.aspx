@@ -127,16 +127,16 @@
             <div class="tab active" onclick="tabPage('game', this)">
                 <span class="language_replace">客戶端 APP</span>
             </div>
-            <div class="tab tab1" onclick="tabPage('agent', this)">
+<%--            <div class="tab tab1" onclick="tabPage('agent', this)">
                 <span class="language_replace">代理网 APP</span>
-            </div>
+            </div>--%>
             <div id="game" class="mainBox">
                 <div class="title">
                     <div class="APPICON">
-                        <img src="images/DDicon-App_gold.png" alt="icon_game">
+                        <img src="images/logo_300.png" alt="icon_game">
                         <h1><span>GAME APP</span></h1>
                     </div>
-                    <p><span>九盈 客戶APP</span></p>
+                    <p><span>BM 客戶APP</span></p>
                     <div class="line">
                         <div class="light"></div>
                     </div>

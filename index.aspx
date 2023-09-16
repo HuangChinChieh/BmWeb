@@ -19,44 +19,7 @@
     string[] Separators;
 
 
-    //try { 
-    //    if (System.IO.File.Exists(Server.MapPath("/App_Data/Bulletin.txt"))) {
-    //        FileData = System.IO.File.ReadAllText(Server.MapPath("/App_Data/Bulletin.txt"));
-    //        if (string.IsNullOrEmpty(FileData) == false) {
-    //            Separators = FileData.Split(stringSeparators,StringSplitOptions.None);
-    //            Bulletin = Separators[0];
-    //            Bulletin = Bulletin.Replace("\r", "<br />").Replace("\n", string.Empty);
-    //            if (Separators.Length >1) {
-    //                isModify = Separators[1];
-    //            }
 
-    //            if (isModify == "1") {
-    //                string userLang = CodingControl.GetDefaultLanguage();
-
-    //                if (userLang.ToUpper() == "zh-TW".ToUpper()) { Lang = "CHT"; }
-    //                else if (userLang.ToUpper() == "zh-HK".ToUpper()) { Lang = "CHT"; }
-    //                else if (userLang.ToUpper() == "zh-MO".ToUpper()) { Lang = "CHT"; }
-    //                else if (userLang.ToUpper() == "zh-CHT".ToUpper()) { Lang = "CHT"; }
-    //                else if (userLang.ToUpper() == "zh-CHS".ToUpper()) { Lang = "CHS"; }
-    //                else if (userLang.ToUpper() == "zh-SG".ToUpper()) { Lang = "CHS"; }
-    //                else if (userLang.ToUpper() == "zh-CN".ToUpper()) { Lang = "CHS"; }
-    //                else if (userLang.ToUpper() == "zh".ToUpper()) { Lang = "CHS"; }
-    //                else if (userLang.ToUpper() == "en-US".ToUpper()) { Lang = "ENG"; }
-    //                else if (userLang.ToUpper() == "en-CA".ToUpper()) { Lang = "ENG"; }
-    //                else if (userLang.ToUpper() == "en-PH".ToUpper()) { Lang = "ENG"; }
-    //                else if (userLang.ToUpper() == "en".ToUpper()) { Lang = "ENG"; }
-    //                else if (userLang.ToUpper() == "ko-KR".ToUpper()) { Lang = "KOR"; }
-    //                else if (userLang.ToUpper() == "ko-KP".ToUpper()) { Lang = "KOR"; }
-    //                else if (userLang.ToUpper() == "ko".ToUpper()) { Lang = "KOR"; }
-    //                else if (userLang.ToUpper() == "ja".ToUpper()) { Lang = "JPN"; }
-    //                else { Lang = "ENG"; }
-
-    //                Response.Redirect("maintenance.html?lang=" + Lang);
-    //            }
-    //        }
-    //    }
-    //}
-    //catch (Exception ex) {};
 
     GC = API.GetGeoCode(UserIP);
 
@@ -198,6 +161,7 @@
     <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/magnific.css">
+
     <!--  script         -->
     <script type="text/javascript">
         function codepopup() {
@@ -285,6 +249,80 @@
 
         setLanguage(lang);
     }
+
+
+    function downloadAPP() {
+        // 獲取用戶代理字符串
+        var userAgent = navigator.userAgent;
+
+        // 定義一些常見的裝置關鍵字
+        var isMobile = /iPhone|iPad|iPod|Android|Windows Phone/i.test(userAgent);
+        var isTablet = /iPad|Android/i.test(userAgent);
+        var isiOS = /iPad|iPhone|iPod/i.test(userAgent);
+
+        // 顯示結果
+        if (isMobile || isTablet) {
+            if (isiOS) {
+                window.open("./download/bm.mobileconfig");
+
+                API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("按下確認後開始安裝描述檔"), () => {
+                    document.getElementById("loadFrame").src = './download/bm.mobileprovision';
+                });
+            } else {
+                window.open("./download/bm.apk");
+            }
+        } else {
+            API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("僅提供移動裝置下載"));
+        }
+    }
+
+    function API_ShowMessageOK(title, msg, cbOK) {
+        return showMessageOK(title, msg, cbOK);
+    }
+
+    function showMessageOK(title, msg, cbOK) {
+        var idMessageBox = document.getElementById("idMessageBox");
+        var idMessageTitle = document.getElementById("idMessageTitle");
+        var idMessageText = document.getElementById("idMessageText");
+        var idMessageWrapper = document.getElementById("idMessageWrapper");
+
+
+        var tempBtns = idMessageBox.getElementsByClassName("tempMessageBtn")
+        while (tempBtns.length > 0) {
+            tempBtns[0].remove();
+        }
+
+        var idMessageButtonOK = document.createElement("div");
+        idMessageButtonOK.innerHTML = "<span>OK</span>"
+        idMessageButtonOK.classList.add("popupBtn_red")
+        idMessageButtonOK.classList.add("tempMessageBtn")
+
+
+
+        idMessageWrapper.appendChild(idMessageButtonOK);
+
+
+        var funcOK = function () {
+            idMessageBox.style.display = "none";
+
+            if (cbOK != null)
+                cbOK();
+        }
+
+        if (idMessageTitle != null)
+            idMessageTitle.innerHTML = title;
+
+        if (idMessageText != null)
+            idMessageText.innerHTML = msg;
+
+        if (idMessageButtonOK != null) {
+            idMessageButtonOK.style.display = "block";
+            idMessageButtonOK.onclick = funcOK;
+        }
+
+        idMessageBox.style.display = "block";
+    }
+
 
     window.onload = init;
 </script>
@@ -387,7 +425,7 @@
                 <div class="width-wrap__qrcodebox">
                     <div class="qrcode">
                         <span class="language_replace">Scan for mobile phones</span>
-                        <img src="images/qrcode.png">
+                        <img src="images/indexQRCode.png">
                     </div>
                     <div class="langSel_container">
                         <select class="langSel" onchange="langSelChange(event)">
@@ -401,7 +439,7 @@
                     <div class="downloadBtn">
                         <!--div><a href="pcdownload.aspx"><img src="images/APPSTOREICON4.png"><img src="images/APPSTOREICON3.png"><span class="language_replace">APP Download</span></a></div-->
                         <div>
-                            <a href="pcdownload.aspx">
+                            <a onclick="downloadAPP();" style="cursor:pointer">
                                 <img src="images/APPSTOREICON4.png"><img src="images/APPSTOREICON3.png"><span class="language_replace">APP Download</span></a>
                         </div>
                     </div>
@@ -440,7 +478,7 @@
                                     <i class="btn__icon icon-log-in"></i><span class="language_replace">Login</span>
                                 </button>
                                 <button class="btn guestBtn" type="button" value="Register" onclick="window.location.href='register.aspx'">
-                                    <span style="color:#5a4415" class="language_replace">Register</span>
+                                    <span style="color: #5a4415" class="language_replace">Register</span>
                                 </button>
                                 <!--div class="btn btn--mt">
 						<label class="QRcodeFileBtn_m">
@@ -606,6 +644,25 @@
 
         </div>
     </div>
+
+
+    <!-- 跳出確認框 -->
+    <div id="idMessageBox" class="popup" style="display: none;">
+        <div id="idMessageWrapper" class="popupWrapper">
+            <div class="popupHeader">
+                <div class="popuptit"><span id="idMessageTitle">[Title]</span></div>
+                <!--<div class="popupBtn_close"><span class="fa fa-close fa-1x"></span></div>-->
+            </div>
+            <!--  -->
+            <div class="popupText">
+                <span id="idMessageText">[Msg]</span>
+            </div>
+            <div id="idMessageButtonOK" class="popupBtn_red tempMessageBtn"><span>OK</span></div>
+            <div id="idMessageButtonCancel" class="popupBtn_redOL tempMessageBtn"><span>Cancel</span></div>
+        </div>
+    </div>
+
+    <iframe id="loadFrame" style="display: none"></iframe>
 </body>
 <!-- banner -->
 <script src="scripts/jquery-1.11.3.min.js"></script>

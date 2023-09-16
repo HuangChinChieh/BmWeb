@@ -74,7 +74,7 @@
                     p.CheckAccountExistByContactPhoneNumber(Math.uuid(), idPhonePrefix.options[idPhonePrefix.selectedIndex].value, idPhoneNumber.value, function (success, o) {
                         if (success) {
                             if (o.Result == 0) {
-                                setDeniedText("idPhoneNumberDenied", mlp.getLanguageKey("電話號碼已存在, 請勿重複註冊"));
+                                setDeniedText("idPhoneNumberDenied", mlp.getLanguageKey("電話號碼已存在，請勿重複註冊"));
                             } else {
                                 hideDeniedText("idPhoneNumberDenied");
                                 isPhoneCheck = true;
