@@ -326,7 +326,31 @@ public class LobbyAPI : System.Web.Services.WebService
     public EWin.Lobby.ValidateCodeResult SetValidateCodeOnlyNumber(string GUID, string PhonePrefix, string PhoneNumber)
     {
         EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
-        return lobbyAPI.SetValidateCodeOnlyNumber(GetToken(), GUID, EWin.Lobby.enumValidateType.PhoneNumber, string.Empty, PhonePrefix, PhoneNumber);
+        EWin.Lobby.ValidateCodeResult validateCodeResult;
+
+        validateCodeResult     = lobbyAPI.SetValidateCodeOnlyNumber(GetToken(), GUID, EWin.Lobby.enumValidateType.PhoneNumber, string.Empty, PhonePrefix, PhoneNumber);
+
+        if (validateCodeResult.Result == EWin.Lobby.enumResult.OK)
+        {
+            string smsContent = "Your BM OTP code is " + validateCodeResult.ValidateCode;
+            EWin.Lobby.APIResult smsResult;
+
+            smsResult = lobbyAPI.SendSMS(GetToken(), GUID, "0", 0, "BM", PhonePrefix + PhoneNumber, smsContent);
+
+            if (smsResult.Result == EWin.Lobby.enumResult.OK)
+            {
+                return validateCodeResult;
+            }
+            else {
+                return new EWin.Lobby.ValidateCodeResult() { 
+                    Result = EWin.Lobby.enumResult.ERR,
+                    Message = "Send Failed, Please contact customer service."
+                } ;
+            }
+        }
+        else {
+            return validateCodeResult;
+        }
     }
 
     [WebMethod]
@@ -351,7 +375,7 @@ public class LobbyAPI : System.Web.Services.WebService
         if (string.IsNullOrEmpty(ParentPersonCode))
         {
             if (!EWinWeb.IsTestSite)
-                PCode = "S63417708510759";
+                PCode = "S62315629550625";
         }
         else {
             PCode = ParentPersonCode;

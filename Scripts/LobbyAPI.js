@@ -315,8 +315,8 @@
         var postData;
 
         postData = {
-            ContactPhonePrefix: PhonePrefix,
-            ContactPhoneNumber: PhoneNumber,
+            PhonePrefix: PhonePrefix,
+            PhoneNumber: PhoneNumber,
             GUID: GUID
         };
 

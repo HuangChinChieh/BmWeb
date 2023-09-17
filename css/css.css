@@ -290,7 +290,7 @@ body {
     .width-wrap .width-wrap__login {
         background-color: rgba(8, 7, 6, 0.8);
         width: 90%;
-        height: 500px;
+        height: 530px;
         right: inherit;
         position: absolute;
         left: 50%;
@@ -361,7 +361,7 @@ body {
 }
 
     .login-logo img {
-        width: 180px;
+        width: 160px;
     }
 
     .login-logo p {

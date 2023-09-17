@@ -7,9 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-/// <summary>
-/// EWin 的摘要描述
-/// </summary>
+
 public static class EWinWeb {
     public static string DBConnStr = System.Configuration.ConfigurationManager.ConnectionStrings["DBConnStr"].ConnectionString;
     public static DateTime DateTimeNull = Convert.ToDateTime("1900/1/1");

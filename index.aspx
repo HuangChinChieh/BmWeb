@@ -99,10 +99,12 @@
             // 訪客登入
             if ((ImageCode != string.Empty) && (ImageCode != null))
             {
-                if (IsChina == true)
-                    Response.Redirect("https://cngame.ewin-soft.com:1443/Game/LoginGuest.aspx?Lang=" + Lang + "&LoginGUID=" + LoginGUID + "&ImageCode=" + ImageCode + "&Action=Game");
-                else
-                    Response.Redirect("https://game.ewin-soft.com/Game/LoginGuest.aspx?Lang=" + Lang + "&LoginGUID=" + LoginGUID + "&ImageCode=" + ImageCode + "&Action=Game");
+                Response.Redirect(EWinWeb.EWinUrl + "/Game/LoginGuest.aspx?Lang=" + Lang + "&LoginGUID=" + LoginGUID + "&ImageCode=" + ImageCode + "&Action=Game");
+
+                //if (IsChina == true)
+                //    Response.Redirect("https://cngame.ewin-soft.com:1443/Game/LoginGuest.aspx?Lang=" + Lang + "&LoginGUID=" + LoginGUID + "&ImageCode=" + ImageCode + "&Action=Game");
+                //else
+                //    Response.Redirect(EWinWeb.EWinUrl + "/Game/LoginGuest.aspx?Lang=" + Lang + "&LoginGUID=" + LoginGUID + "&ImageCode=" + ImageCode + "&Action=Game");
             }
             else
             {
@@ -435,7 +437,7 @@
                             <option value="CHS">简体中文</option>
                             <option value="JPN">日本語</option>
                             <option value="KOR">한국어</option>
-                            <option value="CHT">正體中文</option>
+                            <option value="CHT">繁體中文</option>
                         </select>
                     </div>
                     <div class="downloadBtn">
@@ -479,8 +481,11 @@
                                 <button class="btn btn--mt" type="button" value="LOGIN" onclick="btnLogin()">
                                     <i class="btn__icon icon-log-in"></i><span class="language_replace">Login</span>
                                 </button>
-                                <button class="btn guestBtn" type="button" value="Register" onclick="window.location.href='register.aspx'">
+                                <button class="btn" type="button" value="Register" onclick="window.location.href='register.aspx'">
                                     <span style="color: #5a4415" class="language_replace">Register</span>
+                                </button>
+                                <button class="btn guestBtn" type="button" value="GUEST LOGIN" onClick="btnLoginGuest()">
+                                    <span class="language_replace">GUEST LOGIN</span>
                                 </button>
                                 <!--div class="btn btn--mt">
 						<label class="QRcodeFileBtn_m">
