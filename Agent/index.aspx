@@ -642,14 +642,15 @@
 
                         //確認是否為代理或股東
                         if (EWinInfo.UserInfo.UserAccountType == 1 || EWinInfo.UserInfo.UserAccountType == 2) {
-                            if (document.getElementById("idCreateAccount")) {
-                                if (EWinInfo.CompanyInfo.AgentCreateAccount == 1 || EWinInfo.CompanyInfo.AgentCreateAccount == 3) {
-                                    if (document.getElementById("idCreateAccount")) {
-                                        document.getElementById("idCreateAccount").style.display = "";
-                                        CreateAccount = true;
-                                    }
-                                }
-                            }
+                            //新增下線功能 暫時移除
+                            //if (document.getElementById("idCreateAccount")) {
+                            //    if (EWinInfo.CompanyInfo.AgentCreateAccount == 1 || EWinInfo.CompanyInfo.AgentCreateAccount == 3) {
+                            //        if (document.getElementById("idCreateAccount")) {
+                            //            document.getElementById("idCreateAccount").style.display = "";
+                            //            CreateAccount = true;
+                            //        }
+                            //    }
+                            //}
 
                             if (document.getElementById("idUserAccountAgent")) {
                                 document.getElementById("idUserAccountAgent").style.display = "";
@@ -1016,12 +1017,12 @@
                                             <i class="icon icon-mask icon-ewin-assisant"></i>
                                             <span class="language_replace">會員投注數據</span></a>
                                     </li>
-                                    <li class="nav-item submenu dropdown">
+                                    <li class="nav-item submenu dropdown" style="display:none">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('團隊出入金數據'), 'GetAgentTotalDepositeSummary_Casino.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-assisant"></i>
                                             <span class="language_replace">團隊出入金數據</span></a>
                                     </li>
-                                    <li class="nav-item submenu dropdown">
+                                    <li class="nav-item submenu dropdown" style="display:none">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('會員出入金數據'), 'GetPlayerTotalDepositSummary_Casino.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-assisant"></i>
                                             <span class="language_replace">會員出入金數據</span></a>

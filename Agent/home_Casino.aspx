@@ -884,7 +884,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3">
+                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display:none">
                                 <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/PreferentialCost.png); text-align: right">
                                     <div>
                                         <span class="currency language_replace homeitemtitle">優惠成本</span>
@@ -938,7 +938,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3">
+                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display:none">
                                 <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/ActivateUserCount.png); text-align: right">
                                     <div>
                                         <span class="currency language_replace homeitemtitle">活躍用戶</span>
@@ -956,7 +956,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3">
+                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display:none">
                                 <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/WithdrawalValue.png); text-align: right">
                                     <div>
                                         <span class="currency language_replace homeitemtitle">提現金額</span>
@@ -977,7 +977,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3">
+                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display:none">
                                 <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/DepositValue.png); text-align: right">
                                     <div>
                                         <span class="currency language_replace homeitemtitle">充值金額</span>
@@ -995,7 +995,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3">
+                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display:none">
                                 <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/FirstDepositValue.png); text-align: right">
                                     <div>
                                         <span class="currency language_replace homeitemtitle">首存金額</span>
@@ -1013,7 +1013,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3">
+                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display:none">
                                 <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/FirstDepositCount.png); text-align: right">
                                     <div>
                                         <span class="currency language_replace homeitemtitle">首存人數</span>
@@ -1228,7 +1228,7 @@
                                 </div>
 
                             </div>
-                            <div class="col-12 col-md-12 col-lg-6 col-gx-6 col-xl-6">
+                            <div class="col-12 col-md-12 col-lg-6 col-gx-6 col-xl-6" style="display:none">
                                 <div class="homeitemborder" style="padding: 10px">
                                     <div style="text-align: center; padding-bottom: 5px;">
                                         <span class="currency language_replace homeitemtitle">活躍會員 (前10)</span>
