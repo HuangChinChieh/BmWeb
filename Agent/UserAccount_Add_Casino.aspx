@@ -457,7 +457,7 @@
                     UserField: userList
                 }
                 processing = true;
-
+            
                 window.parent.API_ShowLoading("Sending");
                 $("#btnSave").hide();
 

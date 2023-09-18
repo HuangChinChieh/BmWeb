@@ -560,23 +560,6 @@
                 if (o.ResultState == 0) {
                     EWinInfo.UserInfo = o;
 
-                    if (EWinInfo.UserInfo.WalletList) {
-                        var removeArray = [];
-
-                        for (var i = 0; i < EWinInfo.UserInfo.WalletList.length; i++) {
-                            //if (EWinInfo.UserInfo.WalletList[i].PointState == 1 ) {
-                            //    removeArray.push(i);
-                            //}
-                            if (EWinInfo.CompanyInfo.DefaultCurrencyType != EWinInfo.UserInfo.WalletList[i].CurrencyType) {
-                                removeArray.push(i);
-                            }
-                        }
-
-                        for (var i = 0; i < removeArray.length; i++) {
-                            EWinInfo.UserInfo.WalletList.splice(removeArray[i], 1);
-                        }
-                    }
-
                     if (o.RequireWithdrawalCount > 0) {
                         //LastRequireWithdrawalID = 1;
                         if (LastRequireWithdrawalID != o.LastRequireWithdrawalID) {
@@ -619,21 +602,6 @@
                     }
                     if (firstLoad == true) {
                         firstLoad = false;
-
-                        //確認是否有區塊鏈錢包
-                        if (o.WalletList) {
-                            if (o.WalletList.length > 0) {
-                                for (var i = 0; i < o.WalletList.length; i++) {
-                                    if (o.WalletList[i].PointState == 0 && o.WalletList[i].ValueType == 2) {
-                                        hasCryptoWallet = true;
-                                        document.getElementById("idCryptoWallet").style.display = "";
-                                        //document.getElementById("idCryptoWalletReport").style.display = "";
-
-                                        break;
-                                    }
-                                }
-                            }
-                        }
 
                         //是否顯示推廣碼
                         switch (EWinInfo.UserInfo.UserAccountType) {
