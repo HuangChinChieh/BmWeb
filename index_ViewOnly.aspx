@@ -429,7 +429,7 @@
         </div>
 
         <!-- banner -->
-        <div class="container__banner">
+        <div class="container__banner" style="height:100vh">
             <div class="width-wrap">
                 <div class="width-wrap__qrcodebox">
                     <div class="qrcode">
@@ -629,7 +629,7 @@
             </dl>
         </div-->
         <!-- contact// -->
-        <div class="container__ft" style="height:calc(100vh - 800px)">
+        <div class="container__ft">
             <a class="popup1" id="popup1" onclick="termsDivSwitch()" href="#popup1"><span class="language_replace">Terms of Member Responsibilities</span></a>
         </div>
     </div>
