@@ -374,7 +374,7 @@
                                 PreferentialCost = PreferentialCost + data.BonusPointValue;
                                 TotalOrderCount = TotalOrderCount + data.TotalOrderCount;
                                 ActiveUser = ActiveUser + data.ActiveUser;
-                                NewUserCount = NewUserCount + data.NewUserCount + data.NewAgentCount;
+                                NewUserCount = NewUserCount + data.NewUserCount ; //+ data.NewAgentCount
                                 WithdrawalValue = WithdrawalValue + data.WithdrawalValue;
                                 WithdrawalCount = WithdrawalCount + data.WithdrawalCount;
                                 DepositValue = DepositValue + data.DepositValue;
@@ -1206,7 +1206,7 @@
                     </div>
                 </div>
 
-                <div class="currencyWalletList" style="margin-top: 20px">
+                <div class="currencyWalletList" style="margin-top: 20px; display:none">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 col-md-12 col-lg-6 col-gx-6 col-xl-6">
@@ -1228,7 +1228,7 @@
                                 </div>
 
                             </div>
-                            <div class="col-12 col-md-12 col-lg-6 col-gx-6 col-xl-6" style="display:none">
+                            <div class="col-12 col-md-12 col-lg-6 col-gx-6 col-xl-6">
                                 <div class="homeitemborder" style="padding: 10px">
                                     <div style="text-align: center; padding-bottom: 5px;">
                                         <span class="currency language_replace homeitemtitle">活躍會員 (前10)</span>
