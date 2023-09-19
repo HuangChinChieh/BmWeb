@@ -23,7 +23,7 @@ public partial class UserAccount_Maint2_Casino : System.Web.UI.Page {
 
         if (string.IsNullOrEmpty(SearchLoginAccount)) {
 
-            strRedisData = RedisCache.Agent.GetTeamMemberInfoByLoginAccount(LoginAccount, CurrencyType);
+            //strRedisData = RedisCache.Agent.GetTeamMemberInfoByLoginAccount(LoginAccount, CurrencyType);
 
             //沒有redis資料一律將PageNumber改為1，避免用戶在該頁面放置到Redis已消失的狀態，最大會員編號已失效資料的數量會有問題
             if (string.IsNullOrEmpty(strRedisData)) {
@@ -35,7 +35,7 @@ public partial class UserAccount_Maint2_Casino : System.Web.UI.Page {
                     ExpireTimeoutSeconds = 300;
                     redisSaveData.Add(PageNumber.ToString(), JsonConvert.SerializeObject(RetValue));
 
-                    RedisCache.Agent.UpdateTeamMemberInfoByLoginAccount(JsonConvert.SerializeObject(redisSaveData), LoginAccount, ExpireTimeoutSeconds, CurrencyType);
+                    //RedisCache.Agent.UpdateTeamMemberInfoByLoginAccount(JsonConvert.SerializeObject(redisSaveData), LoginAccount, ExpireTimeoutSeconds, CurrencyType);
                 }
             } else {
                 redisSaveData = JObject.Parse(strRedisData);
@@ -53,7 +53,7 @@ public partial class UserAccount_Maint2_Casino : System.Web.UI.Page {
                     if (RetValue.Result == EWin.BmAgent.enumResult.OK) {
                         redisSaveData.Add(PageNumber.ToString(), JsonConvert.SerializeObject(RetValue));
 
-                        RedisCache.Agent.UpdateTeamMemberInfoByLoginAccount(JsonConvert.SerializeObject(redisSaveData), LoginAccount, ExpireTimeoutSeconds, CurrencyType);
+                        //RedisCache.Agent.UpdateTeamMemberInfoByLoginAccount(JsonConvert.SerializeObject(redisSaveData), LoginAccount, ExpireTimeoutSeconds, CurrencyType);
                     }
                 }
 
