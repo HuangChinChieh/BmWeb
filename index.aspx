@@ -35,6 +35,25 @@
         {
             IsChina = true;
         }
+        else if (GC.GeoCountry == "PH")
+        {
+            string[] ipList = new string[] {
+                "103.151.28.225",
+                "103.151.28.226",
+                "103.151.28.227",
+                "103.151.28.228",
+                "103.151.28.229",
+                "103.151.28.230",
+                "103.151.28.231"
+            };
+
+            if (!ipList.Contains(UserIP))
+            {
+                Response.Redirect("IPDenied.html");
+                Response.Flush();
+                Response.End();
+            }
+        }
         //Response.Write(GC.GeoCountry)
     }
 
@@ -443,7 +462,7 @@
                     <div class="downloadBtn">
                         <!--div><a href="pcdownload.aspx"><img src="images/APPSTOREICON4.png"><img src="images/APPSTOREICON3.png"><span class="language_replace">APP Download</span></a></div-->
                         <div>
-                            <a onclick="downloadAPP();" style="cursor:pointer">
+                            <a onclick="downloadAPP();" style="cursor: pointer">
                                 <img src="images/APPSTOREICON4.png"><img src="images/APPSTOREICON3.png"><span class="language_replace">APP Download</span></a>
                         </div>
                     </div>
@@ -484,7 +503,7 @@
                                 <button class="btn" type="button" value="Register" onclick="window.location.href='register.aspx'">
                                     <span style="color: #5a4415" class="language_replace">Register</span>
                                 </button>
-                                <button class="btn guestBtn" type="button" value="GUEST LOGIN" onClick="btnLoginGuest()">
+                                <button class="btn guestBtn" type="button" value="GUEST LOGIN" onclick="btnLoginGuest()">
                                     <span class="language_replace">GUEST LOGIN</span>
                                 </button>
                                 <!--div class="btn btn--mt">

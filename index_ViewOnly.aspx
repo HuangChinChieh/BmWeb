@@ -35,6 +35,11 @@
         {
             IsChina = true;
         }
+        else if (GC.GeoCountry == "PH") {
+            Response.Redirect("IPDenied.html");
+            Response.Flush();
+            Response.End();
+        }
         //Response.Write(GC.GeoCountry)
     }
 
@@ -565,7 +570,7 @@
         </div>
         <!-- banner// -->
         <!-- step -->
-        <div class="container__step flex">
+      <%--  <div class="container__step flex">
             <dl class="step">
                 <dt class="step__dt flex">
                     <span class="num">01</span>
@@ -611,7 +616,7 @@
                 <dd class="step__dd language_replace">Upon completion of the game of traditional phone betting,the phone better will go to cage and make settlement for the VIPs.If Players are playing easybet,they can just leave the website straightly without noticing us.
                 </dd>
             </dl>
-        </div>
+        </div>--%>
         <!-- step// -->
         <!-- contact -->
         <!--div class="container__contact contact flex">
@@ -624,12 +629,12 @@
             </dl>
         </div-->
         <!-- contact// -->
-        <div class="container__ft">
+        <div class="container__ft" style="height:calc(100vh - 800px)">
             <a class="popup1" id="popup1" onclick="termsDivSwitch()" href="#popup1"><span class="language_replace">Terms of Member Responsibilities</span></a>
         </div>
     </div>
     <!-- container// -->
-    <div id="Terms-popup1" class="TermsDiv">
+   <%-- <div id="Terms-popup1" class="TermsDiv">
         <div class="white-popup" style="max-width: 1200px; color: #272727;">
             <h3 style="font-weight: bolder; margin-bottom: 10px;"><span class="language_replace">As a lawful internet gaming institution, our Company has the responsibility to remind all potential players to pay attention to the relevant laws and regulations of the countries or the regions of residence.</span></h3>
             <ul>
@@ -650,7 +655,7 @@
             </ul>
 
         </div>
-    </div>
+    </div>--%>
 
 
     <!-- 跳出確認框 -->
