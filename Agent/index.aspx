@@ -560,23 +560,6 @@
                 if (o.ResultState == 0) {
                     EWinInfo.UserInfo = o;
 
-                    if (EWinInfo.UserInfo.WalletList) {
-                        var removeArray = [];
-
-                        for (var i = 0; i < EWinInfo.UserInfo.WalletList.length; i++) {
-                            //if (EWinInfo.UserInfo.WalletList[i].PointState == 1 ) {
-                            //    removeArray.push(i);
-                            //}
-                            if (EWinInfo.CompanyInfo.DefaultCurrencyType != EWinInfo.UserInfo.WalletList[i].CurrencyType) {
-                                removeArray.push(i);
-                            }
-                        }
-
-                        for (var i = 0; i < removeArray.length; i++) {
-                            EWinInfo.UserInfo.WalletList.splice(removeArray[i], 1);
-                        }
-                    }
-
                     if (o.RequireWithdrawalCount > 0) {
                         //LastRequireWithdrawalID = 1;
                         if (LastRequireWithdrawalID != o.LastRequireWithdrawalID) {
@@ -620,21 +603,6 @@
                     if (firstLoad == true) {
                         firstLoad = false;
 
-                        //確認是否有區塊鏈錢包
-                        if (o.WalletList) {
-                            if (o.WalletList.length > 0) {
-                                for (var i = 0; i < o.WalletList.length; i++) {
-                                    if (o.WalletList[i].PointState == 0 && o.WalletList[i].ValueType == 2) {
-                                        hasCryptoWallet = true;
-                                        document.getElementById("idCryptoWallet").style.display = "";
-                                        //document.getElementById("idCryptoWalletReport").style.display = "";
-
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-
                         //是否顯示推廣碼
                         switch (EWinInfo.UserInfo.UserAccountType) {
                             case 0:
@@ -674,14 +642,15 @@
 
                         //確認是否為代理或股東
                         if (EWinInfo.UserInfo.UserAccountType == 1 || EWinInfo.UserInfo.UserAccountType == 2) {
-                            if (document.getElementById("idCreateAccount")) {
-                                if (EWinInfo.CompanyInfo.AgentCreateAccount == 1 || EWinInfo.CompanyInfo.AgentCreateAccount == 3) {
-                                    if (document.getElementById("idCreateAccount")) {
-                                        document.getElementById("idCreateAccount").style.display = "";
-                                        CreateAccount = true;
-                                    }
-                                }
-                            }
+                            //新增下線功能 暫時移除
+                            //if (document.getElementById("idCreateAccount")) {
+                            //    if (EWinInfo.CompanyInfo.AgentCreateAccount == 1 || EWinInfo.CompanyInfo.AgentCreateAccount == 3) {
+                            //        if (document.getElementById("idCreateAccount")) {
+                            //            document.getElementById("idCreateAccount").style.display = "";
+                            //            CreateAccount = true;
+                            //        }
+                            //    }
+                            //}
 
                             if (document.getElementById("idUserAccountAgent")) {
                                 document.getElementById("idUserAccountAgent").style.display = "";
@@ -1048,12 +1017,12 @@
                                             <i class="icon icon-mask icon-ewin-assisant"></i>
                                             <span class="language_replace">會員投注數據</span></a>
                                     </li>
-                                    <li class="nav-item submenu dropdown">
+                                    <li class="nav-item submenu dropdown" style="display:none">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('團隊出入金數據'), 'GetAgentTotalDepositeSummary_Casino.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-assisant"></i>
                                             <span class="language_replace">團隊出入金數據</span></a>
                                     </li>
-                                    <li class="nav-item submenu dropdown">
+                                    <li class="nav-item submenu dropdown" style="display:none">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('會員出入金數據'), 'GetPlayerTotalDepositSummary_Casino.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-assisant"></i>
                                             <span class="language_replace">會員出入金數據</span></a>

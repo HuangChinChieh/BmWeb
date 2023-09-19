@@ -28,6 +28,25 @@
     <link rel="stylesheet" href="css/main2.css?<%:AgentVersion%>">
     <link rel="stylesheet" href="css/login.css?<%:AgentVersion%>">
 </head>
+    <style type="text/css">
+        
+    .langSel_container {
+         /*margin: 0px 35px 15px 35px;
+       background-color: rgba(8, 7, 6, 0.8);*/
+        border: 1px solid #d9c38f;
+    }
+
+    .langSel {
+        width: 100%;
+        background-color: transparent;
+        color: white;
+    }
+
+        .langSel option {
+            background-color: rgba(8, 7, 6, 0.8);
+            border: 1px solid #d9c38f;
+        }
+    </style>
 <script src="/Scripts/Common.js"></script>
 <script src="/Scripts/bignumber.min.js"></script>
 <script src="/Scripts/Math.uuid.js"></script>
@@ -320,6 +339,13 @@
     }
     //#endregion
 
+    function langSelChange(e) {
+        var sel = e.currentTarget;
+        var lang = sel.value;
+
+        setLanguage(lang);
+    }
+
     function init() {
         var idCompanyCode = document.getElementById("idCompanyCode");
         var langTmp;
@@ -436,7 +462,7 @@
         <div class="container loginWrapper">
             <section class="login__brand">
                 <div class="heading-login text-center">
-                    <span class="language_replace" onclick="showCompanyCode()">Lucky Sprite</span>
+                    <span class="language_replace" onclick="showCompanyCode()">BM</span>
                 </div>
                 <!-- <div class="login__qrcode"><span class="qrcode"></span></div> -->
                 <%if (EWinWeb.IsTestSite == true) { %>
@@ -460,9 +486,9 @@
                             <label class="custom-control-label" for="rdoLoginType1"><span class="language_replace">助手登入</span></label>
                         </div>
                     </div>
-                    <div class="form-group form-group-lang">
-                        <p><span class="language_replace">語系</span></p>
-                        <div class="custom-control custom-radio-lang custom-control-inline" onclick="setLanguage('CHS')" style="display: none">
+                    <div class="form-group form-group-lang" style="align-self:center">
+                          <%--<p><span class="language_replace" style="font-size:16px">語系</span></p>
+                      <div class="custom-control custom-radio-lang custom-control-inline" onclick="setLanguage('CHS')" style="display: none">
                             <input type="radio" id="lang1" name="lang" class="custom-control-input-hidden" value="CHS">
                             <label class="custom-control-label-lang ico-before-cn" for="lang1">
                                 <span
@@ -479,6 +505,15 @@
                             <label class="custom-control-label-lang ico-before-en" for="lang3">
                                 <span
                                     class="language_replace">english</span></label>
+                        </div>--%>
+                        <div class="langSel_container" style="height:100%;">
+                            <select id="idlangSel" class="langSel" onchange="langSelChange(event)" style="height:100%;width:100%;font-size:20px;padding:5px">
+                                <option value="ENG">English</option>
+                                <option value="CHS">简体中文</option>
+                                <option value="JPN">日本語</option>
+                                <option value="KOR">한국어</option>
+                                <option value="CHT">繁體中文</option>
+                            </select>
                         </div>
                     </div>
                 </div>
