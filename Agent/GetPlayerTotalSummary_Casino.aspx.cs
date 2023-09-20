@@ -24,7 +24,7 @@ public partial class GetPlayerTotalSummary_Casino : System.Web.UI.Page
         int ExpireTimeoutSeconds = 0;
         int TotalPage = 0;
 
-        //strRedisData = RedisCache.Agent.GetPlayerTotalSummaryInfoByLoginAccount(LoginAccount, QueryBeginDate.ToString("yyyy-MM-dd"), QueryEndDate.ToString("yyyy-MM-dd"), CurrencyType);
+        strRedisData = RedisCache.Agent.GetPlayerTotalSummaryInfoByLoginAccount(LoginAccount, QueryBeginDate.ToString("yyyy-MM-dd"), QueryEndDate.ToString("yyyy-MM-dd"), CurrencyType);
 
         if (string.IsNullOrEmpty(strRedisData))
         {
@@ -58,7 +58,7 @@ public partial class GetPlayerTotalSummary_Casino : System.Web.UI.Page
                         RetValue.HasNextPage = false;
                     }
 
-                    //RedisCache.Agent.UpdatePlayerTotalSummaryByLoginAccount(JsonConvert.SerializeObject(redisSaveData), LoginAccount, QueryBeginDate.ToString("yyyy-MM-dd"), QueryEndDate.ToString("yyyy-MM-dd"), CurrencyType);
+                    RedisCache.Agent.UpdatePlayerTotalSummaryByLoginAccount(JsonConvert.SerializeObject(redisSaveData), LoginAccount, QueryBeginDate.ToString("yyyy-MM-dd"), QueryEndDate.ToString("yyyy-MM-dd"), CurrencyType);
                 }
             }
 
