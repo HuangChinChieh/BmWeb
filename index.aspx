@@ -17,8 +17,8 @@
     string isModify = "0";
     string[] stringSeparators = new string[] { "&&_" };
     string[] Separators;
-
-
+    string ViVerify;
+    string UnixTimeStamp;
 
 
     GC = API.GetGeoCode(UserIP);
@@ -160,6 +160,9 @@
     {
         Lang = Request["Lang"];
     }
+
+    UnixTimeStamp = CodingControl.GetUnixTimestamp(DateTime.Now, CodingControl.enumUnixTimestampType.Seconds).ToString();
+    ViVerify = UnixTimeStamp + "-" + HttpUtility.UrlEncode(CodingControl.GetSHA256("/ValidateImage.aspx" + UnixTimeStamp));
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -209,6 +212,7 @@
     var Lang = "<%=Lang%>";
     var qr = new QCodeDecoder();
     var hasBulletin = <%=(string.IsNullOrEmpty(Bulletin) ? "false" : "true")%>;
+   
 
     function btnLoginGuest() {
         document.forms[0].GuestLogin.value = "1";
@@ -224,13 +228,17 @@
 
     function createValidateImage() {
         var iGUID;
+        var viVerify;
         var iURL;
         var ValidateImage = document.getElementById("ValidateImage");
 
+        viVerify = "<%=ViVerify%>";
         iGUID = "<%=LoginGUID%>";
         document.forms[0].LoginGUID.value = iGUID;
 
-        iURL = "ValidateImage.aspx?LoginGUID=" + iGUID;
+        iURL = "ValidateImage.aspx?verify=" + viVerify + "&LoginGUID=" + iGUID;
+
+
 
         ValidateImage.src = iURL;
         ValidateImage.style.display = "inline";
