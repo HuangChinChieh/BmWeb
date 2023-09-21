@@ -12,9 +12,47 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Web;
 using System.Web.UI;
+using System.Security.Cryptography;
 
 public class CodingControl
 {
+    public static bool CheckIPInCIDR(string CIDR, string IPToCheck)
+    {
+        string[] parts = CIDR.Split('/');
+        System.Net.IPAddress ip = System.Net.IPAddress.Parse(parts[0]);
+        int prefixLength = Convert.ToInt32(parts[1]);
+
+        byte[] ipBytes = ip.GetAddressBytes();
+        byte[] ipToCheckBytes = System.Net.IPAddress.Parse(IPToCheck).GetAddressBytes();
+
+        if (ipBytes.Length != ipToCheckBytes.Length)
+        {
+            return false; // IPv4 and IPv6 addresses are not compatible
+        }
+
+        int byteCount = prefixLength / 8;
+        int remainingBits = prefixLength % 8;
+
+        for (int i = 0; i < byteCount; i++)
+        {
+            if (ipBytes[i] != ipToCheckBytes[i])
+            {
+                return false;
+            }
+        }
+
+        if (remainingBits > 0)
+        {
+            int mask = (byte)(255 << (8 - remainingBits));
+            if ((ipBytes[byteCount] & mask) != (ipToCheckBytes[byteCount] & mask))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public enum enumUnixTimestampType
     {
         Seconds = 0,
@@ -696,6 +734,42 @@ public class CodingControl
             }
         }
 
+
+        return RetValue.ToString();
+    }
+
+
+    public static string GetHMACSHA256(string data, string key, bool Base64Encoding = true)
+    {
+        return GetHMACSHA256(System.Text.Encoding.UTF8.GetBytes(data), System.Text.Encoding.UTF8.GetBytes(key), Base64Encoding);
+    }
+
+    public static string GetHMACSHA256(byte[] data, byte[] key, bool Base64Encoding = true)
+    {
+        var encoding = new System.Text.UTF8Encoding();
+        System.Text.StringBuilder RetValue = new System.Text.StringBuilder();
+
+        using (var hmacSHA256 = new HMACSHA256(key))
+        {
+            byte[] hash = hmacSHA256.ComputeHash(data);
+
+            if (Base64Encoding)
+            {
+                RetValue.Append(System.Convert.ToBase64String(hash));
+            }
+            else
+            {
+                foreach (byte EachByte in hash)
+                {
+                    string ByteStr = EachByte.ToString("x");
+
+                    ByteStr = new string('0', 2 - ByteStr.Length) + ByteStr;
+                    RetValue.Append(ByteStr);
+                }
+            }
+
+            hmacSHA256.Dispose();
+        }
 
         return RetValue.ToString();
     }

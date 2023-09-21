@@ -37,17 +37,29 @@
         }
         else if (GC.GeoCountry == "PH")
         {
-            string[] ipList = new string[] {
-                "103.151.28.225",
-                "103.151.28.226",
-                "103.151.28.227",
-                "103.151.28.228",
-                "103.151.28.229",
-                "103.151.28.230",
-                "103.151.28.231"
+            bool isAllowIP = false;
+
+            string[] CIDRList = new string[] {
+                "103.151.28.225/29",
+                "111.90.176.25/29",
+                "202.178.118.255",
+                "103.151.28.224/29",
+                "103.151.28.112/29",
+                "103.151.28.160/29",
+                "210.213.88.66",
+                "103.176.207.80/29"
             };
 
-            if (!ipList.Contains(UserIP))
+            foreach (var cidr in CIDRList)
+            {
+                if (CodingControl.CheckIPInCIDR(cidr, UserIP))
+                {
+                    isAllowIP = true;
+                    break;
+                }
+            }
+
+            if (isAllowIP == false)
             {
                 Response.Redirect("IPDenied.html");
                 Response.Flush();
@@ -162,7 +174,7 @@
     }
 
     UnixTimeStamp = CodingControl.GetUnixTimestamp(DateTime.Now, CodingControl.enumUnixTimestampType.Seconds).ToString();
-    ViVerify = UnixTimeStamp + "-" + HttpUtility.UrlEncode(CodingControl.GetSHA256("/ValidateImage.aspx" + UnixTimeStamp));
+    ViVerify = UnixTimeStamp + "-" + HttpUtility.UrlEncode(CodingControl.GetHMACSHA256("/ValidateImage.aspx" + UnixTimeStamp, "EWin"));
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -212,7 +224,7 @@
     var Lang = "<%=Lang%>";
     var qr = new QCodeDecoder();
     var hasBulletin = <%=(string.IsNullOrEmpty(Bulletin) ? "false" : "true")%>;
-   
+
 
     function btnLoginGuest() {
         document.forms[0].GuestLogin.value = "1";
