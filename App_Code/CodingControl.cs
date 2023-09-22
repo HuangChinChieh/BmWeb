@@ -18,12 +18,30 @@ public class CodingControl
 {
     public static bool CheckIPInCIDR(string CIDR, string IPToCheck)
     {
-        string[] parts = CIDR.Split('/');
-        System.Net.IPAddress ip = System.Net.IPAddress.Parse(parts[0]);
-        int prefixLength = Convert.ToInt32(parts[1]);
+        string[] parts;
+        System.Net.IPAddress ip;
+        int prefixLength;
+        byte[] ipBytes;
+        byte[] ipToCheckBytes;
 
-        byte[] ipBytes = ip.GetAddressBytes();
-        byte[] ipToCheckBytes = System.Net.IPAddress.Parse(IPToCheck).GetAddressBytes();
+        if (CIDR.IndexOf('/') != -1)
+        {
+            parts = CIDR.Split('/');
+
+            ip = System.Net.IPAddress.Parse(parts[0]);
+            prefixLength = Convert.ToInt32(parts[1]);
+        }
+        else
+        {
+            ip = System.Net.IPAddress.Parse(CIDR);
+            if (ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetworkV6)
+                prefixLength = 128;
+            else
+                prefixLength = 32;
+        }
+
+        ipBytes = ip.GetAddressBytes();
+        ipToCheckBytes = System.Net.IPAddress.Parse(IPToCheck).GetAddressBytes();
 
         if (ipBytes.Length != ipToCheckBytes.Length)
         {

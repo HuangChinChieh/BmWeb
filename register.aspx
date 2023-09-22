@@ -58,6 +58,7 @@
 
 
         isPhoneCheck = false;
+        //document.getElementById("idGroupSendPhoneCode").style.display = "none";
         hideDeniedText("idPhoneNumberDenied");
         if ((idPhonePrefix.selectedIndex != -1) && (idPhoneNumber.value != "")) {
             var phoneValue = idPhonePrefix.value + idPhoneNumber.value;
@@ -78,6 +79,7 @@
                             } else {
                                 hideDeniedText("idPhoneNumberDenied");
                                 isPhoneCheck = true;
+                                //document.getElementById("idGroupSendPhoneCode").style.display = "block";
                             }
                         }
                     });
@@ -536,10 +538,18 @@
         idMessageBox.style.display = "block";
     }
 
+    function initLiveChat() {
+        window.__lc = window.__lc || {};
+        window.__lc.license = 16181706;
+        ; (function (n, t, c) { function i(n) { return e._h ? e._h.apply(null, n) : e._q.push(n) } var e = { _q: [], _h: null, _v: "2.0", on: function () { i(["on", c.call(arguments)]) }, once: function () { i(["once", c.call(arguments)]) }, off: function () { i(["off", c.call(arguments)]) }, get: function () { if (!e._h) throw new Error("[LiveChatWidget] You can't use getters before load."); return i(["get", c.call(arguments)]) }, call: function () { i(["call", c.call(arguments)]) }, init: function () { var n = t.createElement("script"); n.async = !0, n.type = "text/javascript", n.src = "https://cdn.livechatinc.com/tracking.js", t.head.appendChild(n) } }; !n.__lc.asyncInit && e.init(), n.LiveChatWidget = n.LiveChatWidget || e }(window, document, [].slice))
+
+    }
+
     function init() {
         lang = localStorage.getItem("Lang");
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
+            initLiveChat();
             p = new LobbyAPI("/API/LobbyAPI.asmx");
             updateBaseInfo();
         });
@@ -595,10 +605,10 @@
                                 </select>
                             </div>
                             <!-- 檢查正確請加上"checked" 檢查未通過請加上"denied" -->
-                            <input id="idPhoneNumber" type="text" language_replace="placeholder"  placeholder="輸入電話" name="UserPhoneNo" onblur="CheckAccountPhoneExist()">
+                            <input id="idPhoneNumber" type="text" language_replace="placeholder"  placeholder="輸入電話" name="UserPhoneNo" onkeyup="CheckAccountPhoneExist()" >
                             <div id="idPhoneNumberDenied" class="popup_notice" style="display: none"><i class="fa fa-info-circle"></i><span class="language_replace">電話已存在</span></div>
                         </div>
-                        <div>
+                        <div id="idGroupSendPhoneCode">
                             <div id="idBtnSendPhoneCode" class="popupBtn_red" onclick="onBtnPhoneCode()"><span class="language_replace">發送驗證碼</span></div>
                             <div id="idBtnSendPhoneCodeText" class="popupBtn_gray" style="display: none"><span class="language_replace">可於</span><span id="idBtnSendPhoneCodeTextSeconds">60</span><span class="language_replace">秒後再次發送</span></div>
                             <input id="idPhoneCode" type="password" class="" language_replace="placeholder" placeholder="輸入簡訊驗證碼" name="text">
