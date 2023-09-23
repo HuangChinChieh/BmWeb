@@ -327,30 +327,47 @@ public class LobbyAPI : System.Web.Services.WebService
     {
         EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
         EWin.Lobby.ValidateCodeResult validateCodeResult;
+        TelPhoneNormalize TN = new TelPhoneNormalize(PhonePrefix, PhoneNumber);
 
-        validateCodeResult     = lobbyAPI.SetValidateCodeOnlyNumber(GetToken(), GUID, EWin.Lobby.enumValidateType.PhoneNumber, string.Empty, PhonePrefix, PhoneNumber);
-
-        if (validateCodeResult.Result == EWin.Lobby.enumResult.OK)
+        if (TN.PhoneIsValid)
         {
-            string smsContent = "Your BM OTP code is " + validateCodeResult.ValidateCode;
-            EWin.Lobby.APIResult smsResult;
+            validateCodeResult = lobbyAPI.SetValidateCodeOnlyNumber(GetToken(), GUID, EWin.Lobby.enumValidateType.PhoneNumber, string.Empty, PhonePrefix, PhoneNumber);
 
-            smsResult = lobbyAPI.SendSMS(GetToken(), GUID, "0", 0, "BM", PhonePrefix + PhoneNumber, smsContent);
+            if (validateCodeResult.Result == EWin.Lobby.enumResult.OK)
+            {
+                string smsContent = "Your BM OTP code is " + validateCodeResult.ValidateCode;
+                EWin.Lobby.APIResult smsResult;
 
-            if (smsResult.Result == EWin.Lobby.enumResult.OK)
+
+                smsResult = lobbyAPI.SendSMS(GetToken(), GUID, "0", 0, "BM", TN.ToString(), smsContent);
+
+                if (smsResult.Result == EWin.Lobby.enumResult.OK)
+                {
+                    return validateCodeResult;
+                }
+                else
+                {
+                    return new EWin.Lobby.ValidateCodeResult()
+                    {
+                        Result = EWin.Lobby.enumResult.ERR,
+                        Message = "Send Failed, Please contact customer service."
+                    };
+                }
+            }
+            else
             {
                 return validateCodeResult;
             }
-            else {
-                return new EWin.Lobby.ValidateCodeResult() { 
-                    Result = EWin.Lobby.enumResult.ERR,
-                    Message = "Send Failed, Please contact customer service."
-                } ;
-            }
         }
-        else {
-            return validateCodeResult;
+        else
+        {
+            return new EWin.Lobby.ValidateCodeResult()
+            {
+                Result = EWin.Lobby.enumResult.ERR,
+                Message = "Send Failed, Please Check PhoneNumber."
+            };
         }
+
     }
 
     [WebMethod]
@@ -358,7 +375,7 @@ public class LobbyAPI : System.Web.Services.WebService
     public EWin.Lobby.APIResult CheckValidateCodeOnlyNumber(string GUID, string PhonePrefix, string PhoneNumber, string ValidateCode)
     {
         EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
-        return lobbyAPI.CheckValidateCode(GetToken(), GUID,  EWin.Lobby.enumValidateType.PhoneNumber, string.Empty, PhonePrefix, PhoneNumber, ValidateCode);
+        return lobbyAPI.CheckValidateCode(GetToken(), GUID, EWin.Lobby.enumValidateType.PhoneNumber, string.Empty, PhonePrefix, PhoneNumber, ValidateCode);
     }
 
     [WebMethod]
@@ -377,12 +394,13 @@ public class LobbyAPI : System.Web.Services.WebService
             if (!EWinWeb.IsTestSite)
                 PCode = "S62315629550625";
         }
-        else {
+        else
+        {
             PCode = ParentPersonCode;
         }
 
 
-        R = lobbyAPI.CreateAccount(GetToken(), GUID, LoginAccount, LoginPassword, PCode, EWinWeb.MainCurrencyType, PS);
+        R = lobbyAPI.CreateAccount(GetToken(), GUID, LoginAccount, LoginPassword, PCode, EWinWeb.RegisterCurrencyType, PS);
 
         return R;
     }
