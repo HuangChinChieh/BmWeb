@@ -17,6 +17,7 @@ public static class EWinWeb {
     public static string APIKey = System.Configuration.ConfigurationManager.AppSettings["Key"];
     public static string PrivateKey = System.Configuration.ConfigurationManager.AppSettings["PrivateKey"];
     public static string CompanyCode = System.Configuration.ConfigurationManager.AppSettings["CompanyCode"];
+    public static string WebUrl = System.Configuration.ConfigurationManager.AppSettings["WebUrl"];
     public static string EWinUrl = System.Configuration.ConfigurationManager.AppSettings["EWinUrl"];
     public static string ImageUrl = System.Configuration.ConfigurationManager.AppSettings["ImageUrl"];
     public static string EWinAgentUrl = System.Configuration.ConfigurationManager.AppSettings["EWinAgentUrl"];
@@ -96,6 +97,36 @@ public static class EWinWeb {
         }
 
         return RetValue.ToString();
+    }
+
+    public static dynamic DecodeClientToken(string CT)
+    {
+        dynamic RetValue = null;
+        byte[] Content = null;
+
+        if (string.IsNullOrEmpty(CT) == false)
+        {
+            if (CT.Length >= 2)
+            {
+                if (CT.Substring(0, 2) == "--")
+                {
+                    Content = CodingControl.AESDecrypt(CT.Substring(2), Key3DES);
+                    if (Content != null)
+                    {
+                        string TextContent;
+
+                        TextContent = System.Text.Encoding.UTF8.GetString(Content);
+                        if (string.IsNullOrEmpty(TextContent) == false)
+                        {
+                            try { RetValue = Newtonsoft.Json.JsonConvert.DeserializeObject(TextContent); }
+                            catch (Exception ex) { }
+                        }
+                    }
+                }
+            }
+        }
+
+        return RetValue;
     }
 
     public static StackExchange.Redis.IDatabase GetRedisClient(int db = -1) {

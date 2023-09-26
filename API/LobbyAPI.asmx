@@ -43,6 +43,7 @@ public class LobbyAPI : System.Web.Services.WebService
 
 
 
+
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public EWin.Lobby.APIResult UserAccountTransfer(string WebSID, string GUID, string DstLoginAccount, string DstCurrencyType, string SrcCurrencyType, decimal TransOutValue, string WalletPassword, string Description)
@@ -339,7 +340,7 @@ public class LobbyAPI : System.Web.Services.WebService
                 EWin.Lobby.APIResult smsResult;
 
 
-                smsResult = lobbyAPI.SendSMS(GetToken(), GUID, "0", 0, "BM", TN.ToString(), smsContent);
+                smsResult = lobbyAPI.SendSMS(GetToken(), GUID, "0", 0, "BMBM888", TN.ToString(), smsContent);
 
                 if (smsResult.Result == EWin.Lobby.enumResult.OK)
                 {
@@ -501,6 +502,43 @@ public class LobbyAPI : System.Web.Services.WebService
             };
             return R;
         }
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public EWin.Lobby.APIResult KeepSIDByProduct(string CT, string GUID)
+    {
+        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+        EWin.Lobby.APIResult R = new EWin.Lobby.APIResult();
+
+        if (string.IsNullOrEmpty(CT) == false)
+        {
+            string SID = "";
+            try
+            {
+                SID = EWinWeb.DecodeClientToken(CT).SID;
+            }
+            catch (Exception)
+            {
+
+            }
+
+            if (string.IsNullOrEmpty(SID) == false)
+            {
+                    R = lobbyAPI.KeepSID(GetToken(), SID, GUID);
+            }
+            else { 
+                  R.Result = EWin.Lobby.enumResult.ERR;
+                }
+            
+        }
+        else
+        {
+            R.Result = EWin.Lobby.enumResult.ERR;
+        }
+
+
+        return R;
     }
 
     private string GetToken()
