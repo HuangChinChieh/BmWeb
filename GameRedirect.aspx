@@ -62,7 +62,11 @@
                 }
                 else if (SelectGameBrand == "PMPE")
                 {
-                    Response.Redirect(EWinWeb.EWinUrl + "/API/GamePlatformAPI2/UserLogin.aspx?SID=" + SID + "&Language=" + Lang + "&CurrencyType=" + CurrencyType + "&GameCode=" + "Sport" + "&HomeUrl=" + HttpUtility.UrlEncode(EWinWeb.WebUrl) + "&DemoPlay=0" + "&InvalidGameCodeAccessUrl=" + HttpUtility.UrlEncode(EWinWeb.WebUrl + "/InvalidGameCodeAccess.aspx"));
+                    Response.Redirect(EWinWeb.EWinUrl + "/API/GamePlatformAPI2/UserLogin.aspx?SID=" + SID + "&Language=" + Lang + "&CurrencyType=" + CurrencyType + "&GameCode=" + "PMPE.Sport" + "&HomeUrl=" + HttpUtility.UrlEncode(EWinWeb.WebUrl) + "&DemoPlay=0" + "&InvalidGameCodeAccessUrl=" + HttpUtility.UrlEncode(EWinWeb.WebUrl + "/InvalidGameCodeAccess.aspx"));
+                }
+                 else if (SelectGameBrand == "PMEG")
+                {
+                    Response.Redirect(EWinWeb.EWinUrl + "/API/GamePlatformAPI2/UserLogin.aspx?SID=" + SID + "&Language=" + Lang + "&CurrencyType=" + CurrencyType + "&GameCode=" + "PMEG.eSport" + "&HomeUrl=" + HttpUtility.UrlEncode(EWinWeb.WebUrl) + "&DemoPlay=0" + "&InvalidGameCodeAccessUrl=" + HttpUtility.UrlEncode(EWinWeb.WebUrl + "/InvalidGameCodeAccess.aspx"));
                 }
                 else
                 {

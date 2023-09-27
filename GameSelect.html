@@ -5,93 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        .page {
-            position: relative;
-            width: 414px;
-            height: 896px;
-            overflow: hidden;
-        }
-
-        .block_1 {
-            background-color: rgba(10, 10, 8, 1);
-            width: 414px;
-            justify-content: flex-center;
-            padding: 8px 15px 7px 15px;
-        }
-
-        .text_1 {
-            overflow-wrap: break-word;
-            color: rgba(229, 229, 229, 1);
-            font-size: 16px;
-            font-family: Helvetica;
-            font-weight: NaN;
-            text-align: left;
-            white-space: nowrap;
-            line-height: 20px;
-        }
-
-        .thumbnail_1 {
-            width: 14px;
-            height: 13px;
-            margin: 1px 0 6px 275px;
-        }
-
-        .thumbnail_2 {
-            width: 15px;
-            height: 11px;
-            margin: 3px 0 6px 11px;
-        }
-
-        .thumbnail_3 {
-            width: 15px;
-            height: 9px;
-            border: 0.672px solid rgba(229, 229, 229, 1);
-            margin: 5px 0 6px 11px;
-        }
-
-        .image-wrapper_1 {
-            background: url(images/GameSelect/BackGround.png) 100% no-repeat;
-            background-size: 100% 100%;
-            padding: 88px 0 0 58px;
-        }
-
-        .image_1 {
-            width: 258px;
-            height: 150px;
-            margin: 0 78px 0 20px;
-        }
-
-        .image_2 {
-            width: 298px;
-            height: 75px;
-            margin: 99px 58px 0 0;
-        }
-
-        .image_3 {
-            width: 294px;
-            height: 75px;
-            margin: 17px 59px 0 3px;
-        }
-
-        .image_4 {
-            width: 172px;
-            height: 117px;
-            margin: 240px 0 0 184px;
-        }
-
-        body * {
-            box-sizing: border-box;
-            flex-shrink: 0;
-        }
-
-        body {
-            font-family: PingFangSC-Regular, Roboto, Helvetica Neue, Helvetica, Tahoma, Arial, PingFang SC-Light, Microsoft YaHei;
-        }
-
-        input {
-            background-color: transparent;
-            border: 0;
-        }
 
         button {
             margin: 0;
@@ -101,83 +14,28 @@
             background-color: transparent;
         }
 
-            button:active {
-                opacity: 0.6;
-            }
-
-        .flex-col {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .flex-row {
-            display: flex;
-            flex-direction: row;
-        }
-
-        .justify-start {
-            display: flex;
-            justify-content: flex-start;
-        }
-
-        .justify-center {
-            display: flex;
-            justify-content: center;
-        }
-
-        .justify-end {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .justify-evenly {
-            display: flex;
-            justify-content: space-evenly;
-        }
-
-        .justify-around {
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .justify-between {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .align-start {
-            display: flex;
-            align-items: flex-start;
-        }
-
-        .align-center {
-            display: flex;
-            align-items: center;
-        }
-
-        .align-end {
-            display: flex;
-            align-items: flex-end;
-        }
+    
     </style>
 </head>
-<body style="background-color: rgb(3 15 36);">
-    <div class="page flex-col" style="margin:0 auto">
-        <div class="image-wrapper_1 flex-col">
+<body style="background-color: rgb(3 15 36);margin:0px">
+    <div class="page flex-col" style="width: 100%;height: 100vh ;background: url(images/banner.jpg) 100% repeat;
+        background-size: 100% 100%;">
+        <div class="image-wrapper_1 flex-col" style="width:600px;height:100vh;margin: auto;background-color: rgba(8, 7, 6, 0.8);padding:0px 60px;">
             <img class="image_1"
                  referrerpolicy="no-referrer"
-                 src="images/GameSelect/SketchPng1e50c386bef02606b0d560902de0485afbe0fc35b797d8ca3c90b8605aa264cc.png" />
-            <img class="image_2"
-                 referrerpolicy="no-referrer"
-                 src="images/GameSelect/SketchPng25ac45e4fbc24be50e06af860004507c51aa09dd0dbd69b1d8244230a352d5e4.png"
-                 style="cursor:pointer" />
-            <img class="image_3"
-                 referrerpolicy="no-referrer"
-                 src="images/GameSelect/SketchPngb869ae68df8c788d7728ed0b2d3a9057fb580775a062205c8bf9198bf87966ff.png"
-                 style="cursor:pointer" />
-            <img class="image_4"
-                 referrerpolicy="no-referrer"
-                 src="images/GameSelect/SketchPng9a9d7e2a0ab922d2db0d9bd1f2eaf1f42d1860f672ffb231120ba6b7db588545.png" />
+                 style="width:240px;height:240px;margin: 30px 180px 40px 180px;"
+                 src="images/logo_1024.png" />
+            <div style=" height: calc(100vh - 310px); display: flex; flex-direction: column; flex-wrap: nowrap; justify-content: flex-start; align-items: center;">
+                <div onclick="clickEntryGame('BM')" style="background: url(images/btn-back-gray.png) no-repeat;width: 300px;height: 75px;margin-bottom:30px">
+                    <button style="width: 200px; font-size: 40px;line-height:55px; cursor:pointer;color: #322b28;font-family: Georgia; margin: 10px 50px; ">BM Live</button>
+                </div>
+                <div onclick="clickEntryGame('PMPE')" style="background: url(images/btn-back-black.png) no-repeat;width: 300px;height: 75px; margin-bottom:30px">
+                    <button style="width: 200px; font-size: 40px;line-height:55px; cursor:pointer; color: #fcfcfc;font-family: Georgia; margin: 10px 50px; ">BM Sport</button>
+                </div>
+                <div onclick="clickEntryGame('PMEG')" style="background: url(images/btn-back-gray.png) no-repeat;width: 300px;height: 75px; margin-bottom:30px">
+                    <button style="width: 200px; font-size: 40px;line-height:55px; cursor:pointer;color: #322b28;font-family: Georgia; margin: 10px 50px; ">BM eSport</button>
+                </div>
+            </div>
         </div>
     </div>
 </body>
@@ -192,7 +50,7 @@
     var p;
 
     function clickEntryGame(brand) {
-        var Url = "GameRedirect.aspx?CT=" + CT + "&SID=" + SID + "&Currency=" + "CNY";
+        var Url = "GameRedirect.aspx?CT=" + encodeURIComponent(CT) + "&SelectGameBrand=" + brand + "&CurrencyType=" + "CNY";
 
         if (Lang) {
             Url += "&Lang=" + Lang;
