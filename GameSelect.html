@@ -14,7 +14,65 @@
             background-color: transparent;
         }
 
-    
+        .containerBrand {
+            height: calc(100vh - 370px);
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .brand:nth-child(odd) {
+            background: url(images/btn-back-gray.png) no-repeat;
+        }
+
+            .brand:nth-child(odd) > button {
+                color: #322b28;
+            }
+
+        .brand:nth-child(even) {
+            background: url(images/btn-back-black.png) no-repeat;
+        }
+
+            .brand:nth-child(even) > button {
+                color: #fcfcfc;
+            }
+
+        .brand {          
+            width: 300px;
+            height: 75px;
+            margin-bottom: 50px
+        }
+
+            .brand:hover {
+                transform: scale(1.10);
+                animation: brandFocus 4s linear infinite;
+            }
+
+            .brand > button {
+                width: 200px;
+                font-size: 32px;
+                line-height: 55px;
+                cursor: pointer;
+                font-family: Georgia;
+                margin: 10px 50px;
+            }
+
+        @keyframes brandFocus {
+            0% {
+                filter: contrast(0.5);
+            }
+
+            50% {
+                filter: contrast(1.0);
+            }
+
+            100% {
+                filter: contrast(0.5);
+            }
+        }
+
     </style>
 </head>
 <body style="background-color: rgb(3 15 36);margin:0px">
@@ -23,17 +81,17 @@
         <div class="image-wrapper_1 flex-col" style="width:600px;height:100vh;margin: auto;background-color: rgba(8, 7, 6, 0.8);padding:0px 60px;">
             <img class="image_1"
                  referrerpolicy="no-referrer"
-                 style="width:240px;height:240px;margin: 30px 180px 40px 180px;"
+                 style="width:300px;height:300px;margin: 30px 150px 40px 150px;"
                  src="images/logo_1024.png" />
-            <div style=" height: calc(100vh - 310px); display: flex; flex-direction: column; flex-wrap: nowrap; justify-content: flex-start; align-items: center;">
-                <div onclick="clickEntryGame('BM')" style="background: url(images/btn-back-gray.png) no-repeat;width: 300px;height: 75px;margin-bottom:30px">
-                    <button style="width: 200px; font-size: 40px;line-height:55px; cursor:pointer;color: #322b28;font-family: Georgia; margin: 10px 50px; ">BM Live</button>
+            <div class="containerBrand" >
+                <div onclick="clickEntryGame('BM')" class="brand">
+                    <button>BM Live</button>
                 </div>
-                <div onclick="clickEntryGame('PMPE')" style="background: url(images/btn-back-black.png) no-repeat;width: 300px;height: 75px; margin-bottom:30px">
-                    <button style="width: 200px; font-size: 40px;line-height:55px; cursor:pointer; color: #fcfcfc;font-family: Georgia; margin: 10px 50px; ">BM Sport</button>
+                <div onclick="clickEntryGame('PMPE')" class="brand">
+                    <button>Panda Sport</button>
                 </div>
-                <div onclick="clickEntryGame('PMEG')" style="background: url(images/btn-back-gray.png) no-repeat;width: 300px;height: 75px; margin-bottom:30px">
-                    <button style="width: 200px; font-size: 40px;line-height:55px; cursor:pointer;color: #322b28;font-family: Georgia; margin: 10px 50px; ">BM eSport</button>
+                <div onclick="clickEntryGame('PMEG')" class="brand">
+                    <button>DB eSport</button>
                 </div>
             </div>
         </div>
@@ -46,22 +104,34 @@
     var c = new common();
     var SID;
     var CT;
+    var CurrencyType;
     var Lang;
     var p;
 
     function clickEntryGame(brand) {
-        var Url = "GameRedirect.aspx?CT=" + encodeURIComponent(CT) + "&SelectGameBrand=" + brand + "&CurrencyType=" + "CNY";
 
-        if (Lang) {
-            Url += "&Lang=" + Lang;
+        cb = () => {
+            var Url = "GameRedirect.aspx?CT=" + encodeURIComponent(CT) + "&SelectGameBrand=" + brand + "&CurrencyType=" + "CNY";
+
+            if (Lang) {
+                Url += "&Lang=" + Lang;
+            }
+
+            window.location.href = Url;
+        };
+
+        if (CurrencyType) {
+            cb();
+        } else {
+
         }
-
-        window.location.href = Url;
     }
 
     function init() {
         CT = c.getParameter("CT");
         Lang = c.getParameter("Lang");
+        CurrencyType = c.getParameter("CurrencyType");
+
 
         p = new LobbyAPI("/API/LobbyAPI.asmx");
 
