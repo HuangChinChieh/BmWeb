@@ -118,10 +118,10 @@
                 <div onclick="clickEntryGame('BM')" class="brand">
                     <button>BM Live</button>
                 </div>
-                <div onclick="clickEntryGame('PMPE')" class="brand">
+                <div onclick="clickEntryGame('PS')" class="brand">
                     <button>Panda Sport</button>
                 </div>
-                <div onclick="clickEntryGame('PMEG')" class="brand">
+                <div onclick="clickEntryGame('DBES')" class="brand">
                     <button>DB eSport</button>
                 </div>
             </div>
@@ -131,6 +131,7 @@
 <script type="text/javascript" src="/Scripts/Common.js"></script>
 <script type="text/javascript" src="/Scripts/LobbyAPI.js"></script>
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
+<!--<script type="text/javascript" src="Scripts/MultiLanguage.js"></script>-->
 <script type="text/javascript">
     var c = new common();
     var SID;
@@ -138,9 +139,40 @@
     var CurrencyType;
     var Lang;
     var p;
+  /*  var mlp;*/
 
     function clickEntryGame(brand) {
-      
+        if (brand == "PS" || brand == "DBES") {
+            if (CurrencyType == "HKD" || CurrencyType == "PHP") {
+                var alertMsg;
+
+                switch (Lang.toLocaleUpperCase()) {
+                    case "ENG":
+                        alertMsg = "Only PHP, CNY, and KRW can be used."
+                        break;
+                    case "JPN":
+                        alertMsg = "PHP、CNY、KRWのみ使用可能です。"
+                        break;
+                    case "CHT":
+                        alertMsg = "僅可以使用PHP、CNY、KRW進入遊戲"
+                        break;
+                    case "CHS":
+                        alertMsg = "仅可以使用PHP、CNY、KRW进入游戏"
+                        break;
+                    case "KOR":
+                        alertMsg = "PHP, CNY, KRW만 게임에 입장할 수 있습니다."
+                        break
+                    default:
+                        alertMsg = "Only PHP, CNY, and KRW can be used."
+                        break;
+                }
+
+                alert(alertMsg);
+                return;
+            }
+        }
+
+
         cb = () => {
             var Url = "GameRedirect.aspx?CT=" + encodeURIComponent(CT) + "&SelectGameBrand=" + brand + "&CurrencyType=" + CurrencyType;
 
@@ -162,7 +194,7 @@
         CT = c.getParameter("CT");
         Lang = c.getParameter("Lang");
         CurrencyType = c.getParameter("CurrencyType");
-
+        
 
         p = new LobbyAPI("/API/LobbyAPI.asmx");
 
@@ -178,6 +210,17 @@
             CurrencyType = idlangSel.value;
         }
 
+
+        if (!Lang) {
+            Lang = "ENG";
+        }
+
+        //mlp = new multiLanguage();
+
+        //setLanguage(Lang, function () {
+            
+        //    //initLiveChat();
+        //});
 
         window.setInterval(function () {
             // refresh SID and Token;
@@ -199,7 +242,7 @@
     function langSelChange(e) {
         var sel = e.currentTarget;
         var lang = sel.value;
-
+        
         CurrencyType = idlangSel.value;
         //setLanguage(lang);
     }

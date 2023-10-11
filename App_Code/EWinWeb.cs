@@ -19,6 +19,7 @@ public static class EWinWeb {
     public static string CompanyCode = System.Configuration.ConfigurationManager.AppSettings["CompanyCode"];
     public static string WebUrl = System.Configuration.ConfigurationManager.AppSettings["WebUrl"];
     public static string EWinUrl = System.Configuration.ConfigurationManager.AppSettings["EWinUrl"];
+    public static string EWinAPIUrl = System.Configuration.ConfigurationManager.AppSettings["EWinAPIUrl"];
     public static string ImageUrl = System.Configuration.ConfigurationManager.AppSettings["ImageUrl"];
     public static string EWinAgentUrl = System.Configuration.ConfigurationManager.AppSettings["EWinAgentUrl"];
     public static string MainCurrencyType = System.Configuration.ConfigurationManager.AppSettings["MainCurrencyType"];
