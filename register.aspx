@@ -58,6 +58,7 @@
 
 
         isPhoneCheck = false;
+        //document.getElementById("idGroupSendPhoneCode").style.display = "none";
         hideDeniedText("idPhoneNumberDenied");
         if ((idPhonePrefix.selectedIndex != -1) && (idPhoneNumber.value != "")) {
             var phoneValue = idPhonePrefix.value + idPhoneNumber.value;
@@ -78,6 +79,7 @@
                             } else {
                                 hideDeniedText("idPhoneNumberDenied");
                                 isPhoneCheck = true;
+                                //document.getElementById("idGroupSendPhoneCode").style.display = "block";
                             }
                         }
                     });
@@ -536,10 +538,16 @@
         idMessageBox.style.display = "block";
     }
 
+    function initLiveChat() {
+      
+
+    }
+
     function init() {
         lang = localStorage.getItem("Lang");
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
+            initLiveChat();
             p = new LobbyAPI("/API/LobbyAPI.asmx");
             updateBaseInfo();
         });
@@ -595,10 +603,10 @@
                                 </select>
                             </div>
                             <!-- 檢查正確請加上"checked" 檢查未通過請加上"denied" -->
-                            <input id="idPhoneNumber" type="text" language_replace="placeholder"  placeholder="輸入電話" name="UserPhoneNo" onblur="CheckAccountPhoneExist()">
+                            <input id="idPhoneNumber" type="text" language_replace="placeholder"  placeholder="輸入電話" name="UserPhoneNo" onkeyup="CheckAccountPhoneExist()" >
                             <div id="idPhoneNumberDenied" class="popup_notice" style="display: none"><i class="fa fa-info-circle"></i><span class="language_replace">電話已存在</span></div>
                         </div>
-                        <div>
+                        <div id="idGroupSendPhoneCode">
                             <div id="idBtnSendPhoneCode" class="popupBtn_red" onclick="onBtnPhoneCode()"><span class="language_replace">發送驗證碼</span></div>
                             <div id="idBtnSendPhoneCodeText" class="popupBtn_gray" style="display: none"><span class="language_replace">可於</span><span id="idBtnSendPhoneCodeTextSeconds">60</span><span class="language_replace">秒後再次發送</span></div>
                             <input id="idPhoneCode" type="password" class="" language_replace="placeholder" placeholder="輸入簡訊驗證碼" name="text">

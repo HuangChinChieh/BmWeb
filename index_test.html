@@ -1,181 +1,4 @@
-﻿<%@ Page Language="C#" %>
-
-<%
-    string Token;
-    int RValue;
-    Random R = new Random();
-    EWin.Login.GeoClass GC;
-    EWin.Login.LoginAPI API = new EWin.Login.LoginAPI();
-    EWin.Login.LoginResult Ret;
-    string UserIP = CodingControl.GetUserIP();
-    string LoginGUID;
-    string Bulletin = string.Empty;
-    string Lang;
-    MultiLanguageParser MLP;
-    bool IsChina = false;
-    string FileData = string.Empty;
-    string isModify = "0";
-    string[] stringSeparators = new string[] { "&&_" };
-    string[] Separators;
-    string ViVerify;
-    string UnixTimeStamp;
-
-
-    GC = API.GetGeoCode(UserIP);
-
-    if (GC != null)
-    {
-        if ((GC.GeoCountry == "TW") && (UserIP != "112.121.69.46"))
-        {
-            //Response.Redirect("IPDenied.html");
-            //Response.Flush();
-            //Response.End();
-        }
-        else if (GC.GeoCountry == "CN")
-        {
-            IsChina = true;
-        }
-        else if (GC.GeoCountry == "PH")
-        {
-            bool isAllowIP = false;
-
-            string[] CIDRList = new string[] {
-                "103.151.28.225/29",
-                "111.90.176.25/29",
-                "202.178.118.255",
-                "103.151.28.224/29",
-                "103.151.28.112/29",
-                "103.151.28.160/29",
-                "210.213.88.66",
-                "103.176.207.80/29"
-            };
-
-            foreach (var cidr in CIDRList)
-            {
-                if (CodingControl.CheckIPInCIDR(cidr, UserIP))
-                {
-                    isAllowIP = true;
-                    break;
-                }
-            }
-
-            if (isAllowIP == false)
-            {
-                Response.Redirect("IPDenied.html");
-                Response.Flush();
-                Response.End();
-            }
-        }
-        //Response.Write(GC.GeoCountry)
-    }
-
-    IsChina = false;
-
-    Token = EWinWeb.GetToken();
-
-    if (CodingControl.FormSubmit())
-    {
-        string LoginAccount = Request["LoginAccount"];
-        string LoginPassword = Request["LoginPassword"];
-        string ImageCode = Request["ImageCode"];
-        string GuestLogin = Request["GuestLogin"];
-        string CT;
-
-        Lang = Request["Lang"];
-        LoginGUID = Request["LoginGUID"];
-        MLP = new MultiLanguageParser(Lang);
-
-        if (GuestLogin != "1")
-        {
-            if ((LoginAccount != string.Empty) && (LoginAccount != null))
-            {
-                if ((LoginPassword != string.Empty) && (LoginPassword != null))
-                {
-                    if ((ImageCode != string.Empty) && (ImageCode != null))
-                    {
-                        Ret = API.UserLogin(Token, LoginGUID, LoginAccount, LoginPassword, EWinWeb.CompanyCode, ImageCode, CodingControl.GetUserIP());
-                        if (Ret.ResultState == EWin.Login.enumResultState.OK)
-                        {
-                            CT = Ret.CT;
-
-                            Response.Redirect(EWinWeb.EWinUrl + "/Game/Login.aspx?CT=" + Server.UrlEncode(CT) + "&Lang=" + Lang + "&Action=Game");
-
-                            //if (IsChina == true)
-                            //    Response.Redirect(EWinWeb.EWinUrl + ":1443" + "/Game/Login.aspx?CT=" + Server.UrlEncode(CT) + "&Lang=" + Lang + "&Action=Game");
-                            //else
-                            //    Response.Redirect(EWinWeb.EWinUrl + "/Game/Login.aspx?CT=" + Server.UrlEncode(CT) + "&Lang=" + Lang + "&Action=Game");
-                        }
-                        else
-                        {
-                            EWinWeb.AlertMessage(MLP.GetLanguageKey("Login failure:") + MLP.GetLanguageKey(Ret.Message), "/Refresh.aspx?index.aspx");
-                        }
-                    }
-                    else
-                    {
-                        EWinWeb.AlertMessage(MLP.GetLanguageKey("invalid image validate code"), "/Refresh.aspx?index.aspx");
-                    }
-                }
-                else
-                {
-                    EWinWeb.AlertMessage(MLP.GetLanguageKey("invalid login password"), "/Refresh.aspx?index.aspx");
-                }
-            }
-            else
-            {
-                EWinWeb.AlertMessage(MLP.GetLanguageKey("invalid login account"), "/Refresh.aspx?index.aspx");
-            }
-        }
-        else
-        {
-            // 訪客登入
-            if ((ImageCode != string.Empty) && (ImageCode != null))
-            {
-                Response.Redirect(EWinWeb.EWinUrl + "/Game/LoginGuest.aspx?Lang=" + Lang + "&LoginGUID=" + LoginGUID + "&ImageCode=" + ImageCode + "&Action=Game");
-
-                //if (IsChina == true)
-                //    Response.Redirect("https://cngame.ewin-soft.com:1443/Game/LoginGuest.aspx?Lang=" + Lang + "&LoginGUID=" + LoginGUID + "&ImageCode=" + ImageCode + "&Action=Game");
-                //else
-                //    Response.Redirect(EWinWeb.EWinUrl + "/Game/LoginGuest.aspx?Lang=" + Lang + "&LoginGUID=" + LoginGUID + "&ImageCode=" + ImageCode + "&Action=Game");
-            }
-            else
-            {
-                EWinWeb.AlertMessage(MLP.GetLanguageKey("invalid image validate code"), "/Refresh.aspx?index.aspx");
-            }
-        }
-    }
-
-    LoginGUID = API.CreateLoginGUID(Token);
-
-    if (string.IsNullOrEmpty(Request["Lang"]))
-    {
-        string userLang = CodingControl.GetDefaultLanguage();
-
-        if (userLang.ToUpper() == "zh-TW".ToUpper()) { Lang = "CHT"; }
-        else if (userLang.ToUpper() == "zh-HK".ToUpper()) { Lang = "CHT"; }
-        else if (userLang.ToUpper() == "zh-MO".ToUpper()) { Lang = "CHT"; }
-        else if (userLang.ToUpper() == "zh-CHT".ToUpper()) { Lang = "CHT"; }
-        else if (userLang.ToUpper() == "zh-CHS".ToUpper()) { Lang = "CHS"; }
-        else if (userLang.ToUpper() == "zh-SG".ToUpper()) { Lang = "CHS"; }
-        else if (userLang.ToUpper() == "zh-CN".ToUpper()) { Lang = "CHS"; }
-        else if (userLang.ToUpper() == "zh".ToUpper()) { Lang = "CHS"; }
-        else if (userLang.ToUpper() == "en-US".ToUpper()) { Lang = "ENG"; }
-        else if (userLang.ToUpper() == "en-CA".ToUpper()) { Lang = "ENG"; }
-        else if (userLang.ToUpper() == "en-PH".ToUpper()) { Lang = "ENG"; }
-        else if (userLang.ToUpper() == "en".ToUpper()) { Lang = "ENG"; }
-        else if (userLang.ToUpper() == "ko-KR".ToUpper()) { Lang = "KOR"; }
-        else if (userLang.ToUpper() == "ko-KP".ToUpper()) { Lang = "KOR"; }
-        else if (userLang.ToUpper() == "ko".ToUpper()) { Lang = "KOR"; }
-        else if (userLang.ToUpper() == "ja".ToUpper()) { Lang = "JPN"; }
-        else { Lang = "ENG"; }
-    }
-    else
-    {
-        Lang = Request["Lang"];
-    }
-
-    UnixTimeStamp = CodingControl.GetUnixTimestamp(DateTime.Now, CodingControl.enumUnixTimestampType.Seconds).ToString();
-    ViVerify = UnixTimeStamp + "-" + HttpUtility.UrlEncode(CodingControl.GetHMACSHA256("/ValidateImage.aspx" + UnixTimeStamp, "EWin"));
-%>
+﻿
 <!DOCTYPE html>
 <html lang="en">
 
@@ -214,46 +37,60 @@
         }
     </script>
 
-   
+    <noscript><a href="https://www.livechat.com/chat-with/16181706/" rel="nofollow">Chat with us</a>, powered by <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a></noscript>
 </head>
-<script language="javascript" src="Scripts/MultiLanguage.js"></script>
-<script language="javascript" src="Scripts/Math.uuid.js"></script>
-<script language="javascript" src="Scripts/qcode-decoder.min.js"></script>
+<script type="text/javascript" src="Scripts/MultiLanguage.js"></script>
+<script type="text/javascript" src="Scripts/Math.uuid.js"></script>
+<script type="text/javascript" src="Scripts/qcode-decoder.min.js"></script>
+<script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
+<script type="text/javascript" src="/Scripts/LoginAPI.js"></script>
 <script language="javascript">
+    var p;
     var mlp;
-    var Lang = "<%=Lang%>";
-    var qr = new QCodeDecoder();
-    var hasBulletin = <%=(string.IsNullOrEmpty(Bulletin) ? "false" : "true")%>;
+    var Lang = "ENG";
+    var isInitGUID = false;
+    var qr = new QCodeDecoder();   
 
 
     function btnLoginGuest() {
-        document.forms[0].GuestLogin.value = "1";
-        createValidateImage();
-        codepopup();
+        if (isInitGUID) {
+            document.forms[0].GuestLogin.value = "1";
+            createValidateImage();
+            codepopup();
+        }
+
     }
 
     function btnLogin() {
-        document.forms[0].GuestLogin.value = "0";
-        createValidateImage();
-        codepopup();
+        if (isInitGUID) {
+            document.forms[0].GuestLogin.value = "0";
+            createValidateImage();
+            codepopup();
+        }
     }
 
     function createValidateImage() {
-        var iGUID;
-        var viVerify;
-        var iURL;
-        var ValidateImage = document.getElementById("ValidateImage");
+        p.GetVerify(Math.uuid(), "/ValidateImage.aspx", (success, o) => {
+            if (success) {
+                if (o.ResultState == 0) {
+                    var iGUID;
+                    var viVerify;
+                    var iURL;
+                    var ValidateImage = document.getElementById("ValidateImage");
 
-        viVerify = "<%=ViVerify%>";
-        iGUID = "<%=LoginGUID%>";
-        document.forms[0].LoginGUID.value = iGUID;
+                    viVerify = o.Message;
+                    iGUID = window.LoginGUID;
+                    document.forms[0].LoginGUID.value = iGUID;
 
-        iURL = "ValidateImage.aspx?verify=" + viVerify + "&LoginGUID=" + iGUID;
+                    iURL = "ValidateImage.aspx?verify=" + viVerify + "&LoginGUID=" + iGUID;
 
 
 
-        ValidateImage.src = iURL;
-        ValidateImage.style.display = "inline";
+                    ValidateImage.src = iURL;
+                    ValidateImage.style.display = "inline";
+                }
+            }          
+        });
     }
 
     function setLanguage(c, cb) {
@@ -349,33 +186,132 @@
         idMessageBox.style.display = "block";
     }
 
-   function initLiveChat() {
-      
+    function initLiveChat() {
+
 
     }
 
+    function setDefaultLang() {
+        var userLang = navigator.language;
+        if (userLang.toUpperCase() == "zh-TW".toUpperCase()) { Lang = "CHT"; }
+        else if (userLang.toUpperCase() == "zh-HK".toUpperCase()) { Lang = "CHT"; }
+        else if (userLang.toUpperCase() == "zh-MO".toUpperCase()) { Lang = "CHT"; }
+        else if (userLang.toUpperCase() == "zh-CHT".toUpperCase()) { Lang = "CHT"; }
+        else if (userLang.toUpperCase() == "zh-CHS".toUpperCase()) { Lang = "CHS"; }
+        else if (userLang.toUpperCase() == "zh-SG".toUpperCase()) { Lang = "CHS"; }
+        else if (userLang.toUpperCase() == "zh-CN".toUpperCase()) { Lang = "CHS"; }
+        else if (userLang.toUpperCase() == "zh".toUpperCase()) { Lang = "CHS"; }
+        else if (userLang.toUpperCase() == "en-US".toUpperCase()) { Lang = "ENG"; }
+        else if (userLang.toUpperCase() == "en-CA".toUpperCase()) { Lang = "ENG"; }
+        else if (userLang.toUpperCase() == "en-PH".toUpperCase()) { Lang = "ENG"; }
+        else if (userLang.toUpperCase() == "en".toUpperCase()) { Lang = "ENG"; }
+        else if (userLang.toUpperCase() == "ko-KR".toUpperCase()) { Lang = "KOR"; }
+        else if (userLang.toUpperCase() == "ko-KP".toUpperCase()) { Lang = "KOR"; }
+        else if (userLang.toUpperCase() == "ko".toUpperCase()) { Lang = "KOR"; }
+        else if (userLang.toUpperCase() == "ja".toUpperCase()) { Lang = "JPN"; }
+        else { Lang = "ENG"; }
+    }
+
+    function redirectIPDenied() {
+        window.location.href = "IPDenied.html";
+    }
+
+    function formSubmit(event) {
+        var form = event.currentTarget;
+        var LoginAccount = form["LoginAccount"].value;
+        var LoginPassword = form["LoginPassword"].value;
+        var GuestLogin = form["GuestLogin"].value;
+        var ImageCode = form["ImageCode"].value;
+
+        if (GuestLogin == "0") {
+            if (LoginAccount == null || LoginAccount == "") {
+                return API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("invalid login account"))
+            } else if (LoginPassword == null || LoginPassword == "") {
+                return API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("invalid login password"))
+            } else if (ImageCode == null || ImageCode == "") {
+                return API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("invalid image validate code"))
+            }
+        } else {
+            if (ImageCode == null || ImageCode == "") {
+                return API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("invalid image validate code"))
+            }
+        }
+
+        p.UserLoginEntryGameSel(Math.uuid(), window.LoginGUID, LoginAccount, LoginPassword, ImageCode, GuestLogin, Lang, (success, o) => {
+            if (success) {
+                if (o.ResultState == 0) {
+                    window.location.href = o.LoginURL;
+                } else {
+                    API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("Login failure:") + mlp.getLanguageKey(o.Message), () => {
+                        window.location.href = "/Refresh.aspx?index.aspx";
+                    });
+                }
+            } else {
+                API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("Login failure:") + "001", () => {
+                    window.location.href = "/Refresh.aspx?index.aspx";
+                });
+            }
+        });
+    }
+
     function init() {
-        if (window.localStorage.getItem("Lang") != null) {
-            Lang = window.localStorage.getItem("Lang");
+        if (!window.location.pathname || window.location.pathname == "/") {
+            window.history.pushState({}, "", "/index.html");
         }
 
-        if ((Lang == "") || (Lang == null)) {
-            Lang = "ENG";
-        }
+        p = new LoginAPI("/API/LoginAPI.asmx");
+        document.getElementById("idLoginForm").addEventListener("submit", function (event) {
+            // 阻止默认的表单提交行为
+            event.preventDefault();
+
+            formSubmit(event);
+        });
+
+        p.CheckUserIP(Math.uuid(), (success, o) => {
+    
+            if (success) {
+                if (o.ResultState == 0) {
+
+                    //setLang
+                    if (window.localStorage.getItem("Lang") != null) {
+                        Lang = window.localStorage.getItem("Lang");
+                    } else {
+                        setDefaultLang();
+                    }
+
+                    if ((Lang == "") || (Lang == null)) {
+                        Lang = "ENG";
+                    }
 
 
-        document.getElementById("idlangSel").value = Lang;
-        mlp = new multiLanguage();
-        setLanguage(Lang, function () {
-            //createValidateImage();
+                    document.getElementById("idlangSel").value = Lang;
+                    mlp = new multiLanguage();
+                    setLanguage(Lang, function () {
+                        //createValidateImage();
 
-            initLiveChat();
+                        p.GetLoginGUID(Math.uuid(), (success, o) => {
+                            if (success) {
+                                if (o.ResultState == 0) {
+                                    isInitGUID = true;
+                                    window.LoginGUID = o.Message;
+                                }
+                            }
+                        });
+
+                        //initLiveChat();
+                    });
+                } else {
+                    redirectIPDenied();
+                }
+            } else {
+                redirectIPDenied();
+            }
         });
     }
 
     window.onload = init;
 </script>
-   
+
 <style type="text/css">
     .downloadBtn {
         vertical-align: middle;
@@ -499,7 +435,7 @@
                         <img src="images/login.png">
                         <p><span>BM VIP CLUB</span></p>
                     </div>
-                    <form method="post">
+                    <form id="idLoginForm">
                         <input type="hidden" name="LoginGUID" value="" />
                         <input type="hidden" name="GuestLogin" value="" />
                         <input type="hidden" name="Lang" value="ENG" />
@@ -737,10 +673,10 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.6.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.reveal.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        if (hasBulletin)
-            $('#myModal').reveal();
-    });
+    //$(document).ready(function () {
+    //    if (hasBulletin)
+    //        $('#myModal').reveal();
+    //});
 </script>
 <!--GSAP-->
 <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js" type="text/javascript" charset="utf-8"></script>
@@ -753,5 +689,5 @@
         var Termspopup1 = document.getElementById("Terms-popup1");
         Termspopup1.classList.toggle("termsDivSwitch");
     }
-</script>     
+</script>
 </html>

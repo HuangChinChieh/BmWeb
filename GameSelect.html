@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+
+        button {
+            margin: 0;
+            padding: 0;
+            border: 1px solid transparent;
+            outline: none;
+            background-color: transparent;
+        }
+
+        .containerBrand {
+            height: calc(100vh - 370px);
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .brand:nth-child(odd) {
+            background: url(images/btn-back-gray.png) no-repeat;
+        }
+
+            .brand:nth-child(odd) > button {
+                color: #322b28;
+            }
+
+        .brand:nth-child(even) {
+            background: url(images/btn-back-black.png) no-repeat;
+        }
+
+            .brand:nth-child(even) > button {
+                color: #fcfcfc;
+            }
+
+        .brand {          
+            width: 300px;
+            height: 75px;
+            margin-bottom: 50px
+        }
+
+            .brand:hover {
+                transform: scale(1.10);
+                animation: brandFocus 4s linear infinite;
+            }
+
+            .brand > button {
+                width: 200px;
+                font-size: 32px;
+                line-height: 55px;
+                cursor: pointer;
+                font-family: Georgia;
+                margin: 10px 50px;
+            }
+
+        @keyframes brandFocus {
+            0% {
+                filter: contrast(0.5);
+            }
+
+            50% {
+                filter: contrast(1.0);
+            }
+
+            100% {
+                filter: contrast(0.5);
+            }
+        }
+
+    </style>
+</head>
+<body style="background-color: rgb(3 15 36);margin:0px">
+    <div class="page flex-col" style="width: 100%;height: 100vh ;background: url(images/banner.jpg) 100% repeat;
+        background-size: 100% 100%;">
+        <div class="image-wrapper_1 flex-col" style="width:600px;height:100vh;margin: auto;background-color: rgba(8, 7, 6, 0.8);padding:0px 60px;">
+            <img class="image_1"
+                 referrerpolicy="no-referrer"
+                 style="width:300px;height:300px;margin: 30px 150px 40px 150px;"
+                 src="images/logo_1024.png" />
+            <div class="containerBrand" >
+                <div onclick="clickEntryGame('BM')" class="brand">
+                    <button>BM Live</button>
+                </div>
+                <div onclick="clickEntryGame('PMPE')" class="brand">
+                    <button>Panda Sport</button>
+                </div>
+                <div onclick="clickEntryGame('PMEG')" class="brand">
+                    <button>DB eSport</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="/Scripts/Common.js"></script>
+<script type="text/javascript" src="/Scripts/LobbyAPI.js"></script>
+<script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
+<script type="text/javascript">
+    var c = new common();
+    var SID;
+    var CT;
+    var CurrencyType;
+    var Lang;
+    var p;
+
+    function clickEntryGame(brand) {
+
+        cb = () => {
+            var Url = "GameRedirect.aspx?CT=" + encodeURIComponent(CT) + "&SelectGameBrand=" + brand + "&CurrencyType=" + "CNY";
+
+            if (Lang) {
+                Url += "&Lang=" + Lang;
+            }
+
+            window.location.href = Url;
+        };
+
+        if (CurrencyType) {
+            cb();
+        } else {
+
+        }
+    }
+
+    function init() {
+        CT = c.getParameter("CT");
+        Lang = c.getParameter("Lang");
+        CurrencyType = c.getParameter("CurrencyType");
+
+
+        p = new LobbyAPI("/API/LobbyAPI.asmx");
+
+        if (!CT) {
+            window.location.href = "index.html";
+        } else {
+            CT = decodeURIComponent(CT)
+        }
+
+        window.setInterval(function () {
+            // refresh SID and Token;
+            var guid = Math.uuid();
+
+            p.KeepSIDByProduct(CT, guid, function (success, o) {
+                if (success == true) {
+                    if (o.Result != 0) {
+                        window.location.href = "index.html";
+                    }
+                } else {
+                    window.location.href = "index.html";
+                }
+            });
+
+        }, 10000);
+    }
+
+    window.onload = init;
+</script>
+</html>
