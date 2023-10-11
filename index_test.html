@@ -49,7 +49,7 @@
     var mlp;
     var Lang = "ENG";
     var isInitGUID = false;
-    var qr = new QCodeDecoder();   
+    var qr = new QCodeDecoder();
 
 
     function btnLoginGuest() {
@@ -89,7 +89,7 @@
                     ValidateImage.src = iURL;
                     ValidateImage.style.display = "inline";
                 }
-            }          
+            }
         });
     }
 
@@ -243,12 +243,12 @@
                     window.location.href = o.LoginURL;
                 } else {
                     API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("Login failure:") + mlp.getLanguageKey(o.Message), () => {
-                        window.location.href = "/Refresh.aspx?index.aspx";
+                        window.location.href = "/Refresh.aspx?index.html";
                     });
                 }
             } else {
                 API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("Login failure:") + "001", () => {
-                    window.location.href = "/Refresh.aspx?index.aspx";
+                    window.location.href = "/Refresh.aspx?index.html";
                 });
             }
         });
@@ -268,7 +268,7 @@
         });
 
         p.CheckUserIP(Math.uuid(), (success, o) => {
-    
+
             if (success) {
                 if (o.ResultState == 0) {
 
@@ -313,6 +313,10 @@
 </script>
 
 <style type="text/css">
+    .flex-viewport img {
+        height: 100vh !important;
+    }
+
     .downloadBtn {
         vertical-align: middle;
         text-align: center;
@@ -320,18 +324,18 @@
         width: 100%;
     }
         /*.downloadBtn a{
-		display: block;
-		width: 90%;
-		line-height: 55px;
-		background:  linear-gradient(to top, #eae0bc 0%, #dec284 27%, #debf7a 52%, #d5b66d 92%, #eae0bc 100%);
-		border: 1px #aa822d solid;
-		vertical-align: middle;
-		color: #5a4415;
-		border-radius: 10px;
-		margin: 10px auto;
-		box-shadow: 0px 0px 8px 2px rgba(0,0,0,0.5);
-		margin-top: 10px;
-	}*/
+        display: block;
+        width: 90%;
+        line-height: 55px;
+        background:  linear-gradient(to top, #eae0bc 0%, #dec284 27%, #debf7a 52%, #d5b66d 92%, #eae0bc 100%);
+        border: 1px #aa822d solid;
+        vertical-align: middle;
+        color: #5a4415;
+        border-radius: 10px;
+        margin: 10px auto;
+        box-shadow: 0px 0px 8px 2px rgba(0,0,0,0.5);
+        margin-top: 10px;
+    }*/
         .downloadBtn a {
             display: block;
             width: 90%;
@@ -426,7 +430,8 @@
                         <!--div><a href="pcdownload.aspx"><img src="images/APPSTOREICON4.png"><img src="images/APPSTOREICON3.png"><span class="language_replace">APP Download</span></a></div-->
                         <div>
                             <a onclick="downloadAPP();" style="cursor: pointer">
-                                <img src="images/APPSTOREICON4.png"><img src="images/APPSTOREICON3.png"><span class="language_replace">APP Download</span></a>
+                                <img src="images/APPSTOREICON4.png"><img src="images/APPSTOREICON3.png"><span class="language_replace">APP Download</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -470,12 +475,12 @@
                                     <span class="language_replace">GUEST LOGIN</span>
                                 </button>
                                 <!--div class="btn btn--mt">
-						<label class="QRcodeFileBtn_m">
-                        <input type="file" onchange="QRScan(this)" accept="image/*" id="idQRImage" name="idQRImage"><span class="inputfile"><img src="images/QRcodeIcon.png" width="20px" height="20px" alt="QRcodeIcon"><span class="language_replace">QR CODE LOGIN</span></span>
-						</label>	
-                    </div-->
+                                    <label class="QRcodeFileBtn_m">
+                                    <input type="file" onchange="QRScan(this)" accept="image/*" id="idQRImage" name="idQRImage"><span class="inputfile"><img src="images/QRcodeIcon.png" width="20px" height="20px" alt="QRcodeIcon"><span class="language_replace">QR CODE LOGIN</span></span>
+                                    </label>
+                                </div-->
                                 <!--
-								<button class="btn btn--mt" type="button" value="QRCODE LOGIN">
+                                <button class="btn btn--mt" type="button" value="QRCODE LOGIN">
                                     <i class="btn__icon icon-log-in"></i><span class="language_replace">QR CODE LOGIN</span>
                                 </button>
                                 -->
@@ -514,9 +519,9 @@
                         <a href="javascript:;" title="LST">
                             <picture>
                                 <!--
-                                上傳大小   1920x800(desktop)
-                                                768x800(mobile)
-                            -->
+                                    上傳大小   1920x800(desktop)
+                                                    768x800(mobile)
+                                -->
                                 <!--[if IE 9]><video style="display: none;"><![endif]-->
                                 <source media="(min-width: 1024px)" srcset="images/banner2.jpg">
                                 <source media="(max-width: 768px)" srcset="images/banner2-s.jpg">
@@ -530,9 +535,9 @@
                         <a href="javascript:;" title="LST">
                             <picture>
                                 <!--
-                                上傳大小   1920x800(desktop)
-                                                768x800(mobile)
-                            -->
+                                    上傳大小   1920x800(desktop)
+                                                    768x800(mobile)
+                                -->
                                 <!--[if IE 9]><video style="display: none;"><![endif]-->
                                 <source media="(min-width: 1024px)" srcset="images/banner.jpg">
                                 <source media="(max-width: 768px)" srcset="images/banner-s.jpg">
@@ -547,7 +552,7 @@
         </div>
         <!-- banner// -->
         <!-- step -->
-        <div class="container__step flex">
+        <!--<div class="container__step flex">
             <dl class="step">
                 <dt class="step__dt flex">
                     <span class="num">01</span>
@@ -593,7 +598,7 @@
                 <dd class="step__dd language_replace">Upon completion of the game of traditional phone betting,the phone better will go to cage and make settlement for the VIPs.If Players are playing easybet,they can just leave the website straightly without noticing us.
                 </dd>
             </dl>
-        </div>
+        </div>-->
         <!-- step// -->
         <!-- contact -->
         <!--div class="container__contact contact flex">
@@ -606,9 +611,9 @@
             </dl>
         </div-->
         <!-- contact// -->
-        <div class="container__ft">
+        <!--<div class="container__ft">
             <a class="popup1" id="popup1" onclick="termsDivSwitch()" href="#popup1"><span class="language_replace">Terms of Member Responsibilities</span></a>
-        </div>
+        </div>-->
     </div>
     <!-- container// -->
     <div id="Terms-popup1" class="TermsDiv">
@@ -682,7 +687,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="//s3-us-west-2.amazonaws.com/s.cdpn.io/35984/AnticipateEase.min.js" type="text/javascript" charset="utf-8"></script>
 <!-- <script src="js/action.js"></script> -->
-
 <!--  Terms of Member Responsibilities        -->
 <script type="text/javascript">
     function termsDivSwitch() {

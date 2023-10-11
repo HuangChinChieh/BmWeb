@@ -237,18 +237,18 @@
             }
         }
 
-        p.UserLoginEntryGameSel(Math.uuid(), window.LoginGUID, LoginAccount, LoginPassword, ImageCode, GuestLogin, Lang, (success, o) => {
+        p.UserLogin(Math.uuid(), window.LoginGUID, LoginAccount, LoginPassword, ImageCode, GuestLogin, Lang, (success, o) => {
             if (success) {
                 if (o.ResultState == 0) {
                     window.location.href = o.LoginURL;
                 } else {
                     API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("Login failure:") + mlp.getLanguageKey(o.Message), () => {
-                        window.location.href = "/Refresh.aspx?index.aspx";
+                        window.location.href = "/Refresh.aspx?index.html";
                     });
                 }
             } else {
                 API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("Login failure:") + "001", () => {
-                    window.location.href = "/Refresh.aspx?index.aspx";
+                    window.location.href = "/Refresh.aspx?index.html";
                 });
             }
         });
@@ -313,6 +313,10 @@
 </script>
 
 <style type="text/css">
+    .flex-viewport img {
+        height:100vh !important;
+    }
+
     .downloadBtn {
         vertical-align: middle;
         text-align: center;
@@ -547,7 +551,7 @@
         </div>
         <!-- banner// -->
         <!-- step -->
-        <div class="container__step flex">
+        <!--<div class="container__step flex">
             <dl class="step">
                 <dt class="step__dt flex">
                     <span class="num">01</span>
@@ -593,7 +597,7 @@
                 <dd class="step__dd language_replace">Upon completion of the game of traditional phone betting,the phone better will go to cage and make settlement for the VIPs.If Players are playing easybet,they can just leave the website straightly without noticing us.
                 </dd>
             </dl>
-        </div>
+        </div>-->
         <!-- step// -->
         <!-- contact -->
         <!--div class="container__contact contact flex">
@@ -606,9 +610,9 @@
             </dl>
         </div-->
         <!-- contact// -->
-        <div class="container__ft">
+        <!--<div class="container__ft">
             <a class="popup1" id="popup1" onclick="termsDivSwitch()" href="#popup1"><span class="language_replace">Terms of Member Responsibilities</span></a>
-        </div>
+        </div>-->
     </div>
     <!-- container// -->
     <div id="Terms-popup1" class="TermsDiv">
