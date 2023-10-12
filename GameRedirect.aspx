@@ -43,7 +43,8 @@
         try
         {
             // 轉換出 Token 與 SID
-            SID = EWinWeb.DecodeClientToken(CT).SID;
+            SID = EWinWeb.DecodeClientToken(CT).SID;        
+
         }
         catch (Exception ex) { }
 
@@ -56,17 +57,22 @@
 
             if (R.Result == EWin.Lobby.enumResult.OK)
             {
+
+
+                try { CodingControl.GetWebTextContent(EWinWeb.EWinAPIUrl + "/API/GamePlatformAPI2/UserLogout.aspx?CT=" + Server.UrlEncode(CT) + "&CurrencyType=" + CurrencyType, "GET"); }
+                catch (Exception ex) { }
+
                 if (SelectGameBrand == "BM")
                 {
                     Response.Redirect(EWinWeb.EWinUrl + "/Game/Login.aspx?CT=" + Server.UrlEncode(CT) + "&Lang=" + Lang + "&Action=Game");
                 }
-                else if (SelectGameBrand == "PMPE")
+                else if (SelectGameBrand == "PS")
                 {
-                    Response.Redirect(EWinWeb.EWinUrl + "/API/GamePlatformAPI2/UserLogin.aspx?SID=" + SID + "&Language=" + Lang + "&CurrencyType=" + CurrencyType + "&GameCode=" + "PMPE.Sport" + "&HomeUrl=" + HttpUtility.UrlEncode(EWinWeb.WebUrl) + "&DemoPlay=0" + "&InvalidGameCodeAccessUrl=" + HttpUtility.UrlEncode(EWinWeb.WebUrl + "/InvalidGameCodeAccess.aspx"));
+                    Response.Redirect(EWinWeb.EWinUrl + "/API/GamePlatformAPI2/UserLogin.aspx?SID=" + SID + "&Language=" + Lang + "&CurrencyType=" + CurrencyType + "&GameCode=" + "PS.Sport" + "&HomeUrl=" + HttpUtility.UrlEncode(EWinWeb.WebUrl) + "&DemoPlay=0" + "&InvalidGameCodeAccessUrl=" + HttpUtility.UrlEncode(EWinWeb.WebUrl + "/InvalidGameCodeAccess.aspx"));
                 }
-                 else if (SelectGameBrand == "PMEG")
+                else if (SelectGameBrand == "DBES")
                 {
-                    Response.Redirect(EWinWeb.EWinUrl + "/API/GamePlatformAPI2/UserLogin.aspx?SID=" + SID + "&Language=" + Lang + "&CurrencyType=" + CurrencyType + "&GameCode=" + "PMEG.eSport" + "&HomeUrl=" + HttpUtility.UrlEncode(EWinWeb.WebUrl) + "&DemoPlay=0" + "&InvalidGameCodeAccessUrl=" + HttpUtility.UrlEncode(EWinWeb.WebUrl + "/InvalidGameCodeAccess.aspx"));
+                    Response.Redirect(EWinWeb.EWinUrl + "/API/GamePlatformAPI2/UserLogin.aspx?SID=" + SID + "&Language=" + Lang + "&CurrencyType=" + CurrencyType + "&GameCode=" + "DBES.eSport" + "&HomeUrl=" + HttpUtility.UrlEncode(EWinWeb.WebUrl) + "&DemoPlay=0" + "&InvalidGameCodeAccessUrl=" + HttpUtility.UrlEncode(EWinWeb.WebUrl + "/InvalidGameCodeAccess.aspx"));
                 }
                 else
                 {
@@ -78,8 +84,9 @@
                 Response.Redirect("index.html");
             }
         }
-        else { 
-           Response.Redirect("index.html");
+        else
+        {
+            Response.Redirect("index.html");
         }
     }
 

@@ -15,7 +15,7 @@
         }
 
         .containerBrand {
-            height: calc(100vh - 370px);
+            height: calc(100vh - 415px);
             display: flex;
             flex-direction: column;
             flex-wrap: nowrap;
@@ -73,6 +73,25 @@
             }
         }
 
+
+        .langSel_container {
+            text-align: center;
+        }
+
+        .langSel {
+            margin: 0px 35px 15px 35px;
+            background-color: rgba(8, 7, 6, 0.8);
+            border: 1px solid #d9c38f;
+            width: 150px;
+            /* height: 50px; */
+            color:white;
+            font-size:18px;
+        }
+
+            .langSel option {
+                color: white;
+                font-size: 18px;
+            }
     </style>
 </head>
 <body style="background-color: rgb(3 15 36);margin:0px">
@@ -83,14 +102,26 @@
                  referrerpolicy="no-referrer"
                  style="width:300px;height:300px;margin: 30px 150px 40px 150px;"
                  src="images/logo_1024.png" />
-            <div class="containerBrand" >
+
+            <div class="langSel_container">
+                <select id="idlangSel" class="langSel" onchange="langSelChange(event)">
+                    <option value="CNY" selected>CNY</option>
+                    <option value="PUSD">PUSD</option>
+                    <option value="CUSD">CUSD</option>
+                    <option value="KRW">KRW</option>
+                    <option value="PHP">PHP</option>
+                    <option value="HKD">HKD</option>
+                </select>
+            </div>
+
+            <div class="containerBrand">
                 <div onclick="clickEntryGame('BM')" class="brand">
                     <button>BM Live</button>
                 </div>
-                <div onclick="clickEntryGame('PMPE')" class="brand">
+                <div onclick="clickEntryGame('PS')" class="brand">
                     <button>Panda Sport</button>
                 </div>
-                <div onclick="clickEntryGame('PMEG')" class="brand">
+                <div onclick="clickEntryGame('DBES')" class="brand">
                     <button>DB eSport</button>
                 </div>
             </div>
@@ -100,6 +131,7 @@
 <script type="text/javascript" src="/Scripts/Common.js"></script>
 <script type="text/javascript" src="/Scripts/LobbyAPI.js"></script>
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
+<!--<script type="text/javascript" src="Scripts/MultiLanguage.js"></script>-->
 <script type="text/javascript">
     var c = new common();
     var SID;
@@ -107,11 +139,42 @@
     var CurrencyType;
     var Lang;
     var p;
+  /*  var mlp;*/
 
     function clickEntryGame(brand) {
+        if (brand == "PS" || brand == "DBES") {
+            if (CurrencyType == "HKD" || CurrencyType == "PHP") {
+                var alertMsg;
+
+                switch (Lang.toLocaleUpperCase()) {
+                    case "ENG":
+                        alertMsg = "Only PHP, CNY, and KRW can be used."
+                        break;
+                    case "JPN":
+                        alertMsg = "PHP、CNY、KRWのみ使用可能です。"
+                        break;
+                    case "CHT":
+                        alertMsg = "僅可以使用PHP、CNY、KRW進入遊戲"
+                        break;
+                    case "CHS":
+                        alertMsg = "仅可以使用PHP、CNY、KRW进入游戏"
+                        break;
+                    case "KOR":
+                        alertMsg = "PHP, CNY, KRW만 게임에 입장할 수 있습니다."
+                        break
+                    default:
+                        alertMsg = "Only PHP, CNY, and KRW can be used."
+                        break;
+                }
+
+                alert(alertMsg);
+                return;
+            }
+        }
+
 
         cb = () => {
-            var Url = "GameRedirect.aspx?CT=" + encodeURIComponent(CT) + "&SelectGameBrand=" + brand + "&CurrencyType=" + "CNY";
+            var Url = "GameRedirect.aspx?CT=" + encodeURIComponent(CT) + "&SelectGameBrand=" + brand + "&CurrencyType=" + CurrencyType;
 
             if (Lang) {
                 Url += "&Lang=" + Lang;
@@ -131,7 +194,7 @@
         CT = c.getParameter("CT");
         Lang = c.getParameter("Lang");
         CurrencyType = c.getParameter("CurrencyType");
-
+        
 
         p = new LobbyAPI("/API/LobbyAPI.asmx");
 
@@ -140,6 +203,24 @@
         } else {
             CT = decodeURIComponent(CT)
         }
+
+        if (CurrencyType) {
+            idlangSel.style.display = "none";
+        } else {
+            CurrencyType = idlangSel.value;
+        }
+
+
+        if (!Lang) {
+            Lang = "ENG";
+        }
+
+        //mlp = new multiLanguage();
+
+        //setLanguage(Lang, function () {
+            
+        //    //initLiveChat();
+        //});
 
         window.setInterval(function () {
             // refresh SID and Token;
@@ -157,6 +238,15 @@
 
         }, 10000);
     }
+
+    function langSelChange(e) {
+        var sel = e.currentTarget;
+        var lang = sel.value;
+        
+        CurrencyType = idlangSel.value;
+        //setLanguage(lang);
+    }
+
 
     window.onload = init;
 </script>
