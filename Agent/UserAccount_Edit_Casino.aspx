@@ -650,6 +650,8 @@
                     //ShowGameCodeByCurrency();
                 }
             }
+
+            queryUserInfoByUserAccountID();
         }
 
     }
@@ -760,7 +762,6 @@
         mlp.loadLanguage(lang, function () {
             EWinInfo = window.parent.EWinInfo;
             queryCurrentUserInfo();
-            queryUserInfoByUserAccountID();
             uType = 1;
             document.getElementById("idUserAccountType").innerText = mlp.getLanguageKey("代理");
             

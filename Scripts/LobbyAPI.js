@@ -215,6 +215,33 @@
         });
     };
 
+    this.SetUserMail = function (GUID, ValidateType, SendMailType, EMail, ContactPhonePrefix, ContactPhoneNumber, ReceiveRegisterRewardURL, cb) {
+        var url = APIUrl + "/SetUserMail";
+        var postData;
+
+        postData = {
+            GUID: GUID,
+            ValidateType: ValidateType,
+            SendMailType: SendMailType,
+            EMail: EMail,
+            ContactPhonePrefix: ContactPhonePrefix,
+            ContactPhoneNumber: ContactPhoneNumber,
+            ReceiveRegisterRewardURL: ReceiveRegisterRewardURL
+        };
+
+        callService(url, postData, 10000, function (success, text) {
+            if (success == true) {
+                var obj = getJSON(text);
+
+                if (cb)
+                    cb(true, obj);
+            } else {
+                if (cb)
+                    cb(false, text);
+            }
+        });
+    };
+
     this.CheckAccountExist = function (GUID, LoginAccount, cb) {
         var url = APIUrl + "/CheckAccountExist";
         var postData;
