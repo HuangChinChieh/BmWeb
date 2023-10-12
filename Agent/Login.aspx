@@ -14,15 +14,13 @@
         Lang = Request["Lang"];
     }
 
-    Lang = "ENG";
-
 %>
 <!doctype html>
 <html lang="zh-Hant-TW" class="mainHtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lucky Sprite</title>
+    <title>BM</title>
     <meta id="extViewportMeta" name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <link rel="stylesheet" href="css/basic.min.css?<%:AgentVersion%>">
     <link rel="stylesheet" href="css/main2.css?<%:AgentVersion%>">
@@ -363,96 +361,30 @@
                             document.getElementsByName("CompanyCode")[0].value = retValue;
                         }
                     }
-
-                    //if (window.sessionStorage.getItem("hasDefaultCompany")) {
-                    //    if (window.sessionStorage.getItem("hasDefaultCompany") == "false") {
-                    //        idCompanyCode.style.display = "block";
-                    //        document.getElementsByName("CompanyCode")[0].value = "";
-                    //    }
-
-                    //}
-                    //else {
-                    //    if ((defaultCompany != null) && (defaultCompany != "")) {
-                    //        idCompanyCode.style.display = "none";
-                    //    } else {
-                    //        window.sessionStorage.setItem("hasDefaultCompany", "false");
-                    //        idCompanyCode.style.display = "block";
-                    //    }
-                    //}
+                    
                 });
 
             }
         }
 
-
         //設定是否已傳送資料
         window.localStorage.setItem("UpdateDeviceInfo", "false");
+        
 
-        if (inAPP == false) {
-            //if (window.sessionStorage.getItem("hasDefaultCompany")) {
-            //    if (window.sessionStorage.getItem("hasDefaultCompany") == "false") {
-            //        idCompanyCode.style.display = "block";
-            //        document.getElementsByName("CompanyCode")[0].value = "";
-            //    }
-
-            //}
-            //else {
-            //    if ((defaultCompany != null) && (defaultCompany != "")) {
-            //        idCompanyCode.style.display = "none";
-            //    } else {
-            //        window.sessionStorage.setItem("hasDefaultCompany", "false");
-            //        idCompanyCode.style.display = "block";
-            //    }
-            //}
+        if (window.localStorage.getItem("agent_lang") != null) {
+            lang = window.localStorage.getItem("agent_lang");
+        } else {
+            window.localStorage.setItem("agent_lang", lang);
         }
-
-        for (var i = 0; i < langel.length; i++) {
-            if (lang == langel[i].value) {
-                langel[i].checked = true;
-                break;
-            }
-        }
-
-        window.localStorage.setItem("agent_lang", lang);
+        
+        $("#idlangSel").val(lang);
 
         onLoginType();
 
         mlp = new multiLanguage(v);
         mlp.loadLanguage(lang, function () {
-            //if (inAPP == true) {
-            //    AppBridge.getCurrentVersion(function (retInfo) {
-            //        var version;
-            //        var mobileType;
-            //        var showAlert = false;
 
-            //        version = retInfo.split(":")[0].toUpperCase();
-            //        mobileType = retInfo.split(":")[1].toUpperCase();
-
-            //        document.getElementById("version").innerText = "v" + version;
-            //        //alert(retInfo);
-            //        switch (mobileType) {
-            //            case "IOS":
-            //                if (parseFloat(version) < 1.1) {
-            //                    showAlert = true;
-            //                }
-            //                break;
-            //            case "AN":
-            //                if (parseFloat(version) < 1.1) {
-            //                    showAlert = true;
-            //                }
-            //                break;
-
-            //        }
-
-            //        if (showAlert == true) {
-            //            showMessageOK(mlp.getLanguageKey("更新"), mlp.getLanguageKey("您好，目前有新版本可以更新"));
-            //        }
-            //    });
-
-            //}
         });
-
-
     }
 
     window.onload = init;

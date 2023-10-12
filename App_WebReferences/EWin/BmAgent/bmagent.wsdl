@@ -975,6 +975,8 @@
               <s:element minOccurs="1" maxOccurs="1" name="AllowRecycle" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="RequireWithdrawalCount" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="LastRequireWithdrawalID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="ContactPhonePrefix" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ContactPhoneNumber" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="WalletList" type="tns:ArrayOfWallet2" />
               <s:element minOccurs="0" maxOccurs="1" name="GameCodeList" type="tns:ArrayOfUserAccountGameCode" />
               <s:element minOccurs="0" maxOccurs="1" name="MultiLoginList" type="tns:ArrayOfMultiLogin" />
@@ -1023,6 +1025,21 @@
           <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="QueryUserInfoByUserAccountID">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserAccountID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryUserInfoByUserAccountIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryUserInfoByUserAccountIDResult" type="tns:UserInfoResult2" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetAgentAccountingDetailExcludeLogin">
         <s:complexType>
           <s:sequence>
@@ -1181,11 +1198,11 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="CreateUserInfo">
+      <s:element name="UpdateUserInfo">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserAccountID" type="s:int" />
             <s:element minOccurs="0" maxOccurs="1" name="UserField" type="tns:ArrayOfPropertySet" />
           </s:sequence>
         </s:complexType>
@@ -1201,6 +1218,22 @@
           <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="UpdateUserInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateUserInfoResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateUserInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UserField" type="tns:ArrayOfPropertySet" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="CreateUserInfoResponse">
         <s:complexType>
           <s:sequence>
@@ -1576,6 +1609,12 @@
   <wsdl:message name="QueryUserInfoExcludeLoginSoapOut">
     <wsdl:part name="parameters" element="tns:QueryUserInfoExcludeLoginResponse" />
   </wsdl:message>
+  <wsdl:message name="QueryUserInfoByUserAccountIDSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryUserInfoByUserAccountID" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserInfoByUserAccountIDSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryUserInfoByUserAccountIDResponse" />
+  </wsdl:message>
   <wsdl:message name="GetAgentAccountingDetailExcludeLoginSoapIn">
     <wsdl:part name="parameters" element="tns:GetAgentAccountingDetailExcludeLogin" />
   </wsdl:message>
@@ -1605,6 +1644,12 @@
   </wsdl:message>
   <wsdl:message name="CheckPasswordSoapOut">
     <wsdl:part name="parameters" element="tns:CheckPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="UpdateUserInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateUserInfoResponse" />
   </wsdl:message>
   <wsdl:message name="CreateUserInfoSoapIn">
     <wsdl:part name="parameters" element="tns:CreateUserInfo" />
@@ -1879,6 +1924,13 @@
     <wsdl:part name="LoginAccount" type="s:string" />
   </wsdl:message>
   <wsdl:message name="QueryUserInfoExcludeLoginHttpGetOut">
+    <wsdl:part name="Body" element="tns:UserInfoResult2" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserInfoByUserAccountIDHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="UserAccountID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserInfoByUserAccountIDHttpGetOut">
     <wsdl:part name="Body" element="tns:UserInfoResult2" />
   </wsdl:message>
   <wsdl:message name="GetAgentAccountingDetailExcludeLoginHttpGetIn">
@@ -2205,6 +2257,13 @@
   <wsdl:message name="QueryUserInfoExcludeLoginHttpPostOut">
     <wsdl:part name="Body" element="tns:UserInfoResult2" />
   </wsdl:message>
+  <wsdl:message name="QueryUserInfoByUserAccountIDHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="UserAccountID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserInfoByUserAccountIDHttpPostOut">
+    <wsdl:part name="Body" element="tns:UserInfoResult2" />
+  </wsdl:message>
   <wsdl:message name="GetAgentAccountingDetailExcludeLoginHttpPostIn">
     <wsdl:part name="CompanyCode" type="s:string" />
     <wsdl:part name="LoginAccount" type="s:string" />
@@ -2401,6 +2460,10 @@
       <wsdl:input message="tns:QueryUserInfoExcludeLoginSoapIn" />
       <wsdl:output message="tns:QueryUserInfoExcludeLoginSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="QueryUserInfoByUserAccountID">
+      <wsdl:input message="tns:QueryUserInfoByUserAccountIDSoapIn" />
+      <wsdl:output message="tns:QueryUserInfoByUserAccountIDSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetAgentAccountingDetailExcludeLogin">
       <wsdl:input message="tns:GetAgentAccountingDetailExcludeLoginSoapIn" />
       <wsdl:output message="tns:GetAgentAccountingDetailExcludeLoginSoapOut" />
@@ -2420,6 +2483,10 @@
     <wsdl:operation name="CheckPassword">
       <wsdl:input message="tns:CheckPasswordSoapIn" />
       <wsdl:output message="tns:CheckPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserInfo">
+      <wsdl:input message="tns:UpdateUserInfoSoapIn" />
+      <wsdl:output message="tns:UpdateUserInfoSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="CreateUserInfo">
       <wsdl:input message="tns:CreateUserInfoSoapIn" />
@@ -2554,6 +2621,10 @@
     <wsdl:operation name="QueryUserInfoExcludeLogin">
       <wsdl:input message="tns:QueryUserInfoExcludeLoginHttpGetIn" />
       <wsdl:output message="tns:QueryUserInfoExcludeLoginHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserInfoByUserAccountID">
+      <wsdl:input message="tns:QueryUserInfoByUserAccountIDHttpGetIn" />
+      <wsdl:output message="tns:QueryUserInfoByUserAccountIDHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="GetAgentAccountingDetailExcludeLogin">
       <wsdl:input message="tns:GetAgentAccountingDetailExcludeLoginHttpGetIn" />
@@ -2704,6 +2775,10 @@
     <wsdl:operation name="QueryUserInfoExcludeLogin">
       <wsdl:input message="tns:QueryUserInfoExcludeLoginHttpPostIn" />
       <wsdl:output message="tns:QueryUserInfoExcludeLoginHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserInfoByUserAccountID">
+      <wsdl:input message="tns:QueryUserInfoByUserAccountIDHttpPostIn" />
+      <wsdl:output message="tns:QueryUserInfoByUserAccountIDHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="GetAgentAccountingDetailExcludeLogin">
       <wsdl:input message="tns:GetAgentAccountingDetailExcludeLoginHttpPostIn" />
@@ -2986,6 +3061,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="QueryUserInfoByUserAccountID">
+      <soap:operation soapAction="http://tempuri.org/QueryUserInfoByUserAccountID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetAgentAccountingDetailExcludeLogin">
       <soap:operation soapAction="http://tempuri.org/GetAgentAccountingDetailExcludeLogin" style="document" />
       <wsdl:input>
@@ -3024,6 +3108,15 @@
     </wsdl:operation>
     <wsdl:operation name="CheckPassword">
       <soap:operation soapAction="http://tempuri.org/CheckPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserInfo">
+      <soap:operation soapAction="http://tempuri.org/UpdateUserInfo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -3331,6 +3424,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="QueryUserInfoByUserAccountID">
+      <soap12:operation soapAction="http://tempuri.org/QueryUserInfoByUserAccountID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetAgentAccountingDetailExcludeLogin">
       <soap12:operation soapAction="http://tempuri.org/GetAgentAccountingDetailExcludeLogin" style="document" />
       <wsdl:input>
@@ -3369,6 +3471,15 @@
     </wsdl:operation>
     <wsdl:operation name="CheckPassword">
       <soap12:operation soapAction="http://tempuri.org/CheckPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserInfo">
+      <soap12:operation soapAction="http://tempuri.org/UpdateUserInfo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -3669,6 +3780,15 @@
     </wsdl:operation>
     <wsdl:operation name="QueryUserInfoExcludeLogin">
       <http:operation location="/QueryUserInfoExcludeLogin" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserInfoByUserAccountID">
+      <http:operation location="/QueryUserInfoByUserAccountID" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -4005,6 +4125,15 @@
     </wsdl:operation>
     <wsdl:operation name="QueryUserInfoExcludeLogin">
       <http:operation location="/QueryUserInfoExcludeLogin" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserInfoByUserAccountID">
+      <http:operation location="/QueryUserInfoByUserAccountID" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
