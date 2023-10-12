@@ -153,9 +153,9 @@
                                 }
 
                                 if (w.PointValue.toString().includes("e")) {
-                                    $("#idWalletBalance").text(BigNumber(roundDown(w.PointValue, 2)).toFormat());
+                                    $("#idWalletBalance").text(BigNumber(roundDown(w.PointValue, 4)).toFormat());
                                 } else {
-                                    $("#idWalletBalance").text(Number(BigNumber(roundDown(w.PointValue, 2))));
+                                    $("#idWalletBalance").text(Number(BigNumber(roundDown(w.PointValue, 4))));
                                 }
                             }
 

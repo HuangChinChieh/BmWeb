@@ -288,7 +288,7 @@
 
                         <div class="form-group">
                             <div class="form-control-underline">
-                                <input type="text" class="form-control" name="transferout" id="idPhonePrefix" language_replace="placeholder" placeholder="國碼" />
+                                <input type="text" class="form-control" name="transferout" id="idPhonePrefix" language_replace="placeholder" placeholder="國碼" disabled="disabled" />
                                 <label for="idTransOut" class="form-label"><span class="language_replace">國碼</span></label>
                             </div>
                         </div>
@@ -298,7 +298,7 @@
 
                         <div class="form-group">
                             <div class="form-control-underline">
-                                <input type="text" class="form-control" name="member" id="idPhoneNumber" language_replace="placeholder" placeholder="手機電話號碼" />
+                                <input type="text" class="form-control" name="member" id="idPhoneNumber" language_replace="placeholder" placeholder="手機電話號碼" disabled="disabled" />
                                 <label for="idPhoneNumber" class="form-label"><span class="language_replace">手機電話號碼</span></label>
                             </div>
                         </div>
