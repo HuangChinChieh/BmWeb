@@ -283,6 +283,8 @@
                     if (obj.Message == "AccountExist") {
                         if (cb)
                             cb(false);
+                    } else if (obj.Message == "HasLimitChar") {
+                        window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("帳號含有限制開頭BMH，請使用其他帳號，如有疑問請聯繫客服。"));
                     } else {
                         window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), obj.Message);
                     }
@@ -969,7 +971,7 @@
                                                 </span>
                                                 <span class="td__content">
                                                     <div class="form-control-hidden ADJ_userRate">
-                                                        <input type="text" class="form-control PointUserRate" language_replace="placeholder" placeholder="佔成率上限" value="50"  style="background-color:rgba(255, 255, 255, 0.1) !important">
+                                                        <input type="text" class="form-control PointUserRate" language_replace="placeholder" placeholder="佔成率上限" value="0"  style="background-color:rgba(255, 255, 255, 0.1) !important">
                                                         <!-- placholder label -->
                                                         <label class="form-label span_parentUserRate">
                                                             <span class="language_replace">上線</span><span class="number"><span class="parentUserRate"></span>%</span>
@@ -983,7 +985,7 @@
                                                 </span>
                                                 <span class="td__content">
                                                     <div class="form-control-hidden ADJ_userRate">
-                                                        <input type="text" class="form-control PointBuyChipRate" language_replace="placeholder" placeholder="轉碼率上限" value="50" style="background-color:rgba(255, 255, 255, 0.1) !important">
+                                                        <input type="text" class="form-control PointBuyChipRate" language_replace="placeholder" placeholder="轉碼率上限" value="0" style="background-color:rgba(255, 255, 255, 0.1) !important">
                                                         <!-- placholder label -->
                                                         <label class="form-label span_parentBuyChipRate">
                                                             <span class="language_replace">上線</span><span class="number"><span class="parentBuyChipRate"></span>%</span>

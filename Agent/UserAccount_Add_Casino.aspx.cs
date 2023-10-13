@@ -26,7 +26,12 @@ public partial class UserAccount_Add_Casino : System.Web.UI.Page {
         EWin.BmAgent.BmAgent api = new EWin.BmAgent.BmAgent();
         EWin.BmAgent.APIResult RetValue = new EWin.BmAgent.APIResult();
 
-        RetValue = api.CheckAccountExist(AID, LoginAccount);
+        if (LoginAccount.ToUpper().StartsWith("BMH")) {
+            RetValue.Result = EWin.BmAgent.enumResult.ERR;
+            RetValue.Message = "HasLimitChar";
+        } else {
+            RetValue = api.CheckAccountExist(AID, LoginAccount);
+        }
 
         return RetValue;
     }
