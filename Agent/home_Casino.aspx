@@ -143,11 +143,14 @@
                         $(".spanUrlLink1").text(EWinInfo.CompanyInfo.QRCodeURL + "?PCode=" + EWinInfo.UserInfo.PersonCode);
                         $("#idWalletBalance").text(0);
                         $("#tb_GameAccountingCode").empty();
+                        $("#tb_Wallet").empty();
 
                         // build wallet list
                         if (o.WalletList != null) {
                             for (var i = 0; i < o.WalletList.length; i++) {
                                 var w = o.WalletList[i];
+                                let t = c.getTemplate("tempGameAccountingCode");
+
                                 if (w.CurrencyType != DefaultCurrencyType) {
                                     continue;
                                 }
@@ -157,6 +160,12 @@
                                 } else {
                                     $("#idWalletBalance").text(Number(BigNumber(roundDown(w.PointValue, 4))));
                                 }
+
+                                c.setClassText(t, "GameAccountingCode", null, mlp.getLanguageKey(w.CurrencyType));
+                                c.setClassText(t, "UserRate", null, c.toCurrency(w.UserRate) + "%");
+                                c.setClassText(t, "BuyChipRate", null, c.toCurrency(w.BuyChipRate) + "%");
+
+                                $("#tb_Wallet").append(t);
                             }
 
                         }
@@ -321,7 +330,7 @@
                         $(".TotalWithdrawUsers").text(toCurrency(o.TotalWithdrawUsers));
                         $(".TotalOrderUsers").text(toCurrency(o.TotalOrderUsers));
                         $(".ActivateUserCount").text(toCurrency(o.ActivateUserCount));
-                        
+
                         if (o.UserOrderList != null) {
                             for (var i = 0; i < o.UserOrderList.length; i++) {
                                 let kk = o.UserOrderList[i];
@@ -334,7 +343,7 @@
                                 $("#tb_TopTenOrderUser").append(t);
                             }
                         }
-        
+
                         //if (o.CanReceiveUserRebateUserRate == 0) {
                         //    let strFailureCondition = "";
 
@@ -374,7 +383,7 @@
                                 PreferentialCost = PreferentialCost + data.BonusPointValue;
                                 TotalOrderCount = TotalOrderCount + data.TotalOrderCount;
                                 ActiveUser = ActiveUser + data.ActiveUser;
-                                NewUserCount = NewUserCount + data.NewUserCount ; //+ data.NewAgentCount
+                                NewUserCount = NewUserCount + data.NewUserCount; //+ data.NewAgentCount
                                 WithdrawalValue = WithdrawalValue + data.WithdrawalValue;
                                 WithdrawalCount = WithdrawalCount + data.WithdrawalCount;
                                 DepositValue = DepositValue + data.DepositValue;
@@ -709,7 +718,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12" style="display:none">
+                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12" style="display: none">
                                         <div>
                                             <div class="item row" style="text-align: center; align-items: center;">
                                                 <div class="col-2 col-md-2 col-lg-2 col-gx-2 col-xl-2">
@@ -748,6 +757,25 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12">
+                                        <div style="padding: 10px">
+                                            <div style="text-align: center; padding-bottom: 5px;">
+                                                <span class="currency language_replace homeitemtitle">佔成返水</span>
+                                            </div>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col" class="language_replace">貨幣</th>
+                                                        <th scope="col" class="language_replace">返水率</th>
+                                                        <th scope="col" class="language_replace">佔成率</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tb_Wallet">
+                                                </tbody>
+                                            </table>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -884,7 +912,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display:none">
+                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display: none">
                                 <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/PreferentialCost.png); text-align: right">
                                     <div>
                                         <span class="currency language_replace homeitemtitle">優惠成本</span>
@@ -938,7 +966,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display:none">
+                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display: none">
                                 <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/ActivateUserCount.png); text-align: right">
                                     <div>
                                         <span class="currency language_replace homeitemtitle">活躍用戶</span>
@@ -956,7 +984,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display:none">
+                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display: none">
                                 <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/WithdrawalValue.png); text-align: right">
                                     <div>
                                         <span class="currency language_replace homeitemtitle">提現金額</span>
@@ -977,7 +1005,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display:none">
+                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display: none">
                                 <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/DepositValue.png); text-align: right">
                                     <div>
                                         <span class="currency language_replace homeitemtitle">充值金額</span>
@@ -995,7 +1023,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display:none">
+                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display: none">
                                 <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/FirstDepositValue.png); text-align: right">
                                     <div>
                                         <span class="currency language_replace homeitemtitle">首存金額</span>
@@ -1013,7 +1041,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display:none">
+                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display: none">
                                 <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/FirstDepositCount.png); text-align: right">
                                     <div>
                                         <span class="currency language_replace homeitemtitle">首存人數</span>
@@ -1201,12 +1229,11 @@
                                     </div>
                                 </div>
                             </div>--%>
-
                         </div>
                     </div>
                 </div>
 
-                <div class="currencyWalletList" style="margin-top: 20px; display:none">
+                <div class="currencyWalletList" style="margin-top: 20px; display: none">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 col-md-12 col-lg-6 col-gx-6 col-xl-6">
