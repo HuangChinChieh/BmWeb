@@ -116,8 +116,8 @@
         var api;
         var lang;
         var parentLoginAccount = "";
-        var startDate = Date.today().addDays(-1).toString("yyyy-MM-dd");
-        var endDate = Date.today().addDays(-1).toString("yyyy-MM-dd");
+        var startDate = Date.today().toString("yyyy-MM-dd");
+        var endDate = Date.today().toString("yyyy-MM-dd");
         var UserAccountID = "<%=UserAccountID%>";
         var DefaultCurrencyType = "<%=DefaultCurrencyType%>";
         var MsgText = " Group Profit - DownLine Total Profit = Pesonal Profit,<br/>"
@@ -383,7 +383,7 @@
                                 PreferentialCost = PreferentialCost + data.BonusPointValue;
                                 TotalOrderCount = TotalOrderCount + data.TotalOrderCount;
                                 ActiveUser = ActiveUser + data.ActiveUser;
-                                NewUserCount = NewUserCount + data.NewUserCount; //+ data.NewAgentCount
+                                NewUserCount = NewUserCount + data.NewAgentCount; //+ data.NewUserCount
                                 WithdrawalValue = WithdrawalValue + data.WithdrawalValue;
                                 WithdrawalCount = WithdrawalCount + data.WithdrawalCount;
                                 DepositValue = DepositValue + data.DepositValue;
@@ -660,7 +660,7 @@
                                                         <i aria-label="icon: copy" class="anticon anticon-copy">
                                                             <svg viewBox="64 64 896 896" data-icon="copy" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
                                                                 <path d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z"></path></svg></i>
-                                                        <span>複製</span>
+                                                        <span class="language_replace">複製</span>
                                                     </button>
                                                     <div id="toastCopied" class="toastCopied">
                                                         <span class="language_replace">已複製</span>
@@ -669,7 +669,7 @@
                                                         <i aria-label="icon: download" class="anticon anticon-download">
                                                             <svg viewBox="64 64 896 896" data-icon="download" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class="">
                                                                 <path d="M505.7 661a8 8 0 0 0 12.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></i>
-                                                        <span>下載</span>
+                                                        <span class="language_replace">下載</span>
                                                     </button>
                                                 </div>
                                             </div>
@@ -792,17 +792,17 @@
                     <div class="container-fluid ">
                         <div class="row">
                             <div id="idTabMainContent" class="tab__Wrapper col-12 col-md">
-                                <ul class="nav-tabs-block nav nav-tabs tab-items-5" role="tablist">
-                                    <%--<li class="nav-item ">
-                                        <a onclick="changeDateTab(this,0)" class="nav-link active language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">本日</a>
-                                    </li>--%>
+                                <ul class="nav-tabs-block nav nav-tabs tab-items-3" role="tablist">
                                     <li class="nav-item active">
+                                        <a onclick="changeDateTab(this,0)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">本日</a>
+                                    </li>
+                                    <li class="nav-item ">
                                         <a onclick="changeDateTab(this,1)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">昨天</a>
                                     </li>
                                     <li class="nav-item">
                                         <a onclick="changeDateTab(this,2)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">本週</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <%--<li class="nav-item">
                                         <a onclick="changeDateTab(this,3)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">上週</a>
                                     </li>
                                     <li class="nav-item">
@@ -810,7 +810,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a onclick="changeDateTab(this,5)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">上月</a>
-                                    </li>
+                                    </li>--%>
                                     <li class="tab-slide"></li>
                                 </ul>
                             </div>
@@ -948,7 +948,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3">
+                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display: none">
                                 <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/NewUserCount.png); text-align: right">
                                     <div>
                                         <span class="currency language_replace homeitemtitle">新用戶數</span>
@@ -1059,7 +1059,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3">
+                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display: none">
                                 <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/NotFirstDepositCount.png); text-align: right">
                                     <div>
                                         <span class="currency language_replace homeitemtitle">複存人數</span>

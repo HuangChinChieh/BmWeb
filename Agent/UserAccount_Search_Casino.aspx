@@ -167,16 +167,11 @@
                 }
 
                 for (var j = 0; j < k.WalletList.length; j++) {
-                    let t = c.getTemplate("tempGameAccountingCode");
                     if (k.WalletList[j].CurrencyType == SelectedWallet) {
                         c.setClassText(temp, "CurrencyType", null, k.WalletList[j].CurrencyType + mlp.getLanguageKey("可用餘額"));
                         c.setClassText(temp, "WalletBalance", null, c.toCurrency(k.WalletList[j].PointValue));
-
-                        c.setClassText(t, "GameAccountingCode", null, mlp.getLanguageKey(k.WalletList[j].CurrencyType));
-                        c.setClassText(t, "UserRate", null, c.toCurrency(k.WalletList[j].UserRate));
-                        c.setClassText(t, "BuyChipRate", null, c.toCurrency(k.WalletList[j].BuyChipRate));
-
-                        $(temp).children().find(".GameAccountingCodeList").append(t);
+                        c.setClassText(temp, "UserRate", null, c.toCurrency(k.WalletList[j].UserRate));
+                        c.setClassText(temp, "BuyChipRate", null, c.toCurrency(k.WalletList[j].BuyChipRate));
                     }
                 }
 
@@ -196,7 +191,7 @@
                 $(temp).find('.ModifyBtn').click(function () {
                     userUpdate(k.UserAccountID);
                 }.bind(temp));
-                
+
                 if ($(temp).children().find(".GameAccountingCodeList").children().length == 0) {
                     $(temp).find('.btnOpen').hide();
                     $(temp).find('.btnClose').hide();
@@ -291,7 +286,7 @@
                 </div>
             </div>
 
-            <div class="totalWalletList tab-scroller" style="display:none">
+            <div class="totalWalletList tab-scroller" style="display: none">
                 <div class="tab-scroller__area">
                     <div id="idParentWalletList" class="tab-scroller__content">
                         <span class="tab-item-half walletList_item itemCurrencyType active" id="tab1" onclick="changeTab(1)">
@@ -352,6 +347,16 @@
                                 <div class="balance">
                                     <span class="title-s"><span class="language_replace CurrencyType">可用餘額</span></span>
                                     <span class="data WalletBalance">0</span>
+                                </div>
+                                <div class="revenue" style="" itemtype="eWinBAC">
+                                    <span class="share spanUserRate">
+                                        <span class="title-s"><span class="language_replace" langkey="佔成率">佔成率</span></span>
+                                        <span class="data"><span class="data UserRate">80</span>%</span>
+                                    </span>
+                                    <span class="commission spanBuyChipRate">
+                                        <span class="title-s"><span class="language_replace" langkey="轉碼率">轉碼率</span></span>
+                                        <span class="data"><span class="data BuyChipRate">0</span>%</span>
+                                    </span>
                                 </div>
                             </div>
 
