@@ -167,9 +167,16 @@
                 }
 
                 for (var j = 0; j < k.WalletList.length; j++) {
+                    let t = c.getTemplate("tempGameAccountingCode");
                     if (k.WalletList[j].CurrencyType == SelectedWallet) {
                         c.setClassText(temp, "CurrencyType", null, k.WalletList[j].CurrencyType + mlp.getLanguageKey("可用餘額"));
                         c.setClassText(temp, "WalletBalance", null, c.toCurrency(k.WalletList[j].PointValue));
+
+                        c.setClassText(t, "GameAccountingCode", null, mlp.getLanguageKey(k.WalletList[j].CurrencyType));
+                        c.setClassText(t, "UserRate", null, c.toCurrency(k.WalletList[j].UserRate));
+                        c.setClassText(t, "BuyChipRate", null, c.toCurrency(k.WalletList[j].BuyChipRate));
+
+                        $(temp).children().find(".GameAccountingCodeList").append(t);
                     }
                 }
 

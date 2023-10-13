@@ -758,8 +758,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12">
-                                        <div style="padding: 10px">
+                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12" style="padding:0px">
+                                        <div style="padding-top: 10px">
                                             <div style="text-align: center; padding-bottom: 5px;">
                                                 <span class="currency language_replace homeitemtitle">佔成返水</span>
                                             </div>
