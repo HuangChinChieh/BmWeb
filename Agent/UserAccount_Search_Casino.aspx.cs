@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 using System.Text.RegularExpressions;
 
 public partial class Agent_UserAccount_Search_Casino : System.Web.UI.Page {
-
+        
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public static EWin.BmAgent.ChildUserInfoResult QueryChildUserInfo(string AID) {
