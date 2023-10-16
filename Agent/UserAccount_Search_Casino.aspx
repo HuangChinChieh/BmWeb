@@ -286,7 +286,7 @@
                 </div>
             </div>
 
-            <div class="totalWalletList tab-scroller" style="display: none">
+            <div class="totalWalletList tab-scroller" style="display: none">   
                 <div class="tab-scroller__area">
                     <div id="idParentWalletList" class="tab-scroller__content">
                         <span class="tab-item-half walletList_item itemCurrencyType active" id="tab1" onclick="changeTab(1)">
