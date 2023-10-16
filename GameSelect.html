@@ -6,101 +6,224 @@
     <title>Document</title>
     <style>
 
-        button {
-            margin: 0;
-            padding: 0;
-            border: 1px solid transparent;
-            outline: none;
-            background-color: transparent;
-        }
-
-        .containerBrand {
-            height: calc(100vh - 415px);
-            display: flex;
-            flex-direction: column;
-            flex-wrap: nowrap;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .brand:nth-child(odd) {
-            background: url(images/btn-back-gray.png) no-repeat;
-        }
-
-            .brand:nth-child(odd) > button {
-                color: #322b28;
+        /*   PC端樣式    */
+        @media (min-width: 768px) {
+            button {
+                margin: 0;
+                padding: 0;
+                border: 1px solid transparent;
+                outline: none;
+                background-color: transparent;
             }
 
-        .brand:nth-child(even) {
-            background: url(images/btn-back-black.png) no-repeat;
-        }
-
-            .brand:nth-child(even) > button {
-                color: #fcfcfc;
+            .containerBrand {
+                height: calc(100vh - 415px);
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                justify-content: center;
+                align-items: center;
             }
 
-        .brand {          
-            width: 300px;
-            height: 75px;
-            margin-bottom: 50px
-        }
-
-            .brand:hover {
-                transform: scale(1.10);
-                animation: brandFocus 4s linear infinite;
+            .brand:nth-child(odd) {
+                background: url(images/btn-back-gray.png) no-repeat;
             }
 
-            .brand > button {
-                width: 200px;
-                font-size: 32px;
-                line-height: 55px;
-                cursor: pointer;
-                font-family: Georgia;
-                margin: 10px 50px;
+                .brand:nth-child(odd) > button {
+                    color: #322b28;
+                }
+
+            .brand:nth-child(even) {
+                background: url(images/btn-back-black.png) no-repeat;
             }
 
-        @keyframes brandFocus {
-            0% {
-                filter: contrast(0.5);
+                .brand:nth-child(even) > button {
+                    color: #fcfcfc;
+                }
+
+            .brand {
+                width: 300px;
+                height: 75px;
+                margin-bottom: 50px
             }
 
-            50% {
-                filter: contrast(1.0);
+                .brand:hover {
+                    transform: scale(1.10);
+                    animation: brandFocus 4s linear infinite;
+                }
+
+                .brand > button {
+                    width: 200px;
+                    font-size: 32px;
+                    line-height: 55px;
+                    cursor: pointer;
+                    font-family: Georgia;
+                    margin: 10px 50px;
+                }
+
+            @keyframes brandFocus {
+                0% {
+                    filter: contrast(0.5);
+                }
+
+                50% {
+                    filter: contrast(1.0);
+                }
+
+                100% {
+                    filter: contrast(0.5);
+                }
             }
 
-            100% {
-                filter: contrast(0.5);
+
+            .langSel_container {
+                text-align: center;
             }
-        }
 
-
-        .langSel_container {
-            text-align: center;
-        }
-
-        .langSel {
-            margin: 0px 35px 15px 35px;
-            background-color: rgba(8, 7, 6, 0.8);
-            border: 1px solid #d9c38f;
-            width: 150px;
-            /* height: 50px; */
-            color:white;
-            font-size:18px;
-        }
-
-            .langSel option {
+            .langSel {
+                margin: 0px 35px 15px 35px;
+                background-color: rgba(8, 7, 6, 0.8);
+                border: 1px solid #d9c38f;
+                width: 150px;
+                /* height: 50px; */
                 color: white;
                 font-size: 18px;
             }
+
+                .langSel option {
+                    color: white;
+                    font-size: 18px;
+                }
+
+            .image_1 {
+                width: 300px;
+                height: 300px;
+                margin: 30px 150px 40px 150px;
+            }
+
+            .image-wrapper_1 {
+                width: 600px;
+                max-width: 100vw;
+                height: 100vh;
+                margin: auto;
+                background-color: rgba(8, 7, 6, 0.8);
+                padding: 0px 60px;
+            }
+        }
+
+        /*   移動端樣式    */
+        @media (max-width: 767px) {
+            button {
+                margin: 0;
+                padding: 0;
+                border: 1px solid transparent;
+                outline: none;
+                background-color: transparent;
+            }
+
+            .containerBrand {
+                height: calc(100vh - 50vw);
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .brand:nth-child(odd) {
+                background: url(images/btn-back-gray.png) no-repeat;
+                background-size: contain;
+            }
+
+                .brand:nth-child(odd) > button {
+                    color: #322b28;
+                }
+
+            .brand:nth-child(even) {
+                background: url(images/btn-back-black.png) no-repeat;
+                background-size: contain;
+            }
+
+                .brand:nth-child(even) > button {
+                    color: #fcfcfc;
+                }
+
+            .brand {
+                width:auto;
+                height: auto;
+                margin-bottom: 40px
+            }
+
+                .brand:hover {
+                    transform: scale(1.10);
+                    animation: brandFocus 4s linear infinite;
+                }
+
+                .brand > button {
+                    width: 180px;
+                    font-size: 26px;
+                    line-height: 45px;
+                    cursor: pointer;
+                    font-family: Georgia;
+                    margin: 10px 40px;
+                }
+
+            @keyframes brandFocus {
+                0% {
+                    filter: contrast(0.5);
+                }
+
+                50% {
+                    filter: contrast(1.0);
+                }
+
+                100% {
+                    filter: contrast(0.5);
+                }
+            }
+
+
+            .langSel_container {
+                text-align: center;
+                margin-top:20px;
+            }
+
+            .langSel {                
+                background-color: rgba(8, 7, 6, 0.8);
+                border: 1px solid #d9c38f;
+                width: 150px;
+                /* height: 50px; */
+                color: white;
+                font-size: 18px;
+            }
+
+                .langSel option {
+                    color: white;
+                    font-size: 18px;
+                }
+
+            .image_1 {
+                width: 50%;                
+                margin: 0 25%;
+            }
+
+            .image-wrapper_1 {
+                width: 600px;
+                max-width: 100vw;
+                height: 100vh;
+                margin: auto;
+                background-color: rgba(8, 7, 6, 0.8);
+                padding: 0px 0px;
+            }
+        }    
     </style>
 </head>
 <body style="background-color: rgb(3 15 36);margin:0px">
     <div class="page flex-col" style="width: 100%;height: 100vh ;background: url(images/banner.jpg) 100% repeat;
         background-size: 100% 100%;">
-        <div class="image-wrapper_1 flex-col" style="width:600px;height:100vh;margin: auto;background-color: rgba(8, 7, 6, 0.8);padding:0px 60px;">
+        <div class="image-wrapper_1 flex-col">
             <img class="image_1"
-                 referrerpolicy="no-referrer"
-                 style="width:300px;height:300px;margin: 30px 150px 40px 150px;"
+                 referrerpolicy="no-referrer"                 
                  src="images/logo_1024.png" />
 
             <div class="langSel_container">

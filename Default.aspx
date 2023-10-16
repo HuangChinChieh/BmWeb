@@ -1,6 +1,6 @@
 ﻿<%@Page Language="C#"%>
 <%
-    Response.Redirect("index.html");
+    Response.Redirect("index.aspx");
 %>
 <html>
 
