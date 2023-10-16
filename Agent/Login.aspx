@@ -391,7 +391,7 @@
 </script>
 <body class="bg_mainBody LoginBody">
     <main class="main_area main__login">
-        <div class="container loginWrapper">
+        <div class="container loginWrapper" style="background-color:aqua !important">
             <section class="login__brand">
                 <div class="heading-login text-center">
                     <span class="language_replace" onclick="showCompanyCode()">BM</span>
