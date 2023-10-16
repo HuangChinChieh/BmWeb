@@ -42,7 +42,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lucky Sprite</title>
+    <title>BM</title>
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"> -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
@@ -801,7 +801,7 @@
 
                 for (var i = 0; i < currencys.length; i++) {
                     SelectCurrencyType = currencys[0];
-                      $('#selectedWallet').append(`<option  value="${currencys[i]}">${currencys[i]}</option>`);
+                      $('#selectedWallet').append(`<option style="zoom:1.1"  value="${currencys[i]}">${currencys[i]}</option>`);
                 }
             }
             
@@ -987,7 +987,7 @@
                             <li class="nav-item navbarMenu__catagory">
                                 <span class="catagory-item"><span class="language_replace">團隊管理</span></span>
                                 <ul class="catagory">
-                                    <li class="nav-item submenu dropdown">
+                                    <li class="nav-item submenu dropdown" style="display:none">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('團隊會員'), 'UserAccount_Maint2_Casino.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-user"></i>
                                             <span class="language_replace">會員</span></a>
@@ -1012,7 +1012,7 @@
                                             <i class="icon icon-mask icon-ewin-assisant"></i>
                                             <span class="language_replace">團隊投注數據</span></a>
                                     </li>
-                                    <li class="nav-item submenu dropdown">
+                                    <li class="nav-item submenu dropdown" style="display:none">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('會員投注數據'), 'GetPlayerTotalSummary_Casino.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-assisant"></i>
                                             <span class="language_replace">會員投注數據</span></a>
@@ -1099,7 +1099,7 @@
                                             <a href="#" onclick="dataToggleDropdown(this)" class="btn btn-user btn-round nav-link btnDropDown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id=""></a>
                                             <!--下拉 dropdown-menu 選單 -->
                                             <ul class="dropdown-menu" aria-labelledby="navbar_Member">
-                                                <li id="idCreateAccount" class="nav-item" style="display: none">
+                                                <li id="idCreateAccount" class="nav-item">
                                                     <a class="nav-link icon icon-ewin-default-n-user-add language_replace " onclick="API_NewWindow(mlp.getLanguageKey('新增下線'), 'UserAccount_Add_Casino.aspx')" target="mainiframe">新增下線</a>
                                                 </li>
                                                 <li id="idMyQRCode" class="nav-item" style="display:none">

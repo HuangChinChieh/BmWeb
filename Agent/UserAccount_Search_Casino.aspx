@@ -170,6 +170,8 @@
                     if (k.WalletList[j].CurrencyType == SelectedWallet) {
                         c.setClassText(temp, "CurrencyType", null, k.WalletList[j].CurrencyType + mlp.getLanguageKey("可用餘額"));
                         c.setClassText(temp, "WalletBalance", null, c.toCurrency(k.WalletList[j].PointValue));
+                        c.setClassText(temp, "UserRate", null, c.toCurrency(k.WalletList[j].UserRate));
+                        c.setClassText(temp, "BuyChipRate", null, c.toCurrency(k.WalletList[j].BuyChipRate));
                     }
                 }
 
@@ -186,27 +188,9 @@
                     }
                 }
 
-                $(temp).find('.ModifyRemarkBtn').click(function () {
-                    var d = this;
-
-                    $(d).find('.mtRemark').hide();
-                    //$(d).find('.inputRemark').val(UserAccountNote);
-                    $(d).find('.inputRemark').show();
-                    $(d).find('.divRemarkBtn').show();
-                    //$(this).show();
+                $(temp).find('.ModifyBtn').click(function () {
+                    userUpdate(k.UserAccountID);
                 }.bind(temp));
-
-                $(temp).find('.ModifyRemarkSaveBtn').click(function () {
-                    var dd = this;
-                    updateTag($(dd).find('.inputRemark'), $(dd).find(".divRemarkBtn"), $(dd).find('.mtRemark'), k.UserAccountID);
-                }.bind(temp));
-
-                $(temp).find('.ModifyRemarkCancelBtn').click(function () {
-                    var ddd = this;
-                    $(ddd).find(".divRemarkBtn").hide();
-                    $(ddd).find(".mtRemark").show();
-                }.bind(temp));
-
 
                 if ($(temp).children().find(".GameAccountingCodeList").children().length == 0) {
                     $(temp).find('.btnOpen').hide();
@@ -231,42 +215,9 @@
             }
         }
 
-        function updateTag(docInputRemark, docModifyRemarkSaveBtn, docmtRemark, userAccountID) {
-            window.parent.API_ShowLoading();
-            var userAccountNote = docInputRemark.val();
-
-            if (userAccountNote == "") {
-                window.parent.API_ShowMessageOK("", mlp.getLanguageKey("請輸入備註"));
-                window.parent.API_CloseLoading();
-                return;
-            }
-
-            postData = {
-                AID: EWinInfo.ASID,
-                UserAccountID: userAccountID,
-                UserAccountNote: userAccountNote
-            };
-            c.callService(ApiUrl + "/UpdateUserAccountNote", postData, function (success, obj) {
-                window.parent.API_CloseLoading();
-                if (success) {
-                    var o = c.getJSON(obj);
-
-                    if (o.Result == 0) {
-                        docModifyRemarkSaveBtn.hide();
-                        docmtRemark.text(userAccountNote);
-                        docmtRemark.show();
-                        docInputRemark.hide();
-                    } else {
-                        window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o.Message));
-                    }
-                } else {
-                    if (o == "Timeout") {
-                        window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請稍後重新嘗試"));
-                    } else {
-                        window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), o);
-                    }
-                }
-            });
+        function userUpdate(userAccountID) {
+            //alert(userAccountID);
+            window.parent.API_NewWindow(mlp.getLanguageKey("會員編輯"), "UserAccount_Edit_Casino.aspx?UserAccountID=" + userAccountID);
         }
 
         function init() {
@@ -335,7 +286,7 @@
                 </div>
             </div>
 
-            <div class="totalWalletList tab-scroller">
+            <div class="totalWalletList tab-scroller" style="display: none">   
                 <div class="tab-scroller__area">
                     <div id="idParentWalletList" class="tab-scroller__content">
                         <span class="tab-item-half walletList_item itemCurrencyType active" id="tab1" onclick="changeTab(1)">
@@ -376,7 +327,7 @@
                             <i class="icon icon-ewin-default-downlineuser"></i>
                             <span class=" mtLoginAccount">--</span>
                         </span>
-                        <button class="btn btn-outline-main language_replace ModifyRemarkBtn">修改備註</button>
+                        <button class="btn btn-outline-main language_replace ModifyBtn">修改</button>
                     </div>
                     <div class="downline__info">
                         <div class="account">
@@ -387,21 +338,6 @@
                         <!-- 帳戶啟用 狀態加入 class="status-active" -->
                         <div class="downline__accountStatus-s"><i class="icon icon-ewin-default-accountStatus"></i><span class="language_replace mtUserAccountState">啟用</span></div>
                     </div>
-                    <div class="downline__info">
-                        <div class="account">
-                            <div class="role "><i class="icon icon-ewin-default-user-s"></i><span class="language_replace">備註</span></div>
-                            <div class="name">
-                                <span class="language_replace mtRemark"></span>
-                                <div style="display: none;" class="divRemarkBtn input-group form-control-underline iconCheckAnim placeholder-move-right zIndex_overMask_SafariFix">
-                                    <input type="text" class="form-control inputRemark" value="">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text ModifyRemarkSaveBtn language_replace" style="cursor: pointer; color: #C9AE7F; background-color: #2d3244; border: none; margin-right: 5px">確認</span>
-                                        <span class="input-group-text ModifyRemarkCancelBtn language_replace" style="cursor: pointer; color: #C9AE7F; background-color: #2d3244; border: none">取消</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="mtCurrencyDetailList">
 
                         <div class="downline__currencyDetail">
@@ -411,6 +347,16 @@
                                 <div class="balance">
                                     <span class="title-s"><span class="language_replace CurrencyType">可用餘額</span></span>
                                     <span class="data WalletBalance">0</span>
+                                </div>
+                                <div class="revenue" style="" itemtype="eWinBAC">
+                                    <span class="share spanUserRate">
+                                        <span class="title-s"><span class="language_replace" langkey="佔成率">佔成率</span></span>
+                                        <span class="data"><span class="data UserRate">80</span>%</span>
+                                    </span>
+                                    <span class="commission spanBuyChipRate">
+                                        <span class="title-s"><span class="language_replace" langkey="轉碼率">轉碼率</span></span>
+                                        <span class="data"><span class="data BuyChipRate">0</span>%</span>
+                                    </span>
                                 </div>
                             </div>
 

@@ -113,17 +113,17 @@
                 var t = c.getTemplate("templateTableItem");
                 c.setClassText(t, "LoginAccount", null, item.LoginAccount);
 
-                switch (item.UserAccountType) {
-                    case 0:
-                        c.setClassText(t, "UserAccountType", null, mlp.getLanguageKey("一般帳戶"));
-                        break;
-                    case 1:
-                        c.setClassText(t, "UserAccountType", null, mlp.getLanguageKey("代理"));
-                        break;
-                    case 2:
-                        c.setClassText(t, "UserAccountType", null, mlp.getLanguageKey("股東"));
-                        break;
-                }
+                //switch (item.UserAccountType) {
+                //    case 0:
+                //        c.setClassText(t, "UserAccountType", null, mlp.getLanguageKey("一般帳戶"));
+                //        break;
+                //    case 1:
+                //        c.setClassText(t, "UserAccountType", null, mlp.getLanguageKey("代理"));
+                //        break;
+                //    case 2:
+                //        c.setClassText(t, "UserAccountType", null, mlp.getLanguageKey("股東"));
+                //        break;
+                //}
 
                 var stateDom = t.querySelector(".UserAccountState");
 
@@ -239,10 +239,10 @@
                                     <span class="LoginAccount">CON5</span>
                                 </span>
                             </div>
-                            <div class="tbody__td td-number td-3 td-vertical">
+                            <%--<div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><i class="icon icon-ewin-default-accountRolling icon-s icon-before"></i><span class="language_replace">類型</span></span>
                                 <span class="td__content"><span class="UserAccountType">CON4</span></span>
-                            </div>
+                            </div>--%>
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><i class="icon icon-ewin-default-accountRolling icon-s icon-before"></i><span class="language_replace">狀態</span></span>
                                 <span class="td__content"><span class="UserAccountState">CON4</span></span>
@@ -262,7 +262,7 @@
                         <!--標題項目單行 -->
                         <div class="thead__tr">
                             <div class="thead__th"><span class="language_replace">帳號</span></div>
-                            <div class="thead__th"><span class="language_replace">類型</span></div>
+                            <%--<div class="thead__th"><span class="language_replace">類型</span></div>--%>
                             <div class="thead__th"><span class="language_replace">狀態</span></div>
                             <div class="thead__th"><span class="language_replace">最後登入時間</span></div>
                             <div class="thead__th"><span class="language_replace">建立時間</span></div>

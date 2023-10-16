@@ -40,10 +40,6 @@ public class LobbyAPI : System.Web.Services.WebService
         return lobbyAPI.HeartBeat(GUID, Echo);
     }
 
-
-
-
-
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public EWin.Lobby.APIResult UserAccountTransfer(string WebSID, string GUID, string DstLoginAccount, string DstCurrencyType, string SrcCurrencyType, decimal TransOutValue, string WalletPassword, string Description)
@@ -525,18 +521,73 @@ public class LobbyAPI : System.Web.Services.WebService
 
             if (string.IsNullOrEmpty(SID) == false)
             {
-                    R = lobbyAPI.KeepSID(GetToken(), SID, GUID);
+                R = lobbyAPI.KeepSID(GetToken(), SID, GUID);
             }
-            else { 
-                  R.Result = EWin.Lobby.enumResult.ERR;
-                }
-            
+            else {
+                R.Result = EWin.Lobby.enumResult.ERR;
+            }
+
         }
         else
         {
             R.Result = EWin.Lobby.enumResult.ERR;
         }
 
+
+        return R;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public EWin.Lobby.APIResult SetUserMail(string GUID, EWin.Lobby.enumValidateType ValidateType, CodingControl.enumSendMailType SendMailType, string EMail, string ContactPhonePrefix, string ContactPhoneNumber, string ReceiveRegisterRewardURL) {
+        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+        EWin.Lobby.ValidateCodeResult validateCodeResult;
+        EWin.Lobby.APIResult R = new EWin.Lobby.APIResult() { GUID = GUID, Result = EWin.Lobby.enumResult.ERR };
+        string ValidateCode = string.Empty;
+        TelPhoneNormalize telPhoneNormalize = new TelPhoneNormalize(ContactPhonePrefix, ContactPhoneNumber);
+        if (telPhoneNormalize != null) {
+            ContactPhonePrefix = telPhoneNormalize.PhonePrefix;
+            ContactPhoneNumber = telPhoneNormalize.PhoneNumber;
+        }
+
+        switch (SendMailType) {
+            case CodingControl.enumSendMailType.Register:
+                validateCodeResult = lobbyAPI.SetValidateCodeOnlyNumber(GetToken(), GUID, ValidateType, EMail, ContactPhonePrefix, ContactPhoneNumber);
+                if (validateCodeResult.Result == EWin.Lobby.enumResult.OK) {
+                    ValidateCode = validateCodeResult.ValidateCode;
+                }
+                break;
+            case CodingControl.enumSendMailType.ForgetPassword:
+                validateCodeResult = lobbyAPI.SetValidateCodeOnlyNumber(GetToken(), GUID, ValidateType, EMail, ContactPhonePrefix, ContactPhoneNumber);
+                if (validateCodeResult.Result == EWin.Lobby.enumResult.OK) {
+                    ValidateCode = validateCodeResult.ValidateCode;
+                }
+                break;
+            case CodingControl.enumSendMailType.ThanksLetter:
+
+                break;
+        }
+
+        switch (ValidateType) {
+            case EWin.Lobby.enumValidateType.PhoneNumber:
+                string smsContent = "Your BM OTP code is " + ValidateCode;
+                R = SendSMS(GUID, "0", 0, ContactPhonePrefix + ContactPhoneNumber, smsContent);
+                break;
+            default:
+                break;
+        }
+
+        return R;
+    }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public EWin.Lobby.APIResult SendSMS(string GUID, string SMSTypeCode, int RecvUserAccountID, string ContactNumber, string SendContent) {
+        EWin.Lobby.LobbyAPI lobbyAPI = new EWin.Lobby.LobbyAPI();
+        EWin.Lobby.APIResult R = new EWin.Lobby.APIResult() { GUID = GUID, Result = EWin.Lobby.enumResult.ERR };
+        string ValidateCode = string.Empty;
+
+        R = lobbyAPI.SendSMS(GetToken(), GUID, SMSTypeCode, RecvUserAccountID, "BM", ContactNumber, SendContent);
 
         return R;
     }
