@@ -556,6 +556,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="NewUserCount" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="NewAgentCount" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="PointValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="LinePoint" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="AgentCount" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="PlayerCount" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="UserAccountState" type="s:int" />
@@ -978,6 +979,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="ContactPhonePrefix" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="ContactPhoneNumber" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="WalletList" type="tns:ArrayOfWallet2" />
+              <s:element minOccurs="0" maxOccurs="1" name="BetLimitList" type="tns:ArrayOfBetLimit1" />
               <s:element minOccurs="0" maxOccurs="1" name="GameCodeList" type="tns:ArrayOfUserAccountGameCode" />
               <s:element minOccurs="0" maxOccurs="1" name="MultiLoginList" type="tns:ArrayOfMultiLogin" />
             </s:sequence>
@@ -999,6 +1001,29 @@
           <s:element minOccurs="1" maxOccurs="1" name="TotalChildPointValue" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="UserRate" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="BuyChipRate" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfBetLimit1">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BetLimit1" nillable="true" type="tns:BetLimit1" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BetLimit1">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="BetLimitID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="forCompanyID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BetLimitType" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserBalance" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="AssignType" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MinBetPlayer" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MinBetBanker" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaxBet" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MinBetTie" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaxBetTie" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MinBetPair" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaxBetPair" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="forBetLimitID" type="s:int" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="ArrayOfUserAccountGameCode">
@@ -1399,6 +1424,28 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="SetUserWalletPasswordByValidateCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CompanyCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GUID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ValidateType" type="tns:enumValidateType" />
+            <s:element minOccurs="0" maxOccurs="1" name="EMail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ContactPhonePrefix" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ContactPhoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ValidateCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NewPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetUserWalletPasswordByValidateCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetUserWalletPasswordByValidateCodeResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetUserAccountByTargetLoginAccount">
         <s:complexType>
           <s:sequence>
@@ -1433,6 +1480,63 @@
           </s:extension>
         </s:complexContent>
       </s:complexType>
+      <s:element name="GetUserAccountBetLimit">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserAccountBetLimitResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserAccountBetLimitResult" type="tns:UserAccountBetLimit" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UserAccountBetLimit">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Data" type="tns:ArrayOfBetLimit1" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="CheckChildAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckChildAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckChildAccountResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserAccountTransfer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DstLoginAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="TransOutValue" type="s:decimal" />
+            <s:element minOccurs="0" maxOccurs="1" name="WalletPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserAccountTransferResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UserAccountTransferResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="LoginResult" nillable="true" type="tns:LoginResult" />
       <s:element name="PhoneResult" nillable="true" type="tns:PhoneResult" />
       <s:element name="UserTag" nillable="true" type="tns:UserTag" />
@@ -1451,6 +1555,7 @@
       <s:element name="ChildUserInfoResult" nillable="true" type="tns:ChildUserInfoResult" />
       <s:element name="UserAccountPropertyResult" nillable="true" type="tns:UserAccountPropertyResult" />
       <s:element name="ChildUserInfoResult1" nillable="true" type="tns:ChildUserInfoResult1" />
+      <s:element name="UserAccountBetLimit" nillable="true" type="tns:UserAccountBetLimit" />
     </s:schema>
   </wsdl:types>
   <wsdl:message name="AgentLoginSoapIn">
@@ -1687,11 +1792,35 @@
   <wsdl:message name="SetUserPasswordByValidateCodeSoapOut">
     <wsdl:part name="parameters" element="tns:SetUserPasswordByValidateCodeResponse" />
   </wsdl:message>
+  <wsdl:message name="SetUserWalletPasswordByValidateCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:SetUserWalletPasswordByValidateCode" />
+  </wsdl:message>
+  <wsdl:message name="SetUserWalletPasswordByValidateCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:SetUserWalletPasswordByValidateCodeResponse" />
+  </wsdl:message>
   <wsdl:message name="GetUserAccountByTargetLoginAccountSoapIn">
     <wsdl:part name="parameters" element="tns:GetUserAccountByTargetLoginAccount" />
   </wsdl:message>
   <wsdl:message name="GetUserAccountByTargetLoginAccountSoapOut">
     <wsdl:part name="parameters" element="tns:GetUserAccountByTargetLoginAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountBetLimitSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserAccountBetLimit" />
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountBetLimitSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserAccountBetLimitResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckChildAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckChildAccount" />
+  </wsdl:message>
+  <wsdl:message name="CheckChildAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckChildAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserAccountTransferSoapIn">
+    <wsdl:part name="parameters" element="tns:UserAccountTransfer" />
+  </wsdl:message>
+  <wsdl:message name="UserAccountTransferSoapOut">
+    <wsdl:part name="parameters" element="tns:UserAccountTransferResponse" />
   </wsdl:message>
   <wsdl:message name="AgentLoginHttpGetIn">
     <wsdl:part name="LoginGUID" type="s:string" />
@@ -2014,6 +2143,20 @@
   <wsdl:message name="SetUserPasswordByValidateCodeHttpGetOut">
     <wsdl:part name="Body" element="tns:APIResult" />
   </wsdl:message>
+  <wsdl:message name="SetUserWalletPasswordByValidateCodeHttpGetIn">
+    <wsdl:part name="CompanyCode" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="ValidateType" type="s:string" />
+    <wsdl:part name="EMail" type="s:string" />
+    <wsdl:part name="ContactPhonePrefix" type="s:string" />
+    <wsdl:part name="ContactPhoneNumber" type="s:string" />
+    <wsdl:part name="ValidateCode" type="s:string" />
+    <wsdl:part name="NewPassword" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetUserWalletPasswordByValidateCodeHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
   <wsdl:message name="GetUserAccountByTargetLoginAccountHttpGetIn">
     <wsdl:part name="AID" type="s:string" />
     <wsdl:part name="TargetLoginAccount" type="s:string" />
@@ -2023,6 +2166,30 @@
   </wsdl:message>
   <wsdl:message name="GetUserAccountByTargetLoginAccountHttpGetOut">
     <wsdl:part name="Body" element="tns:ChildUserInfoResult1" />
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountBetLimitHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountBetLimitHttpGetOut">
+    <wsdl:part name="Body" element="tns:UserAccountBetLimit" />
+  </wsdl:message>
+  <wsdl:message name="CheckChildAccountHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckChildAccountHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="UserAccountTransferHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="DstLoginAccount" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+    <wsdl:part name="TransOutValue" type="s:string" />
+    <wsdl:part name="WalletPassword" type="s:string" />
+    <wsdl:part name="Description" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UserAccountTransferHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
   </wsdl:message>
   <wsdl:message name="AgentLoginHttpPostIn">
     <wsdl:part name="LoginGUID" type="s:string" />
@@ -2345,6 +2512,20 @@
   <wsdl:message name="SetUserPasswordByValidateCodeHttpPostOut">
     <wsdl:part name="Body" element="tns:APIResult" />
   </wsdl:message>
+  <wsdl:message name="SetUserWalletPasswordByValidateCodeHttpPostIn">
+    <wsdl:part name="CompanyCode" type="s:string" />
+    <wsdl:part name="GUID" type="s:string" />
+    <wsdl:part name="ValidateType" type="s:string" />
+    <wsdl:part name="EMail" type="s:string" />
+    <wsdl:part name="ContactPhonePrefix" type="s:string" />
+    <wsdl:part name="ContactPhoneNumber" type="s:string" />
+    <wsdl:part name="ValidateCode" type="s:string" />
+    <wsdl:part name="NewPassword" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetUserWalletPasswordByValidateCodeHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
   <wsdl:message name="GetUserAccountByTargetLoginAccountHttpPostIn">
     <wsdl:part name="AID" type="s:string" />
     <wsdl:part name="TargetLoginAccount" type="s:string" />
@@ -2354,6 +2535,30 @@
   </wsdl:message>
   <wsdl:message name="GetUserAccountByTargetLoginAccountHttpPostOut">
     <wsdl:part name="Body" element="tns:ChildUserInfoResult1" />
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountBetLimitHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountBetLimitHttpPostOut">
+    <wsdl:part name="Body" element="tns:UserAccountBetLimit" />
+  </wsdl:message>
+  <wsdl:message name="CheckChildAccountHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckChildAccountHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
+  <wsdl:message name="UserAccountTransferHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="DstLoginAccount" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+    <wsdl:part name="TransOutValue" type="s:string" />
+    <wsdl:part name="WalletPassword" type="s:string" />
+    <wsdl:part name="Description" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UserAccountTransferHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
   </wsdl:message>
   <wsdl:portType name="BmAgentSoap">
     <wsdl:operation name="AgentLogin">
@@ -2512,9 +2717,25 @@
       <wsdl:input message="tns:SetUserPasswordByValidateCodeSoapIn" />
       <wsdl:output message="tns:SetUserPasswordByValidateCodeSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="SetUserWalletPasswordByValidateCode">
+      <wsdl:input message="tns:SetUserWalletPasswordByValidateCodeSoapIn" />
+      <wsdl:output message="tns:SetUserWalletPasswordByValidateCodeSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetUserAccountByTargetLoginAccount">
       <wsdl:input message="tns:GetUserAccountByTargetLoginAccountSoapIn" />
       <wsdl:output message="tns:GetUserAccountByTargetLoginAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserAccountBetLimit">
+      <wsdl:input message="tns:GetUserAccountBetLimitSoapIn" />
+      <wsdl:output message="tns:GetUserAccountBetLimitSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckChildAccount">
+      <wsdl:input message="tns:CheckChildAccountSoapIn" />
+      <wsdl:output message="tns:CheckChildAccountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserAccountTransfer">
+      <wsdl:input message="tns:UserAccountTransferSoapIn" />
+      <wsdl:output message="tns:UserAccountTransferSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="BmAgentHttpGet">
@@ -2666,9 +2887,25 @@
       <wsdl:input message="tns:SetUserPasswordByValidateCodeHttpGetIn" />
       <wsdl:output message="tns:SetUserPasswordByValidateCodeHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="SetUserWalletPasswordByValidateCode">
+      <wsdl:input message="tns:SetUserWalletPasswordByValidateCodeHttpGetIn" />
+      <wsdl:output message="tns:SetUserWalletPasswordByValidateCodeHttpGetOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetUserAccountByTargetLoginAccount">
       <wsdl:input message="tns:GetUserAccountByTargetLoginAccountHttpGetIn" />
       <wsdl:output message="tns:GetUserAccountByTargetLoginAccountHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserAccountBetLimit">
+      <wsdl:input message="tns:GetUserAccountBetLimitHttpGetIn" />
+      <wsdl:output message="tns:GetUserAccountBetLimitHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckChildAccount">
+      <wsdl:input message="tns:CheckChildAccountHttpGetIn" />
+      <wsdl:output message="tns:CheckChildAccountHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserAccountTransfer">
+      <wsdl:input message="tns:UserAccountTransferHttpGetIn" />
+      <wsdl:output message="tns:UserAccountTransferHttpGetOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="BmAgentHttpPost">
@@ -2820,9 +3057,25 @@
       <wsdl:input message="tns:SetUserPasswordByValidateCodeHttpPostIn" />
       <wsdl:output message="tns:SetUserPasswordByValidateCodeHttpPostOut" />
     </wsdl:operation>
+    <wsdl:operation name="SetUserWalletPasswordByValidateCode">
+      <wsdl:input message="tns:SetUserWalletPasswordByValidateCodeHttpPostIn" />
+      <wsdl:output message="tns:SetUserWalletPasswordByValidateCodeHttpPostOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetUserAccountByTargetLoginAccount">
       <wsdl:input message="tns:GetUserAccountByTargetLoginAccountHttpPostIn" />
       <wsdl:output message="tns:GetUserAccountByTargetLoginAccountHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserAccountBetLimit">
+      <wsdl:input message="tns:GetUserAccountBetLimitHttpPostIn" />
+      <wsdl:output message="tns:GetUserAccountBetLimitHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckChildAccount">
+      <wsdl:input message="tns:CheckChildAccountHttpPostIn" />
+      <wsdl:output message="tns:CheckChildAccountHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserAccountTransfer">
+      <wsdl:input message="tns:UserAccountTransferHttpPostIn" />
+      <wsdl:output message="tns:UserAccountTransferHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BmAgentSoap" type="tns:BmAgentSoap">
@@ -3178,8 +3431,44 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SetUserWalletPasswordByValidateCode">
+      <soap:operation soapAction="http://tempuri.org/SetUserWalletPasswordByValidateCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetUserAccountByTargetLoginAccount">
       <soap:operation soapAction="http://tempuri.org/GetUserAccountByTargetLoginAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserAccountBetLimit">
+      <soap:operation soapAction="http://tempuri.org/GetUserAccountBetLimit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckChildAccount">
+      <soap:operation soapAction="http://tempuri.org/CheckChildAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserAccountTransfer">
+      <soap:operation soapAction="http://tempuri.org/UserAccountTransfer" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -3541,8 +3830,44 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SetUserWalletPasswordByValidateCode">
+      <soap12:operation soapAction="http://tempuri.org/SetUserWalletPasswordByValidateCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetUserAccountByTargetLoginAccount">
       <soap12:operation soapAction="http://tempuri.org/GetUserAccountByTargetLoginAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserAccountBetLimit">
+      <soap12:operation soapAction="http://tempuri.org/GetUserAccountBetLimit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckChildAccount">
+      <soap12:operation soapAction="http://tempuri.org/CheckChildAccount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserAccountTransfer">
+      <soap12:operation soapAction="http://tempuri.org/UserAccountTransfer" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -3886,8 +4211,44 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SetUserWalletPasswordByValidateCode">
+      <http:operation location="/SetUserWalletPasswordByValidateCode" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetUserAccountByTargetLoginAccount">
       <http:operation location="/GetUserAccountByTargetLoginAccount" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserAccountBetLimit">
+      <http:operation location="/GetUserAccountBetLimit" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckChildAccount">
+      <http:operation location="/CheckChildAccount" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserAccountTransfer">
+      <http:operation location="/UserAccountTransfer" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -4231,8 +4592,44 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SetUserWalletPasswordByValidateCode">
+      <http:operation location="/SetUserWalletPasswordByValidateCode" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetUserAccountByTargetLoginAccount">
       <http:operation location="/GetUserAccountByTargetLoginAccount" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserAccountBetLimit">
+      <http:operation location="/GetUserAccountBetLimit" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckChildAccount">
+      <http:operation location="/CheckChildAccount" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserAccountTransfer">
+      <http:operation location="/UserAccountTransfer" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

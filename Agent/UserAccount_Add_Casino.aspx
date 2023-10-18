@@ -60,6 +60,16 @@
             }
         }
 
+        if (form.WalletPassword.value == "") {
+            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入錢包密碼"));
+            retValue = false;
+        } else {
+            if (form.WalletPassword.value != form.WalletPassword2.value) {
+                window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("錢包密碼二次驗證失敗"));
+                retValue = false;
+            }
+        }
+
         CheckAccountPhoneExist(function (check) {
             if (check) {
                 // 檢查所有錢包數值
@@ -344,6 +354,9 @@
             if ((form.LoginPassword.value != "") && (form.LoginPassword.value != null)) {
                 userList[userList.length] = { Name: "LoginPassword", Value: form.LoginPassword.value };
             }
+            if ((form.WalletPassword.value != "") && (form.WalletPassword.value != null)) {
+                userList[userList.length] = { Name: "WalletPassword", Value: form.WalletPassword.value };
+            }
             userList[userList.length] = { Name: "UserAccountType", Value: uType };
             userList[userList.length] = { Name: "UserAccountState", Value: 0 };
             userList[userList.length] = { Name: "RealName", Value: form.RealName.value };
@@ -376,8 +389,6 @@
             userList[userList.length] = { Name: "AllowServiceChat", Value: AllowServiceChat };
 
             userList[userList.length] = { Name: "AllowBet", Value: 3 };
-
-
 
             // 建立錢包更新物件
             for (var i = 0; i < idPointList.children.length; i++) {
@@ -451,6 +462,26 @@
                 }
             }
 
+            for (var i = 0; i < $("#idBetLimit0 .tempRadio:checked").length; i++) {
+                let k = {
+                    BetLimitID: $("#idBetLimit0 .tempRadio:checked").eq(i).attr("data-id")
+                }
+                userList[userList.length] = {
+                    Name: "BetLimit",
+                    Value: JSON.stringify(k)
+                };
+            }
+
+            for (var i = 0; i < $("#idBetLimit1 .tempRadio:checked").length; i++) {
+                let k = {
+                    BetLimitID: $("#idBetLimit1 .tempRadio:checked").eq(i).attr("data-id")
+                }
+                userList[userList.length] = {
+                    Name: "BetLimit",
+                    Value: JSON.stringify(k)
+                };
+            }
+
             if (retValue) {
 
                 postObj = {
@@ -459,7 +490,7 @@
                     UserField: userList
                 }
                 processing = true;
-            
+
                 window.parent.API_ShowLoading("Sending");
                 $("#btnSave").hide();
 
@@ -618,6 +649,67 @@
 
     }
 
+    function setBetLimit() {
+        if (EWinInfo.BetLimitInfo != null) {
+            if (EWinInfo.BetLimitInfo.length > 0) {
+                for (var i = 0; i < EWinInfo.BetLimitInfo.length; i++) {
+                    let tmp = $("#templateBetLimitItem").children().clone();
+                    let bl = EWinInfo.BetLimitInfo[i];
+
+                    let BetLimitType = bl.BetLimitType;
+                    let BetLimitB = bl.MinBetBanker + " - " + bl.MaxBet;
+                    let BetLimitP = bl.MinBetPlayer + " - " + bl.MaxBet;
+                    let BetLimitT = bl.MinBetTie + " - " + bl.MaxBetTie;
+                    let BetLimitPair = bl.MinBetPair + " - " + bl.MaxBetPair;
+                    
+                    $(tmp).find(".tempRadio").attr("data-id", bl.BetLimitID);
+                    $(tmp).find(".BetLimitCurrencyType").text(bl.CurrencyType);
+                    $(tmp).find(".BetLimitB").text(BetLimitB);
+                    $(tmp).find(".BetLimitP").text(BetLimitP);
+                    $(tmp).find(".BetLimitT").text(BetLimitT);
+                    $(tmp).find(".BetLimitPair").text(BetLimitPair);
+                    $(tmp).show();
+
+                    switch (BetLimitType) {
+                        case 0:
+                            $("#idBetLimit0").append(tmp);
+                            break;
+                        case 1:
+                            $("#idBetLimit1").append(tmp);
+                            break;
+                        default:
+                            $("#idBetLimit0").append(tmp);
+                            $("#idBetLimit1").append(tmp);
+                            break;
+                    }
+
+                }
+            } else {
+                $("#divBetLimit0").hide();
+                $("#divBetLimit1").hide();
+            }
+        } else {
+            $("#divBetLimit0").hide();
+            $("#divBetLimit1").hide();
+        }
+    }
+
+    function chkData(el) {
+        var i;
+        var groupEl = document.getElementsByName(el.name);
+
+        if (el.checked == true) {
+            for (i = 0; i < groupEl.length; i++) {
+                groupEl[i].checked = true;
+            }
+        }
+        else {
+            for (i = 0; i < groupEl.length; i++) {
+                groupEl[i].checked = false;
+            }
+        }
+    }
+
     function CheckAccountPhoneExist(cb) {
 
         var idPhonePrefix = document.getElementById("ContactPhonePrefix");
@@ -668,9 +760,9 @@
     function applyGameInfo() {
         let tmpPointUserRate = $(".tmpPointUserRate").val();
         let tmpPointBuyChipRate = $(".tmpPointBuyChipRate").val();
-        
-         $(`#idPointList [gamecodecurrencytype=${SelectGameCodeCurrencyType}] .PointUserRate`).val(tmpPointUserRate);
-         $(`#idPointList [gamecodecurrencytype=${SelectGameCodeCurrencyType}] .PointBuyChipRate`).val(tmpPointBuyChipRate);
+
+        $(`#idPointList [gamecodecurrencytype=${SelectGameCodeCurrencyType}] .PointUserRate`).val(tmpPointUserRate);
+        $(`#idPointList [gamecodecurrencytype=${SelectGameCodeCurrencyType}] .PointBuyChipRate`).val(tmpPointBuyChipRate);
     }
 
     function Selectgamecodecurrency() {
@@ -692,16 +784,9 @@
             EWinInfo = window.parent.EWinInfo;
             queryCurrentUserInfo();
             //setUserAccountType();
+            setBetLimit();
             uType = 1;
             document.getElementById("idUserAccountType").innerText = mlp.getLanguageKey("代理");
-
-            //var select = document.getElementById("ContactPhonePrefix");
-            //select.innerHTML = "";
-
-            //var option = document.createElement("option");
-            //option.text = mlp.getLanguageKey("+63 菲律賓");
-            //option.value = "+63";
-            //select.appendChild(option);
 
             if (EWinInfo.MainCurrencyType) {
                 Wallets = EWinInfo.MainCurrencyType.split(';');
@@ -834,6 +919,24 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- password input =============== -->
+                                <div class="col-12 form-group row no-gutters">
+                                    <div class="col-12">
+                                        <label class="title"><span class="title_name"><i class="icon icon-ewin-default-accountPassword icon-s icon-before"></i><span class="language_replace">錢包密碼</span></span>                        </label>
+                                    </div>
+                                    <div class="col-12 col-smd-6 pr-smd-1">
+                                        <div class="form-control-underline">
+                                            <input type="password" class="form-control" name="WalletPassword" id="WalletPassword" language_replace="placeholder" placeholder="請輸入錢包密碼">
+                                            <label for="password" class="form-label "><span class="language_replace">請輸入錢包密碼</span></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-smd-6 mt-3 mt-smd-0 pl-smd-1">
+                                        <div class="form-control-underline">
+                                            <input type="password" class="form-control" name="WalletPassword2" id="WalletPassword2" language_replace="placeholder" placeholder="確認密碼">
+                                            <label for="password" class="form-label "><span class="language_replace">確認密碼</span></label>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!-- <div class="col-12 form-group row no-gutters">                              
                                 <div class="col-12">
                                     <div class="form-control-underline">
@@ -890,7 +993,7 @@
 
                         <fieldset class="dataFieldset">
                             <legend class="dataFieldset-title language_replace hidden shown-lg">錢包管理</legend>
-                            <div class="row" style="padding-bottom: 5px;display:none">
+                            <div class="row" style="padding-bottom: 5px; display: none">
 
                                 <div class="col-12 col-smd-3 pr-smd-1">
                                     <div>
@@ -899,19 +1002,19 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-12 col-smd-3 pr-smd-1" style="display:none">
+                                <div class="col-12 col-smd-3 pr-smd-1" style="display: none">
                                     <div>
                                         <label for="password" class="form-label "><span class="language_replace">佔成率(%)</span></label>
                                         <input type="text" class="form-control tmpPointUserRate" value="0">
                                     </div>
                                 </div>
-                                <div class="col-12 col-smd-3 mt-3 mt-smd-0 pl-smd-1" style="display:none">
+                                <div class="col-12 col-smd-3 mt-3 mt-smd-0 pl-smd-1" style="display: none">
                                     <div>
                                         <label for="password" class="form-label "><span class="language_replace">轉碼率(%)</span></label>
                                         <input type="text" class="form-control tmpPointBuyChipRate" value="0">
                                     </div>
                                 </div>
-                                <div class="col-12 col-smd-3 mt-3 mt-smd-0 pl-smd-1" style="display:none">
+                                <div class="col-12 col-smd-3 mt-3 mt-smd-0 pl-smd-1" style="display: none">
                                     <div>
                                         <label for="password" class="form-label "><span class="language_replace"></span></label>
                                         <button type="button" class="btn btn-full-main form-control" onclick="applyGameInfo()">
@@ -930,7 +1033,7 @@
                                             <div class="thead__th">
                                                 <span class="language_replace">貨幣</span>
                                             </div>
-                                            <div class="thead__th" style="display:none">
+                                            <div class="thead__th" style="display: none">
                                                 <span class="language_replace">遊戲類型</span>
                                             </div>
                                             <div class="thead__th">
@@ -957,7 +1060,7 @@
                                                     </span>
                                                 </span>
                                             </div>
-                                            <div class="tbody__td td-3 td-vertical" style="display:none">
+                                            <div class="tbody__td td-3 td-vertical" style="display: none">
                                                 <span class="td__title">
                                                     <span class="language_replace">遊戲代碼</span>
                                                 </span>
@@ -971,7 +1074,7 @@
                                                 </span>
                                                 <span class="td__content">
                                                     <div class="form-control-hidden ADJ_userRate">
-                                                        <input type="text" class="form-control PointUserRate" language_replace="placeholder" placeholder="佔成率上限" value="0"  style="background-color:rgba(255, 255, 255, 0.1) !important">
+                                                        <input type="text" class="form-control PointUserRate" language_replace="placeholder" placeholder="佔成率上限" value="0" style="background-color: rgba(255, 255, 255, 0.1) !important">
                                                         <!-- placholder label -->
                                                         <label class="form-label span_parentUserRate">
                                                             <span class="language_replace">上線</span><span class="number"><span class="parentUserRate"></span>%</span>
@@ -985,7 +1088,7 @@
                                                 </span>
                                                 <span class="td__content">
                                                     <div class="form-control-hidden ADJ_userRate">
-                                                        <input type="text" class="form-control PointBuyChipRate" language_replace="placeholder" placeholder="轉碼率上限" value="0" style="background-color:rgba(255, 255, 255, 0.1) !important">
+                                                        <input type="text" class="form-control PointBuyChipRate" language_replace="placeholder" placeholder="轉碼率上限" value="0" style="background-color: rgba(255, 255, 255, 0.1) !important">
                                                         <!-- placholder label -->
                                                         <label class="form-label span_parentBuyChipRate">
                                                             <span class="language_replace">上線</span><span class="number"><span class="parentBuyChipRate"></span>%</span>
@@ -1007,13 +1110,154 @@
 
                             </div>
                         </fieldset>
+
+                        <fieldset class="dataFieldset" id="divBetLimit0">
+                            <legend class="dataFieldset-title language_replace hidden shown-lg">快速電投</legend>
+                            <div class="MT__tableDiv">
+                                <!-- 自訂表格 -->
+                                <div class="MT__table MT__table--Sub table-col-7">
+                                    <!-- 標題項目  -->
+                                    <div class="thead">
+                                        <!--標題項目單行 -->
+                                        <div class="thead__tr">
+                                            <div class="thead__th">
+                                                <span class="language_replace"></span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">貨幣</span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">庄</span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">閒</span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">和</span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">對子</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 表格上下滑動框 -->
+                                    <div id="templateBetLimitItem" style="display:none">
+                                        <!--表格內容單行 -->
+                                        <div class="tbody__tr">
+                                            <div class="tbody__td td-3 td-vertical">
+                                                <div class="custom-control custom-checkboxValue custom-control-inline check-bg">
+                                                    <label class="custom-label">
+                                                        <input type="checkbox" class="custom-control-input-hidden tempRadio" onclick="chkData(this)">
+                                                        <div class="custom-input checkbox"></div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="tbody__td td-3 td-vertical">
+                                                <span class="td__title">
+                                                    <span class="language_replace"></span>
+                                                </span>
+                                                <span class="td__content">
+                                                    <span class="language_replace BetLimitCurrencyType"></span>
+                                                </span>
+                                            </div>
+                                            <div class="tbody__td td-3 td-vertical">
+                                                <span class="td__title">
+                                                    <span class="language_replace"></span>
+                                                </span>
+                                                <span class="td__content">
+                                                    <span class="language_replace BetLimitB">CNY</span>
+                                                </span>
+                                            </div>
+                                            <div class="tbody__td td-3 td-vertical">
+                                                <span class="td__title">
+                                                    <span class="language_replace"></span>
+                                                </span>
+                                                <span class="td__content">
+                                                    <span class="language_replace BetLimitP"></span>
+                                                </span>
+                                            </div>
+                                            <div class="tbody__td td-3 td-vertical">
+                                                <span class="td__title">
+                                                    <span class="language_replace"></span>
+                                                </span>
+                                                <span class="td__content">
+                                                    <span class="language_replace BetLimitT"></span>
+                                                </span>
+                                            </div>
+                                            <div class="tbody__td td-3 td-vertical">
+                                                <span class="td__title">
+                                                    <span class="language_replace"></span>
+                                                </span>
+                                                <span class="td__content">
+                                                    <span class="language_replace BetLimitPair"></span>
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- END OF templateWalletItem  -->
+
+                                    <!-- 原本的寫法 寫在 tbody裡-->
+                                    <!-- <div id="idPointList" class="wallet_PointList">
+                                    </div> -->
+                                    <div id="idBetLimit0" class="tbody wallet_PointList userAccount_Edit">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="dataFieldset" id="divBetLimit1">
+                            <legend class="dataFieldset-title language_replace hidden shown-lg">網投</legend>
+                            <div class="MT__tableDiv">
+                                <!-- 自訂表格 -->
+                                <div class="MT__table MT__table--Sub table-col-7">
+                                    <!-- 標題項目  -->
+                                    <div class="thead">
+                                        <!--標題項目單行 -->
+                                        <div class="thead__tr">
+                                            <div class="thead__th">
+                                                <span class="language_replace"></span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">貨幣</span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">庄</span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">閒</span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">和</span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">對子</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 表格上下滑動框 -->
+                                    
+                                    <!-- END OF templateWalletItem  -->
+
+                                    <!-- 原本的寫法 寫在 tbody裡-->
+                                    <!-- <div id="idPointList" class="wallet_PointList">
+                                    </div> -->
+                                    <div id="idBetLimit1" class="tbody wallet_PointList userAccount_Edit">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </fieldset>
+
                         <div class="wrapper_center fixed-Bottom last-step-execute btn-group-lg">
                             <button type="button" class="btn btn-outline-main " onclick="closePage(this)"><i class="icon icon-before icon-ewin-input-cancel"></i><span class="language_replace">取消</span></button>
                             <button type="button" class="btn btn-full-main hidden-lg" onclick="previousStep(this)" data-step="1"><i class="icon icon-before icon-ewin-input-arrow-left"></i><span class="language_replace">上一步</span></button>
                             <button type="button" class="btn btn-full-main" onclick="checkFormData()" id="btnSave"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">送出</span></button>
                         </div>
                     </div>
-
                     <div id="BetLimitTab" class="BetLimitTab bitLimitDIV" style="display: none">
                         <ul class="nav-tabs-block nav nav-tabs tab-items-2" role="tablist">
                             <li class="nav-item">

@@ -419,6 +419,10 @@
                         }
                     }
 
+                    if (obj.BetLimitList!= null) {
+                        setBetLimit(obj.BetLimitList);
+                    }
+
                 } else {
                     window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), obj.Message);
                 }
@@ -518,6 +522,26 @@
                     };
 
                 }
+            }
+
+            for (var i = 0; i < $("#idBetLimit0 .tempRadio:checked").length; i++) {
+                let k = {
+                    BetLimitID: $("#idBetLimit0 .tempRadio:checked").eq(i).attr("data-id")
+                }
+                userList[userList.length] = {
+                    Name: "BetLimit",
+                    Value: JSON.stringify(k)
+                };
+            }
+
+            for (var i = 0; i < $("#idBetLimit1 .tempRadio:checked").length; i++) {
+                let k = {
+                    BetLimitID: $("#idBetLimit1 .tempRadio:checked").eq(i).attr("data-id")
+                }
+                userList[userList.length] = {
+                    Name: "BetLimit",
+                    Value: JSON.stringify(k)
+                };
             }
 
             if (retValue) {
@@ -705,6 +729,73 @@
     function ShowGameCodeByCurrency() {
         $("#idPointList").children().hide();
         $(`#idPointList [gamecodecurrencytype=${SelectGameCodeCurrencyType}]`).show();
+    }
+
+    function chkData(el) {
+        var i;
+        var groupEl = document.getElementsByName(el.name);
+
+        if (el.checked == true) {
+            for (i = 0; i < groupEl.length; i++) {
+                groupEl[i].checked = true;
+            }
+        }
+        else {
+            for (i = 0; i < groupEl.length; i++) {
+                groupEl[i].checked = false;
+            }
+        }
+    }
+
+    function setBetLimit(BetLimitList) {
+        if (BetLimitList != null) {
+            if (BetLimitList.length > 0) {
+                for (var i = 0; i < BetLimitList.length; i++) {
+                    let tmp = $("#templateBetLimitItem").children().clone();
+                    let bl = BetLimitList[i];
+
+                    let BetLimitType = bl.BetLimitType;
+                    let forBetLimitID = bl.forBetLimitID;
+                    let BetLimitB = bl.MinBetBanker + " - " + bl.MaxBet;
+                    let BetLimitP = bl.MinBetPlayer + " - " + bl.MaxBet;
+                    let BetLimitT = bl.MinBetTie + " - " + bl.MaxBetTie;
+                    let BetLimitPair = bl.MinBetPair + " - " + bl.MaxBetPair;
+                    
+                    $(tmp).find(".tempRadio").attr("data-id", bl.BetLimitID);
+                    $(tmp).find(".BetLimitCurrencyType").text(bl.CurrencyType);
+                    $(tmp).find(".BetLimitB").text(BetLimitB);
+                    $(tmp).find(".BetLimitP").text(BetLimitP);
+                    $(tmp).find(".BetLimitT").text(BetLimitT);
+                    $(tmp).find(".BetLimitPair").text(BetLimitPair);
+
+                    if (forBetLimitID != 0) {
+                        $(tmp).find(".tempRadio").attr("checked", "checked");
+                    }
+
+                    $(tmp).show();
+
+                    switch (BetLimitType) {
+                        case 0:
+                            $("#idBetLimit0").append(tmp);
+                            break;
+                        case 1:
+                            $("#idBetLimit1").append(tmp);
+                            break;
+                        default:
+                            $("#idBetLimit0").append(tmp);
+                            $("#idBetLimit1").append(tmp);
+                            break;
+                    }
+
+                }
+            } else {
+                $("#divBetLimit0").hide();
+                $("#divBetLimit1").hide();
+            }
+        } else {
+            $("#divBetLimit0").hide();
+            $("#divBetLimit1").hide();
+        }
     }
 
     function CheckAccountPhoneExist(cb) {
@@ -1022,6 +1113,147 @@
                                     <!-- <div id="idPointList" class="wallet_PointList">
                                     </div> -->
                                     <div id="idPointList" class="tbody wallet_PointList userAccount_Edit">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="dataFieldset" id="divBetLimit0">
+                            <legend class="dataFieldset-title language_replace hidden shown-lg">快速電投</legend>
+                            <div class="MT__tableDiv">
+                                <!-- 自訂表格 -->
+                                <div class="MT__table MT__table--Sub table-col-7">
+                                    <!-- 標題項目  -->
+                                    <div class="thead">
+                                        <!--標題項目單行 -->
+                                        <div class="thead__tr">
+                                            <div class="thead__th">
+                                                <span class="language_replace"></span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">貨幣</span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">庄</span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">閒</span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">和</span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">對子</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 表格上下滑動框 -->
+                                    <div id="templateBetLimitItem" style="display:none">
+                                        <!--表格內容單行 -->
+                                        <div class="tbody__tr">
+                                            <div class="tbody__td td-3 td-vertical">
+                                                <div class="custom-control custom-checkboxValue custom-control-inline check-bg">
+                                                    <label class="custom-label">
+                                                        <input type="checkbox" class="custom-control-input-hidden tempRadio" onclick="chkData(this)">
+                                                        <div class="custom-input checkbox"></div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="tbody__td td-3 td-vertical">
+                                                <span class="td__title">
+                                                    <span class="language_replace"></span>
+                                                </span>
+                                                <span class="td__content">
+                                                    <span class="language_replace BetLimitCurrencyType"></span>
+                                                </span>
+                                            </div>
+                                            <div class="tbody__td td-3 td-vertical">
+                                                <span class="td__title">
+                                                    <span class="language_replace"></span>
+                                                </span>
+                                                <span class="td__content">
+                                                    <span class="language_replace BetLimitB">CNY</span>
+                                                </span>
+                                            </div>
+                                            <div class="tbody__td td-3 td-vertical">
+                                                <span class="td__title">
+                                                    <span class="language_replace"></span>
+                                                </span>
+                                                <span class="td__content">
+                                                    <span class="language_replace BetLimitP"></span>
+                                                </span>
+                                            </div>
+                                            <div class="tbody__td td-3 td-vertical">
+                                                <span class="td__title">
+                                                    <span class="language_replace"></span>
+                                                </span>
+                                                <span class="td__content">
+                                                    <span class="language_replace BetLimitT"></span>
+                                                </span>
+                                            </div>
+                                            <div class="tbody__td td-3 td-vertical">
+                                                <span class="td__title">
+                                                    <span class="language_replace"></span>
+                                                </span>
+                                                <span class="td__content">
+                                                    <span class="language_replace BetLimitPair"></span>
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- END OF templateWalletItem  -->
+
+                                    <!-- 原本的寫法 寫在 tbody裡-->
+                                    <!-- <div id="idPointList" class="wallet_PointList">
+                                    </div> -->
+                                    <div id="idBetLimit0" class="tbody wallet_PointList userAccount_Edit">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="dataFieldset" id="divBetLimit1">
+                            <legend class="dataFieldset-title language_replace hidden shown-lg">網投</legend>
+                            <div class="MT__tableDiv">
+                                <!-- 自訂表格 -->
+                                <div class="MT__table MT__table--Sub table-col-7">
+                                    <!-- 標題項目  -->
+                                    <div class="thead">
+                                        <!--標題項目單行 -->
+                                        <div class="thead__tr">
+                                            <div class="thead__th">
+                                                <span class="language_replace"></span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">貨幣</span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">庄</span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">閒</span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">和</span>
+                                            </div>
+                                            <div class="thead__th">
+                                                <span class="language_replace">對子</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 表格上下滑動框 -->
+                                    
+                                    <!-- END OF templateWalletItem  -->
+
+                                    <!-- 原本的寫法 寫在 tbody裡-->
+                                    <!-- <div id="idPointList" class="wallet_PointList">
+                                    </div> -->
+                                    <div id="idBetLimit1" class="tbody wallet_PointList userAccount_Edit">
                                     </div>
 
                                 </div>

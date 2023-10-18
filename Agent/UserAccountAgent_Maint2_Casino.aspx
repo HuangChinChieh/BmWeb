@@ -352,6 +352,8 @@
                 c.setClassText(t, "NewUserCount", null, item.NewUserCount);
                 c.setClassText(t, "NewAgentCount", null, item.NewAgentCount);
                 c.setClassText(t, "PointValue", null, c.toCurrency(item.PointValue));
+                c.setClassText(t, "LinePoint", null, c.toCurrency(item.LinePoint));
+                
                 var stateDom = t.querySelector(".UserAccountState");
 
                 if (item.UserAccountState == 0) {
@@ -453,6 +455,7 @@
                 c.setClassText(t, "NewUserCount", null, item.NewUserCount);
                 c.setClassText(t, "NewAgentCount", null, item.NewAgentCount);
                 c.setClassText(t, "PointValue", null, c.toCurrency(item.PointValue));
+                c.setClassText(t, "LinePoint", null, c.toCurrency(item.LinePoint));
                 var stateDom = t.querySelector(".UserAccountState");
 
                 if (item.UserAccountState == 0) {
@@ -831,6 +834,10 @@
                                 <span class="td__content"><span class="PointValue">CON4</span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><i class="icon icon-ewin-default-accountRolling icon-s icon-before"></i><span class="language_replace">總線額度</span></span>
+                                <span class="td__content"><span class="LinePoint">0</span></span>
+                            </div>
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><i class="icon icon-ewin-default-accountRolling icon-s icon-before"></i><span class="language_replace">狀態</span></span>
                                 <span class="td__content"><span class="UserAccountState">CON4</span></span>
                             </div>
@@ -857,6 +864,7 @@
                             <div class="thead__th"><span class="language_replace">期間團隊新增會員數</span></div>
                             <div class="thead__th"><span class="language_replace">期間團隊新增代理數</span></div>
                             <div class="thead__th"><span class="language_replace">錢包餘額</span></div>
+                            <div class="thead__th"><span class="language_replace">總線額度</span></div>
                             <div class="thead__th"><span class="language_replace">狀態</span></div>
                             <div class="thead__th"><span class="language_replace">最後登入時間</span></div>
                             <div class="thead__th"><span class="language_replace">建立時間</span></div>

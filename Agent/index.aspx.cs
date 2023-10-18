@@ -12,5 +12,10 @@ using System.Web;
 /// index 的摘要描述
 /// </summary>
 public partial class index : System.Web.UI.Page {
-
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public static EWin.BmAgent.UserAccountBetLimit GetBetLimitInfo(string AID) {
+        EWin.BmAgent.BmAgent api = new EWin.BmAgent.BmAgent();
+        return api.GetUserAccountBetLimit(AID);
+    }
 }

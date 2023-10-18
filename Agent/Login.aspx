@@ -6,14 +6,14 @@
     string DefaultCompany = EWinWeb.CompanyCode;
     string Version = EWinWeb.Version;
     string AgentVersion = EWinWeb.AgentVersion;
-    if (string.IsNullOrEmpty(Request["Lang"])) {
-        string userLang = CodingControl.GetDefaultLanguage();
+    //if (string.IsNullOrEmpty(Request["Lang"])) {
+    //    string userLang = CodingControl.GetDefaultLanguage();
 
-        if (userLang.ToUpper() == "zh-TW".ToUpper()) { Lang = "CHT"; } else if (userLang.ToUpper() == "zh-HK".ToUpper()) { Lang = "CHT"; } else if (userLang.ToUpper() == "zh-MO".ToUpper()) { Lang = "CHT"; } else if (userLang.ToUpper() == "zh-CHT".ToUpper()) { Lang = "CHT"; } else if (userLang.ToUpper() == "zh-CHS".ToUpper()) { Lang = "CHS"; } else if (userLang.ToUpper() == "zh-SG".ToUpper()) { Lang = "CHS"; } else if (userLang.ToUpper() == "zh-CN".ToUpper()) { Lang = "CHS"; } else if (userLang.ToUpper() == "zh".ToUpper()) { Lang = "CHS"; } else if (userLang.ToUpper() == "en-US".ToUpper()) { Lang = "ENG"; } else if (userLang.ToUpper() == "en-CA".ToUpper()) { Lang = "ENG"; } else if (userLang.ToUpper() == "en-PH".ToUpper()) { Lang = "ENG"; } else if (userLang.ToUpper() == "en".ToUpper()) { Lang = "ENG"; } else if (userLang.ToUpper() == "ko-KR".ToUpper()) { Lang = "KOR"; } else if (userLang.ToUpper() == "ko-KP".ToUpper()) { Lang = "KOR"; } else if (userLang.ToUpper() == "ko".ToUpper()) { Lang = "KOR"; } else if (userLang.ToUpper() == "ja".ToUpper()) { Lang = "JPN"; } else if (userLang.ToUpper() == "th".ToUpper()) { Lang = "THAI"; } else if (userLang.ToUpper() == "ph".ToUpper()) { Lang = "PHP"; } else { Lang = "CHS"; }
-    } else {
-        Lang = Request["Lang"];
-    }
-
+    //    if (userLang.ToUpper() == "zh-TW".ToUpper()) { Lang = "CHT"; } else if (userLang.ToUpper() == "zh-HK".ToUpper()) { Lang = "CHT"; } else if (userLang.ToUpper() == "zh-MO".ToUpper()) { Lang = "CHT"; } else if (userLang.ToUpper() == "zh-CHT".ToUpper()) { Lang = "CHT"; } else if (userLang.ToUpper() == "zh-CHS".ToUpper()) { Lang = "CHS"; } else if (userLang.ToUpper() == "zh-SG".ToUpper()) { Lang = "CHS"; } else if (userLang.ToUpper() == "zh-CN".ToUpper()) { Lang = "CHS"; } else if (userLang.ToUpper() == "zh".ToUpper()) { Lang = "CHS"; } else if (userLang.ToUpper() == "en-US".ToUpper()) { Lang = "ENG"; } else if (userLang.ToUpper() == "en-CA".ToUpper()) { Lang = "ENG"; } else if (userLang.ToUpper() == "en-PH".ToUpper()) { Lang = "ENG"; } else if (userLang.ToUpper() == "en".ToUpper()) { Lang = "ENG"; } else if (userLang.ToUpper() == "ko-KR".ToUpper()) { Lang = "KOR"; } else if (userLang.ToUpper() == "ko-KP".ToUpper()) { Lang = "KOR"; } else if (userLang.ToUpper() == "ko".ToUpper()) { Lang = "KOR"; } else if (userLang.ToUpper() == "ja".ToUpper()) { Lang = "JPN"; } else if (userLang.ToUpper() == "th".ToUpper()) { Lang = "THAI"; } else if (userLang.ToUpper() == "ph".ToUpper()) { Lang = "PHP"; } else { Lang = "CHS"; }
+    //} else {
+    //    Lang = Request["Lang"];
+    //}
+    Lang = "ENG";
 %>
 <!doctype html>
 <html lang="zh-Hant-TW" class="mainHtml">
@@ -371,11 +371,11 @@
         window.localStorage.setItem("UpdateDeviceInfo", "false");
         
 
-        if (window.localStorage.getItem("agent_lang") != null) {
-            lang = window.localStorage.getItem("agent_lang");
-        } else {
+        //if (window.localStorage.getItem("agent_lang") != null) {
+        //    lang = window.localStorage.getItem("agent_lang");
+        //} else {
             window.localStorage.setItem("agent_lang", lang);
-        }
+        //}
         
         $("#idlangSel").val(lang);
 

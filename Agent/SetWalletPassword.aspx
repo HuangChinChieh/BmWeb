@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SetPassword.aspx.cs" Inherits="SetPassword" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="SetWalletPassword.aspx.cs" Inherits="SetWalletPassword" %>
 
 <%
     string ASID = Request["ASID"];
@@ -40,7 +40,7 @@
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/google-libphonenumber/3.2.31/libphonenumber.min.js"></script>
 <script>
-    var ApiUrl = "SetPassword.aspx";
+    var ApiUrl = "SetWalletPassword.aspx";
     var c = new common();
     var ac = new AgentCommon();
     var mlp;
@@ -249,7 +249,7 @@
             NewPassword: NewPassword
         }
      
-        c.callService(ApiUrl + "/SetUserPasswordByValidateCode", postData, function (success, o) {
+        c.callService(ApiUrl + "/SetUserWalletPasswordByValidateCode", postData, function (success, o) {
             if (success) {
                 var obj = c.getJSON(o);
 
@@ -280,7 +280,7 @@
         <div class="loginUserInfo">
             <div class="container-fluid">
                 <div class="breadcrumb__userAccount row">
-                    <div id="idParentPath" class="loginUserInfo__accountID heading-1 col language_replace">設定登入密碼</div>
+                    <div id="idParentPath" class="loginUserInfo__accountID heading-1 col language_replace">設定錢包密碼</div>
                 </div>
 
             </div>

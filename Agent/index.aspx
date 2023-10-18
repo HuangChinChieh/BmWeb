@@ -79,6 +79,7 @@
     var api;
     var windowList = [];
     var apiUrl = "/API/AgentAPI.asmx";
+    var pageUrl= "index.aspx";
     var qr = new QCodeDecoder();
     var firstLoad = true;
     var LastRequireWithdrawalID = 0;
@@ -110,9 +111,11 @@
         UserInfo: null,
         CompanyInfo: null,
         CurrencyType: null,
+        BetLimitInfo: null,
         UserLevel: <%=UserLevel %>
     };
 
+    //#region API_
     function API_GetAgentAPI() {
         return api;
     }
@@ -305,6 +308,7 @@
     function API_GetSelectedWallet() {
         return SelectCurrencyType;
     }
+    //#endregion
 
     function refreshWindow(reloadLastWindow) {
         var idPageMain = document.getElementById("idPageMain");
@@ -703,9 +707,9 @@
                                     }
                                 }
                             }
-                        }                       
+                        }
                     }
-
+                    getBetLimitInfo();
                 }
 
                 if (cb != null)
@@ -719,6 +723,24 @@
 
     function updateBaseInfo() {
 
+    }
+
+    function getBetLimitInfo() {
+        var postData = {
+            AID: EWinInfo.ASID
+        };
+
+        c.callService(pageUrl + "/GetBetLimitInfo", postData, function (success, o) {
+            if (success) {
+                EWinInfo.BetLimitInfo = c.getJSON(o).Data;
+            } else {
+                if (o == "Timeout") {
+                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請稍後重新嘗試"));
+                } else {
+                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), o);
+                }
+            }
+        });
     }
 
     function searchInfo() {
@@ -1002,6 +1024,11 @@
                                             <i class="icon icon-mask icon-ewin-user"></i>
                                             <span class="language_replace">下線列表</span></a>
                                     </li>
+                                    <li class="nav-item submenu dropdown">
+                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('帳戶交易'), 'UserAccountWallet_Transfer.aspx?');ItemClick(this);">
+                                            <i class="icon icon-mask icon-ewin-user"></i>
+                                            <span class="language_replace">帳戶交易</span></a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item navbarMenu__catagory">
@@ -1027,6 +1054,11 @@
                                             <i class="icon icon-mask icon-ewin-assisant"></i>
                                             <span class="language_replace">會員出入金數據</span></a>
                                     </li>
+                                    <li class="nav-item submenu dropdown">
+                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('錢包歷程'), 'GetWalletHistory_Detail.aspx');ItemClick(this);">
+                                            <i class="icon icon-mask icon-ewin-assisant"></i>
+                                            <span class="language_replace">錢包歷程</span></a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item navbarMenu__catagory">
@@ -1047,7 +1079,11 @@
                                             <i class="icon icon-mask icon-ewin-assisant"></i>
                                             <span class="language_replace">設定登入密碼</span></a>
                                     </li>
-                                
+                                    <li class="nav-item submenu dropdown">
+                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('設定登入密碼'), 'SetWalletPassword.aspx');ItemClick(this);">
+                                            <i class="icon icon-mask icon-ewin-assisant"></i>
+                                            <span class="language_replace">設定錢包密碼</span></a>
+                                    </li>
                                 </ul>
                             </li>
 
