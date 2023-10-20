@@ -316,18 +316,14 @@
     }
 </script>
 <body class="innerBody">
-        <div class="loginUserInfo">
-            <div class="container-fluid">
-                <div class="breadcrumb__userAccount row">
-                    <div id="idParentPath" class="loginUserInfo__accountID heading-1 col language_replace">交易明細</div>
-                </div>
-
-            </div>
-        </div>
     <main>
         <div class="dataList dataList-box fixed top">
             <div class="container-fluid">
                 <div class="collapse-box">
+                    <h2 class="collapse-header has-arrow zIndex_overMask_SafariFix" onclick="ac.dataToggleCollapse(this)" data-toggle="collapse" data-target="#searchList" aria-controls="searchList" aria-expanded="true" aria-label="searchList">
+                        <span class="language_replace">交易明細</span>
+                        <i class="arrow"></i>
+                    </h2>
                     <!-- collapse內容 由此開始 ========== -->
                     <div id="searchList" class="collapse-content collapse show">
                         <div id="divSearchContent" class="row searchListContent">

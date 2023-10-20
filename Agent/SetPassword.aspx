@@ -277,16 +277,8 @@
 </script>
 <body class="innerBody ">
     <main class="innerMain">
-        <div class="loginUserInfo">
-            <div class="container-fluid">
-                <div class="breadcrumb__userAccount row">
-                    <div id="idParentPath" class="loginUserInfo__accountID heading-1 col language_replace">設定登入密碼</div>
-                </div>
-
-            </div>
-        </div>
         <div class="container-fluid">
-            <h1 class="page__title "><span class="language_replace"></span></h1>
+            <h1 class="page__title "><span class="language_replace">設定登入密碼</span></h1>
 
             <form onsubmit="return false;">
                 <section class="sectionWallet wallet__currency--transfer">

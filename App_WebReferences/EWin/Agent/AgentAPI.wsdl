@@ -580,6 +580,12 @@
               <s:element minOccurs="1" maxOccurs="1" name="AllowQRCodeType0" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="AllowQRCodeType1" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="AllowQRCodeType2" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="CurrencyType0Transfer" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="CurrencyType1Transfer" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="CurrencyType2Transfer" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="CurrencyType0Recycle" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="CurrencyType1Recycle" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="CurrencyType2Recycle" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="CashUnit" type="s:int" />
               <s:element minOccurs="0" maxOccurs="1" name="MarqueeText" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="DomainURL" type="s:string" />

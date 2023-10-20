@@ -1759,28 +1759,28 @@ body {
 @media screen and (min-width: 360px) {
     html,
     body {
-        font-size: 12px;
+        font-size: 14px;
     }
 }
 
 @media (min-width: 375px) {
     html,
     body {
-        font-size: 12px;
+        font-size: 14px;
     }
 }
 
 @media (min-width: 576px) {
     html,
     body {
-        font-size: 12px;
+        font-size: 14px;
     }
 }
 
 @media (min-width: 768px) {
     html,
     body {
-        font-size: 12px;
+        font-size: 14px;
     }
 }
 

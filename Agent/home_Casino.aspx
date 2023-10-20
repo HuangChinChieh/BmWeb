@@ -792,7 +792,7 @@
                     <div class="container-fluid ">
                         <div class="row">
                             <div id="idTabMainContent" class="tab__Wrapper col-12 col-md">
-                                <ul class="nav-tabs-block nav nav-tabs tab-items-3" role="tablist">
+                                <ul class="nav-tabs-block nav nav-tabs tab-items-4" role="tablist">
                                     <li class="nav-item active">
                                         <a onclick="changeDateTab(this,0)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">本日</a>
                                     </li>
@@ -804,11 +804,11 @@
                                     </li>
                                     <%--<li class="nav-item">
                                         <a onclick="changeDateTab(this,3)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">上週</a>
-                                    </li>
+                                    </li>--%>
                                     <li class="nav-item">
                                         <a onclick="changeDateTab(this,4)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">本月</a>
                                     </li>
-                                    <li class="nav-item">
+                                      <%--<li class="nav-item">
                                         <a onclick="changeDateTab(this,5)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">上月</a>
                                     </li>--%>
                                     <li class="tab-slide"></li>

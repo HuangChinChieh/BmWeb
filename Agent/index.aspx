@@ -104,6 +104,7 @@
         ASID: "<%=ASI.AgentSessionID%>",
         CompanyCode: "<%=ASI.CompanyCode%>",
         LoginType: <%=Convert.ToInt32(ASI.LoginType) %>,
+        Permission: <%=Convert.ToInt32(ASI.Permission) %>, // 0=主帳號 / 1=助手(全功能) / 2=助手(只能看) / 3=助手(看/轉帳)
         LoginAccount: "<%=ASI.LoginAccount%>",
         AgentAccount: "<%=ASI.AgentLoginAccount %>",
         MainCurrencyType: "<%=EWinWeb.MainCurrencyType %>",
@@ -307,6 +308,68 @@
 
     function API_GetSelectedWallet() {
         return SelectCurrencyType;
+    }
+
+    function API_ShowBtnDropdownWindow(title, item, defaultValue, cbConfirm, cbCancel) {
+        var divDropdownBox = document.getElementById("divBtnDropdownBox");
+        var divDropdownTitle = document.getElementById("divBtnDropdownTitle");
+        var divDropdownCancel = document.getElementById("divBtnDropdownCancel");
+
+        if (divDropdownBox != null) {
+            var divDropdownList = document.getElementById("divBtnDropdownList");
+
+            c.setElementText("divBtnDropdownTitle", null, title);
+
+            c.clearChildren(divDropdownList);
+            if (item != null) {
+                // name, value, desc
+                for (var i = 0; i < item.length; i++) {
+                    var eachItem = item[i];
+                    var itemValue;
+                    var template = c.getTemplate("templateBtnDropdownItem");
+                    var inputRadio = c.getFirstClassElement(template, "inputRadio");
+
+                    if (eachItem.value != null)
+                        itemValue = eachItem.value;
+                    else
+                        itemValue = eachItem.name;
+
+                    if (eachItem.value == defaultValue)
+                        inputRadio.checked = true;
+                    else
+                        inputRadio.checked = false;
+
+                    c.setClassText(template, "title", null, eachItem.name);
+                    c.setClassText(template, "desc", null, eachItem.desc);
+                    c.getFirstClassElement(template, "iconImg").src = eachItem.src;
+
+                    template.setAttribute("ItemValue", itemValue);
+
+                    inputRadio.setAttribute("ItemValue", itemValue);
+                    inputRadio.onclick = function () {
+                        var v = this.getAttribute("ItemValue");
+
+                        c.removeClassName(divDropdownBox, "show");
+
+                        if (cbConfirm != null) {
+                            cbConfirm(v);
+                        }
+                    };
+
+                    divDropdownList.appendChild(template);
+                }
+            }
+
+            divDropdownCancel.onclick = function () {
+                c.removeClassName(divDropdownBox, "show");
+
+                if (cbCancel != null) {
+                    cbCancel();
+                }
+            }
+
+            c.addClassName(divDropdownBox, "show");
+        }
     }
     //#endregion
 
@@ -604,6 +667,7 @@
                         }
 
                     }
+
                     if (firstLoad == true) {
                         firstLoad = false;
 
@@ -709,6 +773,13 @@
                             }
                         }
                     }
+                    
+                    if (EWinInfo.CompanyInfo.CurrencyType0Transfer != 0 && EWinInfo.CompanyInfo.CurrencyType0Recycle != 0) {
+                        if (EWinInfo.UserInfo.AllowRecycle == 1 && EWinInfo.UserInfo.AllowTransfer == 1 ) {
+                            $("#liPointsRecovery").show();
+                        }
+                    }
+
                     getBetLimitInfo();
                 }
 
@@ -781,6 +852,44 @@
         });
     }
 
+     // Permission : 0=主帳號 / 1=助手(全功能) / 2=助手(只能看) / 3=助手(看/轉帳)
+    function CheckUserLoginPermission() {
+        if (EWinInfo.LoginType == 1) { //助手登入
+            switch (EWinInfo.Permission) {
+                case 1:
+                    $("#li_UserAgentMaint").hide();
+                    $("#li_Setting").hide();
+                    $("#idSearchButton").hide();
+                    $("#btnCreateAccount").hide();
+                    break;
+                case 2:
+                    $("#toastDiv").hide();
+                    $("#idRequireWithdrawalMySelf").hide();
+                    $("#li_Member").hide();
+                    $("#li_Setting").hide();
+                    $("#idSearchButton").hide();
+                    $("#btnCreateAccount").hide();
+                    break;
+                case 3:
+                    $("#li_UserAgentMaint").hide();
+                    $("#li_TeamAgent").hide();
+                    $("#li_UserSearch").hide();
+                    $("#li_Setting").hide();
+                    $("#idSearchButton").hide();
+                    $("#btnCreateAccount").hide();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    function closeRequireWithdrawalToast() {
+        toastDiv.classList.remove("show");
+        toastDiv.classList.add("moveOut");
+        API_MainWindow(mlp.getLanguageKey('下線出款申請'), 'UserAccount_RequireWithdrawal.aspx')
+    }
+
     function LogOut() {
         API_ShowLoading("LogOut");
         EWinInfo = null;
@@ -809,6 +918,67 @@
         notifyWindowEvent("SelectedWallet", SelectCurrencyType);
     }
 
+    function onBtnShowPaymentWindow() {
+        var ddList = [];
+
+        if (EWinInfo.CompanyInfo != null) {
+
+            // 檢查是否允許金流取款
+            if ((EWinInfo.CompanyInfo.PaymentParent == 2) || (EWinInfo.CompanyInfo.PaymentParent == 3)) {
+                ddList.push(
+                    {
+                        name: mlp.getLanguageKey("出款申請1"),
+                        desc: "",
+                        value: 0,
+                        src: "images/theme/dark/icon/ewin-user-withdraw-user-check.svg"
+                    }
+                );
+            }
+
+            //if ((EWinInfo.CompanyInfo.PaymentGPay == 2) || (EWinInfo.CompanyInfo.PaymentGPay == 3)) {
+            //    ddList.push(
+            //        {
+            //            name: mlp.getLanguageKey("使用四方金流"),
+            //            desc: "",
+            //            value: 1,
+            //            src: "images/theme/dark/icon/ewin-user-withdraw-thirdpartypayment.svg"
+            //        }
+            //    );
+            //}
+
+            //if (hasCryptoWallet == true) {
+            //    if ((EWinInfo.CompanyInfo.PaymentBitCoin == 2) || (EWinInfo.CompanyInfo.PaymentBitCoin == 3)) {
+            //        ddList.push(
+            //            {
+            //                name: mlp.getLanguageKey("使用區塊鏈貨幣"),
+            //                desc: "",
+            //                value: 2,
+            //                src: "images/theme/dark/icon/ewin-user-withdraw-crypto.svg"
+            //            }
+            //        );
+            //    }
+            //}
+        }
+
+
+        API_ShowBtnDropdownWindow(mlp.getLanguageKey("請選擇出款方式"), ddList, EWinInfo.CurrencyType, function (v) {
+            //debugger;
+            switch (Number(v)) {
+                case 0:
+                    API_MainWindow(mlp.getLanguageKey('出款申請'), 'UserAccountWallet_Payment.aspx')
+                    break;
+                case 1:
+                    //window.open("/Payment/GPay/GPayWithdrawByAgent.aspx?AID=" + EWinInfo.ASID, "&Token = " + EWinInfo.Token);
+                    API_MainWindow(mlp.getLanguageKey('四方金流'), "/Payment/VPay/VPayWithdrawByAgent.aspx?AID=" + EWinInfo.ASID, "&Token=" + EWinInfo.Token);
+                    break;
+                case 2:
+                    API_MainWindow(mlp.getLanguageKey('區塊鏈'), 'UserAccountCryptoWallet_Transfer.aspx?w=out')
+                    break;
+            }
+        });
+
+    }
+
     function init() {
         lang = window.localStorage.getItem("agent_lang");
 
@@ -831,6 +1001,7 @@
                 if (success) {
                     queryUserInfo(function (success) {
                         if (success) {
+                            CheckUserLoginPermission();
                             API_MainWindow("Main", "home_Casino.aspx");
                         }                        
                     });                        
@@ -1006,7 +1177,7 @@
                     <!-- Sidebar Menu 側邊選單-->
                     <div class="navbarMenu collapse navbar-menu navbar-collapse offset" id="navbarMenu">
                         <ul class="nav navbar-nav menu_nav no-gutters">
-                            <li class="nav-item navbarMenu__catagory">
+                            <li class="nav-item navbarMenu__catagory" id="li_Member">
                                 <span class="catagory-item"><span class="language_replace">團隊管理</span></span>
                                 <ul class="catagory">
                                     <li class="nav-item submenu dropdown" style="display:none">
@@ -1014,64 +1185,89 @@
                                             <i class="icon icon-mask icon-ewin-user"></i>
                                             <span class="language_replace">會員</span></a>
                                     </li>
-                                    <li class="nav-item submenu dropdown">
+                                    <li class="nav-item submenu dropdown" id="li_TeamAgent">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('團隊代理'), 'UserAccountAgent_Maint2_Casino.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-user"></i>
                                             <span class="language_replace">代理</span></a>
                                     </li>
-                                    <li class="nav-item submenu dropdown">
+                                    <li class="nav-item submenu dropdown" id="li_UserSearch">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('下線列表'), 'UserAccount_Search_Casino.aspx?');ItemClick(this);">
-                                            <i class="icon icon-mask icon-ewin-user"></i>
+                                            <i class="icon icon-mask icon-ewin-downline"></i>
                                             <span class="language_replace">下線列表</span></a>
+                                    </li>
+                                    <li class="nav-item submenu dropdown" id="idRequireWithdrawalMySelf">
+                                        <a class="nav-link" onclick="onBtnShowPaymentWindow();ItemClick(this);">
+                                            <i class="icon icon-mask icon-ewin-transfer-check"></i>
+                                            <span class="language_replace">出款申請</span></a>
+                                    </li>
+                                    <li class="nav-item submenu dropdown">
+                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('下線出款申請'), 'UserAccount_RequireWithdrawal.aspx?');ItemClick(this);">
+                                            <i class="icon icon-mask icon-ewin-transfer-check"></i>
+                                            <span class="language_replace">下線出款申請</span></a>
                                     </li>
                                     <li class="nav-item submenu dropdown">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('帳戶交易'), 'UserAccountWallet_Transfer.aspx?');ItemClick(this);">
-                                            <i class="icon icon-mask icon-ewin-user"></i>
+                                            <i class="icon icon-mask icon-ewin-transfer"></i>
                                             <span class="language_replace">帳戶交易</span></a>
+                                    </li>
+                                    <li class="nav-item submenu dropdown" id="liPointsRecovery" style="display:none">
+                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('下線回收'), 'UserAccountWallet_Transfer2.aspx?');ItemClick(this);">
+                                            <i class="icon icon2020-money-transfer"></i>
+                                            <span class="language_replace">下線回收</span></a>
+                                    </li>
+                                    <li class="nav-item submenu dropdown" id="li_UserAgentMaint">
+                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('助手維護'), 'UserAccountAgent_Maint.aspx?');ItemClick(this);">
+                                            <i class="icon icon-mask icon-ewin-assisant"></i>
+                                            <span class="language_replace">助手維護</span></a>
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item navbarMenu__catagory">
+                            <li class="nav-item navbarMenu__catagory" id="li_Report">
                                 <span class="catagory-item"><span class="language_replace">數據查詢</span></span>
                                 <ul class="catagory">
                                     <li class="nav-item submenu dropdown">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('團隊投注數據'), 'GetAgentTotalSummary_Casino.aspx');ItemClick(this);">
-                                            <i class="icon icon-mask icon-ewin-assisant"></i>
+                                            <i class="icon icon-mask icon-ewin-report-wallet"></i>
                                             <span class="language_replace">團隊投注數據</span></a>
                                     </li>
                                     <li class="nav-item submenu dropdown" style="display:none">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('會員投注數據'), 'GetPlayerTotalSummary_Casino.aspx');ItemClick(this);">
-                                            <i class="icon icon-mask icon-ewin-assisant"></i>
+                                            <i class="icon icon-mask icon-ewin-report-wallet"></i>
                                             <span class="language_replace">會員投注數據</span></a>
                                     </li>
                                     <li class="nav-item submenu dropdown" style="display:none">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('團隊出入金數據'), 'GetAgentTotalDepositeSummary_Casino.aspx');ItemClick(this);">
-                                            <i class="icon icon-mask icon-ewin-assisant"></i>
+                                            <i class="icon icon-mask icon-ewin-report-wallet"></i>
                                             <span class="language_replace">團隊出入金數據</span></a>
                                     </li>
                                     <li class="nav-item submenu dropdown" style="display:none">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('會員出入金數據'), 'GetPlayerTotalDepositSummary_Casino.aspx');ItemClick(this);">
-                                            <i class="icon icon-mask icon-ewin-assisant"></i>
+                                            <i class="icon icon-mask icon-ewin-report-wallet"></i>
                                             <span class="language_replace">會員出入金數據</span></a>
                                     </li>
                                     <li class="nav-item submenu dropdown">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('錢包歷程'), 'GetWalletHistory_Detail.aspx');ItemClick(this);">
-                                            <i class="icon icon-mask icon-ewin-assisant"></i>
+                                            <i class="icon icon-mask icon-ewin-report-wallet"></i>
                                             <span class="language_replace">錢包歷程</span></a>
                                     </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item navbarMenu__catagory">
-                                <span class="catagory-item"><span class="language_replace">結算查詢</span></span>
-                                <ul class="catagory">
+                                    <li class="nav-item submenu dropdown">
+                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('錢包點數異動記錄'), 'GetUserAccountPointManualHistory.aspx');ItemClick(this);">
+                                            <i class="icon icon-mask icon-ewin-report-income"></i>
+                                            <span class="language_replace">錢包點數異動記錄</span></a>
+                                    </li>
+                                    <li class="nav-item submenu dropdown">
+                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('轉帳紀錄'), 'GetUserAccountTransferHistory.aspx');ItemClick(this);">
+                                            <i class="icon icon-mask icon-ewin-report-wallet"></i>
+                                            <span class="language_replace">轉帳紀錄</span></a>
+                                    </li>
                                     <li class="nav-item submenu dropdown">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('傭金結算查詢'), 'GetAgentAccounting_Casino.aspx');ItemClick(this);">
-                                            <i class="icon icon-mask icon-ewin-assisant"></i>
+                                            <i class="icon icon-mask icon-ewin-report-wallet"></i>
                                             <span class="language_replace">傭金結算查詢</span></a>
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item navbarMenu__catagory">
+                            <li class="nav-item navbarMenu__catagory" id="li_Setting">
                                 <span class="catagory-item"><span class="language_replace">設定</span></span>
                                 <ul class="catagory">
                                     <li class="nav-item submenu dropdown">
@@ -1137,6 +1333,9 @@
                                             <ul class="dropdown-menu" aria-labelledby="navbar_Member">
                                                 <li id="idCreateAccount" class="nav-item">
                                                     <a class="nav-link icon icon-ewin-default-n-user-add language_replace " onclick="API_NewWindow(mlp.getLanguageKey('新增下線'), 'UserAccount_Add_Casino.aspx')" target="mainiframe">新增下線</a>
+                                                </li>
+                                                <li id="idCreateUserAccountAgent" class="nav-item">
+                                                    <a class="nav-link icon icon-ewin-default-n-assisant-add language_replace" onclick="API_NewWindow(mlp.getLanguageKey('新增助手'), 'UserAccountAgent_Add.aspx')" target="mainiframe">新增助手</a>
                                                 </li>
                                                 <li id="idMyQRCode" class="nav-item" style="display:none">
                                                     <a class="nav-link icon icon-ewin-default-myQrCode language_replace" onclick="showQRCode()" target="mainiframe">我的推廣碼</a>
@@ -1250,6 +1449,51 @@
         <div class="toast__content">
             <span class="language_replace toastMessage"></span>
             <%--<span class="icon-go"><i class="icon icon-ewin-default-toast-arrow"></i></span>--%>
+        </div>
+    </div>
+    
+    <!--  radio button -- Button樣式 ============-->
+    <div class="popUp" id="divBtnDropdownBox">
+        <div id="templateBtnDropdownBox" style="display: none">
+            <div id="templateBtnDropdownItem">
+                <div class="form-group">
+                    <div class="custom-control custom-radioValue-button-bigGlory">
+                        <label class="custom-label">
+                            <input type="radio" name="currencyexchange" class="custom-control-input-hidden inputRadio">
+                            <div class="custom-input radio-button">
+                                <span class="icon">
+                                    <!-- 上線出款 -->
+                                    <img class="iconImg" src="images/theme/dark/icon/ewin-user-withdraw-user-check.svg" alt="">
+                                    <!-- 四方金流出款 -->
+                                    <!-- <img src="images/theme/dark/icon/ewin-user-withdraw-thirdpartypayment.svg" alt=""> -->
+                                    <!-- 區塊鍊出款 -->
+                                    <!-- <img src="images/theme/dark/icon/ewin-user-withdraw-crypto.svg" alt="" > -->
+                                </span>
+                                <span class="currency title">HKT</span><span class="number desc">132,569</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="popUpWrapper">
+            <div class="popUp__close btn btn-close" id="divBtnDropdownCancel"></div>
+            <div class="popUp__title" id="divBtnDropdownTitle">[Title]</div>
+            <div class="popUp__content" id="divBtnDropdownList">
+            </div>
+        </div>
+        <div id="mask_overlay_popup" class="mask_overlay_popup" onclick="MaskPopUp(this)"></div>
+    </div>
+
+    <!-- Toast Dialog 
+                 css秒數= 執行時間+延遲時間 須大於 JS 移除CLASS 的時間，目前設定5秒後移除
+            -->
+    <div class="toast" id="toastDiv" onclick="closeRequireWithdrawalToast();">
+        <div class="toast__content">
+            <span class="language_replace">您目前有</span>
+            <span class="num">1</span>
+            <span class="language_replace">筆出款申請</span>
+            <span class="icon-go"><i class="icon icon-ewin-default-toast-arrow"></i></span>
         </div>
     </div>
 

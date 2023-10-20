@@ -98,10 +98,9 @@
 
             if (allowCompany) {
                 var allowMainAccount = true;
-                var rdoLoginType0 = document.getElementById("rdoLoginType0");
-                var rdoLoginType1 = document.getElementById("rdoLoginType1");
+                var LoginType = $("#idLoginType").val()
 
-                if (rdoLoginType1.checked) {
+                if (LoginType == 1) {
                     // Agent
                     if (form.MainAccount.value == "") {
                         allowMainAccount = false;
@@ -219,19 +218,6 @@
         c.addClassName(idMessageBox, "show");
     }
 
-    function onLoginType() {
-        var idMainAccountField = document.getElementById("idMainAccountField");
-        var rdoLoginType0 = document.getElementById("rdoLoginType0");
-        var rdoLoginType1 = document.getElementById("rdoLoginType1");
-        var form = document.forms[0];
-
-        if (rdoLoginType0.checked == true) {
-            idMainAccountField.style.display = "none";
-        } else if (rdoLoginType1.checked == true) {
-            idMainAccountField.style.display = "block";
-        }
-    }
-
     //#region 忘記密碼
     function showForgetPassWord() {
         $("#idPopUpForgetPassWord").addClass("show");
@@ -344,6 +330,17 @@
         setLanguage(lang);
     }
 
+    function loginTypeSelChange(e) {
+        var sel = e.currentTarget;
+        var v = sel.value;
+
+        if (v == 1) {
+            $("#idMainAccountField").show();
+        } else {
+            $("#idMainAccountField").hide();
+        }
+    }
+
     function init() {
         var idCompanyCode = document.getElementById("idCompanyCode");
         var langTmp;
@@ -407,15 +404,12 @@
                 <input type="hidden" name="Lang" value="<%=Lang %>" />
 
                 <div class="loginForm__left">
-                    <div class="form-group form-group-loginUser" style="display: none;">
-
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input onclick="onLoginType()" type="radio" name="LoginType" id="rdoLoginType0" value="0" class="custom-control-input-hidden" checked>
-                            <label class="custom-control-label" for="rdoLoginType0"><span class="language_replace">主帳戶登入</span></label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline" style="display: none;">
-                            <input onclick="onLoginType()" type="radio" name="LoginType" id="rdoLoginType1" value="1" class="custom-control-input-hidden">
-                            <label class="custom-control-label" for="rdoLoginType1"><span class="language_replace">助手登入</span></label>
+                    <div class="form-group form-group-lang" style="align-self:center">
+                        <div class="langSel_container" style="height:100%;">
+                            <select id="idLoginType" class="langSel" onchange="loginTypeSelChange(event)" name="LoginType" style="height:100%;width:100%;font-size:20px;padding:5px">
+                                <option value="0">主帳戶登入</option>
+                                <option value="1">助手登入</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group form-group-lang" style="align-self:center">

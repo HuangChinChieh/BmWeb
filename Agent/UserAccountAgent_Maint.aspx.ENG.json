@@ -1,0 +1,24 @@
+{
+  "助手編輯": "Assistant Editing",
+  "類型": "Type",
+  "股東": "Shareholder",
+  "代理": "Agent",
+  "會員": "User",
+  "一般帳戶": "User",
+  "姓名": "Nickname",
+  "狀態": "Status",
+  "正常": "Normal",
+  "停用": "Deactivate",
+  "永久停用": "Permanently Deactivate",
+  "錯誤": "System Message",
+  "網路異常, 請稍後重新嘗試": "Network exception, please try again.",
+  "編輯": "Edit",
+  "啟用": "ON",
+  "管理者": "View+Edit+Transfer",
+  "允許檢視": "View ONLY",
+  "允許檢視+轉帳": "View+Transfer",
+  "完成": "System Message",
+  "無數據": "You have not create any assistant accounts yet.",
+  "助手維護": "Assistant Management"
+
+}
