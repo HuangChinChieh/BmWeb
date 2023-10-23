@@ -376,7 +376,7 @@
         
         $("#idlangSel").val(lang);
 
-        onLoginType();
+        //onLoginType();
 
         mlp = new multiLanguage(v);
         mlp.loadLanguage(lang, function () {

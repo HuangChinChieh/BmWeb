@@ -955,7 +955,6 @@
                                             <div class="col-auto col-md-6">
                                                 <div class="form-control-underline">
                                                     <select name="ContactPhonePrefix" id="ContactPhonePrefix" class="custom-select">
-                                                        <option class="language_replace" value="">(其他)</option>
                                                         <option class="language_replace" value="+86">+86 中國</option>
                                                         <option class="language_replace" value="+853">+853 澳門</option>
                                                         <option class="language_replace" value="+852">+852 香港</option>
@@ -965,7 +964,7 @@
                                                         <option class="language_replace" value="+84">+84 越南</option>
                                                         <option class="language_replace" value="+66">+66 泰國</option>
                                                         <option class="language_replace" value="+855">+855 柬埔寨</option>
-                                                        <option class="language_replace" value="+63">+63 菲律賓</option>
+                                                        <option class="language_replace" value="+63" selected="selected">+63 菲律賓</option>
                                                         <option class="language_replace" value="+65">+65 新加坡</option>
                                                         <option class="language_replace" value="+60">+60 馬來西亞</option>
                                                     </select>

@@ -44,6 +44,21 @@
           <s:enumeration value="ERR" />
         </s:restriction>
       </s:simpleType>
+      <s:element name="AgentMultoLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AgentMultoLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AgentMultoLoginResult" type="tns:APIResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetUserSMSNumber">
         <s:complexType>
           <s:sequence>
@@ -1892,9 +1907,9 @@
         </s:complexType>
       </s:element>
       <s:element name="LoginResult" nillable="true" type="tns:LoginResult" />
+      <s:element name="APIResult" nillable="true" type="tns:APIResult" />
       <s:element name="PhoneResult" nillable="true" type="tns:PhoneResult" />
       <s:element name="UserTag" nillable="true" type="tns:UserTag" />
-      <s:element name="APIResult" nillable="true" type="tns:APIResult" />
       <s:element name="AgentSessionResult" nillable="true" type="tns:AgentSessionResult" />
       <s:element name="ChidUserData" nillable="true" type="tns:ChidUserData" />
       <s:element name="TotalSummaryResult" nillable="true" type="tns:TotalSummaryResult" />
@@ -1922,6 +1937,12 @@
   </wsdl:message>
   <wsdl:message name="AgentLoginSoapOut">
     <wsdl:part name="parameters" element="tns:AgentLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="AgentMultoLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:AgentMultoLogin" />
+  </wsdl:message>
+  <wsdl:message name="AgentMultoLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:AgentMultoLoginResponse" />
   </wsdl:message>
   <wsdl:message name="GetUserSMSNumberSoapIn">
     <wsdl:part name="parameters" element="tns:GetUserSMSNumber" />
@@ -2282,6 +2303,13 @@
   </wsdl:message>
   <wsdl:message name="AgentLoginHttpGetOut">
     <wsdl:part name="Body" element="tns:LoginResult" />
+  </wsdl:message>
+  <wsdl:message name="AgentMultoLoginHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AgentMultoLoginHttpGetOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
   </wsdl:message>
   <wsdl:message name="GetUserSMSNumberHttpGetIn">
     <wsdl:part name="AID" type="s:string" />
@@ -2752,6 +2780,13 @@
   <wsdl:message name="AgentLoginHttpPostOut">
     <wsdl:part name="Body" element="tns:LoginResult" />
   </wsdl:message>
+  <wsdl:message name="AgentMultoLoginHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AgentMultoLoginHttpPostOut">
+    <wsdl:part name="Body" element="tns:APIResult" />
+  </wsdl:message>
   <wsdl:message name="GetUserSMSNumberHttpPostIn">
     <wsdl:part name="AID" type="s:string" />
   </wsdl:message>
@@ -3214,6 +3249,10 @@
       <wsdl:input message="tns:AgentLoginSoapIn" />
       <wsdl:output message="tns:AgentLoginSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="AgentMultoLogin">
+      <wsdl:input message="tns:AgentMultoLoginSoapIn" />
+      <wsdl:output message="tns:AgentMultoLoginSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetUserSMSNumber">
       <wsdl:input message="tns:GetUserSMSNumberSoapIn" />
       <wsdl:output message="tns:GetUserSMSNumberSoapOut" />
@@ -3452,6 +3491,10 @@
       <wsdl:input message="tns:AgentLoginHttpGetIn" />
       <wsdl:output message="tns:AgentLoginHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="AgentMultoLogin">
+      <wsdl:input message="tns:AgentMultoLoginHttpGetIn" />
+      <wsdl:output message="tns:AgentMultoLoginHttpGetOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetUserSMSNumber">
       <wsdl:input message="tns:GetUserSMSNumberHttpGetIn" />
       <wsdl:output message="tns:GetUserSMSNumberHttpGetOut" />
@@ -3674,6 +3717,10 @@
       <wsdl:input message="tns:AgentLoginHttpPostIn" />
       <wsdl:output message="tns:AgentLoginHttpPostOut" />
     </wsdl:operation>
+    <wsdl:operation name="AgentMultoLogin">
+      <wsdl:input message="tns:AgentMultoLoginHttpPostIn" />
+      <wsdl:output message="tns:AgentMultoLoginHttpPostOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetUserSMSNumber">
       <wsdl:input message="tns:GetUserSMSNumberHttpPostIn" />
       <wsdl:output message="tns:GetUserSMSNumberHttpPostOut" />
@@ -3895,6 +3942,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="AgentLogin">
       <soap:operation soapAction="http://tempuri.org/AgentLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgentMultoLogin">
+      <soap:operation soapAction="http://tempuri.org/AgentMultoLogin" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -4436,6 +4492,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AgentMultoLogin">
+      <soap12:operation soapAction="http://tempuri.org/AgentMultoLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetUserSMSNumber">
       <soap12:operation soapAction="http://tempuri.org/GetUserSMSNumber" style="document" />
       <wsdl:input>
@@ -4970,6 +5035,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="AgentMultoLogin">
+      <http:operation location="/AgentMultoLogin" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetUserSMSNumber">
       <http:operation location="/GetUserSMSNumber" />
       <wsdl:input>
@@ -5461,6 +5535,15 @@
     <http:binding verb="POST" />
     <wsdl:operation name="AgentLogin">
       <http:operation location="/AgentLogin" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AgentMultoLogin">
+      <http:operation location="/AgentMultoLogin" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

@@ -595,7 +595,7 @@
                                     <option class="language_replace" value="+60">+60 馬來西亞</option>
                                     <option class="language_replace" value="+61">+61 澳大利亞</option>
                                     <option class="language_replace" value="+62">+62 印尼</option>
-                                    <option class="language_replace" value="+63">+63 菲律賓</option>
+                                    <option class="language_replace" value="+63" selected="selected">+63 菲律賓</option>
                                     <option class="language_replace" value="+65">+65 新加坡</option>
                                     <option class="language_replace" value="+66">+66 泰國</option>
                                     <option class="language_replace" value="+855">+855 柬埔寨</option>

@@ -371,6 +371,20 @@
             c.addClassName(divDropdownBox, "show");
         }
     }
+
+    function API_setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function API_delCookie(name) {
+        var exp = new Date();
+        exp.setTime(exp.getTime() - 1);
+        cval = getCookie(name);
+        if (cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+    }
     //#endregion
 
     function refreshWindow(reloadLastWindow) {
@@ -857,12 +871,16 @@
         if (EWinInfo.LoginType == 1) { //助手登入
             switch (EWinInfo.Permission) {
                 case 1:
+                    $("#li_UserMulti").hide();
+                    $("#btnSwitchAccount").hide();
                     $("#li_UserAgentMaint").hide();
                     $("#li_Setting").hide();
                     $("#idSearchButton").hide();
                     $("#btnCreateAccount").hide();
                     break;
                 case 2:
+                    $("#li_UserMulti").hide();
+                    $("#btnSwitchAccount").hide();
                     $("#toastDiv").hide();
                     $("#idRequireWithdrawalMySelf").hide();
                     $("#li_Member").hide();
@@ -871,6 +889,8 @@
                     $("#btnCreateAccount").hide();
                     break;
                 case 3:
+                    $("#li_UserMulti").hide();
+                    $("#btnSwitchAccount").hide();
                     $("#li_UserAgentMaint").hide();
                     $("#li_TeamAgent").hide();
                     $("#li_UserSearch").hide();
@@ -1195,6 +1215,11 @@
                                             <i class="icon icon-mask icon-ewin-downline"></i>
                                             <span class="language_replace">下線列表</span></a>
                                     </li>
+                                    <li class="nav-item submenu dropdown" id="li_UserMulti">
+                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('多重帳號'), 'UserAccountAgentMulti_Maint.aspx?');ItemClick(this);">
+                                            <i class="icon icon-mask icon-ewin-user-multi"></i>
+                                            <span class="language_replace">多重帳號</span></a>
+                                    </li>
                                     <li class="nav-item submenu dropdown" id="idRequireWithdrawalMySelf">
                                         <a class="nav-link" onclick="onBtnShowPaymentWindow();ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-transfer-check"></i>
@@ -1324,6 +1349,25 @@
                                         
                                         <li id="idSearchButton" class="navbar-search nav-item ">
                                             <a href="#" class="btn btn-search btn-round nav-link" role="button" onclick="API_NewWindow(mlp.getLanguageKey('團隊帳號'), 'UserAccount_Search1_Casino.aspx');"></a>
+                                        </li>
+                                        
+                                        <li id="btnSwitchAccount" class="navbar-member nav-item submenu dropdown">
+                                            <!--
+                                            1. MEMBER LINK : aria-expanded="false" => aria-expanded="true""
+                                            2. 下拉 dropdown-menu 選單 => class 加入 "show"
+                                            3. 按下頁面上任何地方時，下拉 dropdown-menu 選單 => class 移除 "show"
+                                            -->
+                                            <!-- 下拉 MEMBER LINK -->
+                                            <a href="#" onclick="dataToggleDropdown(this)" class="btn btn-user-multiple btn-round nav-link btnDropDown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id=""></a>
+                                            <!--下拉 dropdown-menu 選單 -->
+                                            <ul class="dropdown-menu" aria-labelledby="navbar_Member">
+                                                <li id="idCreateUserAccountMulti" class="nav-item">
+                                                    <a class="nav-link icon icon-ewin-default-n-user-multi-add language_replace" onclick="API_NewWindow(mlp.getLanguageKey('新增多重帳號'), 'UserAccountAgentMulti_Add.aspx')" target="mainiframe">新增多重帳號</a>
+                                                </li>
+                                                <li id="idSwitchAccountMulti" class="nav-item">
+                                                    <a class="nav-link icon icon-ewin-default-n-user-multi-exchange language_replace" onclick="API_NewWindow(mlp.getLanguageKey('切換多重帳號'), 'UserAccountAgentMulti_Login.aspx')" target="mainiframe">切換多重帳號</a>
+                                                </li>
+                                            </ul>
                                         </li>
 
                                         <li id="btnCreateAccount" class="navbar-member nav-item submenu dropdown" style="display: none">
