@@ -964,7 +964,6 @@
                                             <div class="col-auto col-md-6">
                                                 <div class="form-control-underline">
                                                     <select name="ContactPhonePrefix" id="ContactPhonePrefix" class="custom-select">
-                                                        <option class="language_replace" value="">(其他)</option>
                                                         <option class="language_replace" value="+86">+86 中國</option>
                                                         <option class="language_replace" value="+853">+853 澳門</option>
                                                         <option class="language_replace" value="+852">+852 香港</option>
@@ -1001,7 +1000,7 @@
                         <!-- 錢包管理 -->
 
                         <fieldset class="dataFieldset">
-                            <legend class="dataFieldset-title language_replace hidden shown-lg">錢包管理</legend>
+                            <legend class="dataFieldset-title language_replace shown-lg">錢包管理</legend>
                             <div class="row" style="padding-bottom: 5px;display:none">
 
                                 <div class="col-12 col-smd-3 pr-smd-1">
@@ -1121,7 +1120,7 @@
                         </fieldset>
 
                         <fieldset class="dataFieldset" id="divBetLimit0">
-                            <legend class="dataFieldset-title language_replace hidden shown-lg">快速電投</legend>
+                            <legend class="dataFieldset-title language_replace shown-lg">快速電投</legend>
                             <div class="MT__tableDiv">
                                 <!-- 自訂表格 -->
                                 <div class="MT__table MT__table--Sub table-col-7">
@@ -1218,7 +1217,7 @@
                         </fieldset>
 
                         <fieldset class="dataFieldset" id="divBetLimit1">
-                            <legend class="dataFieldset-title language_replace hidden shown-lg">網投</legend>
+                            <legend class="dataFieldset-title language_replace shown-lg">網投</legend>
                             <div class="MT__tableDiv">
                                 <!-- 自訂表格 -->
                                 <div class="MT__table MT__table--Sub table-col-7">

@@ -404,7 +404,7 @@
                 <input type="hidden" name="Lang" value="<%=Lang %>" />
 
                 <div class="loginForm__left">
-                    <div class="form-group form-group-lang" style="align-self:center">
+                    <div class="form-group" style="align-self:center">
                         <div class="langSel_container" style="height:100%;">
                             <select id="idLoginType" class="langSel" onchange="loginTypeSelChange(event)" name="LoginType" style="height:100%;width:100%;font-size:20px;padding:5px">
                                 <option value="0">主帳戶登入</option>
@@ -412,7 +412,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group form-group-lang" style="align-self:center">
+                    <div class="form-group" style="align-self:center">
                           <%--<p><span class="language_replace" style="font-size:16px">語系</span></p>
                       <div class="custom-control custom-radio-lang custom-control-inline" onclick="setLanguage('CHS')" style="display: none">
                             <input type="radio" id="lang1" name="lang" class="custom-control-input-hidden" value="CHS">

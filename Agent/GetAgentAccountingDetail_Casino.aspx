@@ -21,6 +21,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/basic.min.css?<%:AgentVersion%>">
     <link rel="stylesheet" href="css/main2.css?<%:AgentVersion%>">
+    <style>
+        .tree-btn {
+            padding: 0px 9px;
+            border: none;
+            display: inline-block;
+            vertical-align: middle;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            background-color: inherit;
+            text-align: center;
+            cursor: pointer;
+            white-space: nowrap;
+            user-select: none;
+            border-radius: 50%;
+            font-size: 14px;
+            font-weight: bold;
+            border: 3px solid rgba(227, 195, 141, 0.8);
+        }
+
+        .agentPlus {
+            padding: 0px 7px;
+        }
+
+        .tree-btn:hover {
+            color: #fff;
+            background-color: rgba(227, 195, 141, 0.8);
+        }
+
+
+
+        .MT2__table .tbody .tbody__tr:nth-child(2n) {
+            /*background-color: rgba(0, 0, 0, 0.2);*/
+        }
+
+        .switch_tr {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes searchTarget {
+            0% {
+                background-color: indianred;
+            }
+
+            50% {
+                background-color: #607d8b;
+            }
+
+            100% {
+                background-color: indianred;
+            }
+        }
+
+        .searchTarget {
+            background-color: indianred;
+            animation-name: searchTarget;
+            animation-duration: 4s;
+            animation-delay: 2s;
+            animation-iteration-count: infinite;
+        }
+    </style>
 </head>
 <!-- <script type="text/javascript" src="js/AgentCommon.js"></script> -->
 <script type="text/javascript" src="js/AgentCommon.js"></script>
@@ -39,8 +100,87 @@
     var lang;
     var accountingID = <%=AccountingID%>;
     var CurrencyType = "<%=CurrencyType%>";
-    var StartDate = "<%=StartDate%>";
-    var EndDate = "<%=EndDate%>";
+
+    function agentExpand(SortKey) {
+        var expandBtn = event.currentTarget;
+        if (expandBtn) {
+            var exists = !(expandBtn.classList.toggle("agentPlus"));
+            if (exists) {
+                //s
+                expandBtn.innerText = "-";
+                checkParentLoginAccountExists(SortKey)
+            } else {
+                //c
+                expandBtn.innerText = "+";
+                hideChildAllRow(SortKey);
+            }
+        }
+    }
+
+    function checkParentLoginAccountExists(SortKey) {
+        var doms = document.querySelectorAll(".row_s_" + SortKey);
+        for (var ii = 0; ii < doms.length; ii++) {
+            var dom = doms[ii];
+            dom.style.display = "table-row";
+        }
+    }
+
+    function hideChildAllRow(SortKey) {
+        var doms = document.querySelectorAll(".row_c_" + SortKey);
+        for (var i = 0; i < doms.length; i++) {
+            var dom = doms[i];
+            var btn = dom.querySelector('.Expand');
+
+            dom.style.display = "none";
+            if (btn) {
+                btn.classList.add("agentPlus");
+                btn.innerText = "+";
+            }
+        }
+    }
+
+    function toggleAllRow(isExpand) {
+        var doms = document.querySelectorAll(".row_child");
+        for (var i = 0; i < doms.length; i++) {
+            var dom = doms[i];
+            var btn = dom.querySelector('.Expand');
+
+            if (isExpand) {
+                dom.style.display = "table-row";
+
+                if (btn) {
+                    btn.classList.remove("agentPlus");
+                    btn.innerText = "-";
+                }
+            } else {
+                dom.style.display = "none";
+
+                if (btn) {
+                    btn.classList.add("agentPlus");
+                    btn.innerText = "+";
+                }
+            }
+        }
+
+        doms = document.querySelectorAll(".row_top");
+
+        for (var i = 0; i < doms.length; i++) {
+            var dom = doms[i];
+            var btn = dom.querySelector('.Expand');
+
+            if (isExpand) {
+                if (btn) {
+                    btn.classList.remove("agentPlus");
+                    btn.innerText = "-";
+                }
+            } else {
+                if (btn) {
+                    btn.classList.add("agentPlus");
+                    btn.innerText = "+";
+                }
+            }
+        }
+    }
 
     function queryData() {
         var idList = document.getElementById("idList");
@@ -90,100 +230,91 @@
         div.classList.add("td__content", "td__hasNoData");
         document.getElementById("idResultTable").classList.add("MT_tableDiv__hasNoData");
         idList.classList.add("tbody__hasNoData");
-        idList.appendChild(div);
+        idList.appendChild(div); 
         if (o != null) {
             if (o.ADList != null) {
+                let hasChild = false;
                 let childBonusPointValue = 0;
-                let strChild = "";
 
                 for (var i = 0; i < o.ADList.length; i++) {
-                    var data = o.ADList[i];
-                    childBonusPointValue = 0;
-                     strChild = "";
+
+                    let data = o.ADList[i];
+                    let t = c.getTemplate("templateTableItem");
+                    let expandBtn;
+                    let parentSortKey = "";
+
+                    c.setClassText(t, "LoginAccount", null, data.LoginAccount);
+                    c.setClassText(t, "RewardValue", null, toCurrency(parseInt(data.TotalRewardValue)));
+                    c.setClassText(t, "ValidBetValue", null, toCurrency(parseInt(data.TotalValidBetValue)));
+                    c.setClassText(t, "TotalLineRebate", null, toCurrency(parseInt(data.TotalLineRebate)));
+                    c.setClassText(t, "UserRate", null, data.UserRate / 100);
+                    c.setClassText(t, "AccountingOPValue", null, toCurrency(parseInt(data.UserRebate)));
+                    c.setClassText(t, "TotalBonusValue", null, toCurrency(parseInt(data.BonusPointValue)));
+                    c.setClassText(t, "BonusValue_Own", null, toCurrency(parseInt(data.BonusPointValue)));
+                    c.setClassText(t, "OrderCount", null, toCurrency(parseInt(data.TotalOrderCount)));
+
+                    expandBtn = t.querySelector(".Expand");
                     
                     if (data.ChildUser.length > 0) {
-                        for (var i = 0; i < data.ChildUser.length; i++) {
-                            let k = data.ChildUser[i];
-                            if (k.UserAccountType != 0) {
-                                childBonusPointValue += k.BonusPointValue;
-
-                                strChild += ` <div class="tbody__tr td-non-underline-last-2">
-                            <div class="tbody__td date td-100 nonTitle">
-                                <span class="td__title"><span class="language_replace">帳號</span></span>
-                                <span class="td__content"><span class="LoginAccount">${k.LoginAccount}</span></span>
-                            </div>
-                             <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">團隊輸贏數</span></span>
-                                <span class="td__content"><span class="RewardValue">${toCurrency(k.TotalRewardValue)}</span></span>
-                            </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">團隊轉碼數</span></span>
-                                <span class="td__content"><span class="ValidBetValue">${toCurrency(k.TotalValidBetValue)}</span></span>
-                            </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">應得佣金</span></span>
-                                <span class="td__content"><span class="AccountingOPValue">${toCurrency(k.UserRebate)}</span></span>
-                            </div>
-                           <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">總紅利</span></span>
-                                <span class="td__content"><span class="TotalBonusValue">${toCurrency(k.BonusPointValue)}</span></span>
-                            </div>
-                           <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">佔成紅利</span></span>
-                                <span class="td__content"><span class="BonusValue_Own">${toCurrency(k.BonusPointValue)}</span></span>
-                            </div>
-                           <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">團隊投注筆數</span></span>
-                                <span class="td__content"><span class="AccountingOPValue">${toCurrency(k.TotalOrderCount)}</span></span>
-                            </div>
-                        </div>`;
-                            }
-                        }
+                        hasChild = true;
+                        expandBtn.onclick = new Function("agentExpand('" + data.UserAccountSortKey + "')");
+                        expandBtn.classList.add("agentPlus");
+                    } else {
+                        expandBtn.style.display = "none";
+                        t.querySelector(".noChild").style.display = "inline-block";
                     }
 
-                    var doc = ` <div class="tbody__tr td-non-underline-last-2">
-                            <div class="tbody__td date td-100 nonTitle">
-                                <span class="td__title"><span class="language_replace">帳號</span></span>
-                                <span class="td__content"><span class="LoginAccount">${data.LoginAccount}</span></span>
-                            </div>
-                             <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">貨幣</span></span>
-                                <span class="td__content"><span class="RewardValue">${data.CurrencyType}</span></span>
-                            </div>
-                             <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">團隊輸贏數</span></span>
-                                <span class="td__content"><span class="RewardValue">${toCurrency(data.TotalRewardValue)}</span></span>
-                            </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">團隊轉碼數</span></span>
-                                <span class="td__content"><span class="ValidBetValue">${toCurrency(data.TotalValidBetValue)}</span></span>
-                            </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">應得佣金</span></span>
-                                <span class="td__content"><span class="AccountingOPValue">${toCurrency(data.UserRebate)}</span></span>
-                            </div>
-                           <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">總紅利</span></span>
-                                <span class="td__content"><span class="TotalBonusValue">${toCurrency(data.BonusPointValue)}</span></span>
-                            </div>
-                           <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">佔成紅利</span></span>
-                                <span class="td__content"><span class="BonusValue_Own">${toCurrency(data.BonusPointValue - childBonusPointValue)}</span></span>
-                            </div>
-                           <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">團隊投注筆數</span></span>
-                                <span class="td__content"><span class="AccountingOPValue">${toCurrency(data.TotalOrderCount)}</span></span>
-                            </div>
-                        </div>`;
+                    t.classList.add("row_top");
 
-                    $('#idList').append(doc);
-                    if (strChild != "") {
-                        $('#idList').append(strChild);
-                    }
+                    idList.appendChild(t);
 
                     document.getElementById("hasNoData_DIV").style.display = "none";
                     idList.classList.remove("tbody__hasNoData");
                     document.getElementById("idResultTable").classList.remove("MT_tableDiv__hasNoData");
+                }
+
+                if (hasChild) {
+                    for (var ii = 0; ii < o.ADList[0].ChildUser.length; ii++) {
+
+                        let data = o.ADList[0].ChildUser[ii];
+                        let t = c.getTemplate("templateTableItem");
+                        let expandBtn;
+                        let parentSortKey = "";
+                        childBonusPointValue = childBonusPointValue + data.BonusPointValue;
+
+                        c.setClassText(t, "LoginAccount", null, data.LoginAccount);
+                        c.setClassText(t, "RewardValue", null, toCurrency(parseInt(data.TotalRewardValue)));
+                        c.setClassText(t, "ValidBetValue", null, toCurrency(parseInt(data.TotalValidBetValue)));
+                        c.setClassText(t, "TotalLineRebate", null, toCurrency(parseInt(data.TotalLineRebate)));
+                        c.setClassText(t, "UserRate", null, data.UserRate / 100);
+                        c.setClassText(t, "AccountingOPValue", null, toCurrency(parseInt(data.UserRebate)));
+                        c.setClassText(t, "TotalBonusValue", null, toCurrency(parseInt(data.BonusPointValue)));
+                        c.setClassText(t, "BonusValue_Own", null, toCurrency(parseInt(data.BonusPointValue)));
+                        c.setClassText(t, "OrderCount", null, toCurrency(parseInt(data.TotalOrderCount)));
+
+                        expandBtn = t.querySelector(".Expand");
+
+                        t.querySelector(".Space").style.paddingLeft = "20px";
+
+                        expandBtn.style.display = "none";
+                        t.querySelector(".noChild").style.display = "inline-block";
+
+                        if (data.UserAccountInsideLevel % 2 == 0) {
+                            t.classList.add("switch_tr");
+                        }
+
+                        t.classList.add("row_c_" + data.UserAccountSortKey.substring(0, 6));
+                        t.classList.add("row_s_" + data.UserAccountSortKey.substring(0, 6));
+
+                        t.classList.add("row_child");
+                        t.style.display = "none";
+
+                        idList.appendChild(t);
+                    }
+                }
+
+                if (childBonusPointValue != 0) {
+                    $(".row_top .BonusValue_Own").text(toCurrency(parseInt(childBonusPointValue)));
                 }
             }
         }
@@ -197,12 +328,7 @@
         return parts.join('.');
     }
 
-    function btnDetail_Click(title, searchLoginAccount) {
-        window.parent.API_NewWindow(mlp.getLanguageKey("佣金結算細節") + title, "GetAgentAccountingDetail.aspx?AccountingID=" + accountingID + "&LoginAccount=" + searchLoginAccount + "&SearchCurrencyType=" + strCheckCurrency);
-    }
-
     function init() {
-        $('#ToggleCollapse').click();
         EWinInfo = window.parent.EWinInfo;
         api = window.parent.API_GetAgentAPI();
 
@@ -238,6 +364,13 @@
                     <!-- collapse內容 由此開始 ========== -->
                     <div id="searchList" class="collapse-content collapse show">
                         <div id="divSearchContent" class="row searchListContent">
+
+                          <div id="expandDiv" class="col-12 col-md-3 col-lg-1 col-xl-1" style="padding-left:5px">
+                                <div class="form-group wrapper_center row">
+                                    <button class="btn2 btn-outline-main language_replace col-6 col-md-12 col-lg-12" onclick="toggleAllRow(true)">展開</button>
+                                    <button class="btn2 btn-outline-main language_replace col-6 col-md-12 col-lg-12" onclick="toggleAllRow(false)">收合</button>
+                                </div>
+                            </div>
                             <!-- iOS Safari Virtual Keyboard Fix--------------->
                             <div id="div_MaskSafariFix" class="mask_Input_Safari" onclick="clickMask()"></div>
                         </div>
@@ -250,16 +383,16 @@
         <div class="container-fluid wrapper__TopCollapse orderHistory_userAccount">
             <div class="MT__tableDiv" id="idResultTable">
                 <!-- 自訂表格 -->
-                <div class="MT__table table-col-8 w-200">
+                <div class="MT2__table table-col-8 w-200">
                     <div id="templateTableItem" style="display: none">
                         <div class="tbody__tr td-non-underline-last-2">
-                            <div class="tbody__td date td-100 nonTitle">
+                            <div class="tbody__td date td-100 nonTitle expand_tr">
                                 <span class="td__title"><span class="language_replace">帳號</span></span>
-                                <span class="td__content"><span class="LoginAccount">CON5</span></span>
-                            </div>
-                            <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">貨幣</span></span>
-                                <span class="td__content"><span class="CurrencyType"></span></span>
+                                <span class="td__content Space">
+                                    <span class="noChild" style="padding: 0px 12px; display: none"></span>
+                                    <button class="tree-btn Expand">+</button>
+                                    <span class="LoginAccount">CON5</span>
+                                </span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">總輸贏</span></span>
@@ -268,6 +401,14 @@
                               <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">總轉碼</span></span>
                                 <span class="td__content"><span class="ValidBetValue"></span></span>
+                            </div>
+                              <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">總線佣金</span></span>
+                                <span class="td__content"><span class="TotalLineRebate"></span></span>
+                            </div>
+                              <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">佔成率</span></span>
+                                <span class="td__content"><span class="UserRate"></span></span>
                             </div>
                               <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">應付傭金</span></span>
@@ -292,9 +433,10 @@
                         <!--標題項目單行 -->
                         <div class="thead__tr">
                             <div class="thead__th"><span class="language_replace">帳號</span></div>
-                            <div class="thead__th"><span class="language_replace">貨幣</span></div>
                             <div class="thead__th"><span class="language_replace">總輸贏</span></div>
                             <div class="thead__th"><span class="language_replace">總轉碼</span></div>
+                            <div class="thead__th"><span class="language_replace">總線佣金</span></div>
+                            <div class="thead__th"><span class="language_replace">佔成率</span></div>
                             <div class="thead__th"><span class="language_replace">應付傭金</span></div>
                             <div class="thead__th"><span class="language_replace">總紅利</span></div>
                             <div class="thead__th"><span class="language_replace">佔成紅利</span></div>
