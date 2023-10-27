@@ -61,7 +61,7 @@
 
                 .brand > button {
                     width: 180px;
-                    font-size: 28px;
+                    font-size: 24px;
                     line-height: 50px;
                     cursor: pointer;
                     font-family: monospace;
@@ -179,7 +179,7 @@
 
                 .brand > button {
                     width: 180px;
-                    font-size: 26px;
+                    font-size: 24px;
                     line-height: 45px;
                     cursor: pointer;
                     font-family: Georgia;
@@ -296,35 +296,35 @@
     /*  var mlp;*/
 
     function clickEntryGame(brand) {
-        if (brand == "PS" || brand == "DBES") {
-            if (CurrencyType == "HKD") {
-                var alertMsg;
+        //if (brand == "PS" || brand == "DBES") {
+        //    if (CurrencyType == "HKD") {
+        //        var alertMsg;
 
-                switch (Lang.toLocaleUpperCase()) {
-                    case "ENG":
-                        alertMsg = "Only USD, CNY, USDT, PHP, and KRW can be used."
-                        break;
-                    case "JPN":
-                        alertMsg = "USD、USDT、PHP、CNY、KRWのみ使用可能です。"
-                        break;
-                    case "CHT":
-                        alertMsg = "僅可以使用USD、USDT、PHP、CNY、KRW進入遊戲"
-                        break;
-                    case "CHS":
-                        alertMsg = "USD、USDT、PHP、CNY、KRW进入游戏"
-                        break;
-                    case "KOR":
-                        alertMsg = "USD, CNY, USDT, PHP, KRW 만 게임에 입장할 수 있습니다."
-                        break
-                    default:
-                        alertMsg = "Only USD, CNY, USDT, PHP, and KRW can be used.";
-                        break;
-                }
+        //        switch (Lang.toLocaleUpperCase()) {
+        //            case "ENG":
+        //                alertMsg = "Only USD, CNY, USDT, PHP, and KRW can be used."
+        //                break;
+        //            case "JPN":
+        //                alertMsg = "USD、USDT、PHP、CNY、KRWのみ使用可能です。"
+        //                break;
+        //            case "CHT":
+        //                alertMsg = "僅可以使用USD、USDT、PHP、CNY、KRW進入遊戲"
+        //                break;
+        //            case "CHS":
+        //                alertMsg = "USD、USDT、PHP、CNY、KRW进入游戏"
+        //                break;
+        //            case "KOR":
+        //                alertMsg = "USD, CNY, USDT, PHP, KRW 만 게임에 입장할 수 있습니다."
+        //                break
+        //            default:
+        //                alertMsg = "Only USD, CNY, USDT, PHP, and KRW can be used.";
+        //                break;
+        //        }
 
-                alert(alertMsg);
-                return;
-            }
-        }
+        //        alert(alertMsg);
+        //        return;
+        //    }
+        //}
 
 
         cb = () => {
@@ -369,7 +369,7 @@
         } else {
             var guid = Math.uuid();
 
-            CurrencyType = "USD";
+            CurrencyType = "HKD";
             p.GetUserInfoByProduct(CT, guid, (success, o) => {
                 if (success == true) {
                     if (o.Result == 0) {
@@ -400,7 +400,13 @@
         if (Lang) {
             idlangSel.value = Lang;
         } else {
-            Lang = "ENG";
+            if (window.localStorage.getItem("Lang")) {
+                Lang = window.localStorage.getItem("Lang");
+            }
+
+            if (!Lang) {
+                Lang = "ENG";
+            }
         }
 
 
