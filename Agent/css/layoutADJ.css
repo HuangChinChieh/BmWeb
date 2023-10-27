@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 
 
@@ -59,7 +59,7 @@
 
 
  
-@media screen and (min-width: 568px){
+@media screen and (min-width: 375px){
     .wallet_PointList .tbody__tr:last-child .ADJ_userRate .form-control:optional ~ label{
         background: rgba(0,0,0,0.0);
         width: auto;
