@@ -82,28 +82,35 @@
                     }
                 });
             } else {
-                postData = {
-                    AID: EWinInfo.ASID,
-                    LoginAccount: searchUser
-                };
-                c.callService(ApiUrl + "/QueryCurrentUserInfo", postData, function (success, obj) {
-                    window.parent.API_CloseLoading();
-                    if (success) {
-                        var o = c.getJSON(obj);
 
-                        if (o.Result == 0) {
-                            setItem(o.Datas);
+                if (searchUser == EWinInfo.UserInfo.LoginAccount) {
+                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("若要修改資料，請聯絡你的上線或客服人員。"));
+                    window.parent.API_CloseLoading();
+                } else {
+                    postData = {
+                        AID: EWinInfo.ASID,
+                        LoginAccount: searchUser
+                    };
+                    c.callService(ApiUrl + "/QueryCurrentUserInfo", postData, function (success, obj) {
+                        window.parent.API_CloseLoading();
+                        if (success) {
+                            var o = c.getJSON(obj);
+
+                            if (o.Result == 0) {
+                                setItem(o.Datas);
+                            } else {
+                                window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o.Message));
+                            }
                         } else {
-                            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o.Message));
+                            if (o == "Timeout") {
+                                window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請稍後重新嘗試"));
+                            } else {
+                                window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), o);
+                            }
                         }
-                    } else {
-                        if (o == "Timeout") {
-                            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請稍後重新嘗試"));
-                        } else {
-                            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), o);
-                        }
-                    }
-                });
+                    });
+                }
+
             }
 
         }

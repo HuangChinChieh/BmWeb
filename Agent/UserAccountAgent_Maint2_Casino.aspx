@@ -166,7 +166,11 @@
         endDate = document.getElementById("endDate");
 
         if (loginAccount.value.trim() != '') {
-            querySearchData(loginAccount.value);
+            if (loginAccount.value.trim() == EWinInfo.UserInfo.LoginAccount) {
+                window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("此帳號為登入帳號，不符合查詢下線資格。"));
+            } else {
+                querySearchData(loginAccount.value);
+            }
         } else {
             queryData(0, 1, null);
         }
@@ -732,7 +736,7 @@
 
                             <div class="col-12 col-md-12 col-lg-5 col-xl-6">
                                 <div id="idTabMainContent">
-                                    <ul class="nav-tabs-block nav nav-tabs tab-items-6" role="tablist">
+                                    <ul class="nav-tabs-block nav nav-tabs tab-items-4" role="tablist">
                                         <li class="nav-item">
                                             <a onclick="changeDateTab(this,0)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">本日</a>
                                         </li>
@@ -742,15 +746,15 @@
                                         <li class="nav-item active">
                                             <a onclick="changeDateTab(this,2)" class="nav-link language_replace active" data-toggle="tab" href="" role="tab" aria-selected="true">本週</a>
                                         </li>
-                                        <li class="nav-item">
+                                      <%--  <li class="nav-item">
                                             <a onclick="changeDateTab(this,3)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">上週</a>
-                                        </li>
+                                        </li>--%>
                                         <li class="nav-item">
                                             <a onclick="changeDateTab(this,4)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">本月</a>
                                         </li>
-                                        <li class="nav-item">
+                                       <%-- <li class="nav-item">
                                             <a onclick="changeDateTab(this,5)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">上月</a>
-                                        </li>
+                                        </li>--%>
                                         <li class="tab-slide" id="sliderDate"></li>
                                     </ul>
                                 </div>

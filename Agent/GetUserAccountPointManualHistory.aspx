@@ -165,6 +165,7 @@
         mlp.loadLanguage(lang, function () {
             window.parent.API_CloseLoading();
             queryData();
+            ac.dataToggleCollapseInit();
         });
     }
 

@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/basic.min.css?<%:AgentVersion%>">
     <link rel="stylesheet" href="css/main2.css?<%:AgentVersion%>">
     <link rel="stylesheet" href="css/layoutADJ.css?<%:AgentVersion%>">
+    <link rel="stylesheet" href="css/downline.css?<%:AgentVersion%>">
 <script type="text/javascript" src="/Scripts/Common.js?20191127"></script>
 <script type="text/javascript" src="/Scripts/UIControl.js"></script>
 <script type="text/javascript" src="Scripts/MultiLanguage.js"></script>
@@ -110,16 +111,8 @@
                     }
                 }
 
-                idList.classList.remove("tbody__hasNoData");
-                document.getElementById("idResultTable").classList.remove("MT_tableDiv__hasNoData");
                 if (hasNoData) {
-                    var div = document.createElement("DIV");
-
-                    div.innerHTML = mlp.getLanguageKey("無數據");
-                    div.classList.add("td__content", "td__hasNoData");
-                    document.getElementById("idResultTable").classList.add("MT_tableDiv__hasNoData");
-                    idList.classList.add("tbody__hasNoData");
-                    idUserList.appendChild(div);
+                    $("#idNoData").show();
                 }
 
             });
@@ -152,6 +145,15 @@
 
             <div class="MemberList MemberList__Assistant">
                 <div id="idUserList" class="row">
+                </div>
+                <div class="MT__tableDiv MT_tableDiv__hasNoData" id="idNoData" style="display:none">
+                    <!-- 自訂表格 -->
+                    <div class="MT__table table-col-8 w-200">
+                        <!-- 表格上下滑動框 -->
+                        <div class="tbody tbody__hasNoData" id="idList">
+                            <div id="hasNoData_DIV" class="td__content td__hasNoData">無數據</div>
+                        </div>
+                    </div>
                 </div>
 
             </div>

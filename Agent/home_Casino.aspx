@@ -462,6 +462,35 @@
 
         }
 
+        function getLinePoint() {
+            var postData;
+
+            postData = {
+                AID: EWinInfo.ASID,
+                LoginAccount: EWinInfo.UserInfo.LoginAccount,
+                CurrencyType: DefaultCurrencyType
+            };
+
+            c.callService(ApiUrl + "/GetUserLinePointData", postData, function (success, obj) {
+                if (success) {
+                    var o = c.getJSON(obj);
+                    if (o.Result == 0) {
+                        $("#idLinePoint").text(toCurrency(o.LinePoint));
+                    }
+                    window.parent.API_CloseLoading();
+                } else {
+                    window.parent.API_CloseLoading();
+                    if (o == "Timeout") {
+                        window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請稍後重新嘗試"));
+                    } else {
+                        window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), o);
+                    }
+                }
+
+            });
+
+        }
+
         function changeDateTab(e, type) {
             window.event.stopPropagation();
             window.event.preventDefault();
@@ -584,6 +613,7 @@
                     DefaultCurrencyType = parent.API_GetSelectedWallet();
                     queryUserInfo();
                     getChildUserData();
+                    getLinePoint();
                 });
             }
         }
@@ -594,6 +624,7 @@
                     DefaultCurrencyType = param;
                     queryUserInfo();
                     getChildUserData();
+                    getLinePoint();
                     break;
             }
         }
@@ -630,7 +661,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row item">
+                                        <div class="row item"  style="border: hidden">
                                             <div class="col-3 col-md-3 col-lg-3 col-gx-3 col-xl-3">
                                                 <div class="item homeitembackground" style="background-image: url(./Images/home/Balance.png); width: 100%; height: 100%; border: hidden">
                                                 </div>
@@ -641,6 +672,20 @@
                                                 </div>
                                                 <div>
                                                     <span class="language_replace homeitemvalue" id="idWalletBalance">0</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row item">
+                                            <div class="col-3 col-md-3 col-lg-3 col-gx-3 col-xl-3">
+                                                <div class="item homeitembackground" style="background-image: url(./Images/home/Balance.png); width: 100%; height: 100%; border: hidden">
+                                                </div>
+                                            </div>
+                                            <div class="col-9 col-md-9 col-lg-9 col-gx-9 col-xl-9">
+                                                <div>
+                                                    <span class="currency language_replace homeitemtitle">總線額度</span>
+                                                </div>
+                                                <div>
+                                                    <span class="language_replace homeitemvalue" id="idLinePoint">0</span>
                                                 </div>
                                             </div>
                                         </div>
