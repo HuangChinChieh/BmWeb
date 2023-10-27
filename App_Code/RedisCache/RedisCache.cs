@@ -1963,6 +1963,33 @@ public static class RedisCache {
         }
         #endregion
 
+        #region 首頁總線額度
+        public static string GetHomeLinePointByLoginAccount(string LoginAccount, string CurrencyType) {
+            string Key;
+            string strRet = string.Empty;
+
+            Key = XMLPath + ":Home:LinePoint:LoginAccount:" + LoginAccount + ":CurrencyType:" + CurrencyType;
+            if (KeyExists(DBIndex, Key) == true) {
+                strRet = JsonReadFromRedis(DBIndex, Key);
+            }
+
+            return strRet;
+        }
+
+        public static void UpdateHomeLinePointByLoginAccount(string JsonData, string LoginAccount, string CurrencyType) {
+            string Key;
+
+            Key = XMLPath + ":Home:LinePoint:LoginAccount:" + LoginAccount + ":CurrencyType:" + CurrencyType;
+            for (int I = 0; I <= 3; I++) {
+                try {
+                    JsonStringWriteToRedis(DBIndex, JsonData, Key, 300);
+                    break;
+                } catch (Exception ex) {
+                }
+            }
+        }
+        #endregion
+
         #region 團隊管理-會員
         public static string GetTeamMemberInfoByLoginAccount(string LoginAccount) {
             string Key;

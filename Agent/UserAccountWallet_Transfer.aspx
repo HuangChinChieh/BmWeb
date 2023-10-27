@@ -88,7 +88,9 @@
                                 var obj = c.getJSON(o);
 
                                 if (obj.Result == 0) {
-                                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("完成"), mlp.getLanguageKey("轉帳完成"));
+                                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("完成"), mlp.getLanguageKey("轉帳完成"), function () {
+                                        window.parent.API_MainWindow("Main", "home_Casino.aspx");
+                                    });
 
                                 } else {
                                     window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), obj.Message);
