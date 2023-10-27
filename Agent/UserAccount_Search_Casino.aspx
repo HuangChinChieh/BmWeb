@@ -358,7 +358,7 @@
                                 <div class="revenue" style="" itemtype="eWinBAC">
                                     <span class="share spanUserRate">
                                         <span class="title-s"><span class="language_replace" langkey="佔成率">佔成率</span></span>
-                                        <span class="data"><span class="data UserRate">80</span>%</span>
+                                        <span class="data"><span class="data UserRate">0</span>%</span>
                                     </span>
                                     <span class="commission spanBuyChipRate">
                                         <span class="title-s"><span class="language_replace" langkey="轉碼率">轉碼率</span></span>
