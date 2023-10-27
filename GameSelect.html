@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>BM</title>
+    <script type="text/javascript" src="Scripts/MultiLanguage.js"></script>
+    <script type="text/javascript" src="Scripts/bignumber.min.js"></script>
     <style>
-
+        .selTitle {
+            display: inline-block;
+            color: white
+        }
         /*   PC端樣式    */
         @media (min-width: 768px) {
             button {
@@ -17,7 +22,7 @@
             }
 
             .containerBrand {
-                height: calc(100vh - 415px);
+                height: calc(100vh - 430px);
                 display: flex;
                 flex-direction: column;
                 flex-wrap: nowrap;
@@ -27,6 +32,7 @@
 
             .brand:nth-child(odd) {
                 background: url(images/btn-back-gray.png) no-repeat;
+                background-size: 250px 60px;
             }
 
                 .brand:nth-child(odd) > button {
@@ -35,6 +41,7 @@
 
             .brand:nth-child(even) {
                 background: url(images/btn-back-black.png) no-repeat;
+                background-size: 250px 60px;
             }
 
                 .brand:nth-child(even) > button {
@@ -42,9 +49,9 @@
                 }
 
             .brand {
-                width: 300px;
-                height: 75px;
-                margin-bottom: 50px
+                width: 250px;
+                height: 60px;
+                margin-bottom: 40px
             }
 
                 .brand:hover {
@@ -53,12 +60,12 @@
                 }
 
                 .brand > button {
-                    width: 200px;
-                    font-size: 32px;
-                    line-height: 55px;
+                    width: 180px;
+                    font-size: 28px;
+                    line-height: 50px;
                     cursor: pointer;
-                    font-family: Georgia;
-                    margin: 10px 50px;
+                    font-family: monospace;
+                    margin: 5px 35px;
                 }
 
             @keyframes brandFocus {
@@ -78,13 +85,15 @@
 
             .langSel_container {
                 text-align: center;
+                height: 40px;
+                margin: 10px 10px 10px 40px;
             }
 
             .langSel {
-                margin: 0px 35px 15px 35px;
+                margin: 0px 35px 15px 0px;
                 background-color: rgba(8, 7, 6, 0.8);
                 border: 1px solid #d9c38f;
-                width: 150px;
+                width: auto;
                 /* height: 50px; */
                 color: white;
                 font-size: 18px;
@@ -96,9 +105,9 @@
                 }
 
             .image_1 {
-                width: 300px;
-                height: 300px;
-                margin: 30px 150px 40px 150px;
+                width: 240px;
+                height: 240px;
+                margin: 30px 180px 40px 180px;
             }
 
             .image-wrapper_1 {
@@ -113,6 +122,15 @@
 
         /*   移動端樣式    */
         @media (max-width: 767px) {
+            .selContainer {
+                height: 90px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                flex-wrap: nowrap;
+                justify-content: space-evenly;
+            }
+
             button {
                 margin: 0;
                 padding: 0;
@@ -122,7 +140,7 @@
             }
 
             .containerBrand {
-                height: calc(100vh - 50vw);
+                height: calc(100vh - 50vw - 90px);
                 display: flex;
                 flex-direction: column;
                 flex-wrap: nowrap;
@@ -149,7 +167,7 @@
                 }
 
             .brand {
-                width:auto;
+                width: auto;
                 height: auto;
                 margin-bottom: 40px
             }
@@ -185,13 +203,12 @@
 
             .langSel_container {
                 text-align: center;
-                margin-top:20px;
             }
 
-            .langSel {                
+            .langSel {
                 background-color: rgba(8, 7, 6, 0.8);
                 border: 1px solid #d9c38f;
-                width: 150px;
+                width: auto;
                 /* height: 50px; */
                 color: white;
                 font-size: 18px;
@@ -203,7 +220,7 @@
                 }
 
             .image_1 {
-                width: 50%;                
+                width: 50%;
                 margin: 0 25%;
             }
 
@@ -215,7 +232,7 @@
                 background-color: rgba(8, 7, 6, 0.8);
                 padding: 0px 0px;
             }
-        }    
+        }
     </style>
 </head>
 <body style="background-color: rgb(3 15 36);margin:0px">
@@ -223,29 +240,41 @@
         background-size: 100% 100%;">
         <div class="image-wrapper_1 flex-col">
             <img class="image_1"
-                 referrerpolicy="no-referrer"                 
+                 referrerpolicy="no-referrer"
                  src="images/logo_1024.png" />
 
-            <div class="langSel_container">
-                <select id="idlangSel" class="langSel" onchange="langSelChange(event)">
-                    <option value="CNY" selected>CNY</option>
-                    <option value="PUSD">PUSD</option>
-                    <option value="CUSD">CUSD</option>
-                    <option value="KRW">KRW</option>
-                    <option value="PHP">PHP</option>
-                    <option value="HKD">HKD</option>
-                </select>
+            <div class="selContainer">
+                <div class="langSel_container">
+                    <div class="selTitle language_replace">錢包：</div>
+                    <select id="idCurrencySel" class="langSel" onchange="currencySelChange(event)">
+                        <!--<option value="CNY" selected>CNY</option>
+                        <option value="PUSD">PUSD</option>
+                        <option value="CUSD">CUSD</option>
+                        <option value="KRW">KRW</option>
+                        <option value="PHP">PHP</option>
+                        <option value="HKD">HKD</option>-->
+                    </select>
+                </div>
+                <div class="langSel_container">
+                    <div class="selTitle language_replace">語系：</div>
+                    <select id="idlangSel" class="langSel" onchange="langSelChange(event)">
+                        <option value="ENG" selected>English</option>
+                        <option value="CHS">简体中文</option>
+                        <option value="JPN">日本語</option>
+                        <option value="KOR">한국어</option>
+                        <option value="CHT">繁體中文</option>
+                    </select>
+                </div>
             </div>
-
             <div class="containerBrand">
                 <div onclick="clickEntryGame('BM')" class="brand">
-                    <button>BM Live</button>
+                    <button class="language_replace">BM 電投</button>
                 </div>
                 <div onclick="clickEntryGame('PS')" class="brand">
-                    <button>BM 體育</button>
+                    <button class="language_replace">BM 體育</button>
                 </div>
                 <div onclick="clickEntryGame('DBES')" class="brand">
-                    <button>BM 電競</button>
+                    <button class="language_replace">BM 電競</button>
                 </div>
             </div>
         </div>
@@ -261,32 +290,34 @@
     var CT;
     var CurrencyType;
     var Lang;
+    var mlp;
     var p;
-  /*  var mlp;*/
+    var gameWindow;
+    /*  var mlp;*/
 
     function clickEntryGame(brand) {
         if (brand == "PS" || brand == "DBES") {
-            if (CurrencyType == "HKD" || CurrencyType == "PHP") {
+            if (CurrencyType == "HKD") {
                 var alertMsg;
 
                 switch (Lang.toLocaleUpperCase()) {
                     case "ENG":
-                        alertMsg = "Only PHP, CNY, and KRW can be used."
+                        alertMsg = "Only USD, CNY, USDT, PHP, and KRW can be used."
                         break;
                     case "JPN":
-                        alertMsg = "PHP、CNY、KRWのみ使用可能です。"
+                        alertMsg = "USD、USDT、PHP、CNY、KRWのみ使用可能です。"
                         break;
                     case "CHT":
-                        alertMsg = "僅可以使用PHP、CNY、KRW進入遊戲"
+                        alertMsg = "僅可以使用USD、USDT、PHP、CNY、KRW進入遊戲"
                         break;
                     case "CHS":
-                        alertMsg = "仅可以使用PHP、CNY、KRW进入游戏"
+                        alertMsg = "USD、USDT、PHP、CNY、KRW进入游戏"
                         break;
                     case "KOR":
-                        alertMsg = "PHP, CNY, KRW만 게임에 입장할 수 있습니다."
+                        alertMsg = "USD, CNY, USDT, PHP, KRW 만 게임에 입장할 수 있습니다."
                         break
                     default:
-                        alertMsg = "Only PHP, CNY, and KRW can be used."
+                        alertMsg = "Only USD, CNY, USDT, PHP, and KRW can be used.";
                         break;
                 }
 
@@ -303,7 +334,13 @@
                 Url += "&Lang=" + Lang;
             }
 
-            window.location.href = Url;
+            if (gameWindow) {
+                if (!gameWindow.closed) {
+                    gameWindow.close();
+                }
+            }
+
+            gameWindow = window.open(Url);
         };
 
         if (CurrencyType) {
@@ -317,7 +354,7 @@
         CT = c.getParameter("CT");
         Lang = c.getParameter("Lang");
         CurrencyType = c.getParameter("CurrencyType");
-        
+
 
         p = new LobbyAPI("/API/LobbyAPI.asmx");
 
@@ -328,22 +365,59 @@
         }
 
         if (CurrencyType) {
-            idlangSel.style.display = "none";
+            idCurrencySel.value = CurrencyType;
         } else {
-            CurrencyType = idlangSel.value;
+            var guid = Math.uuid();
+
+            CurrencyType = "USD";
+            p.GetUserInfoByProduct(CT, guid, (success, o) => {
+                if (success == true) {
+                    if (o.Result == 0) {
+                        var MaxCurrency = CurrencyType;
+                        var MaxPointValue = 0;
+
+
+                        for (var i = 0; i < o.WalletList.length; i++) {
+                            var wallet = o.WalletList[i];
+                            var opt = document.createElement("option");
+                            opt.value = wallet.CurrencyType;
+                            opt.innerText = wallet.CurrencyType + "  " + new BigNumber(wallet.PointValue).toFormat();
+
+                            if (wallet.PointValue > MaxPointValue) {
+                                MaxCurrency = wallet.CurrencyType;
+                                MaxPointValue = wallet.PointValue;
+                            }
+
+                            idCurrencySel.appendChild(opt);
+                        }
+
+                        idCurrencySel.value = MaxCurrency;
+                    }
+                } 
+            });
         }
 
-
-        if (!Lang) {
+        if (Lang) {
+            idlangSel.value = Lang;
+        } else {
             Lang = "ENG";
         }
+
+
 
         //mlp = new multiLanguage();
 
         //setLanguage(Lang, function () {
-            
+
         //    //initLiveChat();
         //});
+
+
+        mlp = new multiLanguage();
+
+        setLanguage(Lang, function () {
+
+        });
 
         window.setInterval(function () {
             // refresh SID and Token;
@@ -352,24 +426,46 @@
             p.KeepSIDByProduct(CT, guid, function (success, o) {
                 if (success == true) {
                     if (o.Result != 0) {
-                        window.location.href = "index.html";
+                        window.location.href = "index.aspx";
                     }
                 } else {
-                    window.location.href = "index.html";
+                    window.location.href = "index.aspx";
                 }
             });
 
         }, 10000);
     }
 
-    function langSelChange(e) {
+    function currencySelChange(e) {
         var sel = e.currentTarget;
-        var lang = sel.value;
-        
-        CurrencyType = idlangSel.value;
+        CurrencyType = sel.value;
         //setLanguage(lang);
     }
 
+
+
+    function langSelChange(e) {
+        var sel = e.currentTarget;
+        Lang = sel.value;
+
+
+        setLanguage(Lang, null);
+        //setLanguage(lang);
+    }
+
+
+    function setLanguage(c, cb) {
+        Lang = c;
+
+        window.localStorage.setItem("Lang", Lang);
+        idlangSel.value = Lang;
+
+        mlp.loadLanguage(Lang, function () {
+            if (cb)
+                cb();
+        });
+
+    }
 
     window.onload = init;
 </script>

@@ -238,18 +238,18 @@
             }
         }
 
-        p.UserLogin(Math.uuid(), window.LoginGUID, LoginAccount, LoginPassword, ImageCode, GuestLogin, Lang, (success, o) => {
+        p.UserLoginEntryGameSel(Math.uuid(), window.LoginGUID, LoginAccount, LoginPassword, ImageCode, GuestLogin, Lang, (success, o) => {
             if (success) {
                 if (o.ResultState == 0) {
                     window.location.href = o.LoginURL;
                 } else {
                     API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("Login failure:") + mlp.getLanguageKey(o.Message), () => {
-                        window.location.href = "/Refresh.aspx?index.html";
+                        window.location.href = "/Refresh.aspx?index.aspx";
                     });
                 }
             } else {
                 API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("Login failure:") + "001", () => {
-                    window.location.href = "/Refresh.aspx?index.html";
+                    window.location.href = "/Refresh.aspx?index.aspx";
                 });
             }
         });
@@ -257,7 +257,7 @@
 
     function init() {
         if (!window.location.pathname || window.location.pathname == "/") {
-            window.history.pushState({}, "", "/index.html");
+            window.history.pushState({}, "", "/index.aspx");
         }
 
         p = new LoginAPI("/API/LoginAPI.asmx");

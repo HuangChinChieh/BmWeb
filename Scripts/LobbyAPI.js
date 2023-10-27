@@ -457,8 +457,30 @@
         });
     };
 
-    this.KeepSIDByProduct = function (SID, GUID, cb) {
+    this.KeepSIDByProduct = function (CT, GUID, cb) {
         var url = APIUrl + "/KeepSIDByProduct";
+        var postData;
+
+        postData = {
+            CT: CT,
+            GUID: GUID
+        };
+
+        callService(url, postData, 10000, function (success, text) {
+            if (success == true) {
+                var obj = getJSON(text);
+
+                if (cb)
+                    cb(true, obj);
+            } else {
+                if (cb)
+                    cb(false, text);
+            }
+        });
+    };
+
+    this.GetUserInfoByProduct = function (CT, GUID, cb) {
+        var url = APIUrl + "/GetUserInfoByProduct";
         var postData;
 
         postData = {
