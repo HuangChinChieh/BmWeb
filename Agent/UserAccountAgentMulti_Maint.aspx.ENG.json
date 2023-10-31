@@ -1,10 +1,14 @@
 {
-  "多重帳號維護": "Multiple Account Maintenance",
+  "多重帳號維護": "Multiple Account Management",
   "編輯": "Edit",
-  "移除": "Remove",
-  "多重帳號移除": "Remove Multiple Account",
-  "確定移除此帳號": "Are you sure to remove this account?",
+  "移除": "Delete",
+  "多重帳號移除": "Delete Multiple Account",
+  "確定移除此帳號": "Are you sure to delete this multiple account?",
   "完成": "System Message",
-  "更新完成": "The account has been removed successfully.",
-  "無數據": "No data"
+  "更新完成": "The account has been deleted.",
+  "無數據": "There is no any data so far.",
+  "新增多重帳號": "Add Multiple Account",
+  "切換多重帳號": "Switch Multiple Account",
+  "多重帳號": "Multiple Account Management"
+}
 }

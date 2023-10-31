@@ -1,15 +1,15 @@
 {
   "新增多重帳號": "Add Multiple Accounts",
-  "登入帳號": "Login Account",
-  "請輸入帳號": "Please enter the account.",
+  "登入帳號": "ID",
+  "請輸入帳號": "Please enter the ID.",
   "登入密碼": "Password",
   "請輸入登入密碼": "Please enter the password.",
   "描述": "Description",
   "請輸入描述": "Please enter a description.",
   "取消": "Cancel",
-  "送出": "Send",
+  "送出": "OK",
   "錯誤": "System Message",
   "完成": "System Message",
   "新增完成": "The account has been added completely.",
-  "新增失敗，密碼錯誤或該帳號已在別的群組": "It's failed to add the account due to the password is wrong or the account already belongs to another group, please check."
+  "新增失敗，密碼錯誤 或該帳號已在別的群組": "Failure to add. Reason: wrong password or the ID is already in another group."
 }

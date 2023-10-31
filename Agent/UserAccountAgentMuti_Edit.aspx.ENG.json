@@ -1,11 +1,12 @@
 {
   "編輯多重帳號": "Edit Multiple Accounts",
-  "登入帳號": "Login Account",
+  "登入帳號": "ID",
   "描述": "Description",
   "請輸入描述": "Please enter a description.",
   "取消": "Cancel",
   "送出": "Send",
   "錯誤": "System Message",
   "完成": "System Message",
-  "更新完成": "The account description has been changed successfully."
+  "更新完成": "Update completed.",
+  "新增失敗，密碼錯誤 或該帳號已在別的群組": "Failure to add. Reason: wrong password or the ID is already in another group."
 }
