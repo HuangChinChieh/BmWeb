@@ -43,7 +43,7 @@
         try
         {
             // 轉換出 Token 與 SID
-            SID = EWinWeb.DecodeClientToken(CT).SID;        
+            SID = EWinWeb.DecodeClientToken(CT).SID;
 
         }
         catch (Exception ex) { }
@@ -59,8 +59,8 @@
             {
 
 
-                try { CodingControl.GetWebTextContent(EWinWeb.EWinAPIUrl + "/API/GamePlatformAPI2/UserLogout.aspx?CT=" + Server.UrlEncode(CT) + "&CurrencyType=" + CurrencyType, "GET"); }
-                catch (Exception ex) { }
+                //try { CodingControl.GetWebTextContent(EWinWeb.EWinAPIUrl + "/API/GamePlatformAPI2/UserLogout.aspx?CT=" + Server.UrlEncode(CT) + "&CurrencyType=" + CurrencyType, "GET"); }
+                //catch (Exception ex) { }
 
                 if (SelectGameBrand == "BM")
                 {

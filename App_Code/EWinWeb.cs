@@ -32,6 +32,14 @@ public static class EWinWeb {
     private static StackExchange.Redis.ConnectionMultiplexer RedisClient = null;
 
 
+    public enum enumUserDeviceType
+    {
+        PC = 0,
+        iOS = 1,
+        Android = 2
+    }
+
+
     public static void AlertMessage(string Content, string ReturnURL = "")
     {
         bool IsJS = false;
@@ -378,4 +386,39 @@ public static class EWinWeb {
 
         return R;
     }
+
+
+    public static enumUserDeviceType GetUserDeviceType(string UserAgent)
+    {
+        string[] IOSDeviceAgent = new string[] { "iphone", "ipad", "ipod", "android" };
+        string[] AndroidDeviceAgent = new string[] { "android" };
+        enumUserDeviceType RetValue = enumUserDeviceType.PC;
+        bool foundDevice = false;
+
+        foreach (string eachKey in IOSDeviceAgent)
+        {
+            if (UserAgent.ToUpper().IndexOf(eachKey.ToUpper()) != -1)
+            {
+                RetValue = enumUserDeviceType.iOS;
+                foundDevice = true;
+                break;
+            }
+        }
+
+        if (foundDevice == false)
+        {
+            foreach (string eachKey in AndroidDeviceAgent)
+            {
+                if (UserAgent.ToUpper().IndexOf(eachKey.ToUpper()) != -1)
+                {
+                    RetValue = enumUserDeviceType.Android;
+                    foundDevice = true;
+                    break;
+                }
+            }
+        }
+
+        return RetValue;
+    }
+
 }

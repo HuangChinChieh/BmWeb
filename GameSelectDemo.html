@@ -333,22 +333,6 @@
 
         /*-----------------------------------*/
 
-        @keyframes fadeOut {
-            from {
-                opacity: 1;
-            }
-
-            to {
-                opacity: 0;
-                display:none;
-            }
-        }
-
-        .loader-container.is-loader-hide {
-            animation: fadeOut 1s; /* 持续时间为2秒，可以根据需要调整 */
-            opacity: 1;
-            animation-fill-mode: forwards;
-        }
 
         .loader-container {
             position: fixed;
@@ -652,7 +636,7 @@
         </div>
         <div class="game-mask"></div>
     </div>
-    <div class="loader-container">
+    <div class="loader-container" style="display: block;">
         <div class="loader-box">
             <div class="loader-spinner">
                 <div class="sk-fading-circle">
@@ -692,13 +676,31 @@
         var gameFrameOpened = false;
         /*  var mlp;*/
 
-   
-        function API_LoadingStart() {            
+        function fadeOut(element, duration) {
+            var targetOpacity = 0;
+            var currentOpacity = 1;
+            var step = 0.05; // 控制每次变化的步长，可以根据需要调整
+
+            // 设置定时器，每隔一段时间逐渐降低不透明度
+            var timer = setInterval(function () {
+                currentOpacity -= step;
+                element.style.opacity = currentOpacity;
+
+                if (currentOpacity <= targetOpacity) {
+                    // 元素完全不透明时，清除定时器，隐藏元素
+                    clearInterval(timer);
+                    element.style.display = 'none';
+                    element.style.opacity = 1;
+                }
+            }, duration / (1 / step)); // 根据指定的持续时间来计算定时器的间隔
+        }
+
+        function API_LoadingStart() {
             document.querySelector('.loader-container').style.display = "block";
         }
 
-        function API_LoadingEnd() {            
-            document.querySelector('.loader-container').style.display = "none";
+        function API_LoadingEnd() {
+            fadeOut(document.querySelector('.loader-container'), 250);
         }
 
         function clickEntryGame(brand) {
@@ -708,7 +710,7 @@
 
 
             cb = () => {
-                var Url = "GameRedirect.aspx?CT=" + encodeURIComponent(CT) + "&SelectGameBrand=" + brand + "&CurrencyType=" + CurrencyType;
+                var Url = "GameRedirectDemo.aspx?SelectGameBrand=" + brand;
                 var gameTitle = "";
 
                 if (Lang) {
@@ -816,46 +818,10 @@
             }
         }
 
-        function init() {
-            CT = c.getParameter("CT");
-            Lang = c.getParameter("Lang");
-            CurrencyType = c.getParameter("CurrencyType");
-
-
-            p = new LobbyAPI("/API/LobbyAPI.asmx");
-
-            if (!CT) {
-                window.location.href = "index.aspx";
-            } else {
-                CT = decodeURIComponent(CT)
-            }
-
-            var guid = Math.uuid();
-
-            p.GetUserInfoByProduct(CT, Math.uuid(), (success, o) => {
-                if (success == true) {
-                    if (o.Result == 0) {
-                        WalletInfo = o;
-                        updateBaseInfo();
-                        API_LoadingEnd();
-                    } else {
-                        window.location.href = "index.aspx";
-                    }
-                } else {
-                    window.location.href = "index.aspx";
-                }
-            });
-
-            p.ReceiveGamePointByProduct(CT, "", Math.uuid(), (success, o) => {
-                p.GetUserInfoByProduct(CT, Math.uuid(), (success, o) => {
-                    if (success == true) {
-                        if (o.Result == 0) {
-                            WalletInfo = o;
-                            updateBaseInfo();
-                        }
-                    }
-                });
-            });
+        function init() {            
+            Lang = c.getParameter("Lang");            
+          
+            var guid = Math.uuid();       
 
             if (Lang) {
                 idlangSel.value = Lang;
@@ -868,16 +834,6 @@
                     Lang = "ENG";
                 }
             }
-
-
-
-            //mlp = new multiLanguage();
-
-            //setLanguage(Lang, function () {
-
-            //    //initLiveChat();
-            //});
-
 
             document.getElementById("idGameContainer").addEventListener("transitionend", () => {
                 // 过渡完成后执行的代码
@@ -892,23 +848,9 @@
 
             mlp = new multiLanguage();
 
-            setLanguage(Lang, function () { });
-
-            window.setInterval(function () {
-                // refresh SID and Token;
-                var guid = Math.uuid();
-
-                p.KeepSIDByProduct(CT, guid, function (success, o) {
-                    if (success == true) {
-                        if (o.Result != 0) {
-                            window.location.href = "index.aspx";
-                        }
-                    } else {
-                        window.location.href = "index.aspx";
-                    }
-                });
-
-            }, 10000);
+            setLanguage(Lang, function () {
+                API_LoadingEnd();
+            });          
         }
 
         function currencySelChange(e) {
@@ -953,12 +895,13 @@
             if (isMobileDevice()) {
                 for (var i = 0; i < btns.length; i++) {
                     var btn = btns[i];
+
                     ((brand) => {
                         btn.addEventListener("touchend", function (event) {
                             clickEntryGame(brand);
                         });
-                    })(btn.dataset.brand);
-                }           
+                    })(btn.dataset.brand);                 
+                }
             } else {
                 for (var i = 0; i < btns.length; i++) {
                     var btn = btns[i];
@@ -966,8 +909,8 @@
                         btn.addEventListener("click", function (event) {
                             clickEntryGame(brand);
                         });
-                    })(btn.dataset.brand);
-                }           
+                    })(btn.dataset.brand);      
+                }
             }            
         }
 

@@ -177,6 +177,7 @@ public class LoginAPI : System.Web.Services.WebService
          {
              Ret.ResultState = EWin.Login.enumResultState.OK;
              Ret.LoginURL = EWinWeb.EWinUrl + "/Game/LoginGuest.aspx?Lang=" + Lang + "&LoginGUID=" + LoginGUID + "&ImageCode=" + ImageCode + "&Action=Game";
+             //Ret.LoginURL ="GameSelectDemo.html?Lang=" + Lang + "&Action=Game";
          }
          else
          {

@@ -340,7 +340,7 @@
 
             to {
                 opacity: 0;
-                display:none;
+                display: none;
             }
         }
 
@@ -692,12 +692,12 @@
         var gameFrameOpened = false;
         /*  var mlp;*/
 
-   
-        function API_LoadingStart() {            
+
+        function API_LoadingStart() {
             document.querySelector('.loader-container').style.display = "block";
         }
 
-        function API_LoadingEnd() {            
+        function API_LoadingEnd() {
             document.querySelector('.loader-container').style.display = "none";
         }
 
@@ -838,11 +838,7 @@
                         WalletInfo = o;
                         updateBaseInfo();
                         API_LoadingEnd();
-                    } else {
-                        window.location.href = "index.aspx";
                     }
-                } else {
-                    window.location.href = "index.aspx";
                 }
             });
 
@@ -958,7 +954,7 @@
                             clickEntryGame(brand);
                         });
                     })(btn.dataset.brand);
-                }           
+                }
             } else {
                 for (var i = 0; i < btns.length; i++) {
                     var btn = btns[i];
@@ -967,8 +963,8 @@
                             clickEntryGame(brand);
                         });
                     })(btn.dataset.brand);
-                }           
-            }            
+                }
+            }
         }
 
 
