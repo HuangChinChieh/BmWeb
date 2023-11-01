@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/magnific.css">
-
     <!--  script         -->
     <script type="text/javascript">
         function codepopup() {

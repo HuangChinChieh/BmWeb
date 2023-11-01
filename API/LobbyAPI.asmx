@@ -579,6 +579,64 @@ public class LobbyAPI : System.Web.Services.WebService
         return R;
     }
 
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public EWin.Lobby.APIResult ReceiveGamePointByProduct(string CT, string CurrencyType, string GUID)
+    {
+        EWin.Lobby.APIResult R = new EWin.Lobby.APIResult();
+        string ResponseStr;
+        Newtonsoft.Json.Linq.JObject ResponseJObj = null;
+
+        if (string.IsNullOrEmpty(CurrencyType))
+        {
+            ResponseStr = CodingControl.GetWebTextContent(EWinWeb.EWinAPIUrl + "/API/GamePlatformAPI2/UserLogout.aspx?CT=" + Server.UrlEncode(CT), "GET");
+        }
+        else
+        {
+            ResponseStr = CodingControl.GetWebTextContent(EWinWeb.EWinAPIUrl + "/API/GamePlatformAPI2/UserLogout.aspx?CT=" + Server.UrlEncode(CT) + "&CurrencyType=" + CurrencyType, "GET");
+        }
+
+
+        if (string.IsNullOrEmpty(ResponseStr) == false)
+        {
+            try
+            {
+                ResponseJObj = Newtonsoft.Json.Linq.JObject.Parse(ResponseStr);
+
+                if (ResponseJObj != null)
+                {
+                    if ((int)ResponseJObj["Result"] == 0)
+                    {
+                        R.Result = EWin.Lobby.enumResult.OK;
+                    }
+                    else
+                    {
+                        R.Result = EWin.Lobby.enumResult.ERR;
+                        R.Message = (string)ResponseJObj["Message"];
+                    }
+                }
+                else
+                {
+                    R.Result = EWin.Lobby.enumResult.ERR;
+                    R.Message = "DeserializeFail";
+                }
+            }
+            catch (Exception ex)
+            {
+                R.Result = EWin.Lobby.enumResult.ERR;
+                R.Message = ex.Message;
+            }
+        }
+        else
+        {
+            R.Result = EWin.Lobby.enumResult.ERR;
+            R.Message = "RequestFail";
+        }
+
+        return R;
+    }
+
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
     public EWin.Lobby.APIResult SetUserMail(string GUID, EWin.Lobby.enumValidateType ValidateType, CodingControl.enumSendMailType SendMailType, string EMail, string ContactPhonePrefix, string ContactPhoneNumber, string ReceiveRegisterRewardURL)
@@ -640,6 +698,7 @@ public class LobbyAPI : System.Web.Services.WebService
 
         return R;
     }
+
 
     private string GetToken()
     {

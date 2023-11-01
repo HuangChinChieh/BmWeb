@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BM</title>
+    <link rel="shortcut icon" href="images/logo_300.png" />
+    <link rel="Bookmark" href="images/logo_300.png" />
     <script type="text/javascript" src="Scripts/MultiLanguage.js"></script>
     <script type="text/javascript" src="Scripts/bignumber.min.js"></script>
     <style>
@@ -28,6 +30,7 @@
                 flex-wrap: nowrap;
                 justify-content: center;
                 align-items: center;
+                min-height: 320px;
             }
 
             .brand:nth-child(odd) {
@@ -113,10 +116,11 @@
             .image-wrapper_1 {
                 width: 600px;
                 max-width: 100vw;
-                height: 100vh;
+                height: auto;
                 margin: auto;
                 background-color: rgba(8, 7, 6, 0.8);
                 padding: 0px 60px;
+                min-height:100vh;
             }
         }
 
@@ -146,6 +150,7 @@
                 flex-wrap: nowrap;
                 justify-content: center;
                 align-items: center;
+                min-height: 320px;
             }
 
             .brand:nth-child(odd) {
@@ -227,17 +232,97 @@
             .image-wrapper_1 {
                 width: 600px;
                 max-width: 100vw;
-                height: 100vh;
+                height: auto;
                 margin: auto;
                 background-color: rgba(8, 7, 6, 0.8);
                 padding: 0px 0px;
+                min-height: 100vh;
             }
+        }
+
+        .gameContainer {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            background-color: black;
+            transform: translateY(100vh);
+            top: 0;
+            transition: transform 0.5s;
+        }
+
+        .gameContainer-show {
+            transform: translateY(0);
+        }
+
+        .game-header {
+            height: 40px;
+            width: 100%;
+            position: relative;
+            top: 0px;
+            background: linear-gradient(180deg, #CDBB9D 0%, #B9A179 100%, #CDB690 100%);
+            justify-content: center;
+            display: flex;
+            align-items: center;
+        }
+
+        .game-back {
+            position: absolute;
+            left: 0px;
+            font-size: 32px;
+            font-weight: 900;
+            -webkit-text-stroke: 0.1px rgb(232 232 232);
+            color: black;
+            font-family: emoji;
+            border: 0px;
+            margin: 0px;
+            line-height: 40px;
+            width: 60px;
+        }
+
+
+        .game-body {
+            width: 100%;
+            height: calc(100% - 40px);
+            position: relative;
+            /* top: 40px;*/
+            overflow-y: auto;
+            box-sizing: border-box;
+            display: flex;
+        }
+
+        .game-title {
+            line-height: 40px;
+            font-family: Microsoft JhengHei;
+            position: relative;
+            font-size: 18px;
+            font-weight: bold;
+            color: #373b4e;
+        }
+
+        .game-icon {
+            height: 24px;
+            width: 24px;
+            /* vertical-align: middle; */
+            top: 5px;
+            position: absolute;
+            left: -24px
+        }
+
+        .game-mask {
+            height: 100%;
+            width: 100%;
+            background-color: black;
+            position: absolute;
+            top: 0;
+        }
+
+        .is-hide {
+            display: none;
         }
     </style>
 </head>
 <body style="background-color: rgb(3 15 36);margin:0px">
-    <div class="page flex-col" style="width: 100%;height: 100vh ;background: url(images/banner.jpg) 100% repeat;
-        background-size: 100% 100%;">
+    <div class="page flex-col" style="width: 100%; height: 100vh; background: url(images/banner.jpg) 100% repeat; background-size: 100% 100%;overflow-y: auto;">
         <div class="image-wrapper_1 flex-col">
             <img class="image_1"
                  referrerpolicy="no-referrer"
@@ -279,200 +364,246 @@
             </div>
         </div>
     </div>
-</body>
-<script type="text/javascript" src="/Scripts/Common.js"></script>
-<script type="text/javascript" src="/Scripts/LobbyAPI.js"></script>
-<script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
-<!--<script type="text/javascript" src="Scripts/MultiLanguage.js"></script>-->
-<script type="text/javascript">
-    var c = new common();
-    var SID;
-    var CT;
-    var CurrencyType;
-    var Lang;
-    var mlp;
-    var p;
-    var gameWindow;
-    /*  var mlp;*/
+    <div id="idGameContainer" class="gameContainer">
+        <div class="game-header">
+            <button class="game-back" onclick="leaveGame();">↩︎</button>
+            <img class="game-icon" src="images/logo_300.png" /><span class="game-title">電子競技</span>
+        </div>
+        <div class="game-body">
+            <iframe id="idGameFrame" src="" style="height:100%;width:100%;border:0px"></iframe>
+        </div>
+        <div class="game-mask"></div>
+    </div>
 
-    function clickEntryGame(brand) {
-        //if (brand == "PS" || brand == "DBES") {
-        //    if (CurrencyType == "HKD") {
-        //        var alertMsg;
+    <script type="text/javascript" src="/Scripts/Common.js"></script>
+    <script type="text/javascript" src="/Scripts/LobbyAPI.js"></script>
+    <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
+    <!--<script type="text/javascript" src="Scripts/MultiLanguage.js"></script>-->
+    <script type="text/javascript">
+        var c = new common();
+        var SID;
+        var CT;
+        var CurrencyType;
+        var Lang;
+        var mlp;
+        var p;
+        var WalletInfo;
+        var gameFrameOpened = false;
+        /*  var mlp;*/
 
-        //        switch (Lang.toLocaleUpperCase()) {
-        //            case "ENG":
-        //                alertMsg = "Only USD, CNY, USDT, PHP, and KRW can be used."
-        //                break;
-        //            case "JPN":
-        //                alertMsg = "USD、USDT、PHP、CNY、KRWのみ使用可能です。"
-        //                break;
-        //            case "CHT":
-        //                alertMsg = "僅可以使用USD、USDT、PHP、CNY、KRW進入遊戲"
-        //                break;
-        //            case "CHS":
-        //                alertMsg = "USD、USDT、PHP、CNY、KRW进入游戏"
-        //                break;
-        //            case "KOR":
-        //                alertMsg = "USD, CNY, USDT, PHP, KRW 만 게임에 입장할 수 있습니다."
-        //                break
-        //            default:
-        //                alertMsg = "Only USD, CNY, USDT, PHP, and KRW can be used.";
-        //                break;
-        //        }
+        function clickEntryGame(brand) {
+            cb = () => {
+                var Url = "GameRedirect.aspx?CT=" + encodeURIComponent(CT) + "&SelectGameBrand=" + brand + "&CurrencyType=" + CurrencyType;
+                var gameTitle = "";
 
-        //        alert(alertMsg);
-        //        return;
-        //    }
-        //}
+                if (Lang) {
+                    Url += "&Lang=" + Lang;
+                }
 
 
-        cb = () => {
-            var Url = "GameRedirect.aspx?CT=" + encodeURIComponent(CT) + "&SelectGameBrand=" + brand + "&CurrencyType=" + CurrencyType;
+                switch (brand) {
+                    case "BM":
+                        gameTitle = mlp.getLanguageKey("電投");
+                        break;
 
-            if (Lang) {
-                Url += "&Lang=" + Lang;
+                    case "DBES":
+                        gameTitle = mlp.getLanguageKey("電子競技");
+                        break;
+                    case "PS":
+                        gameTitle = mlp.getLanguageKey("體育");
+                        break;
+                    default:
+                        gameTitle = "BM";
+                        break;
+                }
+
+                document.querySelector(".game-title").innerText = gameTitle;
+                document.querySelector(".game-mask").classList.add("is-hide");
+                document.getElementById("idGameContainer").classList.add("gameContainer-show");
+                document.getElementById("idGameFrame").src = Url;
+                gameFrameOpened = true;
+            };
+
+            if (CurrencyType) {
+                cb();
+            } else {
+
             }
+        }
 
-            if (gameWindow) {
-                if (!gameWindow.closed) {
-                    gameWindow.close();
+        function leaveGame() {
+            document.getElementById("idGameContainer").classList.remove("gameContainer-show");
+            document.getElementById("idGameFrame").src = "";
+            gameFrameOpened = false;
+
+            p.ReceiveGamePointByProduct(CT, "", Math.uuid(), (success, o) => {
+                p.GetUserInfoByProduct(CT, Math.uuid(), (success, o) => {
+                    if (success == true) {
+                        if (o.Result == 0) {
+                            WalletInfo = o;
+                            updateBaseInfo();
+                        }
+                    }
+                });
+            });
+        }
+
+        function updateBaseInfo() {
+            if (WalletInfo) {
+                var MaxCurrency;
+                var MaxPointValue = 0;
+                var CurrencyTypeInList = false;
+
+                idCurrencySel.innerHTML = "";
+
+                for (var i = 0; i < WalletInfo.WalletList.length; i++) {
+                    var wallet = WalletInfo.WalletList[i];
+                    var opt = document.createElement("option");
+                    opt.value = wallet.CurrencyType;
+                    opt.innerText = wallet.CurrencyType + "  " + new BigNumber(wallet.PointValue).toFormat();
+
+                    if (wallet.PointValue > MaxPointValue) {
+                        MaxCurrency = wallet.CurrencyType;
+                        MaxPointValue = wallet.PointValue;
+                    }
+
+                    if (CurrencyType) {
+                        if (CurrencyTypeInList == false) {
+                            CurrencyTypeInList = MaxCurrency == CurrencyType;
+                        }
+                    }
+
+                    idCurrencySel.appendChild(opt);
+                }
+
+                if (CurrencyTypeInList) {
+                    idCurrencySel.value = CurrencyType;
+                } else {
+                    if (MaxCurrency) {
+                        CurrencyType = MaxCurrency;
+                        idCurrencySel.value = MaxCurrency;
+                    }
                 }
             }
-
-            gameWindow = window.open(Url);
-        };
-
-        if (CurrencyType) {
-            cb();
-        } else {
-
-        }
-    }
-
-    function init() {
-        CT = c.getParameter("CT");
-        Lang = c.getParameter("Lang");
-        CurrencyType = c.getParameter("CurrencyType");
-
-
-        p = new LobbyAPI("/API/LobbyAPI.asmx");
-
-        if (!CT) {
-            window.location.href = "index.html";
-        } else {
-            CT = decodeURIComponent(CT)
         }
 
-        if (CurrencyType) {
-            idCurrencySel.value = CurrencyType;
-        } else {
+        function init() {
+            CT = c.getParameter("CT");
+            Lang = c.getParameter("Lang");
+            CurrencyType = c.getParameter("CurrencyType");
+
+
+            p = new LobbyAPI("/API/LobbyAPI.asmx");
+
+            if (!CT) {
+                window.location.href = "index.aspx";
+            } else {
+                CT = decodeURIComponent(CT)
+            }
+
             var guid = Math.uuid();
 
-            CurrencyType = "HKD";
             p.GetUserInfoByProduct(CT, guid, (success, o) => {
                 if (success == true) {
                     if (o.Result == 0) {
-                        var MaxCurrency = CurrencyType;
-                        var MaxPointValue = 0;
-
-
-                        for (var i = 0; i < o.WalletList.length; i++) {
-                            var wallet = o.WalletList[i];
-                            var opt = document.createElement("option");
-                            opt.value = wallet.CurrencyType;
-                            opt.innerText = wallet.CurrencyType + "  " + new BigNumber(wallet.PointValue).toFormat();
-
-                            if (wallet.PointValue > MaxPointValue) {
-                                MaxCurrency = wallet.CurrencyType;
-                                MaxPointValue = wallet.PointValue;
-                            }
-
-                            idCurrencySel.appendChild(opt);
-                        }
-
-                        idCurrencySel.value = MaxCurrency;
+                        WalletInfo = o;
+                        updateBaseInfo();
                     }
-                } 
-            });
-        }
-
-        if (Lang) {
-            idlangSel.value = Lang;
-        } else {
-            if (window.localStorage.getItem("Lang")) {
-                Lang = window.localStorage.getItem("Lang");
-            }
-
-            if (!Lang) {
-                Lang = "ENG";
-            }
-        }
-
-
-
-        //mlp = new multiLanguage();
-
-        //setLanguage(Lang, function () {
-
-        //    //initLiveChat();
-        //});
-
-
-        mlp = new multiLanguage();
-
-        setLanguage(Lang, function () {
-
-        });
-
-        window.setInterval(function () {
-            // refresh SID and Token;
-            var guid = Math.uuid();
-
-            p.KeepSIDByProduct(CT, guid, function (success, o) {
-                if (success == true) {
-                    if (o.Result != 0) {
-                        window.location.href = "index.aspx";
-                    }
-                } else {
-                    window.location.href = "index.aspx";
                 }
             });
 
-        }, 10000);
-    }
+            if (Lang) {
+                idlangSel.value = Lang;
+            } else {
+                if (window.localStorage.getItem("Lang")) {
+                    Lang = window.localStorage.getItem("Lang");
+                }
 
-    function currencySelChange(e) {
-        var sel = e.currentTarget;
-        CurrencyType = sel.value;
-        //setLanguage(lang);
-    }
-
-
-
-    function langSelChange(e) {
-        var sel = e.currentTarget;
-        Lang = sel.value;
+                if (!Lang) {
+                    Lang = "ENG";
+                }
+            }
 
 
-        setLanguage(Lang, null);
-        //setLanguage(lang);
-    }
+
+            //mlp = new multiLanguage();
+
+            //setLanguage(Lang, function () {
+
+            //    //initLiveChat();
+            //});
 
 
-    function setLanguage(c, cb) {
-        Lang = c;
+            document.getElementById("idGameContainer").addEventListener("transitionend", () => {
+                // 过渡完成后执行的代码
+                if (gameFrameOpened == false) {
+                    document.querySelector(".game-mask").classList.add("is-hide");
+                }
+            });
 
-        window.localStorage.setItem("Lang", Lang);
-        idlangSel.value = Lang;
+            frameResize();
 
-        mlp.loadLanguage(Lang, function () {
-            if (cb)
-                cb();
-        });
+            mlp = new multiLanguage();
 
-    }
+            setLanguage(Lang, function () { });
 
-    window.onload = init;
-</script>
+            window.setInterval(function () {
+                // refresh SID and Token;
+                var guid = Math.uuid();
+
+                p.KeepSIDByProduct(CT, guid, function (success, o) {
+                    if (success == true) {
+                        if (o.Result != 0) {
+                            window.location.href = "index.aspx";
+                        }
+                    } else {
+                        window.location.href = "index.aspx";
+                    }
+                });
+
+            }, 10000);
+        }
+
+        function currencySelChange(e) {
+            var sel = e.currentTarget;
+            CurrencyType = sel.value;
+            //setLanguage(lang);
+        }
+
+        function langSelChange(e) {
+            var sel = e.currentTarget;
+            Lang = sel.value;
+
+
+            setLanguage(Lang, null);
+            //setLanguage(lang);
+        }
+
+        function setLanguage(c, cb) {
+            Lang = c;
+
+            window.localStorage.setItem("Lang", Lang);
+            idlangSel.value = Lang;
+
+            mlp.loadLanguage(Lang, function () {
+                if (cb)
+                    cb();
+            });
+        }
+
+        function frameResize() {
+            if (gameFrameOpened == true) {
+                var frame = document.getElementById("idGameFrame");
+
+                frame.style.height = frame.contentWindow.outerHeight + "px";
+                frame.style.width = frame.contentWindow.outerWidth + "px";
+            }
+        }
+
+
+        window.onload = init;
+        window.onresize = frameResize;
+
+    </script>
+</body>
 </html>
