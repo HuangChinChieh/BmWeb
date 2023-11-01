@@ -740,6 +740,7 @@
                 API_LoadingStart();
                 idGameFrame.onload = () => {
                     API_LoadingEnd();
+                    resize();
                 };
                 gameFrameOpened = true;
             };
@@ -888,7 +889,7 @@
 
             initGameEvents();
 
-            frameResize();
+            resize();
 
             mlp = new multiLanguage();
 
@@ -938,7 +939,11 @@
             });
         }
 
-        function frameResize() {
+        function resize() {
+            var frameContainer = document.getElementById("idGameContainer");
+
+            frameContainer.style.height = window.innerHeight + "px";
+
             if (gameFrameOpened == true) {
                 var frame = document.getElementById("idGameFrame");
 
@@ -955,6 +960,19 @@
                     var btn = btns[i];
                     ((brand) => {
                         btn.addEventListener("touchend", function (event) {
+                            var frameContainer = document.getElementById("idGameContainer");
+                           
+
+                            if (frameContainer.requestFullscreen) {
+                                frameContainer.requestFullscreen();
+                            } else if (frameContainer.mozRequestFullScreen) { // Firefox
+                                frameContainer.mozRequestFullScreen();
+                            } else if (frameContainer.webkitRequestFullscreen) { // Chrome, Safari, 和 Opera
+                                frameContainer.webkitRequestFullscreen();
+                            } else if (frameContainer.msRequestFullscreen) { // Internet Explorer
+                                frameContainer.msRequestFullscreen();
+                            }
+
                             clickEntryGame(brand);
                         });
                     })(btn.dataset.brand);
@@ -996,7 +1014,7 @@
 
 
         window.onload = init;
-        window.onresize = frameResize;
+        window.onresize = resize;
 
     </script>
 </body>
