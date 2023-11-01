@@ -564,7 +564,7 @@
 
         function toCurrency(num) {
 
-            num = parseFloat(Number(num).toFixed(2));
+            num = parseFloat(Number(num).toFixed(4));
             var parts = num.toString().split('.');
             parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
             return parts.join('.');
@@ -718,7 +718,7 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            <div class="col-3 col-md-3 col-lg-3 col-gx-3 col-xl-3">
+                                            <div class="col-3 col-md-3 col-lg-3 col-gx-3 col-xl-3" style="margin-left: 20px;">
                                                 <img id="QRCodeimg" alt="" />
                                             </div>
                                         </div>
