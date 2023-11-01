@@ -26,10 +26,9 @@
     <link rel="stylesheet" href="css/main2.css?<%:AgentVersion%>">
     <link rel="stylesheet" href="css/login.css?<%:AgentVersion%>">
 </head>
-    <style type="text/css">
-        
+<style type="text/css">
     .langSel_container {
-         /*margin: 0px 35px 15px 35px;
+        /*margin: 0px 35px 15px 35px;
        background-color: rgba(8, 7, 6, 0.8);*/
         border: 1px solid #d9c38f;
     }
@@ -44,7 +43,7 @@
             background-color: rgba(8, 7, 6, 0.8);
             border: 1px solid #d9c38f;
         }
-    </style>
+</style>
 <script src="/Scripts/Common.js"></script>
 <script src="/Scripts/bignumber.min.js"></script>
 <script src="/Scripts/Math.uuid.js"></script>
@@ -65,335 +64,335 @@
     var companyCodeclickCount = 0;
     var v ="<%:AgentVersion%>";
     var p = new LobbyAPI("../API/LobbyAPI.asmx");
-    var PhoneNumberUtil = libphonenumber.PhoneNumberUtil.getInstance();
+                                              var PhoneNumberUtil = libphonenumber.PhoneNumberUtil.getInstance();
 
-    function setLanguage(v) {
-        var form = document.forms[0];
+                                              function setLanguage(v) {
+                                                  var form = document.forms[0];
 
-        lang = v;
-        window.localStorage.setItem("agent_lang", lang);
-        form.Lang.value = lang;
+                                                  lang = v;
+                                                  window.localStorage.setItem("agent_lang", lang);
+                                                  form.Lang.value = lang;
 
-        if (mlp != null) {
-            mlp.loadLanguage(lang);
-        }
-    }
+                                                  if (mlp != null) {
+                                                      mlp.loadLanguage(lang);
+                                                  }
+                                              }
 
-    function checkData() {
-        var form = document.forms[0];
+                                              function checkData() {
+                                                  var form = document.forms[0];
 
-        if (form.LoginAccount.value == "") {
-            showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入登入帳號"));
-        } else if (form.LoginPassword.value == "") {
-            showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入登入密碼"));
-        } else {
-            var allowCompany = true;
+                                                  if (form.LoginAccount.value == "") {
+                                                      showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入登入帳號"));
+                                                  } else if (form.LoginPassword.value == "") {
+                                                      showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入登入密碼"));
+                                                  } else {
+                                                      var allowCompany = true;
 
-            if ((defaultCompany == null) || (defaultCompany == "")) {
-                if (form.CompanyCode.value == "") {
-                    allowCompany = false;
-                    showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入公司代碼"));
-                }
-            }
+                                                      if ((defaultCompany == null) || (defaultCompany == "")) {
+                                                          if (form.CompanyCode.value == "") {
+                                                              allowCompany = false;
+                                                              showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入公司代碼"));
+                                                          }
+                                                      }
 
-            if (allowCompany) {
-                var allowMainAccount = true;
-                var LoginType = $("#idLoginType").val()
+                                                      if (allowCompany) {
+                                                          var allowMainAccount = true;
+                                                          var LoginType = $("#idLoginType").val()
 
-                if (LoginType == 1) {
-                    // Agent
-                    if (form.MainAccount.value == "") {
-                        allowMainAccount = false;
-                        showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入主戶口帳號"));
-                    }
-                }
+                                                          if (LoginType == 1) {
+                                                              // Agent
+                                                              if (form.MainAccount.value == "") {
+                                                                  allowMainAccount = false;
+                                                                  showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入主戶口帳號"));
+                                                              }
+                                                          }
 
-                if (allowMainAccount) {
-                    c.addClassName(document.getElementById("idShowLoading"), "show");
-                    form.submit();
-                }
-            }
-        }
+                                                          if (allowMainAccount) {
+                                                              c.addClassName(document.getElementById("idShowLoading"), "show");
+                                                              form.submit();
+                                                          }
+                                                      }
+                                                  }
 
-        window.clearTimeout(timer);
-        timer = window.setTimeout(function () {
-            clickCount = 0;
-        }, 2000);
-        clickCount++;
+                                                  window.clearTimeout(timer);
+                                                  timer = window.setTimeout(function () {
+                                                      clickCount = 0;
+                                                  }, 2000);
+                                                  clickCount++;
 
-        if (clickCount >= 8) {
-            showMessage("提醒", "是否要轉入到測試環境?", function () {
-                c.addClassName(document.getElementById("idShowLoading"), "show");
-                window.location.href = "http://ewin.dev.mts.idv.tw/agent/login.aspx";
-            }, null);
-        }
+                                                  if (clickCount >= 8) {
+                                                      showMessage("提醒", "是否要轉入到測試環境?", function () {
+                                                          c.addClassName(document.getElementById("idShowLoading"), "show");
+                                                          window.location.href = "http://ewin.dev.mts.idv.tw/agent/login.aspx";
+                                                      }, null);
+                                                  }
 
-    }
+                                              }
 
-    function showCompanyCode() {
+                                              function showCompanyCode() {
 
-        window.clearTimeout(companyCodeTimer);
-        companyCodeTimer = window.setTimeout(function () {
-            companyCodeclickCount = 0;
-        }, 2000);
-        companyCodeclickCount++;
+                                                  window.clearTimeout(companyCodeTimer);
+                                                  companyCodeTimer = window.setTimeout(function () {
+                                                      companyCodeclickCount = 0;
+                                                  }, 2000);
+                                                  companyCodeclickCount++;
 
-        //if (companyCodeclickCount >= 8) {
-        //    idCompanyCode.style.display = "block";
-        //}
-    }
+                                                  //if (companyCodeclickCount >= 8) {
+                                                  //    idCompanyCode.style.display = "block";
+                                                  //}
+                                              }
 
-    function showMessage(title, msg, cbOK, cbCancel) {
-        var idMessageBox = document.getElementById("idMessageBox");
-        var idMessageTitle = document.getElementById("idMessageTitle");
-        var idMessageText = document.getElementById("idMessageText");
-        var idMessageButtonOK = document.getElementById("idMessageButtonOK");
-        var idMessageButtonCancel = document.getElementById("idMessageButtonCancel");
+                                              function showMessage(title, msg, cbOK, cbCancel) {
+                                                  var idMessageBox = document.getElementById("idMessageBox");
+                                                  var idMessageTitle = document.getElementById("idMessageTitle");
+                                                  var idMessageText = document.getElementById("idMessageText");
+                                                  var idMessageButtonOK = document.getElementById("idMessageButtonOK");
+                                                  var idMessageButtonCancel = document.getElementById("idMessageButtonCancel");
 
-        var funcOK = function () {
-            c.removeClassName(idMessageBox, "show");
+                                                  var funcOK = function () {
+                                                      c.removeClassName(idMessageBox, "show");
 
-            if (cbOK != null)
-                cbOK();
-        }
+                                                      if (cbOK != null)
+                                                          cbOK();
+                                                  }
 
-        var funcCancel = function () {
-            c.removeClassName(idMessageBox, "show");
+                                                  var funcCancel = function () {
+                                                      c.removeClassName(idMessageBox, "show");
 
-            if (cbCancel != null)
-                cbCancel();
-        }
+                                                      if (cbCancel != null)
+                                                          cbCancel();
+                                                  }
 
-        if (idMessageTitle != null)
-            idMessageTitle.innerHTML = title;
+                                                  if (idMessageTitle != null)
+                                                      idMessageTitle.innerHTML = title;
 
-        if (idMessageText != null)
-            idMessageText.innerHTML = msg;
+                                                  if (idMessageText != null)
+                                                      idMessageText.innerHTML = msg;
 
-        if (idMessageButtonOK != null) {
-            // idMessageButtonOK.style.display = "block";
-            idMessageButtonOK.style.display = "";
-            idMessageButtonOK.onclick = funcOK;
-        }
+                                                  if (idMessageButtonOK != null) {
+                                                      // idMessageButtonOK.style.display = "block";
+                                                      idMessageButtonOK.style.display = "";
+                                                      idMessageButtonOK.onclick = funcOK;
+                                                  }
 
-        if (idMessageButtonCancel != null) {
-            // idMessageButtonCancel.style.display = "block";
-            idMessageButtonCancel.style.display = "";
-            idMessageButtonCancel.onclick = funcCancel;
-        }
+                                                  if (idMessageButtonCancel != null) {
+                                                      // idMessageButtonCancel.style.display = "block";
+                                                      idMessageButtonCancel.style.display = "";
+                                                      idMessageButtonCancel.onclick = funcCancel;
+                                                  }
 
-        c.addClassName(idMessageBox, "show");
-    }
+                                                  c.addClassName(idMessageBox, "show");
+                                              }
 
-    function showMessageOK(title, msg, cbOK) {
-        var idMessageBox = document.getElementById("idMessageBox");
-        var idMessageTitle = document.getElementById("idMessageTitle");
-        var idMessageText = document.getElementById("idMessageText");
-        var idMessageButtonOK = document.getElementById("idMessageButtonOK");
-        var idMessageButtonCancel = document.getElementById("idMessageButtonCancel");
+                                              function showMessageOK(title, msg, cbOK) {
+                                                  var idMessageBox = document.getElementById("idMessageBox");
+                                                  var idMessageTitle = document.getElementById("idMessageTitle");
+                                                  var idMessageText = document.getElementById("idMessageText");
+                                                  var idMessageButtonOK = document.getElementById("idMessageButtonOK");
+                                                  var idMessageButtonCancel = document.getElementById("idMessageButtonCancel");
 
-        var funcOK = function () {
-            c.removeClassName(idMessageBox, "show");
+                                                  var funcOK = function () {
+                                                      c.removeClassName(idMessageBox, "show");
 
-            if (cbOK != null)
-                cbOK();
-        }
+                                                      if (cbOK != null)
+                                                          cbOK();
+                                                  }
 
-        if (idMessageTitle != null)
-            idMessageTitle.innerHTML = title;
+                                                  if (idMessageTitle != null)
+                                                      idMessageTitle.innerHTML = title;
 
-        if (idMessageText != null)
-            idMessageText.innerHTML = msg;
+                                                  if (idMessageText != null)
+                                                      idMessageText.innerHTML = msg;
 
-        if (idMessageButtonOK != null) {
-            // idMessageButtonOK.style.display = "block";
-            idMessageButtonOK.style.display = "";
-            idMessageButtonOK.onclick = funcOK;
-        }
+                                                  if (idMessageButtonOK != null) {
+                                                      // idMessageButtonOK.style.display = "block";
+                                                      idMessageButtonOK.style.display = "";
+                                                      idMessageButtonOK.onclick = funcOK;
+                                                  }
 
-        if (idMessageButtonCancel != null) {
-            idMessageButtonCancel.style.display = "none";
-        }
+                                                  if (idMessageButtonCancel != null) {
+                                                      idMessageButtonCancel.style.display = "none";
+                                                  }
 
-        c.addClassName(idMessageBox, "show");
-    }
+                                                  c.addClassName(idMessageBox, "show");
+                                              }
 
-    //#region 忘記密碼
-    function showForgetPassWord() {
-        $("#idPopUpForgetPassWord").addClass("show");
-    }
+                                              //#region 忘記密碼
+                                              function showForgetPassWord() {
+                                                  $("#idPopUpForgetPassWord").addClass("show");
+                                              }
 
-    function closeForgetPassWord() {
-        $("#idPopUpForgetPassWord").removeClass("show");
-    }
+                                              function closeForgetPassWord() {
+                                                  $("#idPopUpForgetPassWord").removeClass("show");
+                                              }
 
-    function sendValidateCode() {
-        debugger
-        var GUID = Math.uuid();
-        var PhonePrefix = $("#ContactPhonePrefix").val();
-        var PhoneNumber = $("#ContactPhoneNumber").val();
+                                              function sendValidateCode() {
+                                                  debugger
+                                                  var GUID = Math.uuid();
+                                                  var PhonePrefix = $("#ContactPhonePrefix").val();
+                                                  var PhoneNumber = $("#ContactPhoneNumber").val();
 
-        if (PhoneNumber == "") {
-            showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入手機號碼"));
-            return;
-        } else {
-            var phoneValue = PhonePrefix + PhoneNumber;
-            var phoneObj;
+                                                  if (PhoneNumber == "") {
+                                                      showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入手機號碼"));
+                                                      return;
+                                                  } else {
+                                                      var phoneValue = PhonePrefix + PhoneNumber;
+                                                      var phoneObj;
 
-            try {
-                phoneObj = PhoneNumberUtil.parse(phoneValue);
+                                                      try {
+                                                          phoneObj = PhoneNumberUtil.parse(phoneValue);
 
-                var type = PhoneNumberUtil.getNumberType(phoneObj);
+                                                          var type = PhoneNumberUtil.getNumberType(phoneObj);
 
-                if (type != libphonenumber.PhoneNumberType.MOBILE && type != libphonenumber.PhoneNumberType.FIXED_LINE_OR_MOBILE) {
-                    showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("電話格式有誤"));
-                    return;
-                }
-            } catch (e) {
-                showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("電話格式有誤"));
-                return;
-            }
+                                                          if (type != libphonenumber.PhoneNumberType.MOBILE && type != libphonenumber.PhoneNumberType.FIXED_LINE_OR_MOBILE) {
+                                                              showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("電話格式有誤"));
+                                                              return;
+                                                          }
+                                                      } catch (e) {
+                                                          showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("電話格式有誤"));
+                                                          return;
+                                                      }
 
-        }
+                                                  }
 
-        p.SetUserMail(GUID, 1, 1, "", PhonePrefix, PhoneNumber, "", function (success, o) {
-            if (success) {
-                if (o.Result == 0) {
-                    showMessageOK(mlp.getLanguageKey("成功"), mlp.getLanguageKey("已寄送認證碼"));
-                } else {
-                    showMessageOK(mlp.getLanguageKey("失敗"), mlp.getLanguageKey("發送失敗，請重新發送"));
-                }
-            } else {
-                showMessageOK(mlp.getLanguageKey("失敗"), mlp.getLanguageKey("網路錯誤") + ":" + mlp.getLanguageKey(o.Message));
-            }
-        });
+                                                  p.SetUserMail(GUID, 1, 1, "", PhonePrefix, PhoneNumber, "", function (success, o) {
+                                                      if (success) {
+                                                          if (o.Result == 0) {
+                                                              showMessageOK(mlp.getLanguageKey("成功"), mlp.getLanguageKey("已寄送認證碼"));
+                                                          } else {
+                                                              showMessageOK(mlp.getLanguageKey("失敗"), mlp.getLanguageKey("發送失敗，請重新發送"));
+                                                          }
+                                                      } else {
+                                                          showMessageOK(mlp.getLanguageKey("失敗"), mlp.getLanguageKey("網路錯誤") + ":" + mlp.getLanguageKey(o.Message));
+                                                      }
+                                                  });
 
-    }
+                                              }
 
-    function updatePassWord() {
-        var GUID = Math.uuid();
-        var PhonePrefix = $("#ContactPhonePrefix").val();
-        var PhoneNumber = $("#ContactPhoneNumber").val();
-        var LoginAccount = $("#LoginAccount").val();
-        var LoginPassword = $("#LoginPassword").val();
-        var ValidateCode = $("#ValidateCode").val();
-        var ValidateType = 1;
-        var EMail = "";
-        var postObj;
+                                              function updatePassWord() {
+                                                  var GUID = Math.uuid();
+                                                  var PhonePrefix = $("#ContactPhonePrefix").val();
+                                                  var PhoneNumber = $("#ContactPhoneNumber").val();
+                                                  var LoginAccount = $("#LoginAccount").val();
+                                                  var LoginPassword = $("#LoginPassword").val();
+                                                  var ValidateCode = $("#ValidateCode").val();
+                                                  var ValidateType = 1;
+                                                  var EMail = "";
+                                                  var postObj;
 
-        if (LoginAccount == "") {
-            showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入帳號"));
-        } else if (LoginPassword == "") {
-            showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入密碼"));
-        } else if (ValidateCode == "") {
-            showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入驗證碼"));
-        }
+                                                  if (LoginAccount == "") {
+                                                      showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入帳號"));
+                                                  } else if (LoginPassword == "") {
+                                                      showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入密碼"));
+                                                  } else if (ValidateCode == "") {
+                                                      showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入驗證碼"));
+                                                  }
 
-        postObj = {
-            CompanyCode: defaultCompany,
-            GUID: GUID,
-            ValidateType: ValidateType,
-            EMail: EMail,
-            ContactPhonePrefix: PhonePrefix,
-            ContactPhoneNumber: PhoneNumber,
-            ValidateCode: ValidateCode,
-            NewPassword: LoginPassword,
-            LoginAccount: LoginAccount
-        };
+                                                  postObj = {
+                                                      CompanyCode: defaultCompany,
+                                                      GUID: GUID,
+                                                      ValidateType: ValidateType,
+                                                      EMail: EMail,
+                                                      ContactPhonePrefix: PhonePrefix,
+                                                      ContactPhoneNumber: PhoneNumber,
+                                                      ValidateCode: ValidateCode,
+                                                      NewPassword: LoginPassword,
+                                                      LoginAccount: LoginAccount
+                                                  };
 
-        c.callService("Login.aspx/SetUserPasswordByValidateCode", postObj, function (success, o) {
-            if (success) {
-                var obj = c.getJSON(o);
+                                                  c.callService("Login.aspx/SetUserPasswordByValidateCode", postObj, function (success, o) {
+                                                      if (success) {
+                                                          var obj = c.getJSON(o);
 
-                if (obj.Result == 0) {
-                    showMessageOK(mlp.getLanguageKey("成功"), mlp.getLanguageKey("已修改密碼"), function () {
-                        closeForgetPassWord();
-                    });
-                } else {
-                    showMessageOK(mlp.getLanguageKey("錯誤"), obj.Message);
-                }
-            } else {
-                if (o == "Timeout") {
-                    showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請稍後重新嘗試"));
-                } else {
-                    showMessageOK(mlp.getLanguageKey("錯誤"), o);
-                }
-            }
-        });
-    }
-    //#endregion
+                                                          if (obj.Result == 0) {
+                                                              showMessageOK(mlp.getLanguageKey("成功"), mlp.getLanguageKey("已修改密碼"), function () {
+                                                                  closeForgetPassWord();
+                                                              });
+                                                          } else {
+                                                              showMessageOK(mlp.getLanguageKey("錯誤"), obj.Message);
+                                                          }
+                                                      } else {
+                                                          if (o == "Timeout") {
+                                                              showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請稍後重新嘗試"));
+                                                          } else {
+                                                              showMessageOK(mlp.getLanguageKey("錯誤"), o);
+                                                          }
+                                                      }
+                                                  });
+                                              }
+                                              //#endregion
 
-    function langSelChange(e) {
-        var sel = e.currentTarget;
-        var lang = sel.value;
+                                              function langSelChange(e) {
+                                                  var sel = e.currentTarget;
+                                                  var lang = sel.value;
 
-        setLanguage(lang);
-    }
+                                                  setLanguage(lang);
+                                              }
 
-    function loginTypeSelChange(e) {
-        var sel = e.currentTarget;
-        var v = sel.value;
+                                              function loginTypeSelChange(e) {
+                                                  var sel = e.currentTarget;
+                                                  var v = sel.value;
 
-        if (v == 1) {
-            $("#idMainAccountField").show();
-        } else {
-            $("#idMainAccountField").hide();
-        }
-    }
+                                                  if (v == 1) {
+                                                      $("#idMainAccountField").show();
+                                                  } else {
+                                                      $("#idMainAccountField").hide();
+                                                  }
+                                              }
 
-    function init() {
-        var idCompanyCode = document.getElementById("idCompanyCode");
-        var langTmp;
-        var langel = document.getElementsByName("lang");
-        var inAPP = false;
+                                              function init() {
+                                                  var idCompanyCode = document.getElementById("idCompanyCode");
+                                                  var langTmp;
+                                                  var langel = document.getElementsByName("lang");
+                                                  var inAPP = false;
 
-        //存入殼內的為第一優先
-        if (AppBridge) {
-            if (AppBridge.config.inAPP == true) {
-                inAPP = true;
-                AppBridge.GetDataByKey("CompanyCode", function (retValue) {
-                    if (retValue != "(null)" && retValue != "") {
-                        if (typeof (retValue) != "undefined") {
-                            defaultCompany = retValue;
-                            document.getElementsByName("CompanyCode")[0].value = retValue;
-                        }
-                    }
-                    
-                });
+                                                  //存入殼內的為第一優先
+                                                  if (AppBridge) {
+                                                      if (AppBridge.config.inAPP == true) {
+                                                          inAPP = true;
+                                                          AppBridge.GetDataByKey("CompanyCode", function (retValue) {
+                                                              if (retValue != "(null)" && retValue != "") {
+                                                                  if (typeof (retValue) != "undefined") {
+                                                                      defaultCompany = retValue;
+                                                                      document.getElementsByName("CompanyCode")[0].value = retValue;
+                                                                  }
+                                                              }
 
-            }
-        }
+                                                          });
 
-        //設定是否已傳送資料
-        window.localStorage.setItem("UpdateDeviceInfo", "false");
-        
+                                                      }
+                                                  }
 
-        //if (window.localStorage.getItem("agent_lang") != null) {
-        //    lang = window.localStorage.getItem("agent_lang");
-        //} else {
-            window.localStorage.setItem("agent_lang", lang);
-        //}
-        
-        $("#idlangSel").val(lang);
+                                                  //設定是否已傳送資料
+                                                  window.localStorage.setItem("UpdateDeviceInfo", "false");
 
-        //onLoginType();
 
-        mlp = new multiLanguage(v);
-        mlp.loadLanguage(lang, function () {
+                                                  //if (window.localStorage.getItem("agent_lang") != null) {
+                                                  //    lang = window.localStorage.getItem("agent_lang");
+                                                  //} else {
+                                                  window.localStorage.setItem("agent_lang", lang);
+                                                  //}
 
-        });
-    }
+                                                  $("#idlangSel").val(lang);
 
-    window.onload = init;
-</script>
-<body class="bg_mainBody LoginBody">
-    <main class="main_area main__login">
-        <div class="container loginWrapper">
-            <section class="login__brand">
-                <div class="heading-login text-center">
-                    <span class="language_replace" onclick="showCompanyCode()">BM</span>
-                </div>
-                <!-- <div class="login__qrcode"><span class="qrcode"></span></div> -->
+                                                  //onLoginType();
+
+                                                  mlp = new multiLanguage(v);
+                                                  mlp.loadLanguage(lang, function () {
+
+                                                  });
+                                              }
+
+                                              window.onload = init;
+</script >
+                                                  <body class="bg_mainBody LoginBody">
+                                                      <main class="main_area main__login">
+                                                          <div class="container loginWrapper">
+                                                              <section class="login__brand">
+                                                                  <div class="heading-login text-center">
+                                                                      <span class="language_replace" onclick="showCompanyCode()">BM</span>
+                                                                  </div>
+                                                                  <!-- <div class="login__qrcode"><span class="qrcode"></span></div> -->
                 <%if (EWinWeb.IsTestSite == true) { %>
                 <div>
                     <p style="text-align: center; font-size: 14px; margin-bottom: 0; line-height: 1;"><span class="language_replace num-negative">此為測試環境</span></p>
@@ -404,16 +403,16 @@
                 <input type="hidden" name="Lang" value="<%=Lang %>" />
 
                 <div class="loginForm__left">
-                    <div class="form-group" style="align-self:center">
-                        <div class="langSel_container" style="height:100%;">
-                            <select id="idLoginType" class="langSel" onchange="loginTypeSelChange(event)" name="LoginType" style="height:100%;width:100%;font-size:20px;padding:5px">
+                    <div class="form-group" style="align-self: center">
+                        <div class="langSel_container" style="height: 100%;">
+                            <select id="idLoginType" class="langSel" onchange="loginTypeSelChange(event)" name="LoginType" style="height: 100%; width: 100%; font-size: 20px; padding: 5px">
                                 <option value="0">主帳戶登入</option>
                                 <option value="1">助手登入</option>
                             </select>
                         </div>
                     </div>
-                    <div class="form-group" style="align-self:center">
-                          <%--<p><span class="language_replace" style="font-size:16px">語系</span></p>
+                    <div class="form-group" style="align-self: center">
+                        <%--<p><span class="language_replace" style="font-size:16px">語系</span></p>
                       <div class="custom-control custom-radio-lang custom-control-inline" onclick="setLanguage('CHS')" style="display: none">
                             <input type="radio" id="lang1" name="lang" class="custom-control-input-hidden" value="CHS">
                             <label class="custom-control-label-lang ico-before-cn" for="lang1">
@@ -432,8 +431,8 @@
                                 <span
                                     class="language_replace">english</span></label>
                         </div>--%>
-                        <div class="langSel_container" style="height:100%;">
-                            <select id="idlangSel" class="langSel" onchange="langSelChange(event)" style="height:100%;width:100%;font-size:20px;padding:5px">
+                        <div class="langSel_container" style="height: 100%;">
+                            <select id="idlangSel" class="langSel" onchange="langSelChange(event)" style="height: 100%; width: 100%; font-size: 20px; padding: 5px">
                                 <option value="ENG">English</option>
                                 <option value="CHS">简体中文</option>
                                 <option value="JPN">日本語</option>
@@ -484,7 +483,7 @@
         </div>
     </main>
 
-    <div class="popUp" id="idMessageBox" style="z-index:999">
+    <div class="popUp" id="idMessageBox" style="z-index: 999">
         <div class="popUpWrapper">
             <div class="popUp__title" id="idMessageTitle">[Title]</div>
             <div class="popUp__content" id="idMessageText">
@@ -539,8 +538,18 @@
                                 <div class="col-auto col-md-4 ">
                                     <div class="form-control-underline">
                                         <select name="ContactPhonePrefix" id="ContactPhonePrefix" class="custom-select">
-                                            <option class="language_replace" value="+63" langkey="+63 菲律賓">+63 菲律賓</option>
-                                            <option class="language_replace" value="+886" langkey="+886 台灣">+886 台灣</option>
+                                            <option class="language_replace" value="+86">+86 中國</option>
+                                            <option class="language_replace" value="+853">+853 澳門</option>
+                                            <option class="language_replace" value="+852">+852 香港</option>
+                                            <option class="language_replace" value="+886">+886 台灣</option>
+                                            <option class="language_replace" value="+81">+81 日本</option>
+                                            <option class="language_replace" value="+82">+82 南韓</option>
+                                            <option class="language_replace" value="+84">+84 越南</option>
+                                            <option class="language_replace" value="+66">+66 泰國</option>
+                                            <option class="language_replace" value="+855">+855 柬埔寨</option>
+                                            <option class="language_replace" value="+63" selected="selected">+63 菲律賓</option>
+                                            <option class="language_replace" value="+65">+65 新加坡</option>
+                                            <option class="language_replace" value="+60">+60 馬來西亞</option>
                                         </select>
                                     </div>
                                 </div>
@@ -556,8 +565,8 @@
 
                     <div class="col-12 col-md-6  col-lg-12  form-group row no-gutters data-item">
                         <div class="col-12 data-title">
-                            <div class="form-group form-group-btnLogin btn-group-lg" style="padding-top:0px !important">
-                               <div class="btn btn-full-main" onclick="sendValidateCode()"><span class="language_replace">傳送驗證碼</span></div>
+                            <div class="form-group form-group-btnLogin btn-group-lg" style="padding-top: 0px !important">
+                                <div class="btn btn-full-main" onclick="sendValidateCode()"><span class="language_replace">傳送驗證碼</span></div>
                             </div>
                         </div>
                     </div>
@@ -581,7 +590,7 @@
                         <div class="col-12 data-content">
                             <div class="form-control-underline">
                                 <input type="password" class="form-control" name="LoginPassword" id="LoginPassword" language_replace="placeholder" placeholder="請輸入密碼" langkey="請輸入密碼">
-                                    <label for="password" class="form-label "><span class="language_replace" langkey="請輸入密碼">請輸入密碼</span></label>
+                                <label for="password" class="form-label "><span class="language_replace" langkey="請輸入密碼">請輸入密碼</span></label>
                             </div>
                         </div>
                     </div>
@@ -600,7 +609,7 @@
 
                     <div class="col-12 col-md-6  col-lg-12  form-group row no-gutters data-item">
                         <div class="col-12 data-title">
-                            <div class="form-group form-group-btnLogin btn-group-lg" style="padding-top:0px !important">
+                            <div class="form-group form-group-btnLogin btn-group-lg" style="padding-top: 0px !important">
                                 <div class="btn btn-full-main" onclick="updatePassWord()"><span class="language_replace">修改密碼</span></div>
                             </div>
                         </div>

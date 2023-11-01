@@ -1931,6 +1931,75 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetGameOrderHistory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="QueryBeginDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="QueryEndDate" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="RowsPage" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Page" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGameOrderHistoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGameOrderHistoryResult" type="tns:GameOrderHistoryResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GameOrderHistoryResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="QueryBeginDate" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="QueryEndDate" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="TotalCount" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="HasNextPage" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="SearchPageNumber" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Datas" type="tns:ArrayOfGameOrderHistoryItem" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfGameOrderHistoryItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GameOrderHistoryItem" nillable="true" type="tns:GameOrderHistoryItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GameOrderHistoryItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="OrderHistoryID" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameBrand" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameCodeTextENG" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameCodeTextCHS" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SummaryType" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameAccountingCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameCategoryCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameCategorySubCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SourceGameOrderID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrderValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="RewardValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ValidBetValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="BuyChipValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ThresholdValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="BeforeThreshold" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="RealValidBetValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="RealBuyChipValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="BuyChipAddRate" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ThresholdAddRate" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="SummaryDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RawData" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserIP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreateDate" type="s:string" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="LoginResult" nillable="true" type="tns:LoginResult" />
       <s:element name="APIResult" nillable="true" type="tns:APIResult" />
       <s:element name="PhoneResult" nillable="true" type="tns:PhoneResult" />
@@ -1956,6 +2025,7 @@
       <s:element name="UserAgentInfoResult" nillable="true" type="tns:UserAgentInfoResult" />
       <s:element name="RequireWithdrawalResult" nillable="true" type="tns:RequireWithdrawalResult" />
       <s:element name="UserAccountPointManualHistoryResult" nillable="true" type="tns:UserAccountPointManualHistoryResult" />
+      <s:element name="GameOrderHistoryResult" nillable="true" type="tns:GameOrderHistoryResult" />
     </s:schema>
   </wsdl:types>
   <wsdl:message name="AgentLoginSoapIn">
@@ -2323,6 +2393,12 @@
   </wsdl:message>
   <wsdl:message name="UserAccountTransferForPointsRecoverySoapOut">
     <wsdl:part name="parameters" element="tns:UserAccountTransferForPointsRecoveryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGameOrderHistorySoapIn">
+    <wsdl:part name="parameters" element="tns:GetGameOrderHistory" />
+  </wsdl:message>
+  <wsdl:message name="GetGameOrderHistorySoapOut">
+    <wsdl:part name="parameters" element="tns:GetGameOrderHistoryResponse" />
   </wsdl:message>
   <wsdl:message name="AgentLoginHttpGetIn">
     <wsdl:part name="LoginGUID" type="s:string" />
@@ -2807,6 +2883,17 @@
   <wsdl:message name="UserAccountTransferForPointsRecoveryHttpGetOut">
     <wsdl:part name="Body" element="tns:APIResult" />
   </wsdl:message>
+  <wsdl:message name="GetGameOrderHistoryHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="QueryBeginDate" type="s:string" />
+    <wsdl:part name="QueryEndDate" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+    <wsdl:part name="RowsPage" type="s:string" />
+    <wsdl:part name="Page" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGameOrderHistoryHttpGetOut">
+    <wsdl:part name="Body" element="tns:GameOrderHistoryResult" />
+  </wsdl:message>
   <wsdl:message name="AgentLoginHttpPostIn">
     <wsdl:part name="LoginGUID" type="s:string" />
     <wsdl:part name="GUID" type="s:string" />
@@ -3290,6 +3377,17 @@
   <wsdl:message name="UserAccountTransferForPointsRecoveryHttpPostOut">
     <wsdl:part name="Body" element="tns:APIResult" />
   </wsdl:message>
+  <wsdl:message name="GetGameOrderHistoryHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="QueryBeginDate" type="s:string" />
+    <wsdl:part name="QueryEndDate" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+    <wsdl:part name="RowsPage" type="s:string" />
+    <wsdl:part name="Page" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGameOrderHistoryHttpPostOut">
+    <wsdl:part name="Body" element="tns:GameOrderHistoryResult" />
+  </wsdl:message>
   <wsdl:portType name="BmAgentSoap">
     <wsdl:operation name="AgentLogin">
       <wsdl:input message="tns:AgentLoginSoapIn" />
@@ -3535,6 +3633,10 @@
       <wsdl:input message="tns:UserAccountTransferForPointsRecoverySoapIn" />
       <wsdl:output message="tns:UserAccountTransferForPointsRecoverySoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetGameOrderHistory">
+      <wsdl:input message="tns:GetGameOrderHistorySoapIn" />
+      <wsdl:output message="tns:GetGameOrderHistorySoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="BmAgentHttpGet">
     <wsdl:operation name="AgentLogin">
@@ -3765,6 +3867,10 @@
       <wsdl:input message="tns:UserAccountTransferForPointsRecoveryHttpGetIn" />
       <wsdl:output message="tns:UserAccountTransferForPointsRecoveryHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetGameOrderHistory">
+      <wsdl:input message="tns:GetGameOrderHistoryHttpGetIn" />
+      <wsdl:output message="tns:GetGameOrderHistoryHttpGetOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="BmAgentHttpPost">
     <wsdl:operation name="AgentLogin">
@@ -3994,6 +4100,10 @@
     <wsdl:operation name="UserAccountTransferForPointsRecovery">
       <wsdl:input message="tns:UserAccountTransferForPointsRecoveryHttpPostIn" />
       <wsdl:output message="tns:UserAccountTransferForPointsRecoveryHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGameOrderHistory">
+      <wsdl:input message="tns:GetGameOrderHistoryHttpPostIn" />
+      <wsdl:output message="tns:GetGameOrderHistoryHttpPostOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BmAgentSoap" type="tns:BmAgentSoap">
@@ -4540,6 +4650,15 @@
     </wsdl:operation>
     <wsdl:operation name="UserAccountTransferForPointsRecovery">
       <soap:operation soapAction="http://tempuri.org/UserAccountTransferForPointsRecovery" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGameOrderHistory">
+      <soap:operation soapAction="http://tempuri.org/GetGameOrderHistory" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -5099,6 +5218,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetGameOrderHistory">
+      <soap12:operation soapAction="http://tempuri.org/GetGameOrderHistory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="BmAgentHttpGet" type="tns:BmAgentHttpGet">
     <http:binding verb="GET" />
@@ -5615,6 +5743,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetGameOrderHistory">
+      <http:operation location="/GetGameOrderHistory" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="BmAgentHttpPost" type="tns:BmAgentHttpPost">
     <http:binding verb="POST" />
@@ -6124,6 +6261,15 @@
     </wsdl:operation>
     <wsdl:operation name="UserAccountTransferForPointsRecovery">
       <http:operation location="/UserAccountTransferForPointsRecovery" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGameOrderHistory">
+      <http:operation location="/GetGameOrderHistory" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>
