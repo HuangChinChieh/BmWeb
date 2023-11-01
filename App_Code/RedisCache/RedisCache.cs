@@ -2101,6 +2101,33 @@ public static class RedisCache {
         }
         #endregion
 
+        #region 遊戲紀錄
+        public static string GetGameOrderByLoginAccount(string LoginAccount, string CurrencyType, string StratDate, string EndDate) {
+            string Key;
+            string strRet = string.Empty;
+
+            Key = XMLPath + ":GameOrder:LoginAccount:" + LoginAccount + ":CurrencyType:" + CurrencyType + ":SearchDate:" + StratDate + "_" + EndDate;
+            if (KeyExists(DBIndex, Key) == true) {
+                strRet = JsonReadFromRedis(DBIndex, Key);
+            }
+
+            return strRet;
+        }
+
+        public static void UpdateGameOrderByLoginAccount(string JsonData, string LoginAccount, int ExpireTimeoutSeconds, string CurrencyType, string StratDate, string EndDate) {
+            string Key;
+
+            Key = XMLPath + ":GameOrder:LoginAccount:" + LoginAccount + ":CurrencyType:" + CurrencyType + ":SearchDate:" + StratDate + "_" + EndDate;
+            for (int I = 0; I <= 3; I++) {
+                try {
+                    JsonStringWriteToRedis(DBIndex, JsonData, Key, ExpireTimeoutSeconds);
+                    break;
+                } catch (Exception ex) {
+                }
+            }
+        }
+        #endregion
+
         #region 會員投注數據
         public static string GetPlayerTotalSummaryInfoByLoginAccount(string LoginAccount, string StratDate, string EndDate) {
             string Key;

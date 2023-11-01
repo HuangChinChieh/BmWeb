@@ -37,7 +37,17 @@
   "帳號": "Account",
   "驗證碼": "Verification Code",
   "修改密碼": "Change Password",
-  "+63 菲律賓": "+63 Philippines",
+  "+86 中國": "+86 China",
+  "+853 澳門": "+853 Macau",
+  "+852 香港": "+852 Hong Kong",
   "+886 台灣": "+886 Taiwan",
+  "+81 日本": "+81 Japan",
+  "+82 南韓": "+82 South Korea",
+  "+84 越南": "+84 Vietnam",
+  "+66 泰國": "+66 Thailand",
+  "+855 柬埔寨": "+855 Cambodia",
+  "+63 菲律賓": "+63 Philippines",
+  "+65 新加坡": "+65 Singapore",
+  "+60 馬來西亞": "+60 Malaysia",
   "電話格式有誤": "Invalid phone format"
 }

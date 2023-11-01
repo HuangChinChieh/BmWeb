@@ -453,7 +453,7 @@
         var idList = document.getElementById("idList");
         c.clearChildren(idList);
 
-        if (o.SummaryList && o.SummaryList.length > 0) {  
+        if (o.SummaryList && o.SummaryList.length > 0) {
             document.getElementById("idResultTable").classList.remove("MT_tableDiv__hasNoData");
             idList.classList.remove("tbody__hasNoData");
             //expandDiv.style.display = "block";
@@ -535,23 +535,21 @@
                 if (item.UserAccountSortKey == o.SelfSortKey) {
                     t.style.display = "table-row";
                     t.classList.add("searchTarget");
-                } 
+                }
 
                 idList.appendChild(t);
             }
         } else {
-            if (!targetDom) {
-                c.clearChildren(idList);
-                var div = document.createElement("DIV");
+            c.clearChildren(idList);
+            var div = document.createElement("DIV");
 
-                div.id = "hasNoData_DIV"
-                div.innerHTML = mlp.getLanguageKey("無數據");
-                div.classList.add("td__content", "td__hasNoData");
-                document.getElementById("idResultTable").classList.add("MT_tableDiv__hasNoData");
-                idList.classList.add("tbody__hasNoData");
-                idList.appendChild(div);
-                window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("無數據"));
-            }
+            div.id = "hasNoData_DIV"
+            div.innerHTML = mlp.getLanguageKey("無數據");
+            div.classList.add("td__content", "td__hasNoData");
+            document.getElementById("idResultTable").classList.add("MT_tableDiv__hasNoData");
+            idList.classList.add("tbody__hasNoData");
+            idList.appendChild(div);
+            window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("無數據"));
         }
     }
 
