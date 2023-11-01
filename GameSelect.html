@@ -279,6 +279,19 @@
             width: 60px;
         }
 
+        .game-reload {
+            position: absolute;
+            left: 60px;
+            font-size: 32px;
+            font-weight: 900;
+            -webkit-text-stroke: 0.1px rgb(232 232 232);
+            color: black;
+            font-family: emoji;
+            border: 0px;
+            margin: 0px;
+            line-height: 40px;
+            width: 60px;
+        }
 
         .game-body {
             width: 100%;
@@ -367,7 +380,8 @@
     <div id="idGameContainer" class="gameContainer">
         <div class="game-header">
             <button class="game-back" onclick="leaveGame();">↩︎</button>
-            <img class="game-icon" src="images/logo_300.png" /><span class="game-title">電子競技</span>
+            <button class="game-reload" onclick="reloadGame();">⟳</button>
+            <span class="game-title"><img class="game-icon" src="images/logo_300.png" /><span id="idTitle">電子競技</span></span>
         </div>
         <div class="game-body">
             <iframe id="idGameFrame" src="" style="height:100%;width:100%;border:0px"></iframe>
@@ -417,7 +431,7 @@
                         break;
                 }
 
-                document.querySelector(".game-title").innerText = gameTitle;
+                document.getElementById("idTitle").innerText = gameTitle;
                 document.querySelector(".game-mask").classList.add("is-hide");
                 document.getElementById("idGameContainer").classList.add("gameContainer-show");
                 document.getElementById("idGameFrame").src = Url;
@@ -446,6 +460,11 @@
                     }
                 });
             });
+        }
+
+        function reloadGame() {
+            var iframe = document.getElementById('idGameFrame');
+            iframe.src = iframe.src;
         }
 
         function updateBaseInfo() {

@@ -171,6 +171,7 @@
     }
     
     function init() {
+        lang = window.localStorage.getItem("agent_lang");
         EWinInfo = window.parent.EWinInfo;
         api = window.parent.API_GetAgentAPI();
 
