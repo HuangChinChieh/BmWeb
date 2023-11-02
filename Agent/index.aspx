@@ -1270,7 +1270,7 @@
                                             <i class="icon icon-mask icon-ewin-report-wallet"></i>
                                             <span class="language_replace">會員出入金數據</span></a>
                                     </li>
-                                    <li class="nav-item submenu dropdown">
+                                    <li class="nav-item submenu dropdown" style="display:none">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('錢包歷程'), 'GetWalletHistory_Detail.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-report-wallet"></i>
                                             <span class="language_replace">錢包歷程</span></a>
