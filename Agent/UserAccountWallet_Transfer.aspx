@@ -114,7 +114,7 @@
                         })
 
                     } else {
-                        window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), obj.Message);
+                        window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("此帳號非您可轉帳對象"));
                         $("#btnSave").show();
                         processing = false;
                     }
