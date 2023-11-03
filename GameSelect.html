@@ -701,6 +701,25 @@
             document.querySelector('.loader-container').style.display = "none";
         }
 
+        function API_ReceivePoint() {
+            API_LoadingStart();
+            p.ReceiveGamePointByProduct(CT, "", Math.uuid(), (success, o) => {
+                p.GetUserInfoByProduct(CT, Math.uuid(), (success, o) => {
+                    if (success == true) {
+                        if (o.Result == 0) {
+                            WalletInfo = o;
+                            updateBaseInfo();
+                            API_LoadingEnd();
+                        } else {
+                            window.location.href = "index.aspx";
+                        }
+                    } else {
+                        window.location.href = "index.aspx";
+                    }
+                });
+            });
+        }
+
         function clickEntryGame(brand) {
             if (!brand) {
                 brand = event.currentTarget.dataset.brand;
@@ -738,10 +757,16 @@
                 document.getElementById("idGameFrame").src = Url;
 
                 API_LoadingStart();
+
+
                 idGameFrame.onload = () => {
-                    API_LoadingEnd();
+                    if (gameFrameOpened) {
+                        API_LoadingEnd();
+                    }                  
                     resize();
                 };
+
+
                 gameFrameOpened = true;
             };
 
@@ -757,16 +782,7 @@
             document.getElementById("idGameFrame").src = "";
             gameFrameOpened = false;
 
-            p.ReceiveGamePointByProduct(CT, "", Math.uuid(), (success, o) => {
-                p.GetUserInfoByProduct(CT, Math.uuid(), (success, o) => {
-                    if (success == true) {
-                        if (o.Result == 0) {
-                            WalletInfo = o;
-                            updateBaseInfo();
-                        }
-                    }
-                });
-            });
+            API_ReceivePoint();
         }
 
         function reloadGame() {
@@ -795,10 +811,9 @@
 
                     if (CurrencyType) {
                         if (CurrencyTypeInList == false) {
-                            CurrencyTypeInList = MaxCurrency == CurrencyType;
+                            CurrencyTypeInList = wallet.CurrencyType == CurrencyType;
                         }
-                    } else {
-                    }
+                    } 
 
                     idCurrencySel.appendChild(opt);
                 }
@@ -833,30 +848,9 @@
 
             var guid = Math.uuid();
 
-            p.GetUserInfoByProduct(CT, Math.uuid(), (success, o) => {
-                if (success == true) {
-                    if (o.Result == 0) {
-                        WalletInfo = o;
-                        updateBaseInfo();
-                        API_LoadingEnd();
-                    } else {
-                        window.location.href = "index.aspx";
-                    }
-                } else {
-                    window.location.href = "index.aspx";
-                }
-            });
+            API_ReceivePoint();
 
-            p.ReceiveGamePointByProduct(CT, "", Math.uuid(), (success, o) => {
-                p.GetUserInfoByProduct(CT, Math.uuid(), (success, o) => {
-                    if (success == true) {
-                        if (o.Result == 0) {
-                            WalletInfo = o;
-                            updateBaseInfo();
-                        }
-                    }
-                });
-            });
+
 
             if (Lang) {
                 idlangSel.value = Lang;
