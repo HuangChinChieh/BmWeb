@@ -209,6 +209,8 @@
         else if (userLang.toUpperCase() == "ko-KP".toUpperCase()) { Lang = "KOR"; }
         else if (userLang.toUpperCase() == "ko".toUpperCase()) { Lang = "KOR"; }
         else if (userLang.toUpperCase() == "ja".toUpperCase()) { Lang = "JPN"; }
+        else if (userLang.toUpperCase() == "ja".toUpperCase()) { Lang = "JPN"; }
+        else if (userLang.toUpperCase() == "th".toUpperCase()) { Lang = "THAI"; }
         else { Lang = "ENG"; }
     }
 
@@ -424,6 +426,7 @@
                             <option value="JPN">日本語</option>
                             <option value="KOR">한국어</option>
                             <option value="CHT">繁體中文</option>
+                            <option value="THAI">Thai</option>
                         </select>
                     </div>
                     <div class="downloadBtn">
