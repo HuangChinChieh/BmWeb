@@ -487,7 +487,7 @@
                                 <span class="td__content"><span class="RewardValue">CON4</span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><i class="icon icon-ewin-default-totalRolling icon-s icon-before"></i><span class="language_replace">輸贏數</span></span>
+                                <span class="td__title"><i class="icon icon-ewin-default-totalRolling icon-s icon-before"></i><span class="language_replace">轉碼數</span></span>
                                 <span class="td__content"><span class="BuyChipValue">CON4</span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
@@ -504,7 +504,7 @@
                             <div class="thead__th"><span class="language_replace">遊戲代碼</span></div>
                             <div class="thead__th"><span class="language_replace">投注額度</span></div>
                             <div class="thead__th"><span class="language_replace">上下數</span></div>
-                            <div class="thead__th"><span class="language_replace">輸贏數</span></div>
+                            <div class="thead__th"><span class="language_replace">轉碼數</span></div>
                             <div class="thead__th"><span class="language_replace">遊戲時間</span></div>
                         </div>
                     </div>

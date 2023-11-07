@@ -1276,6 +1276,11 @@
                                             <span class="language_replace">錢包歷程</span></a>
                                     </li>
                                     <li class="nav-item submenu dropdown">
+                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('出款申請記錄'), 'GetRequireWithdrawalHistory.aspx');ItemClick(this);">
+                                            <i class="icon icon-mask icon-ewin-report-income"></i>
+                                            <span class="language_replace">出款申請記錄</span></a>
+                                    </li>
+                                    <li class="nav-item submenu dropdown">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('錢包點數異動記錄'), 'GetUserAccountPointManualHistory.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-report-income"></i>
                                             <span class="language_replace">錢包點數異動記錄</span></a>

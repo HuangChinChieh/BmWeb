@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="GetUserAccountTransferHistory.aspx.cs" Inherits="Agent_GetUserAccountTransferHistory" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="GetRequireWithdrawalHistory.aspx.cs" Inherits="Agent_GetRequireWithdrawalHistory" %>
 
 <%
     string AgentVersion = EWinWeb.AgentVersion;
@@ -24,7 +24,7 @@
 <script type="text/javascript" src="../Scripts/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/google-libphonenumber/3.2.31/libphonenumber.min.js"></script>
 <script>
-    var ApiUrl = "GetUserAccountTransferHistory.aspx";
+    var ApiUrl = "GetRequireWithdrawalHistory.aspx";
     var c = new common();
     var ac = new AgentCommon();
     var mlp;
@@ -103,34 +103,25 @@
         idList.appendChild(div);
 
         if (o != null) {
-            if (o.SummaryList != null) {
+            if (o.Datas != null) {
                 //c.clearChildren(idList);
                 //只顯示個人投注
-                for (var i = 0; i < o.SummaryList.length; i++) {
-                    var item = o.SummaryList[i];
+                for (var i = 0; i < o.Datas.length; i++) {
+                    var item = o.Datas[i];
                     var t = c.getTemplate("templateTableItem");
                     var btn;
 
                     c.setClassText(t, "CreateDate", null, item.CreateDate);
-                    c.setClassText(t, "ConfirmDate", null, item.ConfirmDate);
-                    c.setClassText(t, "SrcLoginAccount", null, item.SrcLoginAccount);
-                    c.setClassText(t, "DstLoginAccount", null, item.DstLoginAccount);
-                    c.setClassText(t, "TransferState", null, item.TransferState == 1 ? mlp.getLanguageKey("確認1") : mlp.getLanguageKey("失敗"));
-                    c.setClassText(t, "SrcCurrencyType", null, item.SrcCurrencyType);
-                    c.setClassText(t, "DstCurrencyType", null, item.DstCurrencyType);
+                    c.setClassText(t, "LoginAccountU", null, item.LoginAccountU);
+                    c.setClassText(t, "LoginAccountP", null, item.LoginAccountP);
+                    c.setClassText(t, "ProcessStatus", null, item.ProcessStatus == 0 ? mlp.getLanguageKey("申請提款") : (item.ProcessStatus == 1 ? mlp.getLanguageKey("完成轉帳") :mlp.getLanguageKey("取消")));
+                    c.setClassText(t, "CurrencyType", null, item.CurrencyType);
 
-                    if (parseFloat(item.TransferValue) < 0) {
-                        t.getElementsByClassName("TransferValue")[0].classList.add("num-negative");
+                    if (parseFloat(item.Amount) < 0) {
+                        t.getElementsByClassName("Amount")[0].classList.add("num-negative");
                     }
-                    c.setClassText(t, "TransferValue", null, c.toCurrency(item.TransferValue));
-
-                    if (parseFloat(item.DstValue) < 0) {
-                        t.getElementsByClassName("DstValue")[0].classList.add("num-negative");
-                    }
-                    c.setClassText(t, "DstValue", null, c.toCurrency(item.DstValue));
+                    c.setClassText(t, "Amount", null, c.toCurrency(item.Amount));
                     c.setClassText(t, "Description", null, item.Description);
-                    c.setClassText(t, "AdminLoginAccount", null, item.AdminLoginAccount);
-                    c.setClassText(t, "ValidAdminLoginAccount", null, item.ValidAdminLoginAccount);
 
                     t.style.display = "none";
                     idList.appendChild(t);
@@ -223,7 +214,7 @@
             <div class="container-fluid">
                 <div class="collapse-box">
                     <h2 class="collapse-header has-arrow zIndex_overMask_SafariFix" onclick="ac.dataToggleCollapse(this)" data-toggle="collapse" data-target="#searchList" aria-controls="searchList" aria-expanded="true" aria-label="searchList">
-                        <span class="language_replace">轉帳紀錄</span>
+                        <span class="language_replace">出款申請記錄</span>
                         <i class="arrow"></i>
                     </h2>
                     <!-- collapse內容 由此開始 ========== -->
@@ -258,24 +249,30 @@
                             <div class="col-12 col-md-6 col-lg-4 col-xl-auto">
                                 <!-- 模式 -->
                                 <div class="form-group form-group-s2 ">
-                                    <div class="title"><span class="language_replace">匯出條件</span></div>
+                                    <div class="title"><span class="language_replace">搜尋條件</span></div>
                                     <div id="TypeDiv" class="content">
                                         <div class="custom-control custom-checkboxValue custom-control-inline check-bg">
                                             <label class="custom-label">
-                                                <input type="radio" name="type" value="0" class="custom-control-input-hidden" checked>
+                                                <input type="radio" name="type" value="99" class="custom-control-input-hidden" checked>
                                                 <div class="custom-input checkbox"><span class="language_replace tempName">全部</span></div>
                                             </label>
                                         </div>
                                         <div class="custom-control custom-checkboxValue custom-control-inline check-bg">
                                             <label class="custom-label">
+                                                <input type="radio" name="type" value="0" class="custom-control-input-hidden">
+                                                <div class="custom-input checkbox"><span class="language_replace tempName">申請提款</span></div>
+                                            </label>
+                                        </div>
+                                        <div class="custom-control custom-checkboxValue custom-control-inline check-bg">
+                                            <label class="custom-label">
                                                 <input type="radio" name="type" value="1" class="custom-control-input-hidden">
-                                                <div class="custom-input checkbox"><span class="language_replace tempName">轉入</span></div>
+                                                <div class="custom-input checkbox"><span class="language_replace tempName">完成轉帳</span></div>
                                             </label>
                                         </div>
                                         <div class="custom-control custom-checkboxValue custom-control-inline check-bg">
                                             <label class="custom-label">
                                                 <input type="radio" name="type" value="2" class="custom-control-input-hidden">
-                                                <div class="custom-input checkbox"><span class="language_replace tempName">轉出</span></div>
+                                                <div class="custom-input checkbox"><span class="language_replace tempName">取消</span></div>
                                             </label>
                                         </div>
                                     </div>
@@ -306,50 +303,29 @@
                                 <span class="td__content"><span class="CreateDate">CON5</span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">收款時間</span></span>
-                                <span class="td__content"><span class="ConfirmDate">CON5</span></span>
+                                <span class="td__title"><span class="language_replace">申請帳戶</span></span>
+                                <span class="td__content"><span class="LoginAccountU">CON5</span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">來源帳戶</span></span>
-                                <span class="td__content"><span class="SrcLoginAccount">CON5</span></span>
-                            </div>
-                            <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">收款帳戶</span></span>
-                                <span class="td__content"><span class="DstLoginAccount">CON5</span></span>
+                                <span class="td__title"><span class="language_replace">審核帳戶</span></span>
+                                <span class="td__content"><span class="LoginAccountP">CON5</span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">狀態</span></span>
-                                <span class="td__content"><span class="TransferState">CON5</span></span>
+                                <span class="td__content"><span class="ProcessStatus">CON5</span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">轉出貨幣</span></span>
-                                <span class="td__content"><span class="SrcCurrencyType">CON3</span></span>
+                                <span class="td__title"><span class="language_replace">貨幣</span></span>
+                                <span class="td__content"><span class="CurrencyType">CON3</span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">轉入貨幣</span></span>
-                                <span class="td__content"><span class="DstCurrencyType">CON3</span></span>
+                                <span class="td__title"><span class="language_replace">額度</span></span>
+                                <span class="td__content"><span class="Amount">CON4</span></span>
                             </div>
-                            <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">轉出額度</span></span>
-                                <span class="td__content"><span class="TransferValue">CON4</span></span>
-                            </div>
-                            <div class="tbody__td td-number td-3 td-vertical td_DepositValue">
-                                <span class="td__title"></i><span class="language_replace">收帳額度</span></span>
-                                <span class="td__content"><span class="DstValue">CON4</span></span>
-                            </div>
-                            <div class="tbody__td td-3 " style="display:none">
+                            <div class="tbody__td td-3 ">
                                 <span class="td__title"><span class="language_replace">備註</span></span>
                                 <span class="td__content"><span class="Description">CON3</span></span>
                             </div>
-                            <div class="tbody__td td-3 " style="display:none">
-                                <span class="td__title"><span class="language_replace">登入管理者帳號</span></span>
-                                <span class="td__content"><span class="AdminLoginAccount">CON3</span></span>
-                            </div>
-                            <div class="tbody__td td-3 " style="display:none">
-                                <span class="td__title"><span class="language_replace">驗證管理者帳號</span></span>
-                                <span class="td__content"><span class="ValidAdminLoginAccount">CON3</span></span>
-                            </div>
-
                         </div>
                     </div>
                     <!-- 標題項目  -->
@@ -357,17 +333,12 @@
                         <!--標題項目單行 -->
                         <div class="thead__tr">
                             <div class="thead__th"><span class="language_replace">交易日期</span></div>
-                            <div class="thead__th"><span class="language_replace">收款時間</span></div>
-                            <div class="thead__th"><span class="language_replace">來源帳戶</span></div>
-                            <div class="thead__th"><span class="language_replace">收款帳戶</span></div>
+                            <div class="thead__th"><span class="language_replace">申請帳戶</span></div>
+                            <div class="thead__th"><span class="language_replace">審核帳戶</span></div>
                             <div class="thead__th"><span class="language_replace">狀態</span></div>
-                            <div class="thead__th"><span class="language_replace">轉出貨幣</span></div>
-                            <div class="thead__th"><span class="language_replace">轉入貨幣</span></div>
-                            <div class="thead__th"><span class="language_replace">轉出額度</span></div>
-                            <div class="thead__th"><span class="language_replace">收帳額度</span></div>
-                            <div class="thead__th" style="display:none"><span class="language_replace">備註</span></div>
-                            <div class="thead__th" style="display:none"><span class="language_replace">登入管理者帳號</span></div>
-                            <div class="thead__th" style="display:none"><span class="language_replace">驗證管理者帳號</span></div>
+                            <div class="thead__th"><span class="language_replace">貨幣</span></div>
+                            <div class="thead__th"><span class="language_replace">額度</span></div>
+                            <div class="thead__th"><span class="language_replace">備註</span></div>
                         </div>
                     </div>
                     <!-- 表格上下滑動框 -->
