@@ -681,6 +681,12 @@
                         }
 
                     }
+                    //他人子帳號
+                    if (o.MainUserAccountID != 0) {
+                        $("#btnSwitchAccount").hide();
+                        $("#li_UserMulti").hide();
+                        $("#li_Setting").hide();
+                    }
 
                     if (firstLoad == true) {
                         firstLoad = false;

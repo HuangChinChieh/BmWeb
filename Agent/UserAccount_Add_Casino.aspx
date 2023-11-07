@@ -1207,7 +1207,7 @@
                             </div>
                         </fieldset>
 
-                        <fieldset class="dataFieldset" id="divBetLimit1">
+                        <fieldset class="dataFieldset" id="divBetLimit1" style="display:none">
                             <legend class="dataFieldset-title language_replace shown-lg">網投</legend>
                             <div class="MT__tableDiv">
                                 <!-- 自訂表格 -->

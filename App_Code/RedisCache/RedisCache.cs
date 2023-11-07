@@ -1859,11 +1859,11 @@ public static class RedisCache {
         private static int DBIndex = 0;
 
         #region 傭金結算查詢-細節
-        public static string GetAccountDetailByLoginAccount(string LoginAccount, int AccountingID) {
+        public static string GetAccountDetailByLoginAccount(string LoginAccount, int AccountingID, string CurrencyType) {
             string Key;
             string strRet = string.Empty;
 
-            Key = XMLPath + ":AccountDetail:AccountingID:" + AccountingID + ":LoginAccount:" + LoginAccount;
+            Key = XMLPath + ":AccountDetail:AccountingID:" + AccountingID + ":LoginAccount:" + LoginAccount + ":CurrencyType:" + CurrencyType;
             if (KeyExists(DBIndex, Key) == true) {
                 strRet = JsonReadFromRedis(DBIndex, Key);
             }
@@ -1871,10 +1871,10 @@ public static class RedisCache {
             return strRet;
         }
 
-        public static void UpdateAccountDetailByLoginAccount(string JsonData, string LoginAccount, int AccountingID) {
+        public static void UpdateAccountDetailByLoginAccount(string JsonData, string LoginAccount, int AccountingID, string CurrencyType) {
             string Key;
 
-            Key = XMLPath + ":AccountDetail:AccountingID:" + AccountingID + ":LoginAccount:" + LoginAccount;
+            Key = XMLPath + ":AccountDetail:AccountingID:" + AccountingID + ":LoginAccount:" + LoginAccount + ":CurrencyType:" + CurrencyType;
             for (int I = 0; I <= 3; I++) {
                 try {
                     JsonStringWriteToRedis(DBIndex, JsonData, Key, 1800);

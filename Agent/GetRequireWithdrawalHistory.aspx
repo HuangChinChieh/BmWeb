@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="GetRequireWithdrawalHistory.aspx.cs" Inherits="Agent_GetRequireWithdrawalHistory" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="GetRequireWithdrawalHistory.aspx.cs" Inherits="GetRequireWithdrawalHistory" %>
 
 <%
     string AgentVersion = EWinWeb.AgentVersion;
@@ -33,6 +33,7 @@
     var lang;
     var qYear;
     var qMon;
+    var SelectedWallet;
 
     function queryData() {
         var startDate;
@@ -62,7 +63,8 @@
             AID: EWinInfo.ASID,
             QueryBeginDate: startDate.value,
             QueryEndDate: endDate.value,
-            SearchState: type
+            SearchState: type,
+            CurrencyType : SelectedWallet
         };
 
         window.parent.API_ShowLoading();
@@ -114,7 +116,7 @@
                     c.setClassText(t, "CreateDate", null, item.CreateDate);
                     c.setClassText(t, "LoginAccountU", null, item.LoginAccountU);
                     c.setClassText(t, "LoginAccountP", null, item.LoginAccountP);
-                    c.setClassText(t, "ProcessStatus", null, item.ProcessStatus == 0 ? mlp.getLanguageKey("申請提款") : (item.ProcessStatus == 1 ? mlp.getLanguageKey("完成轉帳") :mlp.getLanguageKey("取消")));
+                    c.setClassText(t, "ProcessStatus", null, item.ProcessStatus == 0 ? mlp.getLanguageKey("申請提款") : (item.ProcessStatus == 1 ? mlp.getLanguageKey("完成轉帳") :mlp.getLanguageKey("拒絕")));
                     c.setClassText(t, "CurrencyType", null, item.CurrencyType);
 
                     if (parseFloat(item.Amount) < 0) {
@@ -175,8 +177,21 @@
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
             window.parent.API_CloseLoading();
+            SelectedWallet = parent.API_GetSelectedWallet();
             queryData();
         });
+    }
+
+    function EWinEventNotify(eventName, isDisplay, param) {
+        switch (eventName) {
+            case "WindowFocus":
+                ac.dataToggleCollapseInit();
+                break;
+            case "SelectedWallet":
+                SelectedWallet = param;
+                queryData();
+                break;
+        }
     }
 
     window.onload = init;
@@ -272,7 +287,7 @@
                                         <div class="custom-control custom-checkboxValue custom-control-inline check-bg">
                                             <label class="custom-label">
                                                 <input type="radio" name="type" value="2" class="custom-control-input-hidden">
-                                                <div class="custom-input checkbox"><span class="language_replace tempName">取消</span></div>
+                                                <div class="custom-input checkbox"><span class="language_replace tempName">拒絕</span></div>
                                             </label>
                                         </div>
                                     </div>

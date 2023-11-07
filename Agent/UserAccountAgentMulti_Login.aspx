@@ -80,22 +80,26 @@
             var btnSwitchUser;
 
             c.clearChildren(idUserList);
-            api.QueryUserInfo(EWinInfo.ASID, Math.uuid(), function (success, o) {
+
+            
+            postObj = {
+                AID: EWinInfo.ASID
+            };
+
+            c.callService(ApiUrl + "/QueryUserAccountSubUserList", postObj, function (success, obj) {
                 if (success) {
-                    if (o.ResultState == 0) {
-                        if (o.MultiLoginList.length > 1) {
+                    var o = c.getJSON(obj);
+                    if (o.Result == 0) {
+                        if (o.UserAccountList.length > 0) {
                             hasNoData = false;
-                            for (var i = 0; i < o.MultiLoginList.length; i++) {
-                                if (o.MultiLoginList[i].LoginAccount != EWinInfo.UserInfo.LoginAccount) {
+                            for (var i = 0; i < o.UserAccountList.length; i++) {
+                                if (o.UserAccountList[i].LoginAccount != EWinInfo.UserInfo.LoginAccount) {
                                     var temp = c.getTemplate("templateTableItem");
 
-                                    //c.setClassText(temp, "mtAgentLoignAccount", null, EWinInfo.UserInfo.LoginAccount);
-                                    c.setClassText(temp, "mtAgentLoignAccount", null, o.MultiLoginList[i].LoginAccount);
-                                    //c.setClassText(temp, "mtLoginAccount", null, o.MultiLoginList[i].LoginAccount);
-                                    c.setClassText(temp, "mtDescription", null, o.MultiLoginList[i].Description);
-
+                                    c.setClassText(temp, "mtAgentLoignAccount", null, o.UserAccountList[i].LoginAccount);
+                                    
                                     btnSwitchUser = c.getFirstClassElement(temp, "btnSwitchUser");
-                                    btnSwitchUser.onclick = new Function("SwitchUser('" + o.MultiLoginList[i].LoginAccount + "')");
+                                    btnSwitchUser.onclick = new Function("SwitchUser('" + o.UserAccountList[i].LoginAccount + "')");
 
 
                                     idUserList.appendChild(temp);
@@ -122,7 +126,6 @@
                 }
 
             });
-
 
         }
 
@@ -180,8 +183,8 @@
                         </div>
                     </div>
                     <div class="downline__info">
-                        <%--<div class="name "><span class="language_replace mtLoginAccount">帳號</span></div>--%>
-                        <div class="name "><span class="language_replace mtDescription">描述</span></div>
+                        <%--<div class="name "><span class="language_replace mtLoginAccount">帳號</span></div>
+                        <div class="name "><span class="language_replace mtDescription">描述</span></div>--%>
                     </div>
 
                 </div>

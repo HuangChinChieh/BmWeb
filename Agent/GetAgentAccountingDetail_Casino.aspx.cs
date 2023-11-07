@@ -17,12 +17,12 @@ public partial class GetAgentAccountingDetail_Casino : System.Web.UI.Page {
         EWin.BmAgent.AgentAccountingDetailResult RetValue = new EWin.BmAgent.AgentAccountingDetailResult();
         string RedisTmp = string.Empty;
 
-        RedisTmp = RedisCache.Agent.GetAccountDetailByLoginAccount(LoginAccount, AccountingID);
+        RedisTmp = RedisCache.Agent.GetAccountDetailByLoginAccount(LoginAccount, AccountingID, CurrencyType);
 
         if (string.IsNullOrEmpty(RedisTmp)) {
             RetValue = api.GetAgentAccountingDetail(AID, CurrencyType, AccountingID);
 
-            RedisCache.Agent.UpdateAccountDetailByLoginAccount(Newtonsoft.Json.JsonConvert.SerializeObject(RetValue), LoginAccount, AccountingID);
+            RedisCache.Agent.UpdateAccountDetailByLoginAccount(Newtonsoft.Json.JsonConvert.SerializeObject(RetValue), LoginAccount, AccountingID, CurrencyType);
         } else {
             RetValue = Newtonsoft.Json.JsonConvert.DeserializeObject<EWin.BmAgent.AgentAccountingDetailResult>(RedisTmp);
         }

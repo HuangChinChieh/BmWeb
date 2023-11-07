@@ -821,6 +821,8 @@
               <s:element minOccurs="0" maxOccurs="1" name="Birthday" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="PersonCode" type="s:string" />
               <s:element minOccurs="1" maxOccurs="1" name="CompanyClassID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="MainUserAccountID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="MainAccount" type="s:string" />
               <s:element minOccurs="1" maxOccurs="1" name="UserAccountState" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="UserAccountType" type="s:int" />
               <s:element minOccurs="1" maxOccurs="1" name="AllowTransfer" type="s:int" />

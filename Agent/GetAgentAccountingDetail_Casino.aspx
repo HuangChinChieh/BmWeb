@@ -100,6 +100,7 @@
     var lang;
     var accountingID = <%=AccountingID%>;
     var CurrencyType = "<%=CurrencyType%>";
+    var SelectedWallet;
 
     function agentExpand(SortKey) {
         var expandBtn = event.currentTarget;
@@ -194,7 +195,7 @@
         postData = {
             AID: EWinInfo.ASID,
             AccountingID: accountingID,
-            CurrencyType: currencyType,
+            CurrencyType: SelectedWallet,
             LoginAccount: EWinInfo.UserInfo.LoginAccount
         };
 
@@ -247,7 +248,7 @@
                     c.setClassText(t, "RewardValue", null, toCurrency(parseInt(data.TotalRewardValue)));
                     c.setClassText(t, "ValidBetValue", null, toCurrency(parseInt(data.TotalValidBetValue)));
                     c.setClassText(t, "TotalLineRebate", null, toCurrency(parseInt(data.TotalLineRebate)));
-                    c.setClassText(t, "UserRate", null, data.UserRate / 100);
+                    c.setClassText(t, "UserRate", null, data.UserRate);
                     c.setClassText(t, "AccountingOPValue", null, toCurrency(parseInt(data.UserRebate)));
                     c.setClassText(t, "TotalBonusValue", null, toCurrency(parseInt(data.BonusPointValue)));
                     c.setClassText(t, "BonusValue_Own", null, toCurrency(parseInt(data.BonusPointValue)));
@@ -286,7 +287,7 @@
                         c.setClassText(t, "RewardValue", null, toCurrency(parseInt(data.TotalRewardValue)));
                         c.setClassText(t, "ValidBetValue", null, toCurrency(parseInt(data.TotalValidBetValue)));
                         c.setClassText(t, "TotalLineRebate", null, toCurrency(parseInt(data.TotalLineRebate)));
-                        c.setClassText(t, "UserRate", null, data.UserRate / 100);
+                        c.setClassText(t, "UserRate", null, data.UserRate);
                         c.setClassText(t, "AccountingOPValue", null, toCurrency(parseInt(data.UserRebate)));
                         c.setClassText(t, "TotalBonusValue", null, toCurrency(parseInt(data.BonusPointValue)));
                         c.setClassText(t, "BonusValue_Own", null, toCurrency(parseInt(data.BonusPointValue)));
@@ -322,7 +323,7 @@
 
     function toCurrency(num) {
 
-        num = parseFloat(Number(num).toFixed(2));
+        num = parseFloat(Number(num).toFixed(4));
         var parts = num.toString().split('.');
         parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         return parts.join('.');
@@ -336,6 +337,7 @@
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
             window.parent.API_CloseLoading();
+            SelectedWallet = parent.API_GetSelectedWallet();
             queryData();
             ac.dataToggleCollapseInit();
         });
@@ -346,6 +348,10 @@
             case "WindowFocus":
                 //updateBaseInfo();
                 ac.dataToggleCollapseInit();
+                break;
+            case "SelectedWallet":
+                SelectedWallet = param;
+                queryData();
                 break;
         }
     }

@@ -1599,6 +1599,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="QueryBeginDate" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="QueryEndDate" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="SearchState" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -1639,6 +1640,54 @@
           <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="ConfirmDate" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="CreateDate" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetUserAccountRequireWithdrawalHistory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="QueryBeginDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="QueryEndDate" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SearchState" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserAccountRequireWithdrawalHistoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserAccountRequireWithdrawalHistoryResult" type="tns:RequireWithdrawalTableResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RequireWithdrawalTableResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Datas" type="tns:ArrayOfRequireWithdrawalTable" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfRequireWithdrawalTable">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RequireWithdrawalTable" nillable="true" type="tns:RequireWithdrawalTable" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RequireWithdrawalTable">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="RequireWithdrawalID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="forUserAccountID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="forCompanyID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ParentUserAccountID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProcessStatus" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="HistoryType" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreateDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LoginAccountU" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LoginAccountP" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:element name="CreateUserAccountAgentLogin">
@@ -1745,11 +1794,56 @@
       </s:complexType>
       <s:complexType name="UserInfoDetailResult">
         <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="UserAccountID" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="AgentLoginState" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="AgentPermission" type="s:int" />
         </s:sequence>
       </s:complexType>
+      <s:element name="QueryUserAccountSubUserList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="QueryUserAccountSubUserListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="QueryUserAccountSubUserListResult" type="tns:UserAgentInfoResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUserAccountSubUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUserAccountSubUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AddUserAccountSubUserResult" type="tns:UserAgentInfoResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteUserAccountSubUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteUserAccountSubUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DeleteUserAccountSubUserResult" type="tns:UserAgentInfoResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="RequireWithdrawal">
         <s:complexType>
           <s:sequence>
@@ -1843,6 +1937,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="QueryBeginDate" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="QueryEndDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -2021,6 +2116,7 @@
       <s:element name="ChildUserInfoResult1" nillable="true" type="tns:ChildUserInfoResult1" />
       <s:element name="UserAccountBetLimit" nillable="true" type="tns:UserAccountBetLimit" />
       <s:element name="UserAccountTransferHistoryResult" nillable="true" type="tns:UserAccountTransferHistoryResult" />
+      <s:element name="RequireWithdrawalTableResult" nillable="true" type="tns:RequireWithdrawalTableResult" />
       <s:element name="AgentInfoResult" nillable="true" type="tns:AgentInfoResult" />
       <s:element name="UserAgentInfoResult" nillable="true" type="tns:UserAgentInfoResult" />
       <s:element name="RequireWithdrawalResult" nillable="true" type="tns:RequireWithdrawalResult" />
@@ -2316,6 +2412,12 @@
   <wsdl:message name="GetUserAccountTransferHistorySoapOut">
     <wsdl:part name="parameters" element="tns:GetUserAccountTransferHistoryResponse" />
   </wsdl:message>
+  <wsdl:message name="GetUserAccountRequireWithdrawalHistorySoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserAccountRequireWithdrawalHistory" />
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountRequireWithdrawalHistorySoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserAccountRequireWithdrawalHistoryResponse" />
+  </wsdl:message>
   <wsdl:message name="CreateUserAccountAgentLoginSoapIn">
     <wsdl:part name="parameters" element="tns:CreateUserAccountAgentLogin" />
   </wsdl:message>
@@ -2345,6 +2447,24 @@
   </wsdl:message>
   <wsdl:message name="QueryUserAccountAgentListSoapOut">
     <wsdl:part name="parameters" element="tns:QueryUserAccountAgentListResponse" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserAccountSubUserListSoapIn">
+    <wsdl:part name="parameters" element="tns:QueryUserAccountSubUserList" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserAccountSubUserListSoapOut">
+    <wsdl:part name="parameters" element="tns:QueryUserAccountSubUserListResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddUserAccountSubUserSoapIn">
+    <wsdl:part name="parameters" element="tns:AddUserAccountSubUser" />
+  </wsdl:message>
+  <wsdl:message name="AddUserAccountSubUserSoapOut">
+    <wsdl:part name="parameters" element="tns:AddUserAccountSubUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserAccountSubUserSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteUserAccountSubUser" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserAccountSubUserSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteUserAccountSubUserResponse" />
   </wsdl:message>
   <wsdl:message name="RequireWithdrawalSoapIn">
     <wsdl:part name="parameters" element="tns:RequireWithdrawal" />
@@ -2795,9 +2915,20 @@
     <wsdl:part name="QueryBeginDate" type="s:string" />
     <wsdl:part name="QueryEndDate" type="s:string" />
     <wsdl:part name="SearchState" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
   </wsdl:message>
   <wsdl:message name="GetUserAccountTransferHistoryHttpGetOut">
     <wsdl:part name="Body" element="tns:UserAccountTransferHistoryResult" />
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountRequireWithdrawalHistoryHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="QueryBeginDate" type="s:string" />
+    <wsdl:part name="QueryEndDate" type="s:string" />
+    <wsdl:part name="SearchState" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountRequireWithdrawalHistoryHttpGetOut">
+    <wsdl:part name="Body" element="tns:RequireWithdrawalTableResult" />
   </wsdl:message>
   <wsdl:message name="GeteUserAccountAgentInfoByLoginAccountHttpGetIn">
     <wsdl:part name="AID" type="s:string" />
@@ -2817,6 +2948,26 @@
     <wsdl:part name="AID" type="s:string" />
   </wsdl:message>
   <wsdl:message name="QueryUserAccountAgentListHttpGetOut">
+    <wsdl:part name="Body" element="tns:UserAgentInfoResult" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserAccountSubUserListHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserAccountSubUserListHttpGetOut">
+    <wsdl:part name="Body" element="tns:UserAgentInfoResult" />
+  </wsdl:message>
+  <wsdl:message name="AddUserAccountSubUserHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddUserAccountSubUserHttpGetOut">
+    <wsdl:part name="Body" element="tns:UserAgentInfoResult" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserAccountSubUserHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserAccountSubUserHttpGetOut">
     <wsdl:part name="Body" element="tns:UserAgentInfoResult" />
   </wsdl:message>
   <wsdl:message name="RequireWithdrawalHttpGetIn">
@@ -2853,6 +3004,7 @@
     <wsdl:part name="AID" type="s:string" />
     <wsdl:part name="QueryBeginDate" type="s:string" />
     <wsdl:part name="QueryEndDate" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
   </wsdl:message>
   <wsdl:message name="GetPointManualHistoryHttpGetOut">
     <wsdl:part name="Body" element="tns:UserAccountPointManualHistoryResult" />
@@ -3289,9 +3441,20 @@
     <wsdl:part name="QueryBeginDate" type="s:string" />
     <wsdl:part name="QueryEndDate" type="s:string" />
     <wsdl:part name="SearchState" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
   </wsdl:message>
   <wsdl:message name="GetUserAccountTransferHistoryHttpPostOut">
     <wsdl:part name="Body" element="tns:UserAccountTransferHistoryResult" />
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountRequireWithdrawalHistoryHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="QueryBeginDate" type="s:string" />
+    <wsdl:part name="QueryEndDate" type="s:string" />
+    <wsdl:part name="SearchState" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountRequireWithdrawalHistoryHttpPostOut">
+    <wsdl:part name="Body" element="tns:RequireWithdrawalTableResult" />
   </wsdl:message>
   <wsdl:message name="GeteUserAccountAgentInfoByLoginAccountHttpPostIn">
     <wsdl:part name="AID" type="s:string" />
@@ -3311,6 +3474,26 @@
     <wsdl:part name="AID" type="s:string" />
   </wsdl:message>
   <wsdl:message name="QueryUserAccountAgentListHttpPostOut">
+    <wsdl:part name="Body" element="tns:UserAgentInfoResult" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserAccountSubUserListHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="QueryUserAccountSubUserListHttpPostOut">
+    <wsdl:part name="Body" element="tns:UserAgentInfoResult" />
+  </wsdl:message>
+  <wsdl:message name="AddUserAccountSubUserHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddUserAccountSubUserHttpPostOut">
+    <wsdl:part name="Body" element="tns:UserAgentInfoResult" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserAccountSubUserHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="LoginAccount" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteUserAccountSubUserHttpPostOut">
     <wsdl:part name="Body" element="tns:UserAgentInfoResult" />
   </wsdl:message>
   <wsdl:message name="RequireWithdrawalHttpPostIn">
@@ -3347,6 +3530,7 @@
     <wsdl:part name="AID" type="s:string" />
     <wsdl:part name="QueryBeginDate" type="s:string" />
     <wsdl:part name="QueryEndDate" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
   </wsdl:message>
   <wsdl:message name="GetPointManualHistoryHttpPostOut">
     <wsdl:part name="Body" element="tns:UserAccountPointManualHistoryResult" />
@@ -3581,6 +3765,10 @@
       <wsdl:input message="tns:GetUserAccountTransferHistorySoapIn" />
       <wsdl:output message="tns:GetUserAccountTransferHistorySoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetUserAccountRequireWithdrawalHistory">
+      <wsdl:input message="tns:GetUserAccountRequireWithdrawalHistorySoapIn" />
+      <wsdl:output message="tns:GetUserAccountRequireWithdrawalHistorySoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="CreateUserAccountAgentLogin">
       <wsdl:input message="tns:CreateUserAccountAgentLoginSoapIn" />
       <wsdl:output message="tns:CreateUserAccountAgentLoginSoapOut" />
@@ -3600,6 +3788,18 @@
     <wsdl:operation name="QueryUserAccountAgentList">
       <wsdl:input message="tns:QueryUserAccountAgentListSoapIn" />
       <wsdl:output message="tns:QueryUserAccountAgentListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserAccountSubUserList">
+      <wsdl:input message="tns:QueryUserAccountSubUserListSoapIn" />
+      <wsdl:output message="tns:QueryUserAccountSubUserListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserAccountSubUser">
+      <wsdl:input message="tns:AddUserAccountSubUserSoapIn" />
+      <wsdl:output message="tns:AddUserAccountSubUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserAccountSubUser">
+      <wsdl:input message="tns:DeleteUserAccountSubUserSoapIn" />
+      <wsdl:output message="tns:DeleteUserAccountSubUserSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="RequireWithdrawal">
       <wsdl:input message="tns:RequireWithdrawalSoapIn" />
@@ -3823,6 +4023,10 @@
       <wsdl:input message="tns:GetUserAccountTransferHistoryHttpGetIn" />
       <wsdl:output message="tns:GetUserAccountTransferHistoryHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetUserAccountRequireWithdrawalHistory">
+      <wsdl:input message="tns:GetUserAccountRequireWithdrawalHistoryHttpGetIn" />
+      <wsdl:output message="tns:GetUserAccountRequireWithdrawalHistoryHttpGetOut" />
+    </wsdl:operation>
     <wsdl:operation name="GeteUserAccountAgentInfoByLoginAccount">
       <wsdl:input message="tns:GeteUserAccountAgentInfoByLoginAccountHttpGetIn" />
       <wsdl:output message="tns:GeteUserAccountAgentInfoByLoginAccountHttpGetOut" />
@@ -3834,6 +4038,18 @@
     <wsdl:operation name="QueryUserAccountAgentList">
       <wsdl:input message="tns:QueryUserAccountAgentListHttpGetIn" />
       <wsdl:output message="tns:QueryUserAccountAgentListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserAccountSubUserList">
+      <wsdl:input message="tns:QueryUserAccountSubUserListHttpGetIn" />
+      <wsdl:output message="tns:QueryUserAccountSubUserListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserAccountSubUser">
+      <wsdl:input message="tns:AddUserAccountSubUserHttpGetIn" />
+      <wsdl:output message="tns:AddUserAccountSubUserHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserAccountSubUser">
+      <wsdl:input message="tns:DeleteUserAccountSubUserHttpGetIn" />
+      <wsdl:output message="tns:DeleteUserAccountSubUserHttpGetOut" />
     </wsdl:operation>
     <wsdl:operation name="RequireWithdrawal">
       <wsdl:input message="tns:RequireWithdrawalHttpGetIn" />
@@ -4057,6 +4273,10 @@
       <wsdl:input message="tns:GetUserAccountTransferHistoryHttpPostIn" />
       <wsdl:output message="tns:GetUserAccountTransferHistoryHttpPostOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetUserAccountRequireWithdrawalHistory">
+      <wsdl:input message="tns:GetUserAccountRequireWithdrawalHistoryHttpPostIn" />
+      <wsdl:output message="tns:GetUserAccountRequireWithdrawalHistoryHttpPostOut" />
+    </wsdl:operation>
     <wsdl:operation name="GeteUserAccountAgentInfoByLoginAccount">
       <wsdl:input message="tns:GeteUserAccountAgentInfoByLoginAccountHttpPostIn" />
       <wsdl:output message="tns:GeteUserAccountAgentInfoByLoginAccountHttpPostOut" />
@@ -4068,6 +4288,18 @@
     <wsdl:operation name="QueryUserAccountAgentList">
       <wsdl:input message="tns:QueryUserAccountAgentListHttpPostIn" />
       <wsdl:output message="tns:QueryUserAccountAgentListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserAccountSubUserList">
+      <wsdl:input message="tns:QueryUserAccountSubUserListHttpPostIn" />
+      <wsdl:output message="tns:QueryUserAccountSubUserListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserAccountSubUser">
+      <wsdl:input message="tns:AddUserAccountSubUserHttpPostIn" />
+      <wsdl:output message="tns:AddUserAccountSubUserHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserAccountSubUser">
+      <wsdl:input message="tns:DeleteUserAccountSubUserHttpPostIn" />
+      <wsdl:output message="tns:DeleteUserAccountSubUserHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="RequireWithdrawal">
       <wsdl:input message="tns:RequireWithdrawalHttpPostIn" />
@@ -4540,6 +4772,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetUserAccountRequireWithdrawalHistory">
+      <soap:operation soapAction="http://tempuri.org/GetUserAccountRequireWithdrawalHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CreateUserAccountAgentLogin">
       <soap:operation soapAction="http://tempuri.org/CreateUserAccountAgentLogin" style="document" />
       <wsdl:input>
@@ -4578,6 +4819,33 @@
     </wsdl:operation>
     <wsdl:operation name="QueryUserAccountAgentList">
       <soap:operation soapAction="http://tempuri.org/QueryUserAccountAgentList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserAccountSubUserList">
+      <soap:operation soapAction="http://tempuri.org/QueryUserAccountSubUserList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserAccountSubUser">
+      <soap:operation soapAction="http://tempuri.org/AddUserAccountSubUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserAccountSubUser">
+      <soap:operation soapAction="http://tempuri.org/DeleteUserAccountSubUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -5101,6 +5369,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetUserAccountRequireWithdrawalHistory">
+      <soap12:operation soapAction="http://tempuri.org/GetUserAccountRequireWithdrawalHistory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CreateUserAccountAgentLogin">
       <soap12:operation soapAction="http://tempuri.org/CreateUserAccountAgentLogin" style="document" />
       <wsdl:input>
@@ -5139,6 +5416,33 @@
     </wsdl:operation>
     <wsdl:operation name="QueryUserAccountAgentList">
       <soap12:operation soapAction="http://tempuri.org/QueryUserAccountAgentList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserAccountSubUserList">
+      <soap12:operation soapAction="http://tempuri.org/QueryUserAccountSubUserList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserAccountSubUser">
+      <soap12:operation soapAction="http://tempuri.org/AddUserAccountSubUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserAccountSubUser">
+      <soap12:operation soapAction="http://tempuri.org/DeleteUserAccountSubUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -5644,6 +5948,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetUserAccountRequireWithdrawalHistory">
+      <http:operation location="/GetUserAccountRequireWithdrawalHistory" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GeteUserAccountAgentInfoByLoginAccount">
       <http:operation location="/GeteUserAccountAgentInfoByLoginAccount" />
       <wsdl:input>
@@ -5664,6 +5977,33 @@
     </wsdl:operation>
     <wsdl:operation name="QueryUserAccountAgentList">
       <http:operation location="/QueryUserAccountAgentList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserAccountSubUserList">
+      <http:operation location="/QueryUserAccountSubUserList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserAccountSubUser">
+      <http:operation location="/AddUserAccountSubUser" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserAccountSubUser">
+      <http:operation location="/DeleteUserAccountSubUser" />
       <wsdl:input>
         <http:urlEncoded />
       </wsdl:input>
@@ -6169,6 +6509,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetUserAccountRequireWithdrawalHistory">
+      <http:operation location="/GetUserAccountRequireWithdrawalHistory" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GeteUserAccountAgentInfoByLoginAccount">
       <http:operation location="/GeteUserAccountAgentInfoByLoginAccount" />
       <wsdl:input>
@@ -6189,6 +6538,33 @@
     </wsdl:operation>
     <wsdl:operation name="QueryUserAccountAgentList">
       <http:operation location="/QueryUserAccountAgentList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryUserAccountSubUserList">
+      <http:operation location="/QueryUserAccountSubUserList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserAccountSubUser">
+      <http:operation location="/AddUserAccountSubUser" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserAccountSubUser">
+      <http:operation location="/DeleteUserAccountSubUser" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

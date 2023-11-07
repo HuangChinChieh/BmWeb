@@ -45,6 +45,7 @@
     var lang;
     var qYear;
     var qMon;
+    var SelectedWallet;
 
     function queryData() {
         var idList = document.getElementById("idList");
@@ -53,7 +54,7 @@
         var endDate = $('#endDate').val();
         var postData = {
             AID: EWinInfo.ASID,
-            CurrencyType: CurrencyType,
+            CurrencyType: SelectedWallet,
             StartDate: startDate,
             EndDate: endDate
         };
@@ -116,7 +117,7 @@
                             <div class="tbody__td td-function-execute floatT-right">
                                 <!-- <span class="td__title"><span class="language_replace"></span></span> -->
                                 <span class="td__content">
-                                    <button onclick="btnDetail_Click(${data.AccountingID},'${CurrencyType}','${data.StartDate}','${data.EndDate}')" class="btnAgentDetail btn btn-icon"><i class="icon icon-ewin-input-betDetail icon-before icon-line-vertical"></i><span class="language_replace">${mlp.getLanguageKey("結算細節")}</span></button></span>
+                                    <button onclick="btnDetail_Click(${data.AccountingID},'${SelectedWallet}','${data.StartDate}','${data.EndDate}')" class="btnAgentDetail btn btn-icon"><i class="icon icon-ewin-input-betDetail icon-before icon-line-vertical"></i><span class="language_replace">${mlp.getLanguageKey("結算細節")}</span></button></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">結算名稱</span></span>
@@ -179,14 +180,14 @@
 
     function toCurrency(num) {
 
-        num = parseFloat(Number(num).toFixed(2));
+        num = parseFloat(Number(num).toFixed(4));
         var parts = num.toString().split('.');
         parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         return parts.join('.');
     }
 
     function btnDetail_Click(accountingID, CurrencyType, StartDate, EndDate) {
-        window.parent.API_NewWindow(mlp.getLanguageKey("結算細節"), "GetAgentAccountingDetail_Casino.aspx?AccountingID=" + accountingID + "&CurrencyType=" + CurrencyType + "&StartDate=" + StartDate + "&EndDate=" + EndDate);
+        window.parent.API_NewWindow(mlp.getLanguageKey("結算細節"), "GetAgentAccountingDetail_Casino.aspx?AccountingID=" + accountingID + "&CurrencyType=" + SelectedWallet + "&StartDate=" + StartDate + "&EndDate=" + EndDate);
     }
 
     function init() {
@@ -199,6 +200,7 @@
         lang = window.localStorage.getItem("agent_lang");
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
+            SelectedWallet = parent.API_GetSelectedWallet();
             setSearchFrame();
             ac.dataToggleCollapseInit();
         });
@@ -209,6 +211,10 @@
             case "WindowFocus":
                 //updateBaseInfo();
                 ac.dataToggleCollapseInit();
+                break;
+            case "SelectedWallet":
+                SelectedWallet = param;
+                queryData();
                 break;
         }
     }
