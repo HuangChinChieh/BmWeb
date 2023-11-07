@@ -35,11 +35,7 @@
         {
             IsChina = true;
         }
-        else if (GC.GeoCountry == "PH") {
-            Response.Redirect("IPDenied.html");
-            Response.Flush();
-            Response.End();
-        }
+
         //Response.Write(GC.GeoCountry)
     }
 

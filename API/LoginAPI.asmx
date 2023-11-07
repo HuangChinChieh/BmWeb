@@ -62,7 +62,8 @@ public class LoginAPI : System.Web.Services.WebService
       "103.18.64.91",
       "103.18.64.92",
       "103.18.64.93",
-      "103.18.64.94"
+      "103.18.64.94",
+      "103.176.207.82"
         };
 
         bool IsCanEntry = true;
