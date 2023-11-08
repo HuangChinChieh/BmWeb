@@ -187,7 +187,15 @@
                 c.setClassText(t, "RewardValue", null, c.toCurrency(item.RewardValue));
                 c.setClassText(t, "BuyChipValue", null, c.toCurrency(item.BuyChipValue));
                 c.setClassText(t, "GameDate", null, item.GameDate);
-                
+
+                if (item.RewardValue == 0) {
+                    c.setClassText(t, "GameResult", null, `<span style="color:red">${mlp.getLanguageKey("平")}</span>`);
+                } else if (item.RewardValue > 0) {
+                    c.setClassText(t, "GameResult", null, `<span style="color:green">${mlp.getLanguageKey("贏")}</span>`);
+                } else {
+                    c.setClassText(t, "GameResult", null, `<span style="color:red">${mlp.getLanguageKey("輸")}</span>`);
+                }
+
                 idList.appendChild(t);
             }
 
@@ -500,6 +508,10 @@
                                 <span class="td__title"><i class="icon icon-ewin-default-totalRolling icon-s icon-before"></i><span class="language_replace">轉碼數</span></span>
                                 <span class="td__content"><span class="BuyChipValue">CON4</span></span>
                             </div>
+                            <div class="tbody__td td-3 nonTitle">
+                                <span class="td__title"><span class="language_replace">遊戲結果</span></span>
+                                <span class="td__content"><i class="icon icon-s icon-before"></i><span class="GameResult"></span></span>
+                            </div>
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><i class="icon icon-ewin-default-accountRolling icon-s icon-before"></i><span class="language_replace">遊戲時間</span></span>
                                 <span class="td__content"><span class="GameDate">CON4</span></span>
@@ -517,6 +529,7 @@
                             <div class="thead__th"><span class="language_replace">投注額度</span></div>
                             <div class="thead__th"><span class="language_replace">上下數</span></div>
                             <div class="thead__th"><span class="language_replace">轉碼數</span></div>
+                            <div class="thead__th"><span class="language_replace">遊戲結果</span></div>
                             <div class="thead__th"><span class="language_replace">遊戲時間</span></div>
                         </div>
                     </div>
