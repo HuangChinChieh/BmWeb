@@ -245,14 +245,15 @@
                     let parentSortKey = "";
 
                     c.setClassText(t, "LoginAccount", null, data.LoginAccount);
-                    c.setClassText(t, "RewardValue", null, toCurrency(parseInt(data.TotalRewardValue)));
-                    c.setClassText(t, "ValidBetValue", null, toCurrency(parseInt(data.TotalValidBetValue)));
-                    c.setClassText(t, "TotalLineRebate", null, toCurrency(parseInt(data.TotalLineRebate)));
-                    c.setClassText(t, "UserRate", null, data.UserRate);
-                    c.setClassText(t, "AccountingOPValue", null, toCurrency(parseInt(data.UserRebate)));
-                    c.setClassText(t, "TotalBonusValue", null, toCurrency(parseInt(data.BonusPointValue)));
-                    c.setClassText(t, "BonusValue_Own", null, toCurrency(parseInt(data.BonusPointValue)));
-                    c.setClassText(t, "OrderCount", null, toCurrency(parseInt(data.TotalOrderCount)));
+                    c.setClassText(t, "CurrencyType", null, data.CurrencyType);
+                    c.setClassText(t, "SelfRewardValue", null, toCurrency((data.SelfRewardValue)));
+                    c.setClassText(t, "SelfValidBetValue", null, toCurrency((data.SelfValidBetValue)));
+                    c.setClassText(t, "TotalLineRebate", null, toCurrency((data.TotalLineRebate)));
+                        //c.setClassText(t, "CommissionValue", null, toCurrency((data.CommissionValue)));
+                        //c.setClassText(t, "ChildenRebateCommission", null, toCurrency((data.ChildenRebateCommission)));
+                    c.setClassText(t, "UserRate", null, data.UserRate + "%");
+                    c.setClassText(t, "BuyChipRate", null, data.BuyChipRate + "%");
+                    c.setClassText(t, "AccountingOPValue", null, toCurrency((data.UserRebate)));
 
                     expandBtn = t.querySelector(".Expand");
                     
@@ -282,16 +283,17 @@
                         let expandBtn;
                         let parentSortKey = "";
                         childBonusPointValue = childBonusPointValue + data.BonusPointValue;
-
+                        
                         c.setClassText(t, "LoginAccount", null, data.LoginAccount);
-                        c.setClassText(t, "RewardValue", null, toCurrency(parseInt(data.TotalRewardValue)));
-                        c.setClassText(t, "ValidBetValue", null, toCurrency(parseInt(data.TotalValidBetValue)));
-                        c.setClassText(t, "TotalLineRebate", null, toCurrency(parseInt(data.TotalLineRebate)));
-                        c.setClassText(t, "UserRate", null, data.UserRate);
-                        c.setClassText(t, "AccountingOPValue", null, toCurrency(parseInt(data.UserRebate)));
-                        c.setClassText(t, "TotalBonusValue", null, toCurrency(parseInt(data.BonusPointValue)));
-                        c.setClassText(t, "BonusValue_Own", null, toCurrency(parseInt(data.BonusPointValue)));
-                        c.setClassText(t, "OrderCount", null, toCurrency(parseInt(data.TotalOrderCount)));
+                        c.setClassText(t, "CurrencyType", null, data.CurrencyType);
+                        c.setClassText(t, "SelfRewardValue", null, toCurrency((data.SelfRewardValue)));
+                        c.setClassText(t, "SelfValidBetValue", null, toCurrency((data.SelfValidBetValue)));
+                        c.setClassText(t, "TotalLineRebate", null, toCurrency((data.TotalLineRebate)));
+                        //c.setClassText(t, "CommissionValue", null, toCurrency((data.CommissionValue)));
+                        //c.setClassText(t, "ChildenRebateCommission", null, toCurrency((data.ChildenRebateCommission)));
+                        c.setClassText(t, "UserRate", null, data.UserRate + "%");
+                        c.setClassText(t, "BuyChipRate", null, data.BuyChipRate + "%");
+                        c.setClassText(t, "AccountingOPValue", null, toCurrency((data.UserRebate)));
 
                         expandBtn = t.querySelector(".Expand");
 
@@ -304,8 +306,8 @@
                             t.classList.add("switch_tr");
                         }
 
-                        t.classList.add("row_c_" + data.UserAccountSortKey.substring(0, 6));
-                        t.classList.add("row_s_" + data.UserAccountSortKey.substring(0, 6));
+                        t.classList.add("row_c_" + data.ParentUserAccountSortKey);
+                        t.classList.add("row_s_" + data.ParentUserAccountSortKey);
 
                         t.classList.add("row_child");
                         t.style.display = "none";
@@ -315,7 +317,7 @@
                 }
 
                 if (childBonusPointValue != 0) {
-                    $(".row_top .BonusValue_Own").text(toCurrency(parseInt(childBonusPointValue)));
+                    $(".row_top .BonusValue_Own").text(toCurrency((childBonusPointValue)));
                 }
             }
         }
@@ -401,36 +403,40 @@
                                 </span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">總輸贏</span></span>
-                                <span class="td__content"><span class="RewardValue"></span></span>
-                            </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">總轉碼</span></span>
-                                <span class="td__content"><span class="ValidBetValue"></span></span>
-                            </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">總線佣金</span></span>
-                                <span class="td__content"><span class="TotalLineRebate"></span></span>
+                                <span class="td__title"><span class="language_replace">幣別</span></span>
+                                <span class="td__content"><span class="CurrencyType"></span></span>
                             </div>
                               <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">佔成率</span></span>
                                 <span class="td__content"><span class="UserRate"></span></span>
                             </div>
                               <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">轉碼率</span></span>
+                                <span class="td__content"><span class="BuyChipRate"></span></span>
+                            </div>
+                            <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">個人上下數</span></span>
+                                <span class="td__content"><span class="SelfRewardValue"></span></span>
+                            </div>
+                              <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">個人轉碼數</span></span>
+                                <span class="td__content"><span class="SelfValidBetValue"></span></span>
+                            </div>
+<%--                              <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">總洗碼佣金</span></span>
+                                <span class="td__content"><span class="CommissionValue"></span></span>
+                            </div>--%>
+                              <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">總線佣金</span></span>
+                                <span class="td__content"><span class="TotalLineRebate"></span></span>
+                            </div>
+<%--                              <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">下線洗碼佣金</span></span>
+                                <span class="td__content"><span class="ChildenRebateCommission"></span></span>
+                            </div>--%>
+                              <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">應付傭金</span></span>
                                 <span class="td__content"><span class="AccountingOPValue"></span></span>
-                            </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">總紅利</span></span>
-                                <span class="td__content"><span class="TotalBonusValue"></span></span>
-                            </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">佔成紅利</span></span>
-                                <span class="td__content"><span class="BonusValue_Own"></span></span>
-                            </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">團隊投注筆數</span></span>
-                                <span class="td__content"><span class="OrderCount"></span></span>
                             </div>
                         </div>
                     </div>
@@ -439,14 +445,15 @@
                         <!--標題項目單行 -->
                         <div class="thead__tr">
                             <div class="thead__th"><span class="language_replace">帳號</span></div>
-                            <div class="thead__th"><span class="language_replace">總輸贏</span></div>
-                            <div class="thead__th"><span class="language_replace">總轉碼</span></div>
-                            <div class="thead__th"><span class="language_replace">總線佣金</span></div>
+                            <div class="thead__th"><span class="language_replace">幣別</span></div>
                             <div class="thead__th"><span class="language_replace">佔成率</span></div>
+                            <div class="thead__th"><span class="language_replace">轉碼率</span></div>
+                            <div class="thead__th"><span class="language_replace">個人上下數</span></div>
+                            <div class="thead__th"><span class="language_replace">個人轉碼數</span></div>
+                            <%--<div class="thead__th"><span class="language_replace">總洗碼佣金</span></div>--%>
+                            <div class="thead__th"><span class="language_replace">總線佣金</span></div>
+                            <%--<div class="thead__th"><span class="language_replace">下線洗碼佣金</span></div>--%>
                             <div class="thead__th"><span class="language_replace">應付傭金</span></div>
-                            <div class="thead__th"><span class="language_replace">總紅利</span></div>
-                            <div class="thead__th"><span class="language_replace">佔成紅利</span></div>
-                            <div class="thead__th"><span class="language_replace">團隊投注筆數</span></div>
                         </div>
                     </div>
                     <!-- 表格上下滑動框 -->

@@ -1206,7 +1206,7 @@
                             <li class="nav-item navbarMenu__catagory" id="li_Member">
                                 <span class="catagory-item"><span class="language_replace">團隊管理</span></span>
                                 <ul class="catagory">
-                                    <li class="nav-item submenu dropdown" style="display:none">
+                                    <li class="nav-item submenu dropdown">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('團隊會員'), 'UserAccount_Maint2_Casino.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-user"></i>
                                             <span class="language_replace">會員</span></a>
@@ -1261,7 +1261,7 @@
                                             <i class="icon icon-mask icon-ewin-report-wallet"></i>
                                             <span class="language_replace">團隊投注數據</span></a>
                                     </li>
-                                    <li class="nav-item submenu dropdown" style="display:none">
+                                    <li class="nav-item submenu dropdown">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('會員投注數據'), 'GetPlayerTotalSummary_Casino.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-report-wallet"></i>
                                             <span class="language_replace">會員投注數據</span></a>

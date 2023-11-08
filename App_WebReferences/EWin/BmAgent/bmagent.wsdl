@@ -938,6 +938,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="RewardValue" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="ValidBetValue" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="AccountingOPValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="PaidOPValue" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="RebateStatus" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="FailureCondition" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="SummaryValueList" type="tns:ArrayOfSummaryValue2" />

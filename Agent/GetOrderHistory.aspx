@@ -181,6 +181,8 @@
 
                 c.setClassText(t, "OrderHistoryID", null, item.OrderHistoryID);
                 c.setClassText(t, "GameCode", null, item.GameCode);
+                c.setClassText(t, "GameCategoryCode", null, mlp.getLanguageKey(item.GameCategoryCode));
+                c.setClassText(t, "CurrencyType", null, item.CurrencyType);
                 c.setClassText(t, "OrderValue", null, c.toCurrency(item.OrderValue));
                 c.setClassText(t, "RewardValue", null, c.toCurrency(item.RewardValue));
                 c.setClassText(t, "BuyChipValue", null, c.toCurrency(item.BuyChipValue));
@@ -478,6 +480,14 @@
                                 <span class="td__title"><span class="language_replace">遊戲代碼</span></span>
                                 <span class="td__content"><i class="icon icon-s icon-before"></i><span class="GameCode"></span></span>
                             </div>
+                            <div class="tbody__td td-3 nonTitle">
+                                <span class="td__title"><span class="language_replace">遊戲類型</span></span>
+                                <span class="td__content"><i class="icon icon-s icon-before"></i><span class="GameCategoryCode"></span></span>
+                            </div>
+                            <div class="tbody__td td-3 nonTitle">
+                                <span class="td__title"><span class="language_replace">幣別</span></span>
+                                <span class="td__content"><i class="icon icon-s icon-before"></i><span class="CurrencyType"></span></span>
+                            </div>
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><i class="icon icon-ewin-default-totalWinLose icon-s icon-before"></i><span class="language_replace">投注額度</span></span>
                                 <span class="td__content"><span class="OrderValue">CON4</span></span>
@@ -502,6 +512,8 @@
                         <div class="thead__tr">
                             <div class="thead__th"><span class="language_replace">ID</span></div>
                             <div class="thead__th"><span class="language_replace">遊戲代碼</span></div>
+                            <div class="thead__th"><span class="language_replace">遊戲類型</span></div>
+                            <div class="thead__th"><span class="language_replace">幣別</span></div>
                             <div class="thead__th"><span class="language_replace">投注額度</span></div>
                             <div class="thead__th"><span class="language_replace">上下數</span></div>
                             <div class="thead__th"><span class="language_replace">轉碼數</span></div>

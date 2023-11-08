@@ -124,6 +124,10 @@
                                 <span class="td__content"><span class="AccountingName">${data.AccountingName}</span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">幣別</span></span>
+                                <span class="td__content"><span class="CurrencyType">${SelectedWallet}</span></span>
+                            </div>
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">團隊輸贏數</span></span>
                                 <span class="td__content"><span class="RewardValue">${toCurrency(data.RewardValue)}</span></span>
                             </div>
@@ -136,12 +140,8 @@
                                 <span class="td__content"><span class="AccountingOPValue">${toCurrency(data.AccountingOPValue)}</span></span>
                             </div>
                               <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">總紅利</span></span>
-                                <span class="td__content"><span class="TotalBonusValue">${toCurrency(data.TotalBonusValue)}</span></span>
-                            </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">佔成紅利</span></span>
-                                <span class="td__content"><span class="BonusValue_Own">${toCurrency(data.BonusValue_Own)}</span></span>
+                                <span class="td__title"><span class="language_replace">個人已付佣金</span></span>
+                                <span class="td__content"><span class="PaidOPValue">${toCurrency(data.PaidOPValue)}</span></span>
                             </div>
                               <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">派發狀態</span></span>
@@ -469,6 +469,10 @@
                                 <span class="td__content"><span class="AccountingName"></span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">幣別</span></span>
+                                <span class="td__content"><span class="CurrencyType"></span></span>
+                            </div>
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">總輸贏</span></span>
                                 <span class="td__content"><span class="RewardValue"></span></span>
                             </div>
@@ -481,12 +485,8 @@
                                 <span class="td__content"><span class="AccountingOPValue"></span></span>
                             </div>
                               <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">總紅利</span></span>
-                                <span class="td__content"><span class="TotalBonusValue"></span></span>
-                            </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">佔成紅利</span></span>
-                                <span class="td__content"><span class="BonusValue_Own"></span></span>
+                                <span class="td__title"><span class="language_replace">個人已付佣金</span></span>
+                                <span class="td__content"><span class="PaidOPValue"></span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">結算開始日期</span></span>
@@ -507,12 +507,12 @@
                         <!--標題項目單行 -->
                         <div class="thead__tr">
                             <div class="thead__th"><span class="language_replace">結算細節</span></div>
-                            <div class="thead__th"><span class="language_replace">結算名稱</span></div>                             
+                            <div class="thead__th"><span class="language_replace">結算名稱</span></div>       
+                            <div class="thead__th"><span class="language_replace">幣別</span></div>                                 
                             <div class="thead__th"><span class="language_replace">總輸贏</span></div>
                             <div class="thead__th"><span class="language_replace">總轉碼</span></div>
                             <div class="thead__th"><span class="language_replace">應付傭金</span></div>
-                            <div class="thead__th"><span class="language_replace">總紅利</span></div>
-                            <div class="thead__th"><span class="language_replace">佔成紅利</span></div>
+                            <div class="thead__th"><span class="language_replace">個人已付佣金</span></div>
                             <div class="thead__th"><span class="language_replace">派發狀態</span></div>
                             <div class="thead__th"><span class="language_replace">失敗原因</span></div>
                             <div class="thead__th"><span class="language_replace">結算開始日期</span></div>      

@@ -410,6 +410,14 @@
                         document.getElementById("UserAccountState1").checked=true
                     }
 
+                    if (obj.UserAccountType == 0) {
+                        uType = 0;
+                        document.getElementById("idUserAccountType").innerText = mlp.getLanguageKey("一般帳戶");
+                    } else {
+                        uType = 1;
+                        document.getElementById("idUserAccountType").innerText = mlp.getLanguageKey("代理");
+                    }
+
                     if (obj.ContactPhoneNumber != "" && obj.ContactPhonePrefix != "") {
                         originalPhoneNumber = "+" + obj.ContactPhonePrefix + obj.ContactPhoneNumber;
                         $("#ContactPhonePrefix").val("+" + obj.ContactPhonePrefix);
@@ -859,8 +867,7 @@
             EWinInfo = window.parent.EWinInfo;
             queryCurrentUserInfo();
             uType = 1;
-            document.getElementById("idUserAccountType").innerText = mlp.getLanguageKey("代理");
-
+           
             if (EWinInfo.MainCurrencyType) {
                 Wallets = EWinInfo.MainCurrencyType.split(';');
 
