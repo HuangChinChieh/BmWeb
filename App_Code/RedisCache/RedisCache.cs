@@ -2180,6 +2180,33 @@ public static class RedisCache {
         }
         #endregion
 
+        #region 電投開工
+        public static string GetGameSetDetailByID(int GameSetID) {
+            string Key;
+            string strRet = string.Empty;
+
+            Key = XMLPath + ":GameSetDetail:GameSetID:" + GameSetID;
+            if (KeyExists(DBIndex, Key) == true) {
+                strRet = JsonReadFromRedis(DBIndex, Key);
+            }
+
+            return strRet;
+        }
+
+        public static void UpdateGameSetDetailByID(int GameSetID, string JsonData) {
+            string Key;
+
+            Key = XMLPath + ":GameSetDetail:GameSetID:" + GameSetID;
+            for (int I = 0; I <= 3; I++) {
+                try {
+                    JsonStringWriteToRedis(DBIndex, JsonData, Key, 300);
+                    break;
+                } catch (Exception ex) {
+                }
+            }
+        }
+        #endregion
+
     }
 
     public static void DTWriteToRedis(int DBIndex, System.Data.DataTable DT, string Key, int ExpireTimeoutSeconds = 0) {

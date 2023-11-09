@@ -1306,6 +1306,11 @@
                                             <i class="icon icon-mask icon-ewin-report-wallet"></i>
                                             <span class="language_replace">遊戲紀錄</span></a>
                                     </li>
+                                    <li class="nav-item submenu dropdown">
+                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('電投開工紀錄'), 'GetGameSetResult.aspx');ItemClick(this);">
+                                            <i class="icon icon-mask icon-ewin-report-wallet"></i>
+                                            <span class="language_replace">電投開工紀錄</span></a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item navbarMenu__catagory" id="li_Setting">
