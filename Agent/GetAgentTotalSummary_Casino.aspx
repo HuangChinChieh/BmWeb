@@ -395,8 +395,6 @@
                 }
                 c.setClassText(t, "SelfValidBetValue", null, c.toCurrency(item.SelfValidBetValue));
 
-                c.setClassText(t, "SelfOrderCount", null, c.toCurrency(item.SelfOrderCount));
-
                 expandBtn = t.querySelector(".Expand");
                 t.querySelector(".Space").style.paddingLeft = ((DealUserAccountInsideLevel - 1) * 20) + "px";
 
@@ -494,8 +492,6 @@
                     t.getElementsByClassName("SelfValidBetValue")[0].classList.add("num-negative");
                 }
                 c.setClassText(t, "SelfValidBetValue", null, c.toCurrency(item.SelfValidBetValue));
-
-                c.setClassText(t, "SelfOrderCount", null, c.toCurrency(item.SelfOrderCount));
 
                 expandBtn = t.querySelector(".Expand");
                 t.querySelector(".Space").style.paddingLeft = ((DealUserAccountInsideLevel - 1) * 20) + "px";
@@ -853,10 +849,6 @@
                                 <span class="td__title"><i class="icon icon-ewin-default-accountRolling icon-s icon-before"></i><span class="language_replace">個人有效注額</span></span>
                                 <span class="td__content"><span class="SelfValidBetValue">CON4</span></span>
                             </div>
-                            <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><i class="icon icon-ewin-default-accountRolling icon-s icon-before"></i><span class="language_replace">個人投注筆數</span></span>
-                                <span class="td__content"><span class="SelfOrderCount">CON4</span></span>
-                            </div>
                         </div>
                     </div>
                     <!-- 標題項目  -->
@@ -872,7 +864,6 @@
                             <div class="thead__th"><span class="language_replace">團隊投注筆數</span></div>
                             <div class="thead__th"><span class="language_replace">個人輸贏數</span></div>
                             <div class="thead__th"><span class="language_replace">個人有效注額</span></div>
-                            <div class="thead__th"><span class="language_replace">個人投注筆數</span></div>
                         </div>
                     </div>
                     <!-- 表格上下滑動框 -->

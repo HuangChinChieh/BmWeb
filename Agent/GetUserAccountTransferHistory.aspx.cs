@@ -11,11 +11,11 @@ public partial class Agent_GetUserAccountTransferHistory : System.Web.UI.Page
 {
     [WebMethod]
     [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-    public static EWin.BmAgent.UserAccountTransferHistoryResult GetOrderSummary(string AID, string QueryBeginDate, string QueryEndDate, int SearchState) {
+    public static EWin.BmAgent.UserAccountTransferHistoryResult GetOrderSummary(string AID, string QueryBeginDate, string QueryEndDate, int SearchState,string CurrencyType) {
         EWin.BmAgent.BmAgent api = new EWin.BmAgent.BmAgent();
         EWin.BmAgent.UserAccountTransferHistoryResult RetValue = new EWin.BmAgent.UserAccountTransferHistoryResult();
 
-        RetValue = api.GetUserAccountTransferHistory(AID, QueryBeginDate, QueryEndDate, SearchState);
+        RetValue = api.GetUserAccountTransferHistory(AID, QueryBeginDate, QueryEndDate, SearchState, CurrencyType);
 
         return RetValue;
     }

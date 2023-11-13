@@ -45,6 +45,7 @@
     var lang;
     var qYear;
     var qMon;
+    var SelectedWallet;
 
     function queryData() {
         var idList = document.getElementById("idList");
@@ -53,7 +54,7 @@
         var endDate = $('#endDate').val();
         var postData = {
             AID: EWinInfo.ASID,
-            CurrencyType: CurrencyType,
+            CurrencyType: SelectedWallet,
             StartDate: startDate,
             EndDate: endDate
         };
@@ -116,11 +117,15 @@
                             <div class="tbody__td td-function-execute floatT-right">
                                 <!-- <span class="td__title"><span class="language_replace"></span></span> -->
                                 <span class="td__content">
-                                    <button onclick="btnDetail_Click(${data.AccountingID},'${CurrencyType}','${data.StartDate}','${data.EndDate}')" class="btnAgentDetail btn btn-icon"><i class="icon icon-ewin-input-betDetail icon-before icon-line-vertical"></i><span class="language_replace">${mlp.getLanguageKey("結算細節")}</span></button></span>
+                                    <button onclick="btnDetail_Click(${data.AccountingID},'${SelectedWallet}','${data.StartDate}','${data.EndDate}')" class="btnAgentDetail btn btn-icon"><i class="icon icon-ewin-input-betDetail icon-before icon-line-vertical"></i><span class="language_replace">${mlp.getLanguageKey("結算細節")}</span></button></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">結算名稱</span></span>
                                 <span class="td__content"><span class="AccountingName">${data.AccountingName}</span></span>
+                            </div>
+                            <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">幣別</span></span>
+                                <span class="td__content"><span class="CurrencyType">${SelectedWallet}</span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">團隊輸贏數</span></span>
@@ -135,12 +140,8 @@
                                 <span class="td__content"><span class="AccountingOPValue">${toCurrency(data.AccountingOPValue)}</span></span>
                             </div>
                               <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">總紅利</span></span>
-                                <span class="td__content"><span class="TotalBonusValue">${toCurrency(data.TotalBonusValue)}</span></span>
-                            </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">佔成紅利</span></span>
-                                <span class="td__content"><span class="BonusValue_Own">${toCurrency(data.BonusValue_Own)}</span></span>
+                                <span class="td__title"><span class="language_replace">個人已付佣金</span></span>
+                                <span class="td__content"><span class="PaidOPValue">${toCurrency(data.PaidOPValue)}</span></span>
                             </div>
                               <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">派發狀態</span></span>
@@ -179,14 +180,14 @@
 
     function toCurrency(num) {
 
-        num = parseFloat(Number(num).toFixed(2));
+        num = parseFloat(Number(num).toFixed(4));
         var parts = num.toString().split('.');
         parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         return parts.join('.');
     }
 
     function btnDetail_Click(accountingID, CurrencyType, StartDate, EndDate) {
-        window.parent.API_NewWindow(mlp.getLanguageKey("結算細節"), "GetAgentAccountingDetail_Casino.aspx?AccountingID=" + accountingID + "&CurrencyType=" + CurrencyType + "&StartDate=" + StartDate + "&EndDate=" + EndDate);
+        window.parent.API_NewWindow(mlp.getLanguageKey("結算細節"), "GetAgentAccountingDetail_Casino.aspx?AccountingID=" + accountingID + "&CurrencyType=" + SelectedWallet + "&StartDate=" + StartDate + "&EndDate=" + EndDate);
     }
 
     function init() {
@@ -199,6 +200,7 @@
         lang = window.localStorage.getItem("agent_lang");
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
+            SelectedWallet = parent.API_GetSelectedWallet();
             setSearchFrame();
             ac.dataToggleCollapseInit();
         });
@@ -209,6 +211,10 @@
             case "WindowFocus":
                 //updateBaseInfo();
                 ac.dataToggleCollapseInit();
+                break;
+            case "SelectedWallet":
+                SelectedWallet = param;
+                queryData();
                 break;
         }
     }
@@ -463,6 +469,10 @@
                                 <span class="td__content"><span class="AccountingName"></span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">幣別</span></span>
+                                <span class="td__content"><span class="CurrencyType"></span></span>
+                            </div>
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">總輸贏</span></span>
                                 <span class="td__content"><span class="RewardValue"></span></span>
                             </div>
@@ -475,12 +485,8 @@
                                 <span class="td__content"><span class="AccountingOPValue"></span></span>
                             </div>
                               <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">總紅利</span></span>
-                                <span class="td__content"><span class="TotalBonusValue"></span></span>
-                            </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">佔成紅利</span></span>
-                                <span class="td__content"><span class="BonusValue_Own"></span></span>
+                                <span class="td__title"><span class="language_replace">個人已付佣金</span></span>
+                                <span class="td__content"><span class="PaidOPValue"></span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">結算開始日期</span></span>
@@ -501,12 +507,12 @@
                         <!--標題項目單行 -->
                         <div class="thead__tr">
                             <div class="thead__th"><span class="language_replace">結算細節</span></div>
-                            <div class="thead__th"><span class="language_replace">結算名稱</span></div>                             
+                            <div class="thead__th"><span class="language_replace">結算名稱</span></div>       
+                            <div class="thead__th"><span class="language_replace">幣別</span></div>                                 
                             <div class="thead__th"><span class="language_replace">總輸贏</span></div>
                             <div class="thead__th"><span class="language_replace">總轉碼</span></div>
                             <div class="thead__th"><span class="language_replace">應付傭金</span></div>
-                            <div class="thead__th"><span class="language_replace">總紅利</span></div>
-                            <div class="thead__th"><span class="language_replace">佔成紅利</span></div>
+                            <div class="thead__th"><span class="language_replace">個人已付佣金</span></div>
                             <div class="thead__th"><span class="language_replace">派發狀態</span></div>
                             <div class="thead__th"><span class="language_replace">失敗原因</span></div>
                             <div class="thead__th"><span class="language_replace">結算開始日期</span></div>      

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="UserAccountAgentMulti_Add.aspx.cs" Inherits="UserAccountAgentMulti_Add" %>
 
 <%
     string AgentVersion = EWinWeb.AgentVersion;
@@ -31,6 +31,7 @@
     var EWinInfo;
     var parentObj;
     var timerChkUserAccount;
+    var ApiUrl = "UserAccountAgentMulti_Add.aspx";
     var uType;
     var processing = false;
 
@@ -49,18 +50,21 @@
         if (form.LoginAccount.value.trim() == "") {
             window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入帳號"));
             retValue = false;
-        }
-
-        if (form.LoginPassword.value.trim() == "") {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入密碼"));
+        } else if (form.LoginAccount.value.trim() == EWinInfo.LoginAccount) {
+            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入非本人帳號"));
             retValue = false;
         }
 
-        if (form.Description.value.trim() == "") {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入描述"));
-            retValue = false;
-        }
-        
+        //if (form.LoginPassword.value.trim() == "") {
+        //    window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入密碼"));
+        //    retValue = false;
+        //}
+
+        //if (form.Description.value.trim() == "") {
+        //    window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入描述"));
+        //    retValue = false;
+        //}
+
 
         if (retValue == true) {
             if (cb)
@@ -72,41 +76,48 @@
 
     function updateUserMutiInfo(cb) {
         var form = document.forms[0];
-        var userList = [];
         var postObj;
-        var idPointList = document.getElementById("idPointList");
-        var Permission = 1;
 
         if (processing == false) {
 
             processing = true;
             window.parent.API_ShowLoading("Sending");
 
-            api.AddMultiLogin(EWinInfo.ASID, Math.uuid(), form.LoginAccount.value, form.LoginPassword.value, form.Description.value, function (success, o) {
-                if (success) {
-                    if (o.ResultState == 0) {
-                        window.parent.API_ShowMessageOK(mlp.getLanguageKey("完成"), mlp.getLanguageKey("新增完成"), function () {
-                            window.parent.API_CloseWindow(true);
-                        });
+            window.parent.API_ShowMessage(mlp.getLanguageKey("警告"), mlp.getLanguageKey("子帳號登入密碼與錢包密碼會一併修改與主帳號相同"), function () {
+
+                postObj = {
+                    AID: EWinInfo.ASID,
+                    LoginAccount: form.LoginAccount.value
+                };
+
+                c.callService(ApiUrl + "/AddUserAccountSubUserList", postObj, function (success, obj) {
+                    if (success) {
+                    var o = c.getJSON(obj);
+                        if (o.Result == 0) {
+                            window.parent.API_ShowMessageOK(mlp.getLanguageKey("完成"), mlp.getLanguageKey("新增完成"), function () {
+                                window.parent.API_CloseWindow(true);
+                            });
+                        } else {
+                            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"),  mlp.getLanguageKey(o));
+                            if (cb)
+                                cb(false);
+                        }
                     } else {
-                        window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("新增失敗，密碼錯誤，或該帳號已在別的群組"));
+                        if (o == "Timeout") {
+                            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請稍後再嘗試"));
+                        } else {
+                            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o));
+                        }
+
+
                         if (cb)
                             cb(false);
                     }
-                } else {
-                    if (o == "Timeout") {
-                        window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請稍後再嘗試"));
-                    } else {
-                        window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o));
-                    }
+                    processing = false;
+                    window.parent.API_CloseLoading();
+                });
 
-
-                    if (cb)
-                        cb(false);
-                }
-                processing = false;
-                window.parent.API_CloseLoading();
-            });
+            }, null);
         }
         else {
             window.parent.API_ShowToastMessage(mlp.getLanguageKey("作業進行中"));
@@ -157,15 +168,15 @@
                                         <label class="title"><span class="title_name"><i class="icon icon-ewin-default-account icon-s icon-before"></i><span class="language_replace">登入帳號</span></span></label>
                                     </div>
                                     <div class="col-12 data-content ">
-                                        
+
                                         <div id="idLoginAccount" class="form-control-underline ">
                                             <input type="text" class="form-control" name="LoginAccount" id="LoginAccount" language_replace="placeholder" placeholder="請輸入帳號">
                                             <label for="password" class="form-label "><span class="language_replace">請輸入帳號</span></label>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-smd-12 col-md-12 col-lg-12 form-group row no-gutters data-item">
+                                <div class="col-12 col-smd-12 col-md-12 col-lg-12 form-group row no-gutters data-item" style="display:none">
 
                                     <div class="col-12 data-title">
                                         <label class="title"><span class="title_name"><i class="icon icon-ewin-default-accountPassword icon-s icon-before"></i><span class="language_replace">登入密碼</span></span></label>
@@ -177,7 +188,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12 col-smd-12 col-md-12 col-lg-12 form-group row no-gutters data-item">
+                                <div class="col-12 col-smd-12 col-md-12 col-lg-12 form-group row no-gutters data-item" style="display:none">
 
                                     <div class="col-12 data-title">
                                         <label class="title"><span class="title_name"><i class="icon icon-ewin-default-note icon-s icon-before"></i><span class="language_replace">描述</span></span></label>

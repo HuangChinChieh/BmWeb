@@ -214,8 +214,6 @@
                 }
                 c.setClassText(t, "SelfValidBetValue", null, c.toCurrency(item.SelfValidBetValue));
 
-                c.setClassText(t, "SelfOrderCount", null, c.toCurrency(item.SelfOrderCount));
-
                 idList.appendChild(t);
             }
 
@@ -416,7 +414,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-12 col-md-6 col-lg-4 col-xl-3" style="display: none">
+                            <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                                 <!-- 起始日期 / 結束日期 -->
                                 <div class="form-group search_date">
                                     <div class="starDate">
@@ -445,7 +443,7 @@
 
                             <div class="col-12 col-md-12 col-lg-5 col-xl-7">
                                 <div id="idTabMainContent">
-                                    <ul class="nav-tabs-block nav nav-tabs tab-items-6" role="tablist">
+                                    <ul class="nav-tabs-block nav nav-tabs tab-items-4" role="tablist">
                                         <li class="nav-item">
                                             <a onclick="changeDateTab(this,0)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">本日</a>
                                         </li>
@@ -455,15 +453,15 @@
                                         <li class="nav-item active">
                                             <a onclick="changeDateTab(this,2)" class="nav-link language_replace active" data-toggle="tab" href="" role="tab" aria-selected="true">本週</a>
                                         </li>
-                                        <li class="nav-item">
+                                       <%-- <li class="nav-item">
                                             <a onclick="changeDateTab(this,3)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">上週</a>
-                                        </li>
+                                        </li>--%>
                                         <li class="nav-item">
                                             <a onclick="changeDateTab(this,4)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">本月</a>
                                         </li>
-                                        <li class="nav-item">
+                                      <%--  <li class="nav-item">
                                             <a onclick="changeDateTab(this,5)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">上月</a>
-                                        </li>
+                                        </li>--%>
                                         <li class="tab-slide" id="sliderDate"></li>
                                     </ul>
                                 </div>
@@ -547,10 +545,6 @@
                                 <span class="td__title"><i class="icon icon-ewin-default-accountRolling icon-s icon-before"></i><span class="language_replace">個人有效注額</span></span>
                                 <span class="td__content"><span class="SelfValidBetValue">CON4</span></span>
                             </div>
-                            <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><i class="icon icon-ewin-default-accountRolling icon-s icon-before"></i><span class="language_replace">個人投注筆數</span></span>
-                                <span class="td__content"><span class="SelfOrderCount">CON4</span></span>
-                            </div>
                         </div>
                     </div>
                     <!-- 標題項目  -->
@@ -566,13 +560,12 @@
                             <div class="thead__th"><span class="language_replace">團隊投注筆數</span></div>--%>
                             <div class="thead__th"><span class="language_replace">個人輸贏數</span></div>
                             <div class="thead__th"><span class="language_replace">個人有效注額</span></div>
-                            <div class="thead__th"><span class="language_replace">個人投注筆數</span></div>
                         </div>
                     </div>
                     <!-- 表格上下滑動框 -->
                     <div class="tbody" id="idList">
                     </div>
-                    <div class="row" style="position: absolute; left: 0; right: 0; margin: 0 auto; padding-top: 40px;">
+                    <div class="row" style="position: absolute; left: 0; right: 0; margin: 0 auto; padding-top: 40px;margin-top:15px">
                         <div class="col-12" id="btnShowNextData" style="display: none;">
                             <div class="form-group wrapper_center dataList-process">
                                 <button style="max-width: 30%;" class="btn btn-full-main btn-roundcorner " onclick="showNextData()"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">查看更多</span></button>

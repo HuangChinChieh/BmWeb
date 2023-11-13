@@ -33,6 +33,7 @@
     var lang;
     var qYear;
     var qMon;
+    var SelectedWallet;
 
     function queryData() {
         var startDate;
@@ -46,7 +47,8 @@
         postData = {
             AID: EWinInfo.ASID,
             QueryBeginDate: startDate.value,
-            QueryEndDate: endDate.value
+            QueryEndDate: endDate.value,
+            CurrencyType : SelectedWallet
         };
 
         window.parent.API_ShowLoading();
@@ -164,9 +166,22 @@
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
             window.parent.API_CloseLoading();
+            SelectedWallet = parent.API_GetSelectedWallet();
             queryData();
             ac.dataToggleCollapseInit();
         });
+    }
+
+    function EWinEventNotify(eventName, isDisplay, param) {
+        switch (eventName) {
+            case "WindowFocus":
+                ac.dataToggleCollapseInit();
+                break;
+            case "SelectedWallet":
+                SelectedWallet = param;
+                queryData();
+                break;
+        }
     }
 
     window.onload = init;

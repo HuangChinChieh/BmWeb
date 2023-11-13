@@ -67,7 +67,7 @@
 
                         $("#idUserList").empty();
                         $("#idAgentList").empty();
-
+                        
                         if (o.Result == 0) {
                             setItem(o.Datas);
                         } else {
@@ -175,10 +175,12 @@
 
                 for (var j = 0; j < k.WalletList.length; j++) {
                     if (k.WalletList[j].CurrencyType == SelectedWallet) {
+                        let ps = k.WalletList[j].PointState == 0 ? mlp.getLanguageKey("啟用") : mlp.getLanguageKey("停用");
                         c.setClassText(temp, "CurrencyType", null, k.WalletList[j].CurrencyType + mlp.getLanguageKey("可用餘額"));
                         c.setClassText(temp, "WalletBalance", null, c.toCurrency(k.WalletList[j].PointValue));
                         c.setClassText(temp, "UserRate", null, c.toCurrency(k.WalletList[j].UserRate));
                         c.setClassText(temp, "BuyChipRate", null, c.toCurrency(k.WalletList[j].BuyChipRate));
+                        c.setClassText(temp, "PointState", null, ps);
                     }
                 }
 
@@ -186,7 +188,7 @@
                     let kk = k.GameCodeList[l];
                     let t = c.getTemplate("tempGameAccountingCode");
 
-                    if (k.GameCodeList[j].CurrencyType == SelectedWallet) {
+                    if (k.GameCodeList[l].CurrencyType == SelectedWallet) {
                         c.setClassText(t, "GameAccountingCode", null, mlp.getLanguageKey(kk.GameAccountingCode));
                         c.setClassText(t, "UserRate", null, c.toCurrency(kk.UserRate));
                         c.setClassText(t, "BuyChipRate", null, c.toCurrency(kk.BuyChipRate));
@@ -213,7 +215,7 @@
                         $(b).find(".GameAccountingCodeList").hide();
                     }.bind(temp));
                 }
-
+                
                 if (k.UserAccountType == 0) {
                     $("#idUserList").append(temp);
                 } else {
@@ -237,7 +239,7 @@
 
                 //$("#idParentPath").text(EWinInfo.LoginAccount);
                 SelectedWallet = parent.API_GetSelectedWallet();
-
+                
                 searchUser();
 
                 window.parent.API_CloseLoading();
@@ -293,7 +295,7 @@
                 </div>
             </div>
 
-            <div class="totalWalletList tab-scroller" style="display: none">   
+            <div class="totalWalletList tab-scroller">   
                 <div class="tab-scroller__area">
                     <div id="idParentWalletList" class="tab-scroller__content">
                         <span class="tab-item-half walletList_item itemCurrencyType active" id="tab1" onclick="changeTab(1)">
@@ -352,7 +354,7 @@
                             <div class="focusBox divWalletList">
                                 <!-- 錢包停用， balance 加入 class=> wallet-deactive -->
                                 <div class="balance">
-                                    <span class="title-s"><span class="language_replace CurrencyType">可用餘額</span></span>
+                                    <span class="title-s"><span class="language_replace CurrencyType">可用餘額</span><span class="language_replace PointState" style="margin-left:10px;">停用</span></span>
                                     <span class="data WalletBalance">0</span>
                                 </div>
                                 <div class="revenue" style="" itemtype="eWinBAC">

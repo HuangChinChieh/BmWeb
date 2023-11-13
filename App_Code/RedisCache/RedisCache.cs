@@ -1859,11 +1859,11 @@ public static class RedisCache {
         private static int DBIndex = 0;
 
         #region 傭金結算查詢-細節
-        public static string GetAccountDetailByLoginAccount(string LoginAccount, int AccountingID) {
+        public static string GetAccountDetailByLoginAccount(string LoginAccount, int AccountingID, string CurrencyType) {
             string Key;
             string strRet = string.Empty;
 
-            Key = XMLPath + ":AccountDetail:AccountingID:" + AccountingID + ":LoginAccount:" + LoginAccount;
+            Key = XMLPath + ":AccountDetail:AccountingID:" + AccountingID + ":LoginAccount:" + LoginAccount + ":CurrencyType:" + CurrencyType;
             if (KeyExists(DBIndex, Key) == true) {
                 strRet = JsonReadFromRedis(DBIndex, Key);
             }
@@ -1871,10 +1871,10 @@ public static class RedisCache {
             return strRet;
         }
 
-        public static void UpdateAccountDetailByLoginAccount(string JsonData, string LoginAccount, int AccountingID) {
+        public static void UpdateAccountDetailByLoginAccount(string JsonData, string LoginAccount, int AccountingID, string CurrencyType) {
             string Key;
 
-            Key = XMLPath + ":AccountDetail:AccountingID:" + AccountingID + ":LoginAccount:" + LoginAccount;
+            Key = XMLPath + ":AccountDetail:AccountingID:" + AccountingID + ":LoginAccount:" + LoginAccount + ":CurrencyType:" + CurrencyType;
             for (int I = 0; I <= 3; I++) {
                 try {
                     JsonStringWriteToRedis(DBIndex, JsonData, Key, 1800);
@@ -2170,6 +2170,33 @@ public static class RedisCache {
             string Key;
 
             Key = XMLPath + ":PlayerTotalSummaryInfo:LoginAccount:" + LoginAccount + ":CurrencyType:" + CurrencyType + ":SearchDate:" + StratDate + "_" + EndDate;
+            for (int I = 0; I <= 3; I++) {
+                try {
+                    JsonStringWriteToRedis(DBIndex, JsonData, Key, 300);
+                    break;
+                } catch (Exception ex) {
+                }
+            }
+        }
+        #endregion
+
+        #region 電投開工
+        public static string GetGameSetDetailByID(int GameSetID) {
+            string Key;
+            string strRet = string.Empty;
+
+            Key = XMLPath + ":GameSetDetail:GameSetID:" + GameSetID;
+            if (KeyExists(DBIndex, Key) == true) {
+                strRet = JsonReadFromRedis(DBIndex, Key);
+            }
+
+            return strRet;
+        }
+
+        public static void UpdateGameSetDetailByID(int GameSetID, string JsonData) {
+            string Key;
+
+            Key = XMLPath + ":GameSetDetail:GameSetID:" + GameSetID;
             for (int I = 0; I <= 3; I++) {
                 try {
                     JsonStringWriteToRedis(DBIndex, JsonData, Key, 300);

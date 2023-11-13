@@ -181,11 +181,21 @@
 
                 c.setClassText(t, "OrderHistoryID", null, item.OrderHistoryID);
                 c.setClassText(t, "GameCode", null, item.GameCode);
+                c.setClassText(t, "GameCategoryCode", null, mlp.getLanguageKey(item.GameCategoryCode));
+                c.setClassText(t, "CurrencyType", null, item.CurrencyType);
                 c.setClassText(t, "OrderValue", null, c.toCurrency(item.OrderValue));
                 c.setClassText(t, "RewardValue", null, c.toCurrency(item.RewardValue));
                 c.setClassText(t, "BuyChipValue", null, c.toCurrency(item.BuyChipValue));
                 c.setClassText(t, "GameDate", null, item.GameDate);
-                
+
+                if (item.RewardValue == 0) {
+                    c.setClassText(t, "GameResult", null, `<span style="color:red">${mlp.getLanguageKey("平")}</span>`);
+                } else if (item.RewardValue > 0) {
+                    c.setClassText(t, "GameResult", null, `<span style="color:green">${mlp.getLanguageKey("贏")}</span>`);
+                } else {
+                    c.setClassText(t, "GameResult", null, `<span style="color:red">${mlp.getLanguageKey("輸")}</span>`);
+                }
+
                 idList.appendChild(t);
             }
 
@@ -478,6 +488,14 @@
                                 <span class="td__title"><span class="language_replace">遊戲代碼</span></span>
                                 <span class="td__content"><i class="icon icon-s icon-before"></i><span class="GameCode"></span></span>
                             </div>
+                            <div class="tbody__td td-3 nonTitle">
+                                <span class="td__title"><span class="language_replace">遊戲類型</span></span>
+                                <span class="td__content"><i class="icon icon-s icon-before"></i><span class="GameCategoryCode"></span></span>
+                            </div>
+                            <div class="tbody__td td-3 nonTitle">
+                                <span class="td__title"><span class="language_replace">幣別</span></span>
+                                <span class="td__content"><i class="icon icon-s icon-before"></i><span class="CurrencyType"></span></span>
+                            </div>
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><i class="icon icon-ewin-default-totalWinLose icon-s icon-before"></i><span class="language_replace">投注額度</span></span>
                                 <span class="td__content"><span class="OrderValue">CON4</span></span>
@@ -487,8 +505,12 @@
                                 <span class="td__content"><span class="RewardValue">CON4</span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><i class="icon icon-ewin-default-totalRolling icon-s icon-before"></i><span class="language_replace">輸贏數</span></span>
+                                <span class="td__title"><i class="icon icon-ewin-default-totalRolling icon-s icon-before"></i><span class="language_replace">轉碼數</span></span>
                                 <span class="td__content"><span class="BuyChipValue">CON4</span></span>
+                            </div>
+                            <div class="tbody__td td-3 nonTitle">
+                                <span class="td__title"><span class="language_replace">遊戲結果</span></span>
+                                <span class="td__content"><i class="icon icon-s icon-before"></i><span class="GameResult"></span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><i class="icon icon-ewin-default-accountRolling icon-s icon-before"></i><span class="language_replace">遊戲時間</span></span>
@@ -502,29 +524,25 @@
                         <div class="thead__tr">
                             <div class="thead__th"><span class="language_replace">ID</span></div>
                             <div class="thead__th"><span class="language_replace">遊戲代碼</span></div>
+                            <div class="thead__th"><span class="language_replace">遊戲類型</span></div>
+                            <div class="thead__th"><span class="language_replace">幣別</span></div>
                             <div class="thead__th"><span class="language_replace">投注額度</span></div>
                             <div class="thead__th"><span class="language_replace">上下數</span></div>
-                            <div class="thead__th"><span class="language_replace">輸贏數</span></div>
+                            <div class="thead__th"><span class="language_replace">轉碼數</span></div>
+                            <div class="thead__th"><span class="language_replace">遊戲結果</span></div>
                             <div class="thead__th"><span class="language_replace">遊戲時間</span></div>
                         </div>
                     </div>
                     <!-- 表格上下滑動框 -->
                     <div class="tbody" id="idList">
                     </div>
-                    <div class="row" style="position: absolute; left: 0; right: 0; margin: 0 auto; padding-top: 40px;">
+                    <div class="row" style="position: absolute; left: 0; right: 0; margin: 0 auto; padding-top: 40px;margin-top:15px">
                         <div class="col-12" id="btnShowNextData" style="display: none;">
                             <div class="form-group wrapper_center dataList-process">
                                 <button style="max-width: 30%;" class="btn btn-full-main btn-roundcorner " onclick="showNextData()"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">查看更多</span></button>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div id="templateMoreRow" style="display: none;">
-            <div class="tbody__tr td-non-underline-last-2">
-                <div class="tbody__td date td-100 nonTitle expand_tr">
-                    <button class="moreBtn btn2 btn-outline-main language_replace">更多</button>
                 </div>
             </div>
         </div>

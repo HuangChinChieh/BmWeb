@@ -172,7 +172,7 @@
 
                         if (o.GameCodeList != null) {
                             for (var l = 0; l < o.GameCodeList.length; l++) {
-                                let kk = o.GameCodeList[l];
+                                let kk = o.GameCodeList[l]; 
                                 if (kk.CurrencyType == DefaultCurrencyType) {
                                     let t = c.getTemplate("tempGameAccountingCode");
 
@@ -1278,7 +1278,7 @@
                     </div>
                 </div>
 
-                <div class="currencyWalletList" style="margin-top: 20px; display: none">
+                <div class="currencyWalletList" style="margin-top: 20px;">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 col-md-12 col-lg-6 col-gx-6 col-xl-6">
@@ -1300,7 +1300,7 @@
                                 </div>
 
                             </div>
-                            <div class="col-12 col-md-12 col-lg-6 col-gx-6 col-xl-6">
+                            <div class="col-12 col-md-12 col-lg-6 col-gx-6 col-xl-6" style="display:none">
                                 <div class="homeitemborder" style="padding: 10px">
                                     <div style="text-align: center; padding-bottom: 5px;">
                                         <span class="currency language_replace homeitemtitle">活躍會員 (前10)</span>

@@ -1,4 +1,4 @@
-<%@ Page Language="C#" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="UserAccountAgentMulti_Maint.aspx.cs" Inherits="UserAccountAgentMulti_Maint" %>
 
 <%
     string AgentVersion = EWinWeb.AgentVersion;
@@ -14,18 +14,19 @@
     <link rel="stylesheet" href="css/main2.css?<%:AgentVersion%>">
     <link rel="stylesheet" href="css/layoutADJ.css?<%:AgentVersion%>">
     <link rel="stylesheet" href="css/downline.css?<%:AgentVersion%>">
-<script type="text/javascript" src="/Scripts/Common.js?20191127"></script>
-<script type="text/javascript" src="/Scripts/UIControl.js"></script>
-<script type="text/javascript" src="Scripts/MultiLanguage.js"></script>
-<script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
-<script type="text/javascript" src="/Scripts/bignumber.min.js"></script>
-<script type="text/javascript" src="/Scripts/SelectItem.js"></script>
-<script type="text/javascript" src="js/AgentCommon.js"></script>
-<script type="text/javascript" src="../Scripts/jquery-3.3.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/google-libphonenumber/3.2.31/libphonenumber.min.js"></script>
+    <script type="text/javascript" src="/Scripts/Common.js?20191127"></script>
+    <script type="text/javascript" src="/Scripts/UIControl.js"></script>
+    <script type="text/javascript" src="Scripts/MultiLanguage.js"></script>
+    <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
+    <script type="text/javascript" src="/Scripts/bignumber.min.js"></script>
+    <script type="text/javascript" src="/Scripts/SelectItem.js"></script>
+    <script type="text/javascript" src="js/AgentCommon.js"></script>
+    <script type="text/javascript" src="../Scripts/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/google-libphonenumber/3.2.31/libphonenumber.min.js"></script>
     <script type="text/javascript">
         var c = new common();
         var ac = new AgentCommon();
+        var ApiUrl = "UserAccountAgentMulti_Maint.aspx";
         var mlp;
         var EWinInfo;
         var api;
@@ -33,35 +34,40 @@
         var childList;
 
 
-        function EditAccount(LoginAccount) {
-            window.parent.API_NewWindow(mlp.getLanguageKey("多重帳號編輯"), "UserAccountAgentMuti_Edit.aspx?LoginAccount=" + LoginAccount);
-        }
+        //function EditAccount(LoginAccount) {
+        //    window.parent.API_NewWindow(mlp.getLanguageKey("多重帳號編輯"), "UserAccountAgentMuti_Edit.aspx?LoginAccount=" + LoginAccount);
+        //}
 
         function DelAccount(LoginAccount) {
-            window.parent.API_ShowMessage(mlp.getLanguageKey("多重帳號移除"), mlp.getLanguageKey("確定移除此帳號"), function () {
-                api.RemoveMultiLogin(EWinInfo.ASID, Math.uuid(), LoginAccount, function (success, o) {
-                    if (success) {
-                        if (o.ResultState == 0) {
-                            window.parent.API_ShowMessageOK(mlp.getLanguageKey("完成"), mlp.getLanguageKey("更新完成"), function () {
-                                window.parent.API_CloseWindow(true);
-                            });
-                        } else {
-                            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o.Message));
+            var postObj;
+            postObj = {
+                AID: EWinInfo.ASID,
+                LoginAccount: LoginAccount
+            };
 
-                            if (cb)
-                                cb(false);
-                        }
+            c.callService(ApiUrl + "/DeleteUserAccountSubUserList", postObj, function (success, obj) {
+                if (success) {
+                    var o = c.getJSON(obj);
+                    if (o.Result == 0) {
+                        window.parent.API_ShowMessageOK(mlp.getLanguageKey("完成"), mlp.getLanguageKey("更新完成"), function () {
+                            window.parent.API_CloseWindow(true);
+                        });
                     } else {
-                        if (o == "Timeout") {
-                            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請稍後再嘗試"));
-                        } else {
-                            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o));
-                        }
-                    }
-                })
-            },null)
-        }
+                        window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o.Message));
 
+                        if (cb)
+                            cb(false);
+                    }
+                } else {
+                    if (o == "Timeout") {
+                        window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請稍後再嘗試"));
+                    } else {
+                        window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o));
+                    }
+                }
+            });
+
+        }
 
         function setUserAccountAgentMuti(cb) {
             var idUserList = document.getElementById("idUserList");
@@ -71,25 +77,28 @@
             var btnDelUser;
 
             c.clearChildren(idUserList);
-            api.QueryUserInfo(EWinInfo.ASID, Math.uuid(), function (success, o) {
+
+            postObj = {
+                AID: EWinInfo.ASID
+            };
+
+            c.callService(ApiUrl + "/QueryUserAccountSubUserList", postObj, function (success, obj) {
                 if (success) {
-                    if (o.ResultState == 0) {
-                        if (o.MultiLoginList.length > 1) {
+                    var o = c.getJSON(obj);
+                    if (o.Result == 0) {
+                        if (o.UserAccountList.length > 0) {
                             hasNoData = false;
-                            for (var i = 0; i < o.MultiLoginList.length; i++) {
-                                if (o.MultiLoginList[i].LoginAccount != EWinInfo.UserInfo.LoginAccount) {
+                            for (var i = 0; i < o.UserAccountList.length; i++) {
+                                if (o.UserAccountList[i].LoginAccount != EWinInfo.UserInfo.LoginAccount) {
                                     var temp = c.getTemplate("templateTableItem");
 
-                                    //c.setClassText(temp, "mtAgentLoignAccount", null, EWinInfo.UserInfo.LoginAccount);
-                                    c.setClassText(temp, "mtAgentLoignAccount", null, o.MultiLoginList[i].LoginAccount);
-                                    //c.setClassText(temp, "mtLoginAccount", null, o.MultiLoginList[i].LoginAccount);
-                                    c.setClassText(temp, "mtDescription", null, o.MultiLoginList[i].Description);
+                                    c.setClassText(temp, "mtAgentLoignAccount", null, o.UserAccountList[i].LoginAccount);
 
-                                    btnEditUser = c.getFirstClassElement(temp, "btnEditUser");
-                                    btnEditUser.onclick = new Function("EditAccount('" + o.MultiLoginList[i].LoginAccount + "')");
+                                    //btnEditUser = c.getFirstClassElement(temp, "btnEditUser");
+                                    //btnEditUser.onclick = new Function("EditAccount('" + o.MultiLoginList[i].UserAccountID + "')");
 
                                     btnDelUser = c.getFirstClassElement(temp, "btnDelUser");
-                                    btnDelUser.onclick = new Function("DelAccount('" + o.MultiLoginList[i].LoginAccount + "')");
+                                    btnDelUser.onclick = new Function("DelAccount('" + o.UserAccountList[i].LoginAccount + "')");
 
 
                                     idUserList.appendChild(temp);
@@ -116,11 +125,7 @@
                 }
 
             });
-
-
         }
-
-
 
         function init() {
             EWinInfo = window.parent.EWinInfo;
@@ -146,7 +151,7 @@
             <div class="MemberList MemberList__Assistant">
                 <div id="idUserList" class="row">
                 </div>
-                <div class="MT__tableDiv MT_tableDiv__hasNoData" id="idNoData" style="display:none">
+                <div class="MT__tableDiv MT_tableDiv__hasNoData" id="idNoData" style="display: none">
                     <!-- 自訂表格 -->
                     <div class="MT__table table-col-8 w-200">
                         <!-- 表格上下滑動框 -->
@@ -167,7 +172,7 @@
                     <div class="downline__header">
                         <span class="downline__account mtAgentLoignAccount">--</span>
                         <div class="function-execute">
-                            <span class="downline__enterance downline-link btnEditUser">
+                            <span class="downline__enterance downline-link btnEditUser" style="display: none">
                                 <a class="" href=""><i class="icon icon2020-pencil-1"></i><span class="language_replace">編輯</span></a>
                             </span>
                             <span class="downline__enterance downline-link btnDelUser">
@@ -176,8 +181,8 @@
                         </div>
                     </div>
                     <div class="downline__info">
-                        <%--<div class="name "><span class="language_replace mtLoginAccount">帳號</span></div>--%>
-                        <div class="name "><span class="language_replace mtDescription">描述</span></div>
+                         <%--<div class="name "><span class="language_replace mtLoginAccount">帳號</span></div>
+                       <div class="name "><span class="language_replace mtDescription">描述</span></div>--%>
                     </div>
 
                 </div>

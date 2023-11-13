@@ -114,7 +114,7 @@
     var startDate;
     var endDate;
     var currencyType = "";
-    var SelectedWallet;
+    var SelectedWallet= parent.API_GetSelectedWallet();
 
     function agentExpand(SortKey, UserAccountID) {
         var expandBtn = event.currentTarget;
@@ -209,6 +209,7 @@
         //var page = Number(targetBtn.dataset.page);
         //queryData(userAccountID, (page + 1), targetDom);
     }
+
     function querySelfData() {
         var currencyTypeDom = "";
 
@@ -237,7 +238,7 @@
                 TargetUserAccountID: UserAccountID,
                 QueryBeginDate: startDate.value,
                 QueryEndDate: endDate.value,
-                CurrencyType: SelectedWallet,
+                CurrencyType: SelectedWallet
             };
 
             if (new Date(postData.QueryBeginDate) <= new Date(postData.QueryEndDate)) {

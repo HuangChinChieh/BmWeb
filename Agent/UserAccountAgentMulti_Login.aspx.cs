@@ -20,4 +20,14 @@ public partial class UserAccountAgentMulti_Login : System.Web.UI.Page {
 
         return RetValue;
     }
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public static EWin.BmAgent.UserAgentInfoResult QueryUserAccountSubUserList(string AID) {
+        EWin.BmAgent.BmAgent api = new EWin.BmAgent.BmAgent();
+        EWin.BmAgent.UserAgentInfoResult RetValue = new EWin.BmAgent.UserAgentInfoResult();
+
+        RetValue = api.QueryUserAccountSubUserList(AID);
+
+        return RetValue;
+    }
 }

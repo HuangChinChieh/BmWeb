@@ -33,6 +33,7 @@
     var lang;
     var qYear;
     var qMon;
+    var SelectedWallet;
 
     function queryData() {
         var startDate;
@@ -62,7 +63,8 @@
             AID: EWinInfo.ASID,
             QueryBeginDate: startDate.value,
             QueryEndDate: endDate.value,
-            SearchState: type
+            SearchState: type,
+            CurrencyType : SelectedWallet
         };
 
         window.parent.API_ShowLoading();
@@ -183,9 +185,23 @@
         lang = window.localStorage.getItem("agent_lang");
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
+            ac.dataToggleCollapseInit();
             window.parent.API_CloseLoading();
+            SelectedWallet = parent.API_GetSelectedWallet();
             queryData();
         });
+    }
+
+    function EWinEventNotify(eventName, isDisplay, param) {
+        switch (eventName) {
+            case "WindowFocus":
+                ac.dataToggleCollapseInit();
+                break;
+            case "SelectedWallet":
+                SelectedWallet = param;
+                queryData();
+                break;
+        }
     }
 
     window.onload = init;
@@ -337,15 +353,15 @@
                                 <span class="td__title"></i><span class="language_replace">收帳額度</span></span>
                                 <span class="td__content"><span class="DstValue">CON4</span></span>
                             </div>
-                            <div class="tbody__td td-3 ">
+                            <div class="tbody__td td-3 " style="display:none">
                                 <span class="td__title"><span class="language_replace">備註</span></span>
                                 <span class="td__content"><span class="Description">CON3</span></span>
                             </div>
-                            <div class="tbody__td td-3 ">
+                            <div class="tbody__td td-3 " style="display:none">
                                 <span class="td__title"><span class="language_replace">登入管理者帳號</span></span>
                                 <span class="td__content"><span class="AdminLoginAccount">CON3</span></span>
                             </div>
-                            <div class="tbody__td td-3 ">
+                            <div class="tbody__td td-3 " style="display:none">
                                 <span class="td__title"><span class="language_replace">驗證管理者帳號</span></span>
                                 <span class="td__content"><span class="ValidAdminLoginAccount">CON3</span></span>
                             </div>
@@ -365,9 +381,9 @@
                             <div class="thead__th"><span class="language_replace">轉入貨幣</span></div>
                             <div class="thead__th"><span class="language_replace">轉出額度</span></div>
                             <div class="thead__th"><span class="language_replace">收帳額度</span></div>
-                            <div class="thead__th"><span class="language_replace">備註</span></div>
-                            <div class="thead__th"><span class="language_replace">登入管理者帳號</span></div>
-                            <div class="thead__th"><span class="language_replace">驗證管理者帳號</span></div>
+                            <div class="thead__th" style="display:none"><span class="language_replace">備註</span></div>
+                            <div class="thead__th" style="display:none"><span class="language_replace">登入管理者帳號</span></div>
+                            <div class="thead__th" style="display:none"><span class="language_replace">驗證管理者帳號</span></div>
                         </div>
                     </div>
                     <!-- 表格上下滑動框 -->

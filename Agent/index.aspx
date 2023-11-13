@@ -681,6 +681,12 @@
                         }
 
                     }
+                    //他人子帳號
+                    if (o.MainUserAccountID != 0) {
+                        $("#btnSwitchAccount").hide();
+                        $("#li_UserMulti").hide();
+                        $("#li_Setting").hide();
+                    }
 
                     if (firstLoad == true) {
                         firstLoad = false;
@@ -791,6 +797,14 @@
                     if (EWinInfo.CompanyInfo.CurrencyType0Transfer != 0 && EWinInfo.CompanyInfo.CurrencyType0Recycle != 0) {
                         if (EWinInfo.UserInfo.AllowRecycle == 1 && EWinInfo.UserInfo.AllowTransfer == 1 ) {
                             $("#liPointsRecovery").show();
+                        }
+                    }
+
+                    if (o.WalletList) {
+
+                        for (var l = 0; l < o.WalletList.length; l++) {
+                            SelectCurrencyType = o.WalletList[0].CurrencyType;
+                            $('#selectedWallet').append(`<option style="zoom:1.1"  value="${o.WalletList[l].CurrencyType}">${o.WalletList[l].CurrencyType}</option>`);
                         }
                     }
 
@@ -1007,15 +1021,6 @@
         mlp.loadLanguage(lang, function () {
             api = new AgentAPI(apiUrl);
             lobbyClient = new LobbyAPI("/API/LobbyAPI.asmx");
-
-            if (EWinInfo.MainCurrencyType) {
-                let currencys = EWinInfo.MainCurrencyType.split(';');
-
-                for (var i = 0; i < currencys.length; i++) {
-                    SelectCurrencyType = currencys[0];
-                      $('#selectedWallet').append(`<option style="zoom:1.1"  value="${currencys[i]}">${currencys[i]}</option>`);
-                }
-            }
             
             getCompanyInfo(function (success) {
                 if (success) {
@@ -1200,7 +1205,7 @@
                             <li class="nav-item navbarMenu__catagory" id="li_Member">
                                 <span class="catagory-item"><span class="language_replace">團隊管理</span></span>
                                 <ul class="catagory">
-                                    <li class="nav-item submenu dropdown" style="display:none">
+                                    <li class="nav-item submenu dropdown">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('團隊會員'), 'UserAccount_Maint2_Casino.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-user"></i>
                                             <span class="language_replace">會員</span></a>
@@ -1255,7 +1260,7 @@
                                             <i class="icon icon-mask icon-ewin-report-wallet"></i>
                                             <span class="language_replace">團隊投注數據</span></a>
                                     </li>
-                                    <li class="nav-item submenu dropdown" style="display:none">
+                                    <li class="nav-item submenu dropdown">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('會員投注數據'), 'GetPlayerTotalSummary_Casino.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-report-wallet"></i>
                                             <span class="language_replace">會員投注數據</span></a>
@@ -1276,6 +1281,11 @@
                                             <span class="language_replace">錢包歷程</span></a>
                                     </li>
                                     <li class="nav-item submenu dropdown">
+                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('出款申請記錄'), 'GetRequireWithdrawalHistory.aspx');ItemClick(this);">
+                                            <i class="icon icon-mask icon-ewin-report-income"></i>
+                                            <span class="language_replace">出款申請記錄</span></a>
+                                    </li>
+                                    <li class="nav-item submenu dropdown">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('錢包點數異動記錄'), 'GetUserAccountPointManualHistory.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-report-income"></i>
                                             <span class="language_replace">錢包點數異動記錄</span></a>
@@ -1294,6 +1304,11 @@
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('遊戲紀錄'), 'GetOrderHistory.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-report-wallet"></i>
                                             <span class="language_replace">遊戲紀錄</span></a>
+                                    </li>
+                                    <li class="nav-item submenu dropdown">
+                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('電投開工紀錄'), 'GetGameSetResult.aspx');ItemClick(this);">
+                                            <i class="icon icon-mask icon-ewin-report-wallet"></i>
+                                            <span class="language_replace">電投開工紀錄</span></a>
                                     </li>
                                 </ul>
                             </li>
