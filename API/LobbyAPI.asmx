@@ -389,7 +389,7 @@ public class LobbyAPI : System.Web.Services.WebService
         if (string.IsNullOrEmpty(ParentPersonCode))
         {
             if (!EWinWeb.IsTestSite)
-                PCode = "S62315629550625";
+                PCode = EWinWeb.RegisterPCode;
         }
         else
         {
