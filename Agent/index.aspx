@@ -800,6 +800,14 @@
                         }
                     }
 
+                    if (o.WalletList) {
+
+                        for (var l = 0; l < o.WalletList.length; l++) {
+                            SelectCurrencyType = o.WalletList[0].CurrencyType;
+                            $('#selectedWallet').append(`<option style="zoom:1.1"  value="${o.WalletList[l].CurrencyType}">${o.WalletList[l].CurrencyType}</option>`);
+                        }
+                    }
+
                     getBetLimitInfo();
                 }
 
@@ -1013,15 +1021,6 @@
         mlp.loadLanguage(lang, function () {
             api = new AgentAPI(apiUrl);
             lobbyClient = new LobbyAPI("/API/LobbyAPI.asmx");
-
-            if (EWinInfo.MainCurrencyType) {
-                let currencys = EWinInfo.MainCurrencyType.split(';');
-
-                for (var i = 0; i < currencys.length; i++) {
-                    SelectCurrencyType = currencys[0];
-                      $('#selectedWallet').append(`<option style="zoom:1.1"  value="${currencys[i]}">${currencys[i]}</option>`);
-                }
-            }
             
             getCompanyInfo(function (success) {
                 if (success) {

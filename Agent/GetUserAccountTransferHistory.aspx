@@ -185,6 +185,7 @@
         lang = window.localStorage.getItem("agent_lang");
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
+            ac.dataToggleCollapseInit();
             window.parent.API_CloseLoading();
             SelectedWallet = parent.API_GetSelectedWallet();
             queryData();

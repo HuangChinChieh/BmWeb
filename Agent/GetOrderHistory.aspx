@@ -536,20 +536,13 @@
                     <!-- 表格上下滑動框 -->
                     <div class="tbody" id="idList">
                     </div>
-                    <div class="row" style="position: absolute; left: 0; right: 0; margin: 0 auto; padding-top: 40px;">
+                    <div class="row" style="position: absolute; left: 0; right: 0; margin: 0 auto; padding-top: 40px;margin-top:15px">
                         <div class="col-12" id="btnShowNextData" style="display: none;">
                             <div class="form-group wrapper_center dataList-process">
                                 <button style="max-width: 30%;" class="btn btn-full-main btn-roundcorner " onclick="showNextData()"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">查看更多</span></button>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div id="templateMoreRow" style="display: none;">
-            <div class="tbody__tr td-non-underline-last-2">
-                <div class="tbody__td date td-100 nonTitle expand_tr">
-                    <button class="moreBtn btn2 btn-outline-main language_replace">更多</button>
                 </div>
             </div>
         </div>

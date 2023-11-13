@@ -10,12 +10,9 @@
 
     ASR = api.GetAgentSessionByID(ASID);
 
-    if (ASR.Result != EWin.BmAgent.enumResult.OK)
-    {
+    if (ASR.Result != EWin.BmAgent.enumResult.OK) {
         Response.Redirect("login.aspx");
-    }
-    else
-    {
+    } else {
         ASI = ASR.AgentSessionInfo;
     }
 
@@ -146,6 +143,7 @@
 
                 c.setClassText(t, "LoginAccount", null, item.LoginAccount);
                 c.setClassText(t, "CreateDate", null, item.CreateDate);
+                c.setClassText(t, "UserInitChip", null, toCurrency(item.UserInitChip));
                 
                 btnDetail = t.querySelector(".btnDetail");
                 btnDetail.onclick = new Function("btnDetail_Click('" + item.GameSetID + "')");
@@ -331,9 +329,10 @@
                         <div id="divSearchContent" class="row searchListContent">
                             <div id="idSearchButton" class="col-12 col-md-4 col-lg-2 col-xl-2">
                                 <div class="form-group form-group-s2 ">
-                                    <div class="title hidden shown-md"><span class="language_replace">帳號</span>
-                                         <btn style="font-size: 12px; right: 5px; position: absolute; border: 2px solid; width: 22px; text-align: center; border-radius: 11px; color: #bba480; cursor: pointer;" onclick="showSearchAccountPrecautions()">!</btn>
-										 </div>
+                                    <div class="title hidden shown-md">
+                                        <span class="language_replace">帳號</span>
+                                        <btn style="font-size: 12px; right: 5px; position: absolute; border: 2px solid; width: 22px; text-align: center; border-radius: 11px; color: #bba480; cursor: pointer;" onclick="showSearchAccountPrecautions()">!</btn>
+                                    </div>
 
                                     <div class="form-control-underline iconCheckAnim placeholder-move-right zIndex_overMask_SafariFix">
                                         <input type="text" class="form-control" id="loginAccount" value="" />
@@ -381,7 +380,7 @@
                                         <li class="nav-item active">
                                             <a onclick="changeDateTab(this,2)" class="nav-link language_replace active" data-toggle="tab" href="" role="tab" aria-selected="true">本週</a>
                                         </li>
-                                      <%--  <li class="nav-item">
+                                        <%--  <li class="nav-item">
                                             <a onclick="changeDateTab(this,3)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">上週</a>
                                         </li>--%>
                                         <li class="nav-item">
@@ -432,7 +431,7 @@
                 <div class="MT2__table table-col-8 w-200">
                     <div id="templateTableItem" style="display: none">
                         <div class="tbody__tr td-non-underline-last-2">
-                           <div class="tbody__td td-function-execute floatT-right">
+                            <div class="tbody__td td-function-execute floatT-right">
                                 <!-- <span class="td__title"><span class="language_replace"></span></span> -->
                                 <span class="td__content">
                                     <button class="btnDetail btn btn-icon"><i class="icon icon-ewin-input-betDetail icon-before icon-line-vertical"></i><span class="language_replace">細節</span></button></span>
@@ -448,6 +447,10 @@
                             <div class="tbody__td td-3 nonTitle">
                                 <span class="td__title"><span class="language_replace">幣別</span></span>
                                 <span class="td__content"><i class="icon icon-s icon-before"></i><span class="CurrencyType"></span></span>
+                            </div>
+                            <div class="tbody__td td-3 nonTitle">
+                                <span class="td__title"><span class="language_replace">本金</span></span>
+                                <span class="td__content"><i class="icon icon-s icon-before"></i><span class="UserInitChip"></span></span>
                             </div>
                             <div class="tbody__td td-3 nonTitle">
                                 <span class="td__title"><span class="language_replace">狀態</span></span>
@@ -471,6 +474,7 @@
                             <div class="thead__th"><span class="language_replace">單號</span></div>
                             <div class="thead__th"><span class="language_replace">帳號</span></div>
                             <div class="thead__th"><span class="language_replace">貨幣</span></div>
+                            <div class="thead__th"><span class="language_replace">本金</span></div>
                             <div class="thead__th"><span class="language_replace">狀態</span></div>
                             <div class="thead__th"><span class="language_replace">輸贏數</span></div>
                             <div class="thead__th"><span class="language_replace">建立日期</span></div>
@@ -483,11 +487,11 @@
             </div>
         </div>
         <div id="templateMoreRow" style="display: none;">
-                   <div class="tbody__tr td-non-underline-last-2">
-                            <div class="tbody__td date td-100 nonTitle expand_tr">
-                                  <button class="moreBtn btn2 btn-outline-main language_replace">更多</button>
-                            </div>                           
-                        </div>
+            <div class="tbody__tr td-non-underline-last-2">
+                <div class="tbody__td date td-100 nonTitle expand_tr">
+                    <button class="moreBtn btn2 btn-outline-main language_replace">更多</button>
+                </div>
+            </div>
         </div>
     </main>
 </body>

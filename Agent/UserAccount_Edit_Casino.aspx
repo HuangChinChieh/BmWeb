@@ -402,6 +402,7 @@
                 var obj = c.getJSON(o);
 
                 if (obj.Result == 0) {
+                    console.log("ddd", obj);
                     $("#idLoginAccount").text(obj.LoginAccount);
                     $("#RealName").val(obj.RealName);
                     if (obj.UserAccountState == 0) {
@@ -429,6 +430,14 @@
                             var w = obj.WalletList[i];
                             $("div[default=" + w.CurrencyType + "] .PointUserRate").val(w.UserRate);
                             $("div[default=" + w.CurrencyType + "] .PointBuyChipRate").val(w.BuyChipRate);
+                        }
+                    }
+
+                    if (obj.GameCodeList != null) {
+                        for (var l = 0; l < obj.GameCodeList.length; l++) {
+                            var gc = obj.GameCodeList[l];
+                            $("."+gc.GameAccountingCode+"[currencytype=" + gc.CurrencyType + "] .PointUserRate").val(gc.UserRate);
+                            $("."+gc.GameAccountingCode+"[currencytype=" + gc.CurrencyType + "] .PointBuyChipRate").val(gc.BuyChipRate);
                         }
                     }
 
@@ -656,33 +665,33 @@
                     idPointList.appendChild(t);
 
                     //多遊戲設定
-                    //if (EWinInfo.UserInfo.GameCodeList.length > 0) {
-                    //    for (var j = 0; j < EWinInfo.UserInfo.GameCodeList.length; j++) {
-                    //        if (EWinInfo.UserInfo.GameCodeList[j].CurrencyType == w.CurrencyType) {
-                    //            t = c.getTemplate("templateWalletItem");
-                    //            t.style.display = "none";
-                    //            btnPointNew = c.getFirstClassElement(t, "btnPointNew");
-                    //            pointUserRate = c.getFirstClassElement(t, "PointUserRate");
-                    //            pointBuyChipRate = c.getFirstClassElement(t, "PointBuyChipRate");
+                    if (EWinInfo.UserInfo.GameCodeList.length > 0) {
+                        for (var j = 0; j < EWinInfo.UserInfo.GameCodeList.length; j++) {
+                            if (EWinInfo.UserInfo.GameCodeList[j].CurrencyType == w.CurrencyType) {
+                                t = c.getTemplate("templateWalletItem");
+                                //t.style.display = "none";
+                                btnPointNew = c.getFirstClassElement(t, "btnPointNew");
+                                pointUserRate = c.getFirstClassElement(t, "PointUserRate");
+                                pointBuyChipRate = c.getFirstClassElement(t, "PointBuyChipRate");
 
-                    //            t.setAttribute("currencyType", w.CurrencyType);
-                    //            t.setAttribute("GameCodeCurrencyType", w.CurrencyType);
-                    //            t.classList.add(EWinInfo.UserInfo.GameCodeList[j].GameAccountingCode);
-                    //            t.classList.add("div_GameCode");
-                    //            c.setClassText(t, "PointCurrencyType", null, w.CurrencyType);
-                    //            c.setClassText(t, "GameAccountingCode", null, mlp.getLanguageKey(EWinInfo.UserInfo.GameCodeList[j].GameAccountingCode));
+                                t.setAttribute("currencyType", w.CurrencyType);
+                                t.setAttribute("GameCodeCurrencyType", w.CurrencyType);
+                                t.classList.add(EWinInfo.UserInfo.GameCodeList[j].GameAccountingCode);
+                                t.classList.add("div_GameCode");
+                                c.setClassText(t, "PointCurrencyType", null, w.CurrencyType);
+                                c.setClassText(t, "GameAccountingCode", null, mlp.getLanguageKey(EWinInfo.UserInfo.GameCodeList[j].GameAccountingCode));
 
-                    //            c.setClassText(t, "parentBuyChipRate", null, EWinInfo.UserInfo.GameCodeList[j].BuyChipRate);
-                    //            c.setClassText(t, "parentUserRate", null, EWinInfo.UserInfo.GameCodeList[j].UserRate);
+                                c.setClassText(t, "parentBuyChipRate", null, EWinInfo.UserInfo.GameCodeList[j].BuyChipRate);
+                                c.setClassText(t, "parentUserRate", null, EWinInfo.UserInfo.GameCodeList[j].UserRate);
 
-                    //            btnPointNew.setAttribute("btnGameCode", EWinInfo.UserInfo.GameCodeList[j].GameAccountingCode);
-                    //            btnPointNew.setAttribute("btnUserRate", EWinInfo.UserInfo.GameCodeList[j].UserRate);
-                    //            btnPointNew.setAttribute("btnBuyChipRate", EWinInfo.UserInfo.GameCodeList[j].BuyChipRate);
+                                btnPointNew.setAttribute("btnGameCode", EWinInfo.UserInfo.GameCodeList[j].GameAccountingCode);
+                                btnPointNew.setAttribute("btnUserRate", EWinInfo.UserInfo.GameCodeList[j].UserRate);
+                                btnPointNew.setAttribute("btnBuyChipRate", EWinInfo.UserInfo.GameCodeList[j].BuyChipRate);
 
-                    //            idPointList.appendChild(t);
-                    //        }
-                    //    }
-                    //}
+                                idPointList.appendChild(t);
+                            }
+                        }
+                    }
 
                     //ShowGameCodeByCurrency();
                 }
@@ -728,10 +737,18 @@
 
     function applyGameInfo() {
         let tmpPointUserRate = $(".tmpPointUserRate").val();
+        if (tmpPointUserRate == "") {
+            tmpPointUserRate = 0;
+        }
         let tmpPointBuyChipRate = $(".tmpPointBuyChipRate").val();
-
-        $(`#idPointList [gamecodecurrencytype=${SelectGameCodeCurrencyType}] .PointUserRate`).val(tmpPointUserRate);
-        $(`#idPointList [gamecodecurrencytype=${SelectGameCodeCurrencyType}] .PointBuyChipRate`).val(tmpPointBuyChipRate);
+        if (tmpPointBuyChipRate == "") {
+            tmpPointBuyChipRate = 0;
+        }
+        
+        $(".PointUserRate").val(tmpPointUserRate);
+        $(".PointBuyChipRate").val(tmpPointBuyChipRate);
+        //$(`#idPointList [gamecodecurrencytype=${SelectGameCodeCurrencyType}] .PointUserRate`).val(tmpPointUserRate);
+        //$(`#idPointList [gamecodecurrencytype=${SelectGameCodeCurrencyType}] .PointBuyChipRate`).val(tmpPointBuyChipRate);
     }
 
     function Selectgamecodecurrency() {
@@ -868,12 +885,20 @@
             queryCurrentUserInfo();
             uType = 1;
            
-            if (EWinInfo.MainCurrencyType) {
-                Wallets = EWinInfo.MainCurrencyType.split(';');
+            //if (EWinInfo.MainCurrencyType) {
+            //    Wallets = EWinInfo.MainCurrencyType.split(';');
 
-                for (var i = 0; i < Wallets.length; i++) {
-                    SelectGameCodeCurrencyType = Wallets[0];
-                    $('#gamecodecurrency').append(`<option  value="${Wallets[i]}">${Wallets[i]}</option>`);
+            //    for (var i = 0; i < Wallets.length; i++) {
+            //        SelectGameCodeCurrencyType = Wallets[0];
+            //        $('#gamecodecurrency').append(`<option  value="${Wallets[i]}">${Wallets[i]}</option>`);
+            //    }
+            //}
+
+            if (EWinInfo.UserInfo.WalletList) {
+                
+                for (var i = 0; i < EWinInfo.UserInfo.WalletList.length; i++) {
+                    SelectGameCodeCurrencyType = EWinInfo.UserInfo.WalletList[0].CurrencyType;
+                    $('#gamecodecurrency').append(`<option  value="${EWinInfo.UserInfo.WalletList[i].CurrencyType}">${EWinInfo.UserInfo.WalletList[i].CurrencyType}</option>`);
                 }
             }
 
@@ -1033,28 +1058,28 @@
 
                         <fieldset class="dataFieldset">
                             <legend class="dataFieldset-title language_replace shown-lg">錢包管理</legend>
-                            <div class="row" style="padding-bottom: 5px; display: none">
+                            <div class="row" style="padding-bottom: 5px;">
 
-                                <div class="col-12 col-smd-3 pr-smd-1">
+                                <div class="col-12 col-smd-3 pr-smd-1" style="display:none">
                                     <div>
                                         <label for="password" class="form-label "><span class="language_replace">貨幣</span></label>
                                         <select name="ContactPhonePrefix" id="gamecodecurrency" class="custom-select" onchange="Selectgamecodecurrency()">
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-12 col-smd-3 pr-smd-1" style="display: none">
+                                <div class="col-12 col-smd-3 pr-smd-1">
                                     <div>
                                         <label for="password" class="form-label "><span class="language_replace">佔成率(%)</span></label>
                                         <input type="text" class="form-control tmpPointUserRate" value="0">
                                     </div>
                                 </div>
-                                <div class="col-12 col-smd-3 mt-3 mt-smd-0 pl-smd-1" style="display: none">
+                                <div class="col-12 col-smd-3 mt-3 mt-smd-0 pl-smd-1">
                                     <div>
                                         <label for="password" class="form-label "><span class="language_replace">轉碼率(%)</span></label>
                                         <input type="text" class="form-control tmpPointBuyChipRate" value="0">
                                     </div>
                                 </div>
-                                <div class="col-12 col-smd-3 mt-3 mt-smd-0 pl-smd-1" style="display: none">
+                                <div class="col-12 col-smd-3 mt-3 mt-smd-0 pl-smd-1">
                                     <div>
                                         <label for="password" class="form-label "><span class="language_replace"></span></label>
                                         <button type="button" class="btn btn-full-main form-control" onclick="applyGameInfo()">
@@ -1073,7 +1098,7 @@
                                             <div class="thead__th">
                                                 <span class="language_replace">貨幣</span>
                                             </div>
-                                            <div class="thead__th" style="display: none">
+                                            <div class="thead__th">
                                                 <span class="language_replace">遊戲類型</span>
                                             </div>
                                             <div class="thead__th">
@@ -1100,7 +1125,7 @@
                                                     </span>
                                                 </span>
                                             </div>
-                                            <div class="tbody__td td-3 td-vertical" style="display: none">
+                                            <div class="tbody__td td-3 td-vertical">
                                                 <span class="td__title">
                                                     <span class="language_replace">遊戲代碼</span>
                                                 </span>
