@@ -61,6 +61,9 @@
 
     }
 
+
+
+
     function btnLogin() {
         if (isInitGUID) {
             document.forms[0].GuestLogin.value = "0";
