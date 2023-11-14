@@ -653,7 +653,7 @@
                     t.classList.add(w.CurrencyType);
                     t.classList.add("div_GameCode");
                     c.setClassText(t, "PointCurrencyType", null, w.CurrencyType);
-                    c.setClassText(t, "GameAccountingCode", null, "Default");
+                    c.setClassText(t, "GameAccountingCode", null, mlp.getLanguageKey("Default"));
 
                     c.setClassText(t, "parentBuyChipRate", null, w.BuyChipRate);
                     c.setClassText(t, "parentUserRate", null, w.UserRate);

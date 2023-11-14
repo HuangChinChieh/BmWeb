@@ -172,15 +172,30 @@
                             break;
                     }
                 }
-
+                
                 for (var j = 0; j < k.WalletList.length; j++) {
                     if (k.WalletList[j].CurrencyType == SelectedWallet) {
-                        let ps = k.WalletList[j].PointState == 0 ? mlp.getLanguageKey("啟用") : mlp.getLanguageKey("停用");
+                        mtPointState = temp.getElementsByClassName("mtPointState");
+                        mtPointState[0].parentNode.classList.remove("status-deactive");
+                       // let ps = k.WalletList[j].PointState == 0 ? mlp.getLanguageKey("啟用") : mlp.getLanguageKey("停用");
+
                         c.setClassText(temp, "CurrencyType", null, k.WalletList[j].CurrencyType + mlp.getLanguageKey("可用餘額"));
                         c.setClassText(temp, "WalletBalance", null, c.toCurrency(k.WalletList[j].PointValue));
                         c.setClassText(temp, "UserRate", null, c.toCurrency(k.WalletList[j].UserRate));
                         c.setClassText(temp, "BuyChipRate", null, c.toCurrency(k.WalletList[j].BuyChipRate));
-                        c.setClassText(temp, "PointState", null, ps);
+                       // c.setClassText(temp, "PointState", null, ps);
+
+                        switch (k.UserAccountState) {
+                            case 0:
+                                c.setClassText(temp, "mtPointState", null, mlp.getLanguageKey("正常"));
+                                mtPointState[0].parentNode.classList.add("status-active");
+                                break;
+                            case 1:
+                                c.setClassText(temp, "mtPointState", null, "<span>" + mlp.getLanguageKey("停用") + "</span>");
+                                mtPointState[0].parentNode.classList.add("status-deactive");
+                                break;
+                        }
+
                     }
                 }
 
@@ -354,7 +369,12 @@
                             <div class="focusBox divWalletList">
                                 <!-- 錢包停用， balance 加入 class=> wallet-deactive -->
                                 <div class="balance">
-                                    <span class="title-s"><span class="language_replace CurrencyType">可用餘額</span><span class="language_replace PointState" style="margin-left:10px;">停用</span></span>
+                                    <span class="title-s">
+                                        <span class="language_replace CurrencyType">可用餘額</span>
+                                        <%--<span class="language_replace PointState" style="margin-left:10px;">停用</span>--%>
+                                        <%--<div class="downline__accountStatus-s" style="margin-left:10px;"><i class="icon icon-ewin-default-accountStatus"></i><span class="language_replace mtPointState">啟用</span></div>--%>
+                                        <div class="downline__accountStatus-s status-deactive" style="margin-left:10px;"><span class="language_replace mtPointState" langkey="停用"><span>停用</span></span></div>
+                                    </span>
                                     <span class="data WalletBalance">0</span>
                                 </div>
                                 <div class="revenue" style="" itemtype="eWinBAC">
