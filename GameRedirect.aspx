@@ -64,7 +64,7 @@
 
                 if (SelectGameBrand == "BM")
                 {
-                    Response.Redirect(EWinWeb.EWinUrl + "/Game/Login.aspx?CT=" + Server.UrlEncode(CT) + "&Lang=" + Lang + "&Action=Game");
+                    Response.Redirect(EWinWeb.EWinUrl + "/Game/Login.aspx?CT=" + Server.UrlEncode(CT) + "&Lang=" + Lang + "&CurrencyType=" + CurrencyType + "&Action=Game");
                 }
                 else if (SelectGameBrand == "PS")
                 {
