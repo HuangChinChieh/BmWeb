@@ -269,46 +269,50 @@
             formSubmit(event);
         });
 
-        p.CheckUserIP(Math.uuid(), (success, o) => {
 
-            if (success) {
-                if (o.ResultState == 0) {
+        //setLang
+        if (window.localStorage.getItem("Lang") != null) {
+            Lang = window.localStorage.getItem("Lang");
+        } else {
+            setDefaultLang();
+        }
 
-                    //setLang
-                    if (window.localStorage.getItem("Lang") != null) {
-                        Lang = window.localStorage.getItem("Lang");
-                    } else {
-                        setDefaultLang();
+        if ((Lang == "") || (Lang == null)) {
+            Lang = "ENG";
+        }
+
+
+        document.getElementById("idlangSel").value = Lang;
+        mlp = new multiLanguage();
+        setLanguage(Lang, function () {
+            //createValidateImage();
+
+            p.GetLoginGUID(Math.uuid(), (success, o) => {
+                if (success) {
+                    if (o.ResultState == 0) {
+                        isInitGUID = true;
+                        window.LoginGUID = o.Message;
                     }
-
-                    if ((Lang == "") || (Lang == null)) {
-                        Lang = "ENG";
-                    }
-
-
-                    document.getElementById("idlangSel").value = Lang;
-                    mlp = new multiLanguage();
-                    setLanguage(Lang, function () {
-                        //createValidateImage();
-
-                        p.GetLoginGUID(Math.uuid(), (success, o) => {
-                            if (success) {
-                                if (o.ResultState == 0) {
-                                    isInitGUID = true;
-                                    window.LoginGUID = o.Message;
-                                }
-                            }
-                        });
-
-                        //initLiveChat();
-                    });
-                } else {
-                    redirectIPDenied();
                 }
-            } else {
-                redirectIPDenied();
-            }
+            });
+
+            //initLiveChat();
         });
+
+
+        //p.CheckUserIP(Math.uuid(), (success, o) => {
+
+        //    if (success) {
+        //        if (o.ResultState == 0) {
+
+                  
+        //        } else {
+        //            redirectIPDenied();
+        //        }
+        //    } else {
+        //        redirectIPDenied();
+        //    }
+        //});
     }
 
     window.onload = init;
