@@ -491,7 +491,6 @@
         var idMessageButtonCancel = document.getElementById("idMessageButtonCancel");
 
         var funcOK = function () {
-            debugger
             c.removeClassName(idMessageBox, "show");
 
             if (cbOK != null)
