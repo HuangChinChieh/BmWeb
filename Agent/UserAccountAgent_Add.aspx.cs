@@ -27,8 +27,12 @@ public partial class UserAccountAgent_Add : System.Web.UI.Page {
         EWin.BmAgent.BmAgent api = new EWin.BmAgent.BmAgent();
         EWin.BmAgent.APIResult RetValue = new EWin.BmAgent.APIResult();
 
-        RetValue = api.CheckUserAccountAgentExist(AID, LoginAccount);
-
+        if (LoginAccount.ToUpper().StartsWith("BMH")) {
+            RetValue.Result = EWin.BmAgent.enumResult.ERR;
+            RetValue.Message = "HasLimitChar";
+        } else {
+            RetValue = api.CheckUserAccountAgentExist(AID, LoginAccount);
+        }
         return RetValue;
     }
 }

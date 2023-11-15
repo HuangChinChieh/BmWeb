@@ -64,335 +64,335 @@
     var companyCodeclickCount = 0;
     var v ="<%:AgentVersion%>";
     var p = new LobbyAPI("../API/LobbyAPI.asmx");
-                                              var PhoneNumberUtil = libphonenumber.PhoneNumberUtil.getInstance();
-
-                                              function setLanguage(v) {
-                                                  var form = document.forms[0];
-
-                                                  lang = v;
-                                                  window.localStorage.setItem("agent_lang", lang);
-                                                  form.Lang.value = lang;
-
-                                                  if (mlp != null) {
-                                                      mlp.loadLanguage(lang);
-                                                  }
-                                              }
-
-                                              function checkData() {
-                                                  var form = document.forms[0];
-
-                                                  if (form.LoginAccount.value == "") {
-                                                      showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入登入帳號"));
-                                                  } else if (form.LoginPassword.value == "") {
-                                                      showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入登入密碼"));
-                                                  } else {
-                                                      var allowCompany = true;
-
-                                                      if ((defaultCompany == null) || (defaultCompany == "")) {
-                                                          if (form.CompanyCode.value == "") {
-                                                              allowCompany = false;
-                                                              showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入公司代碼"));
-                                                          }
-                                                      }
-
-                                                      if (allowCompany) {
-                                                          var allowMainAccount = true;
-                                                          var LoginType = $("#idLoginType").val()
-
-                                                          if (LoginType == 1) {
-                                                              // Agent
-                                                              if (form.MainAccount.value == "") {
-                                                                  allowMainAccount = false;
-                                                                  showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入主戶口帳號"));
-                                                              }
-                                                          }
-
-                                                          if (allowMainAccount) {
-                                                              c.addClassName(document.getElementById("idShowLoading"), "show");
-                                                              form.submit();
-                                                          }
-                                                      }
-                                                  }
-
-                                                  window.clearTimeout(timer);
-                                                  timer = window.setTimeout(function () {
-                                                      clickCount = 0;
-                                                  }, 2000);
-                                                  clickCount++;
-
-                                                  if (clickCount >= 8) {
-                                                      showMessage("提醒", "是否要轉入到測試環境?", function () {
-                                                          c.addClassName(document.getElementById("idShowLoading"), "show");
-                                                          window.location.href = "http://ewin.dev.mts.idv.tw/agent/login.aspx";
-                                                      }, null);
-                                                  }
-
-                                              }
-
-                                              function showCompanyCode() {
-
-                                                  window.clearTimeout(companyCodeTimer);
-                                                  companyCodeTimer = window.setTimeout(function () {
-                                                      companyCodeclickCount = 0;
-                                                  }, 2000);
-                                                  companyCodeclickCount++;
-
-                                                  //if (companyCodeclickCount >= 8) {
-                                                  //    idCompanyCode.style.display = "block";
-                                                  //}
-                                              }
-
-                                              function showMessage(title, msg, cbOK, cbCancel) {
-                                                  var idMessageBox = document.getElementById("idMessageBox");
-                                                  var idMessageTitle = document.getElementById("idMessageTitle");
-                                                  var idMessageText = document.getElementById("idMessageText");
-                                                  var idMessageButtonOK = document.getElementById("idMessageButtonOK");
-                                                  var idMessageButtonCancel = document.getElementById("idMessageButtonCancel");
-
-                                                  var funcOK = function () {
-                                                      c.removeClassName(idMessageBox, "show");
-
-                                                      if (cbOK != null)
-                                                          cbOK();
-                                                  }
-
-                                                  var funcCancel = function () {
-                                                      c.removeClassName(idMessageBox, "show");
-
-                                                      if (cbCancel != null)
-                                                          cbCancel();
-                                                  }
-
-                                                  if (idMessageTitle != null)
-                                                      idMessageTitle.innerHTML = title;
-
-                                                  if (idMessageText != null)
-                                                      idMessageText.innerHTML = msg;
-
-                                                  if (idMessageButtonOK != null) {
-                                                      // idMessageButtonOK.style.display = "block";
-                                                      idMessageButtonOK.style.display = "";
-                                                      idMessageButtonOK.onclick = funcOK;
-                                                  }
-
-                                                  if (idMessageButtonCancel != null) {
-                                                      // idMessageButtonCancel.style.display = "block";
-                                                      idMessageButtonCancel.style.display = "";
-                                                      idMessageButtonCancel.onclick = funcCancel;
-                                                  }
-
-                                                  c.addClassName(idMessageBox, "show");
-                                              }
-
-                                              function showMessageOK(title, msg, cbOK) {
-                                                  var idMessageBox = document.getElementById("idMessageBox");
-                                                  var idMessageTitle = document.getElementById("idMessageTitle");
-                                                  var idMessageText = document.getElementById("idMessageText");
-                                                  var idMessageButtonOK = document.getElementById("idMessageButtonOK");
-                                                  var idMessageButtonCancel = document.getElementById("idMessageButtonCancel");
-
-                                                  var funcOK = function () {
-                                                      c.removeClassName(idMessageBox, "show");
-
-                                                      if (cbOK != null)
-                                                          cbOK();
-                                                  }
-
-                                                  if (idMessageTitle != null)
-                                                      idMessageTitle.innerHTML = title;
-
-                                                  if (idMessageText != null)
-                                                      idMessageText.innerHTML = msg;
-
-                                                  if (idMessageButtonOK != null) {
-                                                      // idMessageButtonOK.style.display = "block";
-                                                      idMessageButtonOK.style.display = "";
-                                                      idMessageButtonOK.onclick = funcOK;
-                                                  }
-
-                                                  if (idMessageButtonCancel != null) {
-                                                      idMessageButtonCancel.style.display = "none";
-                                                  }
-
-                                                  c.addClassName(idMessageBox, "show");
-                                              }
-
-                                              //#region 忘記密碼
-                                              function showForgetPassWord() {
-                                                  $("#idPopUpForgetPassWord").addClass("show");
-                                              }
-
-                                              function closeForgetPassWord() {
-                                                  $("#idPopUpForgetPassWord").removeClass("show");
-                                              }
-
-                                              function sendValidateCode() {
-                                                  debugger
-                                                  var GUID = Math.uuid();
-                                                  var PhonePrefix = $("#ContactPhonePrefix").val();
-                                                  var PhoneNumber = $("#ContactPhoneNumber").val();
-
-                                                  if (PhoneNumber == "") {
-                                                      showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入手機號碼"));
-                                                      return;
-                                                  } else {
-                                                      var phoneValue = PhonePrefix + PhoneNumber;
-                                                      var phoneObj;
-
-                                                      try {
-                                                          phoneObj = PhoneNumberUtil.parse(phoneValue);
-
-                                                          var type = PhoneNumberUtil.getNumberType(phoneObj);
-
-                                                          if (type != libphonenumber.PhoneNumberType.MOBILE && type != libphonenumber.PhoneNumberType.FIXED_LINE_OR_MOBILE) {
-                                                              showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("電話格式有誤"));
-                                                              return;
-                                                          }
-                                                      } catch (e) {
-                                                          showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("電話格式有誤"));
-                                                          return;
-                                                      }
-
-                                                  }
-
-                                                  p.SetUserMail(GUID, 1, 1, "", PhonePrefix, PhoneNumber, "", function (success, o) {
-                                                      if (success) {
-                                                          if (o.Result == 0) {
-                                                              showMessageOK(mlp.getLanguageKey("成功"), mlp.getLanguageKey("已寄送認證碼"));
-                                                          } else {
-                                                              showMessageOK(mlp.getLanguageKey("失敗"), mlp.getLanguageKey("發送失敗，請重新發送"));
-                                                          }
-                                                      } else {
-                                                          showMessageOK(mlp.getLanguageKey("失敗"), mlp.getLanguageKey("網路錯誤") + ":" + mlp.getLanguageKey(o.Message));
-                                                      }
-                                                  });
-
-                                              }
-
-                                              function updatePassWord() {
-                                                  var GUID = Math.uuid();
-                                                  var PhonePrefix = $("#ContactPhonePrefix").val();
-                                                  var PhoneNumber = $("#ContactPhoneNumber").val();
-                                                  var LoginAccount = $("#LoginAccount").val();
-                                                  var LoginPassword = $("#LoginPassword").val();
-                                                  var ValidateCode = $("#ValidateCode").val();
-                                                  var ValidateType = 1;
-                                                  var EMail = "";
-                                                  var postObj;
-
-                                                  if (LoginAccount == "") {
-                                                      showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入帳號"));
-                                                  } else if (LoginPassword == "") {
-                                                      showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入密碼"));
-                                                  } else if (ValidateCode == "") {
-                                                      showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入驗證碼"));
-                                                  }
-
-                                                  postObj = {
-                                                      CompanyCode: defaultCompany,
-                                                      GUID: GUID,
-                                                      ValidateType: ValidateType,
-                                                      EMail: EMail,
-                                                      ContactPhonePrefix: PhonePrefix,
-                                                      ContactPhoneNumber: PhoneNumber,
-                                                      ValidateCode: ValidateCode,
-                                                      NewPassword: LoginPassword,
-                                                      LoginAccount: LoginAccount
-                                                  };
-
-                                                  c.callService("Login.aspx/SetUserPasswordByValidateCode", postObj, function (success, o) {
-                                                      if (success) {
-                                                          var obj = c.getJSON(o);
-
-                                                          if (obj.Result == 0) {
-                                                              showMessageOK(mlp.getLanguageKey("成功"), mlp.getLanguageKey("已修改密碼"), function () {
-                                                                  closeForgetPassWord();
-                                                              });
-                                                          } else {
-                                                              showMessageOK(mlp.getLanguageKey("錯誤"), obj.Message);
-                                                          }
-                                                      } else {
-                                                          if (o == "Timeout") {
-                                                              showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請稍後重新嘗試"));
-                                                          } else {
-                                                              showMessageOK(mlp.getLanguageKey("錯誤"), o);
-                                                          }
-                                                      }
-                                                  });
-                                              }
-                                              //#endregion
-
-                                              function langSelChange(e) {
-                                                  var sel = e.currentTarget;
-                                                  var lang = sel.value;
-
-                                                  setLanguage(lang);
-                                              }
-
-                                              function loginTypeSelChange(e) {
-                                                  var sel = e.currentTarget;
-                                                  var v = sel.value;
-
-                                                  if (v == 1) {
-                                                      $("#idMainAccountField").show();
-                                                  } else {
-                                                      $("#idMainAccountField").hide();
-                                                  }
-                                              }
-
-                                              function init() {
-                                                  var idCompanyCode = document.getElementById("idCompanyCode");
-                                                  var langTmp;
-                                                  var langel = document.getElementsByName("lang");
-                                                  var inAPP = false;
-
-                                                  //存入殼內的為第一優先
-                                                  if (AppBridge) {
-                                                      if (AppBridge.config.inAPP == true) {
-                                                          inAPP = true;
-                                                          AppBridge.GetDataByKey("CompanyCode", function (retValue) {
-                                                              if (retValue != "(null)" && retValue != "") {
-                                                                  if (typeof (retValue) != "undefined") {
-                                                                      defaultCompany = retValue;
-                                                                      document.getElementsByName("CompanyCode")[0].value = retValue;
-                                                                  }
-                                                              }
-
-                                                          });
-
-                                                      }
-                                                  }
-
-                                                  //設定是否已傳送資料
-                                                  window.localStorage.setItem("UpdateDeviceInfo", "false");
-
-
-                                                  //if (window.localStorage.getItem("agent_lang") != null) {
-                                                  //    lang = window.localStorage.getItem("agent_lang");
-                                                  //} else {
-                                                  window.localStorage.setItem("agent_lang", lang);
-                                                  //}
-
-                                                  $("#idlangSel").val(lang);
-
-                                                  //onLoginType();
-
-                                                  mlp = new multiLanguage(v);
-                                                  mlp.loadLanguage(lang, function () {
-
-                                                  });
-                                              }
-
-                                              window.onload = init;
-</script >
-                                                  <body class="bg_mainBody LoginBody">
-                                                      <main class="main_area main__login">
-                                                          <div class="container loginWrapper">
-                                                              <section class="login__brand">
-                                                                  <div class="heading-login text-center">
-                                                                      <span class="language_replace" onclick="showCompanyCode()">BM</span>
-                                                                  </div>
-                                                                  <!-- <div class="login__qrcode"><span class="qrcode"></span></div> -->
+    var PhoneNumberUtil = libphonenumber.PhoneNumberUtil.getInstance();
+
+    function setLanguage(v) {
+        var form = document.forms[0];
+
+        lang = v;
+        window.localStorage.setItem("agent_lang", lang);
+        form.Lang.value = lang;
+
+        if (mlp != null) {
+            mlp.loadLanguage(lang);
+        }
+    }
+
+    function checkData() {
+        var form = document.forms[0];
+
+        if (form.LoginAccount.value == "") {
+            showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入登入帳號"));
+        } else if (form.LoginPassword.value == "") {
+            showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入登入密碼"));
+        } else {
+            var allowCompany = true;
+
+            if ((defaultCompany == null) || (defaultCompany == "")) {
+                if (form.CompanyCode.value == "") {
+                    allowCompany = false;
+                    showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入公司代碼"));
+                }
+            }
+
+            if (allowCompany) {
+                var allowMainAccount = true;
+                var LoginType = $("#idLoginType").val()
+
+                if (LoginType == 1) {
+                    // Agent
+                    if (form.MainAccount.value == "") {
+                        allowMainAccount = false;
+                        showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入主戶口帳號"));
+                    }
+                }
+
+                if (allowMainAccount) {
+                    c.addClassName(document.getElementById("idShowLoading"), "show");
+                    form.submit();
+                }
+            }
+        }
+
+        window.clearTimeout(timer);
+        timer = window.setTimeout(function () {
+            clickCount = 0;
+        }, 2000);
+        clickCount++;
+
+        if (clickCount >= 8) {
+            showMessage("提醒", "是否要轉入到測試環境?", function () {
+                c.addClassName(document.getElementById("idShowLoading"), "show");
+                window.location.href = "http://ewin.dev.mts.idv.tw/agent/login.aspx";
+            }, null);
+        }
+
+    }
+
+    function showCompanyCode() {
+
+        window.clearTimeout(companyCodeTimer);
+        companyCodeTimer = window.setTimeout(function () {
+            companyCodeclickCount = 0;
+        }, 2000);
+        companyCodeclickCount++;
+
+        //if (companyCodeclickCount >= 8) {
+        //    idCompanyCode.style.display = "block";
+        //}
+    }
+
+    function showMessage(title, msg, cbOK, cbCancel) {
+        var idMessageBox = document.getElementById("idMessageBox");
+        var idMessageTitle = document.getElementById("idMessageTitle");
+        var idMessageText = document.getElementById("idMessageText");
+        var idMessageButtonOK = document.getElementById("idMessageButtonOK");
+        var idMessageButtonCancel = document.getElementById("idMessageButtonCancel");
+
+        var funcOK = function () {
+            c.removeClassName(idMessageBox, "show");
+
+            if (cbOK != null)
+                cbOK();
+        }
+
+        var funcCancel = function () {
+            c.removeClassName(idMessageBox, "show");
+
+            if (cbCancel != null)
+                cbCancel();
+        }
+
+        if (idMessageTitle != null)
+            idMessageTitle.innerHTML = title;
+
+        if (idMessageText != null)
+            idMessageText.innerHTML = msg;
+
+        if (idMessageButtonOK != null) {
+            // idMessageButtonOK.style.display = "block";
+            idMessageButtonOK.style.display = "";
+            idMessageButtonOK.onclick = funcOK;
+        }
+
+        if (idMessageButtonCancel != null) {
+            // idMessageButtonCancel.style.display = "block";
+            idMessageButtonCancel.style.display = "";
+            idMessageButtonCancel.onclick = funcCancel;
+        }
+
+        c.addClassName(idMessageBox, "show");
+    }
+
+    function showMessageOK(title, msg, cbOK) {
+        var idMessageBox = document.getElementById("idMessageBox");
+        var idMessageTitle = document.getElementById("idMessageTitle");
+        var idMessageText = document.getElementById("idMessageText");
+        var idMessageButtonOK = document.getElementById("idMessageButtonOK");
+        var idMessageButtonCancel = document.getElementById("idMessageButtonCancel");
+
+        var funcOK = function () {
+            c.removeClassName(idMessageBox, "show");
+
+            if (cbOK != null)
+                cbOK();
+        }
+
+        if (idMessageTitle != null)
+            idMessageTitle.innerHTML = title;
+
+        if (idMessageText != null)
+            idMessageText.innerHTML = msg;
+
+        if (idMessageButtonOK != null) {
+            // idMessageButtonOK.style.display = "block";
+            idMessageButtonOK.style.display = "";
+            idMessageButtonOK.onclick = funcOK;
+        }
+
+        if (idMessageButtonCancel != null) {
+            idMessageButtonCancel.style.display = "none";
+        }
+
+        c.addClassName(idMessageBox, "show");
+    }
+
+    //#region 忘記密碼
+    function showForgetPassWord() {
+        $("#idPopUpForgetPassWord").addClass("show");
+    }
+
+    function closeForgetPassWord() {
+        $("#idPopUpForgetPassWord").removeClass("show");
+    }
+
+    function sendValidateCode() {
+        debugger
+        var GUID = Math.uuid();
+        var PhonePrefix = $("#ContactPhonePrefix").val();
+        var PhoneNumber = $("#ContactPhoneNumber").val();
+
+        if (PhoneNumber == "") {
+            showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入手機號碼"));
+            return;
+        } else {
+            var phoneValue = PhonePrefix + PhoneNumber;
+            var phoneObj;
+
+            try {
+                phoneObj = PhoneNumberUtil.parse(phoneValue);
+
+                var type = PhoneNumberUtil.getNumberType(phoneObj);
+
+                if (type != libphonenumber.PhoneNumberType.MOBILE && type != libphonenumber.PhoneNumberType.FIXED_LINE_OR_MOBILE) {
+                    showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("電話格式有誤"));
+                    return;
+                }
+            } catch (e) {
+                showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("電話格式有誤"));
+                return;
+            }
+
+        }
+
+        p.SetUserMail(GUID, 1, 1, "", PhonePrefix, PhoneNumber, "", function (success, o) {
+            if (success) {
+                if (o.Result == 0) {
+                    showMessageOK(mlp.getLanguageKey("成功"), mlp.getLanguageKey("已寄送認證碼"));
+                } else {
+                    showMessageOK(mlp.getLanguageKey("失敗"), mlp.getLanguageKey("發送失敗，請重新發送"));
+                }
+            } else {
+                showMessageOK(mlp.getLanguageKey("失敗"), mlp.getLanguageKey("網路錯誤") + ":" + mlp.getLanguageKey(o.Message));
+            }
+        });
+
+    }
+
+    function updatePassWord() {
+        var GUID = Math.uuid();
+        var PhonePrefix = $("#ContactPhonePrefix").val();
+        var PhoneNumber = $("#ContactPhoneNumber").val();
+        var LoginAccount = $("#LoginAccount").val();
+        var LoginPassword = $("#LoginPassword").val();
+        var ValidateCode = $("#ValidateCode").val();
+        var ValidateType = 1;
+        var EMail = "";
+        var postObj;
+
+        if (LoginAccount == "") {
+            showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入帳號"));
+        } else if (LoginPassword == "") {
+            showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入密碼"));
+        } else if (ValidateCode == "") {
+            showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入驗證碼"));
+        }
+
+        postObj = {
+            CompanyCode: defaultCompany,
+            GUID: GUID,
+            ValidateType: ValidateType,
+            EMail: EMail,
+            ContactPhonePrefix: PhonePrefix,
+            ContactPhoneNumber: PhoneNumber,
+            ValidateCode: ValidateCode,
+            NewPassword: LoginPassword,
+            LoginAccount: LoginAccount
+        };
+
+        c.callService("Login.aspx/SetUserPasswordByValidateCode", postObj, function (success, o) {
+            if (success) {
+                var obj = c.getJSON(o);
+
+                if (obj.Result == 0) {
+                    showMessageOK(mlp.getLanguageKey("成功"), mlp.getLanguageKey("已修改密碼"), function () {
+                        closeForgetPassWord();
+                    });
+                } else {
+                    showMessageOK(mlp.getLanguageKey("錯誤"), obj.Message);
+                }
+            } else {
+                if (o == "Timeout") {
+                    showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請稍後重新嘗試"));
+                } else {
+                    showMessageOK(mlp.getLanguageKey("錯誤"), o);
+                }
+            }
+        });
+    }
+    //#endregion
+
+    function langSelChange(e) {
+        var sel = e.currentTarget;
+        var lang = sel.value;
+
+        setLanguage(lang);
+    }
+
+    function loginTypeSelChange(e) {
+        var sel = e.currentTarget;
+        var v = sel.value;
+
+        if (v == 1) {
+            $("#idMainAccountField").show();
+        } else {
+            $("#idMainAccountField").hide();
+        }
+    }
+
+    function init() {
+        var idCompanyCode = document.getElementById("idCompanyCode");
+        var langTmp;
+        var langel = document.getElementsByName("lang");
+        var inAPP = false;
+
+        //存入殼內的為第一優先
+        if (AppBridge) {
+            if (AppBridge.config.inAPP == true) {
+                inAPP = true;
+                AppBridge.GetDataByKey("CompanyCode", function (retValue) {
+                    if (retValue != "(null)" && retValue != "") {
+                        if (typeof (retValue) != "undefined") {
+                            defaultCompany = retValue;
+                            document.getElementsByName("CompanyCode")[0].value = retValue;
+                        }
+                    }
+
+                });
+
+            }
+        }
+
+        //設定是否已傳送資料
+        window.localStorage.setItem("UpdateDeviceInfo", "false");
+
+
+        //if (window.localStorage.getItem("agent_lang") != null) {
+        //    lang = window.localStorage.getItem("agent_lang");
+        //} else {
+        window.localStorage.setItem("agent_lang", lang);
+        //}
+
+        $("#idlangSel").val(lang);
+
+        //onLoginType();
+
+        mlp = new multiLanguage(v);
+        mlp.loadLanguage(lang, function () {
+
+        });
+    }
+
+    window.onload = init;
+</script>
+<body class="bg_mainBody LoginBody">
+    <main class="main_area main__login">
+        <div class="container loginWrapper">
+            <section class="login__brand">
+                <div class="heading-login text-center">
+                    <span class="language_replace" onclick="showCompanyCode()">BM</span>
+                </div>
+                <!-- <div class="login__qrcode"><span class="qrcode"></span></div> -->
                 <%if (EWinWeb.IsTestSite == true) { %>
                 <div>
                     <p style="text-align: center; font-size: 14px; margin-bottom: 0; line-height: 1;"><span class="language_replace num-negative">此為測試環境</span></p>
@@ -501,11 +501,11 @@
 
     <div class="popUp" id="idShowLoading">
         <!-- <div class="popUpWrapper">
-            <div class="popUp__title" id="idMessageTitle">[Title]</div>
-            <div class="popUp__content" id="idMessageText">
-                [Msg]
+                            <div class="popUp__title" id="idMessageTitle">[Title]</div>
+                            <div class="popUp__content" id="idMessageText">
+                                [Msg]
             </div>
-        </div> -->
+                        </div> -->
         <div class="global__loading">
             <!-- <div class="logo"><img src="Images/theme/dark/img/logo_eWin.svg" alt=""></div> -->
             <div class="gooey">

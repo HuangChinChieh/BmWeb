@@ -168,12 +168,11 @@
 
     function init() {
         var d = new Date();
-
+        lang = window.localStorage.getItem("agent_lang");
         EWinInfo = window.parent.EWinInfo;
         api = window.parent.API_GetAgentAPI();
         setSearchFrame();
-
-        lang = window.localStorage.getItem("agent_lang");
+        
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
             window.parent.API_CloseLoading();
