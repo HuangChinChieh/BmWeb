@@ -801,7 +801,7 @@
                     }
 
                     if (o.WalletList) {
-
+                        $('#selectedWallet').empty();
                         for (var l = 0; l < o.WalletList.length; l++) {
                             SelectCurrencyType = o.WalletList[0].CurrencyType;
                             $('#selectedWallet').append(`<option style="zoom:1.1"  value="${o.WalletList[l].CurrencyType}">${o.WalletList[l].CurrencyType}</option>`);

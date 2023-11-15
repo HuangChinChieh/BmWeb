@@ -93,7 +93,7 @@
                                     });
 
                                 } else {
-                                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), obj.Message);
+                                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(obj.Message));
                                     $("#btnSave").show();
                                     processing = false;
                                 }

@@ -149,7 +149,7 @@
                         if (o.WalletList != null) {
                             for (var i = 0; i < o.WalletList.length; i++) {
                                 var w = o.WalletList[i];
-                                let t = c.getTemplate("tempGameAccountingCode");
+                                let t = c.getTemplate("tempWallet");
 
                                 if (w.CurrencyType != DefaultCurrencyType) {
                                     continue;
@@ -175,7 +175,8 @@
                                 let kk = o.GameCodeList[l]; 
                                 if (kk.CurrencyType == DefaultCurrencyType) {
                                     let t = c.getTemplate("tempGameAccountingCode");
-
+                                    
+                                    c.setClassText(t, "CurrencyType", null, mlp.getLanguageKey(kk.CurrencyType));
                                     c.setClassText(t, "GameAccountingCode", null, mlp.getLanguageKey(kk.GameAccountingCode));
                                     c.setClassText(t, "UserRate", null, c.toCurrency(kk.UserRate) + "%");
                                     c.setClassText(t, "BuyChipRate", null, c.toCurrency(kk.BuyChipRate) + "%");
@@ -1289,6 +1290,7 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
+                                                <th scope="col" class="language_replace">貨幣</th>
                                                 <th scope="col" class="language_replace">遊戲種類</th>
                                                 <th scope="col" class="language_replace">返水率</th>
                                                 <th scope="col" class="language_replace">佔成率</th>
@@ -1329,6 +1331,19 @@
         <div style="display: none">
             <table>
                 <tbody id="tempGameAccountingCode">
+                    <tr>
+                        <td class="CurrencyType language_replace"></td>
+                        <td class="GameAccountingCode language_replace"></td>
+                        <td class="BuyChipRate">0</td>
+                        <td class="UserRate">0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="display: none">
+            <table>
+                <tbody id="tempWallet">
                     <tr>
                         <td class="GameAccountingCode language_replace"></td>
                         <td class="BuyChipRate">0</td>
