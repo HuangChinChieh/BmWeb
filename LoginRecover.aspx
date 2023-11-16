@@ -28,19 +28,12 @@
         LoginResult = LoginAPI.RecoverLogin(Token, RecoverToken, CodingControl.GetUserIP());
         if (LoginResult != null) {
             if (LoginResult.ResultState == EWin.Login.enumResultState.OK) {
-                SID = RedisCache.SessionContext.CreateSID(EWinWeb.CompanyCode, LoginAccount, CodingControl.GetUserIP(), false, LoginResult.SID, LoginResult.CT);
 
-                if (string.IsNullOrEmpty(SID) == false) {
-                    ResultObj.ResultCode = RecoverResult.enumResultCode.OK;
-                    ResultObj.Token = Token;
-                    ResultObj.LoginAccount = LoginAccount;
-                    ResultObj.SID = SID;
-                    ResultObj.CT = LoginResult.CT;
-                    ResultObj.RecoverToken = LoginResult.RecoverToken;
-                } else {
-                    ResultObj.ResultCode = RecoverResult.enumResultCode.ERR;
-                    ResultObj.Message = "ServerError";
-                }
+                ResultObj.ResultCode = RecoverResult.enumResultCode.OK;
+                ResultObj.Token = Token;
+                ResultObj.LoginAccount = LoginAccount;
+                ResultObj.CT = LoginResult.CT;
+                ResultObj.RecoverToken = LoginResult.RecoverToken;
             } else {
                 ResultObj.ResultCode = RecoverResult.enumResultCode.ERR;
                 ResultObj.Message = "";
