@@ -39,7 +39,7 @@
         //}
 
         function DelAccount(LoginAccount) {
-            var postObj;
+
             postObj = {
                 AID: EWinInfo.ASID,
                 LoginAccount: LoginAccount
@@ -66,7 +66,6 @@
                     }
                 }
             });
-
         }
 
         function setUserAccountAgentMuti(cb) {
@@ -74,7 +73,6 @@
             var postObj;
             var hasNoData = true;
             var btnEditUser;
-            var btnDelUser;
 
             c.clearChildren(idUserList);
 
@@ -91,15 +89,19 @@
                             for (var i = 0; i < o.UserAccountList.length; i++) {
                                 if (o.UserAccountList[i].LoginAccount != EWinInfo.UserInfo.LoginAccount) {
                                     var temp = c.getTemplate("templateTableItem");
-
-                                    c.setClassText(temp, "mtAgentLoignAccount", null, o.UserAccountList[i].LoginAccount);
+                                    let loginaccount = o.UserAccountList[i].LoginAccount;
+                                    var btnDelUser;
+                                    c.setClassText(temp, "mtAgentLoignAccount", null, loginaccount);
 
                                     //btnEditUser = c.getFirstClassElement(temp, "btnEditUser");
                                     //btnEditUser.onclick = new Function("EditAccount('" + o.MultiLoginList[i].UserAccountID + "')");
 
                                     btnDelUser = c.getFirstClassElement(temp, "btnDelUser");
-                                    btnDelUser.onclick = new Function("DelAccount('" + o.UserAccountList[i].LoginAccount + "')");
+                                    btnDelUser.onclick = new Function("DelAccount('" + loginaccount + "')");
 
+                                    //btnDelUser.onclick = (function () {
+                                    //    DelAccount(loginaccount).bind(this);
+                                    //}).bind(btnDelUser)
 
                                     idUserList.appendChild(temp);
 
@@ -156,7 +158,7 @@
                     <div class="MT__table table-col-8 w-200">
                         <!-- 表格上下滑動框 -->
                         <div class="tbody tbody__hasNoData" id="idList">
-                            <div id="hasNoData_DIV" class="td__content td__hasNoData">無數據</div>
+                            <div id="hasNoData_DIV" class="td__content td__hasNoData language_replace">無數據</div>
                         </div>
                     </div>
                 </div>
