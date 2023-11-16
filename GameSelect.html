@@ -685,6 +685,7 @@
         var c = new common();
         var SID;
         var CT;
+        var RecoverToken;
         var CurrencyType;
         var Lang;
         var mlp;
@@ -797,6 +798,8 @@
                 var MaxPointValue = 0;
                 var CurrencyTypeInList = false;
 
+                setCookie("LoginAccount", WalletInfo.LoginAccount, 365);
+
                 idCurrencySel.innerHTML = "";
 
                 for (var i = 0; i < WalletInfo.WalletList.length; i++) {
@@ -837,8 +840,8 @@
             CT = c.getParameter("CT");
             Lang = c.getParameter("Lang");
             CurrencyType = c.getParameter("CurrencyType");
-
-
+            RecoverToken = c.getParameter("RecoverToken"); 
+            //undefined
             p = new LobbyAPI("/API/LobbyAPI.asmx");
 
             if (!CT) {
@@ -847,12 +850,16 @@
                 CT = decodeURIComponent(CT)
             }
 
+            if (!RecoverToken) {
+
+            } else {
+                setCookie("RecoverToken", RecoverToken, 365);
+            }
+
             var guid = Math.uuid();
 
             API_ReceivePoint();
-
-
-
+            
             if (Lang) {
                 idlangSel.value = Lang;
             } else {
@@ -897,10 +904,12 @@
                 p.KeepSIDByProduct(CT, guid, function (success, o) {
                     if (success == true) {
                         if (o.Result != 0) {
-                            window.location.href = "index.aspx";
+                            //window.location.href = "index.aspx";
+                            userRecover();
                         }
                     } else {
-                        window.location.href = "index.aspx";
+                        //window.location.href = "index.aspx";
+                        userRecover();
                     }
                 });
 
@@ -984,7 +993,6 @@
             }            
         }
 
-
         function isMobileDevice() {
             const mobileKeywords = [
                 "Android",
@@ -1007,6 +1015,70 @@
             return false;
         }
 
+        function userRecover() {
+            var recoverToken = getCookie("RecoverToken");
+            var LoginAccount = getCookie("LoginAccount");
+
+            if ((recoverToken != null) && (recoverToken != "")) {
+                var postData;
+                postData = {
+                    "RecoverToken": recoverToken,
+                    "LoginAccount": LoginAccount
+                }
+                c.callService("/LoginRecover.aspx", postData, function (success, o) {
+
+                    if (success) {
+                        var obj = c.getJSON(o);
+
+                        if (obj.ResultCode == 0) {
+                            setCookie("RecoverToken", obj.RecoverToken, 365);
+                            setCookie("LoginAccount", obj.LoginAccount, 365);
+                            setCookie("SID", obj.SID, 365);
+                            setCookie("CT", obj.CT, 365);
+                            CT = obj.CT;
+                        } else {
+                            window.location.href = "index.aspx";
+                        }
+                    } else {
+                        window.location.href = "index.aspx";
+                    }
+                });
+            } else {
+                window.location.href = "index.aspx";
+            }
+        }
+
+        //#region Cookie
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        function delCookie(name) {
+            var exp = new Date();
+            exp.setTime(exp.getTime() - 1);
+            cval = getCookie(name);
+            if (cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+        }
+    //#endregion
 
         window.onload = init;
         window.onresize = resize;

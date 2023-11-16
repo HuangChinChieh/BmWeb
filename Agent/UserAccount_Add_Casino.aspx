@@ -431,7 +431,7 @@
 
                 } else if (el.hasAttribute("default")) {
                     var currencyType = el.getAttribute("default");
-                    var PointStateSelect = 0;
+                    var PointStateSelect = $(el).find(".PointState").val();
                     var pointUserRate = c.getFirstClassElement(el, "PointUserRate");
                     var pointBuyChipRate = c.getFirstClassElement(el, "PointBuyChipRate");
 
@@ -569,7 +569,7 @@
                     t.classList.add(w.CurrencyType);
                     t.classList.add("div_GameCode");
                     c.setClassText(t, "PointCurrencyType", null, w.CurrencyType);
-                    c.setClassText(t, "GameAccountingCode", null, "Default");
+                    c.setClassText(t, "GameAccountingCode", null, mlp.getLanguageKey("Default"));
 
                     c.setClassText(t, "parentBuyChipRate", null, w.BuyChipRate);
                     c.setClassText(t, "parentUserRate", null, w.UserRate);
@@ -1007,6 +1007,7 @@
 
                         <fieldset class="dataFieldset">
                             <legend class="dataFieldset-title language_replace shown-lg">錢包管理</legend>
+                            <label for="password" class="form-label "><span class="language_replace" style="color:yellow;font-weight:bold">請注意: 各幣別的百家樂錢包為"主要錢包"，若將該幣別的百家樂錢包關閉，則無法使用該幣別進行遊玩任何遊戲！</span></label>
                             <div class="row" style="padding-bottom: 5px;">
 
                                 <div class="col-12 col-smd-3 pr-smd-1" style="display:none">
@@ -1051,6 +1052,9 @@
                                                 <span class="language_replace">遊戲類型</span>
                                             </div>
                                             <div class="thead__th">
+                                                <span class="language_replace">狀態</span>
+                                            </div>
+                                            <div class="thead__th">
                                                 <span class="language_replace">佔成率(%)</span>
                                             </div>
                                             <div class="thead__th">
@@ -1080,6 +1084,15 @@
                                                 </span>
                                                 <span class="td__content">
                                                     <span class="language_replace GameAccountingCode"></span>
+                                                </span>
+                                            </div>
+                                            <div class="tbody__td td-100 " style="min-width:130px">
+                                                <span class="td__title"><span class="language_replace">狀態</span></span>
+                                                <span class="td__content">
+                                                    <select class="custom-select PointState">
+                                                        <option class="language_replace" value="0">使用中</option>
+                                                        <option class="language_replace" value="1" selected="selected">停用</option>
+                                                    </select>
                                                 </span>
                                             </div>
                                             <div class="tbody__td td-3 td-vertical">

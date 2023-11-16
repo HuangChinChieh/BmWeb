@@ -45,9 +45,9 @@
     function submitCheck() {
         var CurrencyType = idWalletList.options[idWalletList.selectedIndex].value;
         var TransOutValue = document.forms[0].idTransOut.value;
-        window.parent.API_ShowMessageOK(mlp.getLanguageKey("確定要求提款"), mlp.getLanguageKey("將會預先從您的錢包保管額度並通知您的上線處理提款要求") + "<br>" + CurrencyType + " " + TransOutValue + "<br><br>" + mlp.getLanguageKey("是否確定進行?"), function () {
+        window.parent.API_ShowMessage(mlp.getLanguageKey("確定要求提款"), mlp.getLanguageKey("將會預先從您的錢包保管額度並通知您的上線處理提款要求") + "<br>" + CurrencyType + " " + TransOutValue + "<br><br>" + mlp.getLanguageKey("是否確定進行?"), function () {
             submitForm();
-        });
+        }, null);
     }
 
     function submitForm() {

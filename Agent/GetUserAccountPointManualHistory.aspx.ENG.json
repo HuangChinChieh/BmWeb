@@ -1,14 +1,16 @@
 {
-"錢包點數異動記錄":"Wallet Point Transaction Record",
-"起始日期":"Start Date",
-"結束日期":"End Date",
-"確認":"OK",
-"日期":"Date",
-"帳號":"Account",
-"貨幣":"Currency",
-"補點額度":"Add/Deduct Points",
-"扣點額度":"Deduction Points",
-"描述":"Description",
-"驗證帳號":"Verified by",
-"執行帳號":"Executor"
+  "錢包點數異動記錄": "Manual Point Record (Backend System Processing)",
+  "起始日期": "Start Date",
+  "結束日期": "End Date",
+  "確認": "Search",
+  "日期": "Date",
+  "帳號": "ID",
+  "貨幣": "Curr.",
+  "補點額度": "Add Points",
+  "扣點額度": "Deduction Points",
+  "描述": "Content",
+  "驗證帳號": "Verified by",
+  "執行帳號": "Executor",
+  "網路異常, 請稍後重新嘗試": "Network exception, please try again.",
+  "錯誤": "System Message"
 }

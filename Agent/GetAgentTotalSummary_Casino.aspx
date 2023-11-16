@@ -383,7 +383,7 @@
                 }
                 c.setClassText(t, "ValidBetValue", null, c.toCurrency(item.ValidBetValue));
 
-                c.setClassText(t, "OrderCount", null, c.toCurrency(item.OrderCount));
+                //c.setClassText(t, "OrderCount", null, c.toCurrency(item.OrderCount));
 
                 if (parseFloat(item.RewardValue) < 0) {
                     t.getElementsByClassName("SelfRewardValue")[0].classList.add("num-negative");
@@ -481,7 +481,7 @@
                 }
                 c.setClassText(t, "ValidBetValue", null, c.toCurrency(item.ValidBetValue));
 
-                c.setClassText(t, "OrderCount", null, c.toCurrency(item.OrderCount));
+                //c.setClassText(t, "OrderCount", null, c.toCurrency(item.OrderCount));
 
                 if (parseFloat(item.RewardValue) < 0) {
                     t.getElementsByClassName("SelfRewardValue")[0].classList.add("num-negative");
@@ -837,10 +837,10 @@
                                 <span class="td__title"><i class="icon icon-ewin-default-totalRolling icon-s icon-before"></i><span class="language_replace">團隊有效注額</span></span>
                                 <span class="td__content"><span class="ValidBetValue">CON4</span></span>
                             </div>
-                            <div class="tbody__td td-number td-3 td-vertical">
+<%--                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><i class="icon icon-ewin-default-totalRolling icon-s icon-before"></i><span class="language_replace">團隊投注筆數</span></span>
                                 <span class="td__content"><span class="OrderCount">CON4</span></span>
-                            </div>
+                            </div>--%>
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><i class="icon icon-ewin-default-accountWinLose icon-s icon-before"></i><span class="language_replace">個人輸贏數</span></span>
                                 <span class="td__content"><span class="SelfRewardValue">CON4</span></span>
@@ -861,7 +861,7 @@
                             <div class="thead__th"><span class="language_replace">貨幣</span></div>
                             <div class="thead__th"><span class="language_replace">團隊輸贏數</span></div>
                             <div class="thead__th"><span class="language_replace">團隊有效注額</span></div>
-                            <div class="thead__th"><span class="language_replace">團隊投注筆數</span></div>
+                            <%--<div class="thead__th"><span class="language_replace">團隊投注筆數</span></div>--%>
                             <div class="thead__th"><span class="language_replace">個人輸贏數</span></div>
                             <div class="thead__th"><span class="language_replace">個人有效注額</span></div>
                         </div>

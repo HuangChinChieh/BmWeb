@@ -163,7 +163,7 @@ public class LoginAPI : System.Web.Services.WebService
          {
              Ret.ResultState = EWin.Login.enumResultState.OK;
              //Ret.LoginURL = EWinWeb.EWinUrl + "/Game/Login.aspx?CT=" + Server.UrlEncode(loginRet.CT) + "&Lang=" + Lang + "&Action=Game";
-             Ret.LoginURL ="GameSelect.html?CT=" + Server.UrlEncode(loginRet.CT) + "&Lang=" + Lang + "&Action=Game";
+             Ret.LoginURL ="GameSelect.html?CT=" + Server.UrlEncode(loginRet.CT) + "&Lang=" + Lang + "&Action=Game" + "&RecoverToken=" + loginRet.RecoverToken;
          }
          else
          {

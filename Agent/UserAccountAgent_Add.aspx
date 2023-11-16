@@ -49,6 +49,12 @@
         if (form.LoginAccount.value.trim() == "") {
             window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入帳號"));
             retValue = false;
+        } else if (form.LoginAccount.value.trim().toUpperCase() == EWinInfo.LoginAccount.toUpperCase()) {
+            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("請輸入非本人帳號"));
+            retValue = false;
+        } else if (form.LoginAccount.value.trim().toUpperCase().startsWith('BMH')) {
+            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("帳號含有限制開頭BMH，請使用其他帳號，如有疑問請聯繫客服。"));
+            retValue = false;
         }
 
         if (form.LoginPassword.value.trim() == "") {
@@ -127,6 +133,8 @@
                     if (obj.Message == "AccountExist") {
                         if (cb)
                             cb(false);
+                    } else if (obj.Message == "HasLimitChar") {
+                        window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("帳號含有限制開頭BMH，請使用其他帳號，如有疑問請聯繫客服。"));
                     } else {
                         window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), obj.Message);
                     }
@@ -245,7 +253,7 @@
                                                 2.若資料錯誤 <div class="form-control-underline...=>加入class "iconError iconErrorAnim"   
                                              -->
                                         <div id="idLoginAccount" class="form-control-underline ">
-                                            <input type="text" class="form-control" name="LoginAccount" id="LoginAccount" language_replace="placeholder" placeholder="請輸入帳號" onkeyup="chkUserAccount(this)">
+                                            <input type="text" class="form-control" name="LoginAccount" id="LoginAccount" language_replace="placeholder" placeholder="請輸入帳號" >
                                             <label for="password" class="form-label "><span class="language_replace">請輸入帳號</span></label>
                                             <!-- loading 動畫 -->
                                             <div class="icon-loading" style="display: none;">

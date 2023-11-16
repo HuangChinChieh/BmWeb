@@ -6,9 +6,9 @@
   "確定移除此帳號": "Are you sure to delete this multiple account?",
   "完成": "System Message",
   "更新完成": "The account has been deleted.",
-  "無數據": "There is no any data so far.",
+  "無數據": "There is no information related to multiple account settings.",
   "新增多重帳號": "Add Multiple Account",
   "切換多重帳號": "Switch Multiple Account",
   "多重帳號": "Multiple Account Management"
-}
+
 }
