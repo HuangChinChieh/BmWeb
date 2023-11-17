@@ -147,48 +147,52 @@ public class LoginAPI : System.Web.Services.WebService
         return Ret;
     }
 
-         [WebMethod]
- [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
- public EWin.Login.LoginResult UserLoginEntryGameSel(string GUID, string LoginGUID, string LoginAccount, string LoginPassword, string ImageCode, string GuestLogin, string Lang)
- {
-     EWin.Login.LoginResult Ret = new EWin.Login.LoginResult() { ResultState = EWin.Login.enumResultState.ERR };
-     EWin.Login.LoginAPI loginAPI = new EWin.Login.LoginAPI();
-     EWin.Login.LoginResult loginRet;
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public EWin.Login.LoginResult UserLoginEntryGameSel(string GUID, string LoginGUID, string LoginAccount, string LoginPassword, string ImageCode, string GuestLogin, string Lang)
+    {
+        EWin.Login.LoginResult Ret = new EWin.Login.LoginResult() { ResultState = EWin.Login.enumResultState.ERR };
+        EWin.Login.LoginAPI loginAPI = new EWin.Login.LoginAPI();
+        EWin.Login.LoginResult loginRet;
 
-     if (GuestLogin != "1")
-     {
-         loginRet = loginAPI.UserLogin(EWinWeb.GetToken(), LoginGUID, LoginAccount, LoginPassword, EWinWeb.CompanyCode, ImageCode, CodingControl.GetUserIP());
+        if (GuestLogin != "1")
+        {
+            loginRet = loginAPI.UserLogin(EWinWeb.GetToken(), LoginGUID, LoginAccount, LoginPassword, EWinWeb.CompanyCode, ImageCode, CodingControl.GetUserIP());
 
-         if (loginRet.ResultState == EWin.Login.enumResultState.OK)
-         {
-             Ret.ResultState = EWin.Login.enumResultState.OK;
-             //Ret.LoginURL = EWinWeb.EWinUrl + "/Game/Login.aspx?CT=" + Server.UrlEncode(loginRet.CT) + "&Lang=" + Lang + "&Action=Game";
-             Ret.LoginURL ="GameSelect.html?CT=" + Server.UrlEncode(loginRet.CT) + "&Lang=" + Lang + "&Action=Game" + "&RecoverToken=" + loginRet.RecoverToken;
-         }
-         else
-         {
-             Ret.ResultState = EWin.Login.enumResultState.ERR;
-             Ret.Message = loginRet.Message;
-         }
+            if (loginRet.ResultState == EWin.Login.enumResultState.OK)
+            {
 
-     }
-     else
-     {
-         if (!string.IsNullOrEmpty(ImageCode))
-         {
-             Ret.ResultState = EWin.Login.enumResultState.OK;
-             Ret.LoginURL = EWinWeb.EWinUrl + "/Game/LoginGuest.aspx?Lang=" + Lang + "&LoginGUID=" + LoginGUID + "&ImageCode=" + ImageCode + "&Action=Game";
-             //Ret.LoginURL ="GameSelectDemo.html?Lang=" + Lang + "&Action=Game";
-         }
-         else
-         {
-             Ret.ResultState = EWin.Login.enumResultState.ERR;
-             Ret.Message = "ImageCodeNotValied";
-         }
-     }
+                try { CodingControl.GetWebTextContent(EWinWeb.EWinAPIUrl + "/API/Partner/BmProductAPI.asmx/UserAccountCheckWallet", "POST", "Token=" + EWinWeb.GetToken() + "&GUID=" + GUID + "&LoginAccount=" + LoginAccount); }
+                catch (Exception ex) { }
 
-     return Ret;
- }
+                Ret.ResultState = EWin.Login.enumResultState.OK;
+                //Ret.LoginURL = EWinWeb.EWinUrl + "/Game/Login.aspx?CT=" + Server.UrlEncode(loginRet.CT) + "&Lang=" + Lang + "&Action=Game";
+                Ret.LoginURL ="GameSelect.html?CT=" + Server.UrlEncode(loginRet.CT) + "&Lang=" + Lang + "&Action=Game" + "&RecoverToken=" + loginRet.RecoverToken;
+            }
+            else
+            {
+                Ret.ResultState = EWin.Login.enumResultState.ERR;
+                Ret.Message = loginRet.Message;
+            }
+
+        }
+        else
+        {
+            if (!string.IsNullOrEmpty(ImageCode))
+            {
+                Ret.ResultState = EWin.Login.enumResultState.OK;
+                Ret.LoginURL = EWinWeb.EWinUrl + "/Game/LoginGuest.aspx?Lang=" + Lang + "&LoginGUID=" + LoginGUID + "&ImageCode=" + ImageCode + "&Action=Game";
+                //Ret.LoginURL ="GameSelectDemo.html?Lang=" + Lang + "&Action=Game";
+            }
+            else
+            {
+                Ret.ResultState = EWin.Login.enumResultState.ERR;
+                Ret.Message = "ImageCodeNotValied";
+            }
+        }
+
+        return Ret;
+    }
 
 
     [WebMethod]
@@ -221,7 +225,7 @@ public class LoginAPI : System.Web.Services.WebService
         EWin.Login.Result Ret = new EWin.Login.Result() { ResultState = EWin.Login.enumResultState.ERR };
         string UnixTimeStamp = CodingControl.GetUnixTimestamp(DateTime.Now, CodingControl.enumUnixTimestampType.Seconds).ToString();
         string Verify = UnixTimeStamp + "-" + HttpUtility.UrlEncode(CodingControl.GetHMACSHA256(Url + UnixTimeStamp, "EWin"));
-            
+
         Ret.ResultState = EWin.Login.enumResultState.OK;
         Ret.Message = Verify;
 
