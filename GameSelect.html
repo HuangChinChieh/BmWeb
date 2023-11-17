@@ -714,9 +714,7 @@
                             API_LoadingEnd();
                         } else {
                             if (o.Message == "InvalidSID") {
-                                userRecover(function () {
-                                    API_ReceivePoint();
-                                });
+                                userRecover();
                             } else {
                                 window.location.href = "index.aspx";
                             }
@@ -1042,6 +1040,7 @@
                             setCookie("CT", obj.CT, 365);
                             CT = obj.CT;
 
+                            leaveGame();
                             if (cb) {
                                 cb(true);
                             }

@@ -161,7 +161,7 @@
                     <div class="MT__table table-col-8 w-200">
                         <!-- 表格上下滑動框 -->
                         <div class="tbody tbody__hasNoData" id="idList">
-                            <div id="hasNoData_DIV" class="td__content td__hasNoData">無數據</div>
+                            <div id="hasNoData_DIV" class="td__content td__hasNoData language_replace">無數據</div>
                         </div>
                     </div>
                 </div>

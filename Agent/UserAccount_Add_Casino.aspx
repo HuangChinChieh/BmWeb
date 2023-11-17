@@ -1007,7 +1007,7 @@
 
                         <fieldset class="dataFieldset">
                             <legend class="dataFieldset-title language_replace shown-lg">錢包管理</legend>
-                            <label for="password" class="form-label "><span class="language_replace" style="color:yellow;font-weight:bold">請注意: 各幣別的百家樂錢包為"主要錢包"，若將該幣別的百家樂錢包關閉，則無法使用該幣別進行遊玩任何遊戲！</span></label>
+                            <label for="password" class="form-label "><span class="language_replace" style="color:yellow;font-weight:bold">注意!!各幣別的百家樂錢包為[主要錢包]，若將該幣別的百家樂錢包關閉，則無法使用該幣別進行遊玩任何遊戲！</span></label>
                             <div class="row" style="padding-bottom: 5px;">
 
                                 <div class="col-12 col-smd-3 pr-smd-1" style="display:none">

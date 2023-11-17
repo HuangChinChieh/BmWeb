@@ -92,13 +92,13 @@
 
                 c.callService(ApiUrl + "/AddUserAccountSubUserList", postObj, function (success, obj) {
                     if (success) {
-                    var o = c.getJSON(obj);
+                        var o = c.getJSON(obj);
                         if (o.Result == 0) {
                             window.parent.API_ShowMessageOK(mlp.getLanguageKey("完成"), mlp.getLanguageKey("新增完成"), function () {
                                 window.parent.API_CloseWindow(true);
                             });
                         } else {
-                            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"),  mlp.getLanguageKey(o));
+                            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o.Message));
                             if (cb)
                                 cb(false);
                         }
@@ -117,7 +117,10 @@
                     window.parent.API_CloseLoading();
                 });
 
-            }, null);
+            }, function () {
+                processing = false;
+                window.parent.API_CloseLoading();
+            });
         }
         else {
             window.parent.API_ShowToastMessage(mlp.getLanguageKey("作業進行中"));
