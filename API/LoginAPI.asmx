@@ -162,12 +162,27 @@ public class LoginAPI : System.Web.Services.WebService
             if (loginRet.ResultState == EWin.Login.enumResultState.OK)
             {
 
-                try { CodingControl.GetWebTextContent(EWinWeb.EWinAPIUrl + "/API/Partner/BmProductAPI.asmx/UserAccountCheckWallet", "POST", "Token=" + EWinWeb.GetToken() + "&GUID=" + GUID + "&LoginAccount=" + LoginAccount); }
-                catch (Exception ex) { }
+                if (EWinWeb.IsTestSite)
+                {
+                    if (EWinWeb.CompanyCode.ToUpper() == "GWIN")
+                    {
+                        try { CodingControl.GetWebTextContent(EWinWeb.EWinAPIUrl + "/API/Partner/BmProductAPI.asmx/UserAccountCheckWallet", "POST", "Token=" + EWinWeb.GetToken() + "&GUID=" + GUID + "&LoginAccount=" + LoginAccount); }
+                        catch (Exception ex) { }
+                    }
+                }
+                else
+                {
+                    if (EWinWeb.CompanyCode.ToUpper() == "BM")
+                    {
+                        try { CodingControl.GetWebTextContent(EWinWeb.EWinAPIUrl + "/API/Partner/BmProductAPI.asmx/UserAccountCheckWallet", "POST", "Token=" + EWinWeb.GetToken() + "&GUID=" + GUID + "&LoginAccount=" + LoginAccount); }
+                        catch (Exception ex) { }
+                    }
+                }
+
 
                 Ret.ResultState = EWin.Login.enumResultState.OK;
                 //Ret.LoginURL = EWinWeb.EWinUrl + "/Game/Login.aspx?CT=" + Server.UrlEncode(loginRet.CT) + "&Lang=" + Lang + "&Action=Game";
-                Ret.LoginURL ="GameSelect.html?CT=" + Server.UrlEncode(loginRet.CT) + "&Lang=" + Lang + "&Action=Game" + "&RecoverToken=" + loginRet.RecoverToken;
+                Ret.LoginURL = "GameSelect.html?CT=" + Server.UrlEncode(loginRet.CT) + "&Lang=" + Lang + "&Action=Game" + "&RecoverToken=" + loginRet.RecoverToken;
             }
             else
             {
