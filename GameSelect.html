@@ -903,27 +903,32 @@
 
             setLanguage(Lang, function () { });
 
-            window.setInterval(function () {
-                // refresh SID and Token;
-                var guid = Math.uuid();
+            setTimeout_keepSID();
+        }
 
-                p.KeepSIDByProduct(CT, guid, function (success, o) {
-                    if (success == true) {
-                        if (o.Result != 0) {
-                            //window.location.href = "index.aspx";
-                            if (!gameFrameOpened) {
-                                userRecover();
-                            }                            
-                        }
-                    } else {
+        function setTimeout_keepSID() {
+            setTimeout(setTimeout_keepSID, 10000); 
+            keepSID();
+        }
+
+        function keepSID() {
+            var guid = Math.uuid();
+
+            p.KeepSIDByProduct(CT, guid, function (success, o) {
+                if (success == true) {
+                    if (o.Result != 0) {
                         //window.location.href = "index.aspx";
                         if (!gameFrameOpened) {
                             userRecover();
-                        }                        
+                        }
                     }
-                });
-
-            }, 10000);
+                } else {
+                    //window.location.href = "index.aspx";
+                    if (!gameFrameOpened) {
+                        userRecover();
+                    }
+                }
+            });
         }
 
         function currencySelChange(e) {
