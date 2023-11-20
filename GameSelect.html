@@ -706,16 +706,16 @@
         function API_ReceivePoint() {
             API_LoadingStart();
             p.ReceiveGamePointByProduct(CT, "", Math.uuid(), (success, o) => {
+                API_LoadingEnd();
                 p.GetUserInfoByProduct(CT, Math.uuid(), (success, o) => {
                     if (success == true) {
                         if (o.Result == 0) {
                             WalletInfo = o;
-                            updateBaseInfo();
-                            API_LoadingEnd();
+                            updateBaseInfo();                           
                         } else {
                             if (o.Message == "InvalidSID") {
                                 if (!gameFrameOpened) {
-                                    userRecover();
+                                    userRecover();                                  
                                 }                                
                             } else {
                                 window.location.href = "index.aspx";
@@ -726,6 +726,10 @@
                     }
                 });
             });
+        }
+
+        function API_LeaveGame() {
+            leaveGame();
         }
 
         function clickEntryGame(brand) {
@@ -843,6 +847,15 @@
         }
 
         function init() {
+            if (window.self !== window.parent) {
+                // 如果在iframe中，嘗試往上呼叫遊戲關閉
+                try {
+                    window.parent.API_LeaveGame();
+                } catch (e) {
+
+                }
+            }
+
             CT = c.getParameter("CT");
             Lang = c.getParameter("Lang");
             CurrencyType = c.getParameter("CurrencyType");
@@ -971,10 +984,13 @@
             }
         }
 
-        function initGameEvents() {
-            var btns = document.querySelectorAll('.entryGame');
-
+        function initGameEvents() {           
             if (isMobileDevice()) {
+                //綁定直橫轉換
+                window.addEventListener("orientationchange", resize);
+
+                //綁定進入遊戲按鈕的事件
+                var btns = document.querySelectorAll('.entryGame');
                 for (var i = 0; i < btns.length; i++) {
                     var btn = btns[i];
                     ((brand) => {
@@ -997,6 +1013,8 @@
                     })(btn.dataset.brand);
                 }           
             } else {
+
+                var btns = document.querySelectorAll('.entryGame');
                 for (var i = 0; i < btns.length; i++) {
                     var btn = btns[i];
                     ((brand) => {

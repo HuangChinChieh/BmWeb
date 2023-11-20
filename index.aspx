@@ -260,6 +260,15 @@
     }
 
     function init() {
+        if (window.self !== window.parent) {
+            // 如果在iframe中，嘗試往上呼叫遊戲關閉
+            try {
+                window.parent.API_LeaveGame();
+            } catch (e) {
+
+            }
+        }
+
         if (!window.location.pathname || window.location.pathname == "/") {
             window.history.pushState({}, "", "/index.aspx");
         }
@@ -308,7 +317,7 @@
         //    if (success) {
         //        if (o.ResultState == 0) {
 
-                  
+
         //        } else {
         //            redirectIPDenied();
         //        }
@@ -323,7 +332,7 @@
 
 <style type="text/css">
     .flex-viewport img {
-        height:100vh !important;
+        height: 100vh !important;
     }
 
     .downloadBtn {
@@ -414,7 +423,7 @@
     <div class="container">
         <div id="myModal" class="reveal-modal">
             <!--<p>Welcome to the Resorts World Manila ASIA GOLD</p>-->
-       <%--     <p><%=Bulletin %></p>--%>
+            <%--     <p><%=Bulletin %></p>--%>
             <a class="close-reveal-modal">&#215;</a>
         </div>
 
