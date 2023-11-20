@@ -714,7 +714,9 @@
                             API_LoadingEnd();
                         } else {
                             if (o.Message == "InvalidSID") {
-                                userRecover();
+                                if (!gameFrameOpened) {
+                                    userRecover();
+                                }                                
                             } else {
                                 window.location.href = "index.aspx";
                             }
@@ -909,11 +911,15 @@
                     if (success == true) {
                         if (o.Result != 0) {
                             //window.location.href = "index.aspx";
-                            userRecover();
+                            if (!gameFrameOpened) {
+                                userRecover();
+                            }                            
                         }
                     } else {
                         //window.location.href = "index.aspx";
-                        userRecover();
+                        if (!gameFrameOpened) {
+                            userRecover();
+                        }                        
                     }
                 });
 
