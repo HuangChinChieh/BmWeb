@@ -1,0 +1,34 @@
+@-webkit-keyframes fadeIn { from { opacity:0; } to {opacity: 1;} }
+@-moz-keyframes fadeIn { from { opacity:0; } to {opacity: 1;} }
+@keyframes fadeIn { from { opacity:0; } to {opacity: 1;} }
+
+
+.animate{
+    -moz-transition: 2s ease-in-out;
+    -webkit-transition: 2s ease-in-out;
+    transition: 2s ease-in-out;
+
+    -moz-animation: fadeIn ease-in 1;
+    -webkit-animation: fadeIn ease-in 1;
+    animation: fadeIn ease-in 1;
+
+    -moz-animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    animation-duration: 1s;
+}
+
+#phone.animate {
+    -webkit-transform: translate(14em,0);
+    -moz-transform: translate(14em,0);
+    transform: translate(14em,0);
+}
+
+#monitor.animate {
+    -webkit-transform: translate(3em,0);
+    -moz-transform: translate(3em,0);
+    transform: translate(3em,0);
+}

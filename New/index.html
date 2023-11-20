@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, minimum-scale=1, maximum-scale=2.0" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+    <link rel="shortcut icon" href="images/logo_icon.ico" />
+    <link rel="bookmark" href="images/logo_icon.ico" />
+    <link rel="stylesheet" href="css/test.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    <title>BM</title>
+</head>
+<body>
+    <!--		桌機跟平板用的topbar-->
+    <div class="bg-top d-none d-sm-block">
+        <div class="fix-area">
+            <div class="content-top01">
+                <div class="logo-size"><center><img src="images/logo.png" alt="Responsive image" class="img-responsive"></center></div>
+                <div style="display:inline-flex" class="topbar-out">
+
+                    <div class="topbar-icon01-out">
+                        <div class="topbar-icon01">
+                            <img src="images/icon/topbar/user01-icon.png" alt="Responsive image" class="img-responsive, icon-size">
+                            <div class="font-color01">R123456789</div>
+                            <div><img src="images/icon/topbar/down-icon.png" alt="Responsive image" class="img-responsive, icon-size"></div>
+                        </div>
+                    </div>
+
+                    <div class="button01">登出</div>
+
+                    <div class="topbar-icon01-out">
+                        <div class="topbar-icon01">
+                            <img src="images/icon/topbar/coins-icon.svg" alt="Responsive image" class="img-responsive, icon-size">
+                            <div class="font-color02" style="font-weight:800">CYN</div><div class="font-color01">9123345123.5123</div>
+                            <div><img src="images/icon/topbar/down-icon.png" alt="Responsive image" class="img-responsive, icon-size"></div>
+                            <!--			<div><img src="images/icon/topbar/add-icon.svg" alt="Responsive image" class="img-responsive, icon-size"></div>-->
+                        </div>
+                    </div>
+
+                    <div class="button02">遊戲大廳</div>
+
+                    <div><img src="images/icon/topbar/paper01-icon.svg" alt="Responsive image" class="img-responsive, icon-size"></div>
+                    <div><img src="images/icon/topbar/chat01-icon.svg" alt="Responsive image" class="img-responsive, icon-size"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--		手機用的topbar-->
+
+    <div class="m-topbar-outline d-block d-sm-none">
+
+        <div class="content-top">
+
+
+            <div class="topbar-icon01-out">
+                <div class="topbar-icon01">
+                    <div class="font-color01">R123456789</div>
+                    <div><img src="images/icon/topbar/down-icon.png" alt="Responsive image" class="img-responsive, icon-size"></div>
+                </div>
+            </div>
+
+
+            <div class="topbar-icon01-out">
+                <div class="topbar-icon01">
+                    <div class="font-color02" style="font-weight:800">CYN</div><div class="font-color01">9123345123.5123</div>
+                    <div><img src="images/icon/topbar/down-icon.png" alt="Responsive image" class="img-responsive, icon-size"></div>
+                    <div></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="m-logo-size d-block d-sm-none"><center><img src="images/logo.png" alt="Responsive image" class="img-responsive"></center></div>
+
+
+    <!--	---------手機用的底部------------------------------		-->
+    <div class="m-bottombar-outline d-block d-sm-none">
+        <div class="m-bottombar-outline01">
+            <div class="m-bottombar-content01"><div class="button02">遊戲大廳</div></div>
+            <div class="m-bottombar-content02">
+                <div><img src="images/icon/topbar/info-icon.svg" alt="Responsive image" class="img-responsive, icon-size, icon-size01"></div>
+                <div><img src="images/icon/topbar/chat01-icon.svg" alt="Responsive image" class="img-responsive, icon-size, icon-size01"></div>
+                <div><img src="images/icon/topbar/chat01-icon.svg" alt="Responsive image" class="img-responsive, icon-size, icon-size01"></div>
+                <div class="button01">登出</div>
+            </div>
+        </div>
+    </div>
+
+    <!--	---------------------------------------		-->
+
+    <div id="idContainer" class="frame_container">
+        <iframe src="./home.html" style="width:100%;height:100%">
+        </iframe>
+    </div>
+    <script type="text/javascript">       
+
+        function initListener
+
+        function init() {
+            CT = c.getParameter("CT");
+            Lang = c.getParameter("Lang");
+            CurrencyType = c.getParameter("CurrencyType");
+
+
+            p = new LobbyAPI("/API/LobbyAPI.asmx");
+
+            if (!CT) {
+                window.location.href = "index.aspx";
+            } else {
+                CT = decodeURIComponent(CT)
+            }
+
+            var guid = Math.uuid();
+
+            API_ReceivePoint();
+
+
+
+            if (Lang) {
+                idlangSel.value = Lang;
+            } else {
+                if (window.localStorage.getItem("Lang")) {
+                    Lang = window.localStorage.getItem("Lang");
+                }
+
+                if (!Lang) {
+                    Lang = "ENG";
+                }
+            }
+
+
+
+            //mlp = new multiLanguage();
+
+            //setLanguage(Lang, function () {
+
+            //    //initLiveChat();
+            //});
+
+
+            document.getElementById("idGameContainer").addEventListener("transitionend", () => {
+                // 过渡完成后执行的代码
+                if (gameFrameOpened == false) {
+                    document.querySelector(".game-mask").classList.add("is-hide");
+                }
+            });
+
+
+            initGameEvents();
+
+            //設定iframeResize;
+            resize();
+
+            //啟用語系
+            mlp = new multiLanguage();
+            setLanguage(Lang, function () { });
+
+
+            //定時激活token
+            window.setInterval(function () {
+                // refresh SID and Token;
+                var guid = Math.uuid();
+
+                p.KeepSIDByProduct(CT, guid, function (success, o) {
+                    if (success == true) {
+                        if (o.Result != 0) {
+                            window.location.href = "index.aspx";
+                        }
+                    } else {
+                        window.location.href = "index.aspx";
+                    }
+                });
+
+            }, 10000);
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
