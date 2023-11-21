@@ -1,14 +1,15 @@
 {
-  "多重帳號維護": "Multiple Account Management",
+  "多重帳號維護": "Sub-ID Management",
   "編輯": "Edit",
   "移除": "Delete",
-  "多重帳號移除": "Delete Multiple Account",
-  "確定移除此帳號": "Are you sure to delete this multiple account?",
+  "多重帳號移除": "Delete Sub-ID",
+  "確定移除此帳號": "Are you sure to delete this Sub-ID?",
   "完成": "System Message",
-  "更新完成": "The account has been deleted.",
-  "無數據": "There is no information related to multiple account settings.",
-  "新增多重帳號": "Add Multiple Account",
-  "切換多重帳號": "Switch Multiple Account",
-  "多重帳號": "Multiple Account Management"
+  "更新完成": "The Sub-ID has been deleted.",
+  "無數據": "There is no information related to Sub-ID .",
+  "新增多重帳號": "Sub-ID Adding",
+  "切換多重帳號": "Switch To My Sub-ID ",
+  "多重帳號": "Sub-ID Management",
+  "該帳號非本人子帳號": "This ID is not a Sub-ID created by you. If you have any questions, please contact customer service."
 
 }
