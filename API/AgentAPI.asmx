@@ -301,5 +301,16 @@ public class AgentAPI : System.Web.Services.WebService {
 
         return R;
     }
+        
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public EWin.BmAgent.UserAgentInfoResult DeleteUserAccountSubUserList(string AID, string LoginAccount) {
+        EWin.BmAgent.BmAgent api = new EWin.BmAgent.BmAgent();
+        EWin.BmAgent.UserAgentInfoResult RetValue = new EWin.BmAgent.UserAgentInfoResult();
+
+        RetValue = api.DeleteUserAccountSubUser(AID, LoginAccount);
+
+        return RetValue;
+    }
 
 }
