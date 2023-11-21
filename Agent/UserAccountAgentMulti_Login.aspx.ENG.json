@@ -1,9 +1,10 @@
 {
-  "多重帳號切換": "Multiple Account Switching",
+  "多重帳號切換": "Sub-ID Switching",
   "切換": "Switch",
-  "帳號切換": "Account Switch",
-  "確定切換此帳號": "Want to switch to this account?",
+  "帳號切換": "Switch To My Sub-Account",
+  "確定切換此帳號": "Do you want to switch to this sub-account?",
   "完成": "System Message",
-  "切換完成": "Switch to this account successfully.",
-  "此帳號無使用權限": "You don't have permission to use the agent app, please contact customer service. Thank you!"
+  "切換完成": "Switched successfully! You are now using your sub-account.",
+  "此帳號無使用權限": "You don't have permission to use the agent app, please contact customer service!",
+  "無數據": "There are currently no sub-accounts. Please add one if needed."
 }

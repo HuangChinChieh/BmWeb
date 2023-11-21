@@ -81,12 +81,15 @@
   "套用": "Quick Apply",
   "會員編輯": "Downline Editing",
   "帳戶狀態": "Status",
-  "正常": "Normal",
-  "停用": "Disabled",
+  "正常": "Open",
+  "停用": "Close",
   "Default": "Baccarat",
   "PS": "BM Sports",
   "DBES": "BM eSports",
   "錢包密碼": "Wallet Password",
   "請輸入錢包密碼": "(Please enter the wallet password.)",
-  "帳號含有限制開頭BMH，請使用其他帳號，如有疑問請聯繫客服。": "Account cannot start with BMH, please use another account.<br>if you have any questions, please contact customer service."
+  "帳號含有限制開頭BMH，請使用其他帳號，如有疑問請聯繫客服。": "Account cannot start with BMH, please use another account.<br>if you have any questions, please contact customer service.",
+  "注意!!各幣別的百家樂錢包為[主要錢包]，若將該幣別的百家樂錢包關閉，則無法使用該幣別進行遊玩任何遊戲！": "Attention! Each currency's Baccarat wallet is the MAIN WALLET. If you close the MAIN WALLET, you can't play games with that currency!",
+  "狀態": "Status",
+  "使用中": "Open"
 }

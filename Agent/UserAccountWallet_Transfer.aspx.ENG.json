@@ -24,8 +24,8 @@
   "請填寫這個欄位": "Please enter the information.",
   "來源帳戶額度不足": "Unable to transfer due to the transfer-out account is insufficient, please check.",
   "InvalidPassword": "Wallet password is incorrect.",
-  "作業進行中": "It is being processed, please do not click the button repeatedly, thank you!",
-  "尚未開啟任一錢包": "No wallet is available, please contact customer service or upline, thank you!",
+  "作業進行中": "It is being processed, please do not click the button repeatedly.",
+  "尚未開啟任一錢包": "No wallet is available, please contact customer service or upline.",
   "轉出錢包1": "Wallet",
   "來源帳戶或 PointType 不存在": "Sending Account or the wallet does not exist, please check.",
   "目的帳戶或 PointType 不存在": "Receiver Account or the wallet does not exist, please check.",
@@ -36,5 +36,6 @@
   "三秒內交易": "You have made the transaction within 3 seconds, please try later on.",
   "轉入帳號錯誤": "The receiver account is incorrect.",
   "轉出金額不可輸入負數": "The transfer amount cannot be minus!",
-  "此帳號非您可轉帳對象": "This account is not eligible for your transfer.<br> If there is any question, please contact customer service."
+  "此帳號非您可轉帳對象": "This account is not eligible for your transfer.<br> If there is any question, please contact customer service.",
+  "轉帳對象該錢包已被停用": "The wallet of the transfer recipient has been deactivated. .<br> Please contact customer service if you have any questions."
 }

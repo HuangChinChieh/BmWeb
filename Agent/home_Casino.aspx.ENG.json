@@ -60,16 +60,17 @@
   "投注人數": "Betting Users",
   "活躍用戶": "Active Users",
   "人": "P",
-  "各遊戲的佔成返水": "Commiss.& Rebate for Each Game",
+  "各遊戲的佔成返水": "Term of Each Game",
   "返水率": "Rolling%",
   "活躍會員 (前10)": "Active Users(Top 10)",
   "轉碼": "Rolling",
   "輸贏": "Win/Loss",
   "餘額": "Balance",
   "筆": "ea",
-  "遊戲種類": "Game Categories",
-  "佔成返水": "My Term",
-  "貨幣": "Currency",
-  "總線額度": "My Line Balance<br>(including yourself)"
-
+  "遊戲種類": "Game",
+  "佔成返水": "Baccarat Term",
+  "貨幣": "Curr.",
+  "總線額度": "My Line Balance<br>(including yourself)",
+  "PS": "BM Sports",
+  "DBES": "BM eSports"
 }
