@@ -37,39 +37,7 @@
         //function EditAccount(LoginAccount) {
         //    window.parent.API_NewWindow(mlp.getLanguageKey("多重帳號編輯"), "UserAccountAgentMuti_Edit.aspx?LoginAccount=" + LoginAccount);
         //}
-
-        //function DelAccount(LoginAccount) {
-
-        //    postObj = {
-        //        AID: EWinInfo.ASID,
-        //        LoginAccount: LoginAccount
-        //    };
-
-        //    c.callService(ApiUrl + "/DeleteUserAccountSubUserList", postObj, function (success, obj) {
-        //        if (success) {
-        //            var o = c.getJSON(obj);
-        //            if (o.Result == 0) {
-        //                window.parent.API_ShowMessageOK(mlp.getLanguageKey("完成"), mlp.getLanguageKey("更新完成"), function () {
-        //                    window.parent.API_CloseWindow(true);
-        //                });
-        //            } else {
-        //                window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o.Message));
-
-        //                if (cb)
-        //                    cb(false);
-        //            }
-        //        } else {
-        //            if (o == "Timeout") {
-        //                window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請稍後再嘗試"));
-        //            } else {
-        //                window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o));
-        //            }
-        //        }
-        //    });
-        //}
-
         
-
         function DelAccount(LoginAccount) {
             window.parent.API_ShowMessage(mlp.getLanguageKey("多重帳號移除"), mlp.getLanguageKey("確定移除此帳號"), function () {
                 api.DeleteUserAccountSubUserList(EWinInfo.ASID, LoginAccount, function (success, o) {
@@ -122,65 +90,6 @@
 
                                     btnDelUser = c.getFirstClassElement(temp, "btnDelUser");
                                     btnDelUser.onclick = new Function("DelAccount('" + loginaccount + "')");
-
-                                    //btnDelUser.onclick = (function () {
-                                    //    var k = this;
-                                    //    window.parent.API_ShowMessage(mlp.getLanguageKey("移除"), mlp.getLanguageKey("確定移除此帳號"), function () {
-                                    //        postObj = {
-                                    //            AID: EWinInfo.ASID,
-                                    //            LoginAccount: k
-                                    //        };
-                                            
-                                    //        //$.ajax({
-                                    //        //    url: ApiUrl + "/DeleteUserAccountSubUserList",
-                                    //        //    type: "POST",
-                                    //        //    dataType: "json",
-                                    //        //    data: JSON.stringify(postObj),
-                                    //        //    async: false,
-                                    //        //    contentType: "application/json; charset=utf-8",
-                                    //        //    success: function (obj) {
-                                    //        //        var o = c.getJSON(obj);
-                                    //        //        if (o.Result == 0) {
-                                    //        //            //window.parent.API_ShowMessageOK(mlp.getLanguageKey("完成"), mlp.getLanguageKey("更新完成"), function () {
-                                    //        //            //    window.parent.API_CloseWindow(true);
-                                    //        //            //});
-
-                                    //        //              setUserAccountAgentMuti();
-                                    //        //        } else {
-                                    //        //            window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o.Message));
-
-                                    //        //        }
-                                    //        //    },
-                                    //        //    complete: function () {
-                                    //        //        setUserAccountAgentMuti();
-                                    //        //    }
-                                    //        //});
-
-
-
-                                    //        c.callService(ApiUrl + "/DeleteUserAccountSubUserList", postObj, function (success, obj) {
-                                    //            if (success) {
-                                    //                var o = c.getJSON(obj);
-                                    //                if (o.Result == 0) {
-                                    //                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("完成"), mlp.getLanguageKey("更新完成"), function () {
-                                    //                        window.parent.API_CloseWindow(true);
-                                    //                    });
-                                    //                } else {
-                                    //                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o.Message));
-
-                                    //                    if (cb)
-                                    //                        cb(false);
-                                    //                }
-                                    //            } else {
-                                    //                if (o == "Timeout") {
-                                    //                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請稍後再嘗試"));
-                                    //                } else {
-                                    //                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o));
-                                    //                }
-                                    //            }
-                                    //        });
-                                    //    });
-                                    //}).bind(loginaccount);
 
                                     idUserList.appendChild(temp);
 
