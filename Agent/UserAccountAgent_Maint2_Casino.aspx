@@ -304,17 +304,28 @@
 
                     targetDom.querySelector(".Expand").dataset.isloaded = "Y";
 
-                    if (o.SummaryList.length < 20) {
+                    //if (o.SummaryList.length < 20) {
+                    //    moreBtnRowDom.style.display = "none";
+                    //}
+                    if (o.PageCount > o.Page) {
+                     
+                    } else {
                         moreBtnRowDom.style.display = "none";
                     }
                 } else {
                     // page > 1 => targetDom = more按鈕的Row
                     moreBtnRowDom = targetDom;
                     moreBtnDom = targetDom.querySelector(".moreBtn");
-                    if (o.SummaryList.length < 20) {
-                        moreBtnRowDom.style.display = "none";
-                    } else {
+                    //if (o.SummaryList.length < 20) {
+                    //    moreBtnRowDom.style.display = "none";
+                    //} else {
+                    //    moreBtnDom.dataset.page = page.toString();
+                    //}
+
+                    if (o.PageCount > o.Page) {
                         moreBtnDom.dataset.page = page.toString();
+                    } else {
+                        moreBtnRowDom.style.display = "none";
                     }
                 }
 
@@ -331,7 +342,13 @@
                 moreBtnDom.style.marginLeft = ((o.SelfInsideLevel + 1) * 20) + "px";
                 idList.appendChild(moreBtnRowDom);
 
-                if (o.SummaryList.length < 20) {
+                //if (o.SummaryList.length < 20) {
+                //    moreBtnRowDom.style.display = "none";
+                //}
+
+                if (o.PageCount > o.Page) {
+
+                } else {
                     moreBtnRowDom.style.display = "none";
                 }
             }
