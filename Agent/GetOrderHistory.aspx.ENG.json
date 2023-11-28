@@ -33,6 +33,13 @@
   "贏": "Win",
   "平": "Tie",
   "PS": "BM Sports",
-  "DBES": "BM eSports"
+  "DBES": "BM eSports",
+  "遊戲品牌": "Game Platform",
+  "即時結算狀態": "Real-time Settl. Status",
+  "投注時佔成率": "Rolling % @ The Time",
+  "投注時轉碼率": "Sharing % @ The Time",
+  "尚未結算": "Pending",
+  "已結算": "Settled",
+  "EWin": "BM Live"
 
 }
