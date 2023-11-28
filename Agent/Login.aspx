@@ -406,8 +406,8 @@
                     <div class="form-group" style="align-self: center">
                         <div class="langSel_container" style="height: 100%;">
                             <select id="idLoginType" class="langSel" onchange="loginTypeSelChange(event)" name="LoginType" style="height: 100%; width: 100%; font-size: 20px; padding: 5px">
-                                <option value="0">主帳戶登入</option>
-                                <option value="1">助手登入</option>
+                                <option value="0"class="language_replace">主帳戶登入</option>
+                                <option value="1"class="language_replace">助手登入</option>
                             </select>
                         </div>
                     </div>

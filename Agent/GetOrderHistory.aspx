@@ -180,8 +180,8 @@
                 var t = c.getTemplate("templateTableItem");
 
                 c.setClassText(t, "OrderHistoryID", null, item.OrderHistoryID);
-                c.setClassText(t, "GameCode", null, item.GameCode);
-                c.setClassText(t, "GameCategoryCode", null, mlp.getLanguageKey(item.GameCategoryCode));
+                //c.setClassText(t, "GameCode", null, item.GameCode);
+                //c.setClassText(t, "GameCategoryCode", null, mlp.getLanguageKey(item.GameCategoryCode));
                 c.setClassText(t, "CurrencyType", null, item.CurrencyType);
                 c.setClassText(t, "OrderValue", null, c.toCurrency(item.OrderValue));
                 c.setClassText(t, "RewardValue", null, c.toCurrency(item.RewardValue));
@@ -189,11 +189,20 @@
                 c.setClassText(t, "GameDate", null, item.GameDate);
 
                 if (item.RewardValue == 0) {
-                    c.setClassText(t, "GameResult", null, `<span style="color:red">${mlp.getLanguageKey("平")}</span>`);
+                    c.setClassText(t, "GameResult", null, `<span style="color:#FF359A">${mlp.getLanguageKey("平")}</span>`);
                 } else if (item.RewardValue > 0) {
-                    c.setClassText(t, "GameResult", null, `<span style="color:green">${mlp.getLanguageKey("贏")}</span>`);
+                    c.setClassText(t, "GameResult", null, `<span style="color:#28FF28">${mlp.getLanguageKey("贏")}</span>`);
                 } else {
-                    c.setClassText(t, "GameResult", null, `<span style="color:red">${mlp.getLanguageKey("輸")}</span>`);
+                    c.setClassText(t, "GameResult", null, `<span style="color:yellow">${mlp.getLanguageKey("輸")}</span>`);
+                }
+                
+                c.setClassText(t, "GameBrand", null, mlp.getLanguageKey(item.GameBrand));
+                c.setClassText(t, "UserRate", null, item.UserRate);
+                c.setClassText(t, "BuyChipRate", null, item.BuyChipRate);
+                if (item.RealTimeAccountingStatus == 0) {
+                    c.setClassText(t, "RealTimeAccountingStatus", null, mlp.getLanguageKey("尚未結算"));
+                } else {
+                    c.setClassText(t, "RealTimeAccountingStatus", null, mlp.getLanguageKey("已結算"));
                 }
 
                 idList.appendChild(t);
@@ -484,13 +493,17 @@
                                 <span class="td__title"><span class="language_replace">ID</span></span>
                                 <span class="td__content"><i class="icon icon-s icon-before"></i><span class="OrderHistoryID"></span></span>
                             </div>
-                            <div class="tbody__td td-3 nonTitle">
+<%--                            <div class="tbody__td td-3 nonTitle">
                                 <span class="td__title"><span class="language_replace">遊戲代碼</span></span>
                                 <span class="td__content"><i class="icon icon-s icon-before"></i><span class="GameCode"></span></span>
                             </div>
                             <div class="tbody__td td-3 nonTitle">
                                 <span class="td__title"><span class="language_replace">遊戲類型</span></span>
                                 <span class="td__content"><i class="icon icon-s icon-before"></i><span class="GameCategoryCode"></span></span>
+                            </div>--%>
+                            <div class="tbody__td td-3 nonTitle">
+                                <span class="td__title"><span class="language_replace">遊戲品牌</span></span>
+                                <span class="td__content"><i class="icon icon-s icon-before"></i><span class="GameBrand"></span></span>
                             </div>
                             <div class="tbody__td td-3 nonTitle">
                                 <span class="td__title"><span class="language_replace">幣別</span></span>
@@ -512,6 +525,18 @@
                                 <span class="td__title"><span class="language_replace">遊戲結果</span></span>
                                 <span class="td__content"><i class="icon icon-s icon-before"></i><span class="GameResult"></span></span>
                             </div>
+                            <div class="tbody__td td-3 nonTitle">
+                                <span class="td__title"><span class="language_replace">投注時佔成率</span></span>
+                                <span class="td__content"><i class="icon icon-s icon-before"></i><span class="UserRate"></span></span>
+                            </div>
+                            <div class="tbody__td td-3 nonTitle">
+                                <span class="td__title"><span class="language_replace">投注時轉碼率</span></span>
+                                <span class="td__content"><i class="icon icon-s icon-before"></i><span class="BuyChipRate"></span></span>
+                            </div>
+                            <div class="tbody__td td-3 nonTitle">
+                                <span class="td__title"><span class="language_replace">即時結算狀態</span></span>
+                                <span class="td__content"><i class="icon icon-s icon-before"></i><span class="RealTimeAccountingStatus"></span></span>
+                            </div>
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><i class="icon icon-ewin-default-accountRolling icon-s icon-before"></i><span class="language_replace">遊戲時間</span></span>
                                 <span class="td__content"><span class="GameDate">CON4</span></span>
@@ -523,13 +548,17 @@
                         <!--標題項目單行 -->
                         <div class="thead__tr">
                             <div class="thead__th"><span class="language_replace">ID</span></div>
-                            <div class="thead__th"><span class="language_replace">遊戲代碼</span></div>
-                            <div class="thead__th"><span class="language_replace">遊戲類型</span></div>
+<%--                            <div class="thead__th"><span class="language_replace">遊戲代碼</span></div>
+                            <div class="thead__th"><span class="language_replace">遊戲類型</span></div>--%>
+                            <div class="thead__th"><span class="language_replace">遊戲品牌</span></div>
                             <div class="thead__th"><span class="language_replace">幣別</span></div>
                             <div class="thead__th"><span class="language_replace">投注額度</span></div>
                             <div class="thead__th"><span class="language_replace">上下數</span></div>
                             <div class="thead__th"><span class="language_replace">轉碼數</span></div>
                             <div class="thead__th"><span class="language_replace">遊戲結果</span></div>
+                            <div class="thead__th"><span class="language_replace">投注時佔成率</span></div>
+                            <div class="thead__th"><span class="language_replace">投注時轉碼率</span></div>
+                            <div class="thead__th"><span class="language_replace">即時結算狀態</span></div>
                             <div class="thead__th"><span class="language_replace">遊戲時間</span></div>
                         </div>
                     </div>
