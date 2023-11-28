@@ -2093,6 +2093,9 @@
           <s:element minOccurs="0" maxOccurs="1" name="GameDate" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="RawData" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="UserIP" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserRate" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="BuyChipRate" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="RealTimeAccountingStatus" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="CreateDate" type="s:string" />
         </s:sequence>
       </s:complexType>
