@@ -43,18 +43,18 @@
 
         .homeitemborder {
             border: solid 3px rgba(255, 255, 255, 0.15);
-            margin-bottom: 20px;
+            margin-bottom: 5px;
         }
 
         .homeitemtitle {
-            font-size: 1.15rem;
+            font-size: 1rem;
             font-weight: bold;
             color: rgba(227, 195, 141, 0.85);
         }
 
         .homeitemvalue {
             color: rgba(255, 238, 210, 0.8);
-            font-size: 2rem;
+            font-size: 1.5rem;
         }
 
         .homeitembackground {
@@ -253,31 +253,31 @@
             var postData;
             $(".TotalValidBetValue").text(0);
             $(".TotalRewardValue").text(0);
-            $(".UserRebate").text(0);
-            $(".PaidOPValue").text(0);
-            $(".TotalNGR").text(0);
-            $(".ComissionValue").text(0);
-            $(".TotalLineRebate").text(0);
-            $(".TotalChildLineRebate").text(0);
-            $(".TotalOrderCount").text(0);
-            $(".NewUserCount").text(0);
-            $(".WithdrawalValue").text(0);
-            $(".WithdrawalCount").text(0);
-            $(".DepositValue").text(0);
-            $(".DepositCount").text(0);
-            $(".FirstDepositValue").text(0);
-            $(".FirstDepositCount").text(0);
-            $(".RewardValue").text(0);
-            $(".NotFirstDepositCount").text(0);
-            $(".PreferentialCost").text(0);
-            $(".FailureCondition").text("");
-            $(".UserRebateUserRate").text(0);
+            //$(".UserRebate").text(0);
+            //$(".PaidOPValue").text(0);
+            //$(".TotalNGR").text(0);
+            //$(".ComissionValue").text(0);
+            //$(".TotalLineRebate").text(0);
+            //$(".TotalChildLineRebate").text(0);
+            //$(".TotalOrderCount").text(0);
+            //$(".NewUserCount").text(0);
+            //$(".WithdrawalValue").text(0);
+            //$(".WithdrawalCount").text(0);
+            //$(".DepositValue").text(0);
+            //$(".DepositCount").text(0);
+            //$(".FirstDepositValue").text(0);
+            //$(".FirstDepositCount").text(0);
+            //$(".RewardValue").text(0);
+            //$(".NotFirstDepositCount").text(0);
+            //$(".PreferentialCost").text(0);
+            //$(".FailureCondition").text("");
+            //$(".UserRebateUserRate").text(0);
             $(".UserRebateCommission").text(0);
             $(".TotalLineRebateUserRate").text(0);
-            $(".TotalChildLineRebateUserRate").text(0);
-            $(".TotalLineRebateCommission").text(0);
-            $(".TotalChildLineRebateCommission").text(0);
-            $(".ActiveUser").text(0);
+            //$(".TotalChildLineRebateUserRate").text(0);
+            //$(".TotalLineRebateCommission").text(0);
+            //$(".TotalChildLineRebateCommission").text(0);
+            //$(".ActiveUser").text(0);
             $("#tb_TopTenOrderUser").empty();
             MsgText = " Group Profit - DownLine Total Profit = Pesonal Profit,<br/>"
                 + " NGR * Share (at that time) = Group Profit,<br/>"
@@ -326,11 +326,11 @@
                     $("#tb_TopTenOrderUser").empty();
 
                     if (o.Result == 0) {
-                        $(".FirstDepositCount").text(toCurrency(o.FirstDepositCount));
-                        $(".NotFirstDepositCount").text(toCurrency(o.NextDepositCount));
-                        $(".TotalWithdrawUsers").text(toCurrency(o.TotalWithdrawUsers));
+                        //$(".FirstDepositCount").text(toCurrency(o.FirstDepositCount));
+                        //$(".NotFirstDepositCount").text(toCurrency(o.NextDepositCount));
+                        //$(".TotalWithdrawUsers").text(toCurrency(o.TotalWithdrawUsers));
                         $(".TotalOrderUsers").text(toCurrency(o.TotalOrderUsers));
-                        $(".ActivateUserCount").text(toCurrency(o.ActivateUserCount));
+                        //$(".ActivateUserCount").text(toCurrency(o.ActivateUserCount));
 
                         if (o.UserOrderList != null) {
                             for (var i = 0; i < o.UserOrderList.length; i++) {
@@ -395,7 +395,7 @@
                             }
 
                             $(".TotalValidBetValue").text(toCurrency(TotalValidBetValue));
-                            $(".UserRebateUserRate").text(toCurrency(UserRebateUserRate));
+                            //$(".UserRebateUserRate").text(toCurrency(UserRebateUserRate));
                             //$(".PaidOPValue").text(toCurrency(PaidOPValue));
                             //$(".TotalNGR").text(toCurrency(TotalNGR));
                             $(".UserRebateCommission").text(toCurrency(UserRebateCommission));
@@ -404,15 +404,15 @@
                             //$(".TotalLineRebateCommission").text(toCurrency(TotalLineRebateCommission));
                             //$(".TotalChildLineRebateCommission").text(toCurrency(TotalLineRebateCommission - UserRebateCommission));
                             $(".TotalRewardValue").text(toCurrency(RewardValue));
-                            $(".PreferentialCost").text(toCurrency(PreferentialCost));
+                            //$(".PreferentialCost").text(toCurrency(PreferentialCost));
                             //$(".TotalOrderCount").text(toCurrency(TotalOrderCount));
                             //$(".ActiveUser").text(toCurrency(ActiveUser));
-                            $(".NewUserCount").text(toCurrency(NewUserCount));
-                            $(".WithdrawalValue").text(toCurrency(WithdrawalValue));
-                            $(".WithdrawalCount").text(toCurrency(WithdrawalCount));
-                            $(".DepositValue").text(toCurrency(DepositValue));
-                            $(".DepositCount").text(toCurrency(DepositCount));
-                            $(".FirstDepositValue").text(toCurrency(FirstDepositValue));
+                            //$(".NewUserCount").text(toCurrency(NewUserCount));
+                            //$(".WithdrawalValue").text(toCurrency(WithdrawalValue));
+                            //$(".WithdrawalCount").text(toCurrency(WithdrawalCount));
+                            //$(".DepositValue").text(toCurrency(DepositValue));
+                            //$(".DepositCount").text(toCurrency(DepositCount));
+                            //$(".FirstDepositValue").text(toCurrency(FirstDepositValue));
                         }
                     } else {
                         window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(obj.Message));
@@ -640,7 +640,7 @@
         <div class="row" style="width: 99%; margin: auto; margin-top: 20px">
             <div class="col-12 col-md-12 col-lg-12 col-gx-3 col-xl-3">
 
-                <div class="currencyWalletList" style="margin-top: 20px">
+                <div class="currencyWalletList"><%-- style="margin-top: 20px"--%>
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12">
@@ -691,7 +691,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12">
+                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12" style="display:none">
                                         <div class="item row">
                                             <div class="col-8 col-md-8 col-lg-8 col-gx-8 col-xl-8">
                                                 <div>
@@ -722,6 +722,43 @@
                                             <div class="col-3 col-md-3 col-lg-3 col-gx-3 col-xl-3" style="margin-left: 20px;">
                                                 <img id="QRCodeimg" alt="" />
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12" style="padding:0px">
+                                        <div style="padding-top: 10px">
+                                            <div style="text-align: center; padding-bottom: 5px;">
+                                                <span class="currency language_replace homeitemtitle">佔成返水</span>
+                                            </div>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col" class="language_replace">貨幣</th>
+                                                        <th scope="col" class="language_replace">返水率</th>
+                                                        <th scope="col" class="language_replace">佔成率</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tb_Wallet">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12" style="padding:0px">
+                                        <div style="padding-top: 10px">
+                                            <div style="text-align: center; padding-bottom: 5px;">
+                                                <span class="currency language_replace homeitemtitle">各遊戲的佔成返水</span>
+                                            </div>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                <th scope="col" class="language_replace">貨幣</th>
+                                                <th scope="col" class="language_replace">遊戲種類</th>
+                                                <th scope="col" class="language_replace">返水率</th>
+                                                <th scope="col" class="language_replace">佔成率</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tb_GameAccountingCode">
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12">
@@ -804,25 +841,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12" style="padding:0px">
-                                        <div style="padding-top: 10px">
-                                            <div style="text-align: center; padding-bottom: 5px;">
-                                                <span class="currency language_replace homeitemtitle">佔成返水</span>
-                                            </div>
-                                            <table class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col" class="language_replace">貨幣</th>
-                                                        <th scope="col" class="language_replace">返水率</th>
-                                                        <th scope="col" class="language_replace">佔成率</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="tb_Wallet">
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                    </div>
                                 </div>
                             </div>
 
@@ -867,75 +885,14 @@
                 <div class="currencyWalletList" style="margin-top: 5px">
                     <div class="container-fluid">
                         <div id="idUserInfo" class="row">
-
-                            <div class="col-12 col-md-12 col-lg-6 col-gx-6 col-xl-6">
-                                <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/UserRebateCommission.png); text-align: right">
-                                    <div>
-                                        <span class="currency language_replace homeitemtitle">總返水</span>
-                                    </div>
-                                    <div>
-                                        <span class="language_replace UserRebateCommission homeitemvalue">0</span>
-                                    </div>
-
-                                    <div class="wrapper_revenueAmount">
-                                        <div class="detailItem">
-                                            <span class="title-s"><span class="language_replace"></span></span>
-                                            <span class="data"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-md-12 col-lg-6 col-gx-6 col-xl-6">
-                                <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/UserRebateUserRate.png); text-align: right">
-                                    <div>
-                                        <span class="currency language_replace homeitemtitle">總收益</span>
-                                    </div>
-                                    <div>
-                                        <span class="language_replace UserRebateUserRate homeitemvalue">0</span>
-                                    </div>
-
-                                    <div class="wrapper_revenueAmount">
-                                        <div class="detailItem">
-                                            <span class="title-s"><span class="language_replace"></span></span>
-                                            <span class="data FailureCondition" style="color: #FF4D00; display: none"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            
                             <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3">
-                                <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/TotalValidBetValue.png); text-align: right">
+                                <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/TotalOrderUsers.png); text-align: right">
                                     <div>
-                                        <span class="currency language_replace homeitemtitle">有效投注</span>
-                                    </div>
-                                    <div>
-                                        <span class="language_replace TotalValidBetValue homeitemvalue">0</span>
-                                    </div>
-
-                                    <div class="wrapper_revenueAmount">
-                                        <div class="detailItem">
-                                            <span class="title-s"><span class="language_replace"></span></span>
-                                            <span class="data"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3">
-                                <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/TotalRewardValue.png); text-align: right">
-                                    <div>
-                                        <span class="currency language_replace homeitemtitle">會員輸贏</span>
+                                        <span class="currency language_replace homeitemtitle">投注人數</span>
                                     </div>
                                     <div>
-                                        <span class="language_replace TotalRewardValue homeitemvalue">0</span>
-                                    </div>
-
-                                    <div class="wrapper_revenueAmount">
-                                        <div class="detailItem">
-                                            <span class="title-s"><span class="language_replace"></span></span>
-                                            <span class="data"></span>
-                                        </div>
+                                        <span class="language_replace TotalOrderUsers  homeitemvalue">0</span>
                                     </div>
                                 </div>
                             </div>
@@ -948,12 +905,52 @@
                                     <div>
                                         <span class="language_replace TotalLineRebateUserRate  homeitemvalue">0</span>
                                     </div>
+                                </div>
+                            </div>
 
-                                    <div class="wrapper_revenueAmount">
-                                        <div class="detailItem">
-                                            <span class="title-s"><span class="language_replace"></span></span>
-                                            <span class="data"></span>
-                                        </div>
+                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3">
+                                <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/UserRebateCommission.png); text-align: right">
+                                    <div>
+                                        <span class="currency language_replace homeitemtitle">總返水</span>
+                                    </div>
+                                    <div>
+                                        <span class="language_replace UserRebateCommission homeitemvalue">0</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3">
+                                <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/TotalRewardValue.png); text-align: right">
+                                    <div>
+                                        <span class="currency language_replace homeitemtitle">會員輸贏</span>
+                                    </div>
+                                    <div>
+                                        <span class="language_replace TotalRewardValue homeitemvalue">0</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3">
+                                <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/TotalValidBetValue.png); text-align: right">
+                                    <div>
+                                        <span class="currency language_replace homeitemtitle">有效投注</span>
+                                    </div>
+                                    <div>
+                                        <span class="language_replace TotalValidBetValue homeitemvalue">0</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <%--<div class="col-12 col-md-12 col-lg-6 col-gx-6 col-xl-6" style="display:none">
+                                <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/UserRebateUserRate.png); text-align: right">
+                                    <div>
+                                        <span class="currency language_replace homeitemtitle">總收益</span>
+                                    </div>
+                                    <div>
+                                        <span class="language_replace UserRebateUserRate homeitemvalue">0</span>
                                     </div>
                                 </div>
                             </div>
@@ -966,33 +963,9 @@
                                     <div>
                                         <span class="language_replace PreferentialCost homeitemvalue">0</span>
                                     </div>
-
-                                    <div class="wrapper_revenueAmount">
-                                        <div class="detailItem">
-                                            <span class="title-s"><span class="language_replace"></span></span>
-                                            <span class="data"></span>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
 
-                            <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3">
-                                <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/TotalOrderUsers.png); text-align: right">
-                                    <div>
-                                        <span class="currency language_replace homeitemtitle">投注人數</span>
-                                    </div>
-                                    <div>
-                                        <span class="language_replace TotalOrderUsers  homeitemvalue">0</span>
-                                    </div>
-
-                                    <div class="wrapper_revenueAmount">
-                                        <div class="detailItem">
-                                            <span class="title-s"><span class="language_replace"></span></span>
-                                            <span class="data"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3" style="display: none">
                                 <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/NewUserCount.png); text-align: right">
@@ -1001,13 +974,6 @@
                                     </div>
                                     <div>
                                         <span class="language_replace NewUserCount homeitemvalue">0</span>
-                                    </div>
-
-                                    <div class="wrapper_revenueAmount">
-                                        <div class="detailItem">
-                                            <span class="title-s"><span class="language_replace"></span></span>
-                                            <span class="data"></span>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1019,13 +985,6 @@
                                     </div>
                                     <div>
                                         <span class="language_replace ActivateUserCount  homeitemvalue">0</span>
-                                    </div>
-
-                                    <div class="wrapper_revenueAmount">
-                                        <div class="detailItem">
-                                            <span class="title-s"><span class="language_replace"></span></span>
-                                            <span class="data"></span>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1113,17 +1072,10 @@
                                     <div>
                                         <span class="language_replace NotFirstDepositCount homeitemvalue">0</span>
                                     </div>
-
-                                    <div class="wrapper_revenueAmount">
-                                        <div class="detailItem">
-                                            <span class="title-s"><span class="language_replace"></span></span>
-                                            <span class="data"></span>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
 
-                            <%--<div style="display: none">
+                            <div style="display: none">
                                 <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3">
                                     <div class="item homeitem">
                                         <div class="currencyWallet__type">
@@ -1279,7 +1231,7 @@
                     </div>
                 </div>
 
-                <div class="currencyWalletList" style="margin-top: 20px;">
+                <div class="currencyWalletList" style="margin-top: 20px;display:none" >
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 col-md-12 col-lg-6 col-gx-6 col-xl-6">
@@ -1296,13 +1248,13 @@
                                                 <th scope="col" class="language_replace">佔成率</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tb_GameAccountingCode">
+                                        <tbody id="tb_GameAccountingCode1">
                                         </tbody>
                                     </table>
                                 </div>
 
                             </div>
-                            <div class="col-12 col-md-12 col-lg-6 col-gx-6 col-xl-6" style="display:none">
+                            <div class="col-12 col-md-12 col-lg-6 col-gx-6 col-xl-6" >
                                 <div class="homeitemborder" style="padding: 10px">
                                     <div style="text-align: center; padding-bottom: 5px;">
                                         <span class="currency language_replace homeitemtitle">活躍會員 (前10)</span>

@@ -187,13 +187,13 @@
                 c.setClassText(t, "RewardValue", null, c.toCurrency(item.RewardValue));
                 c.setClassText(t, "BuyChipValue", null, c.toCurrency(item.BuyChipValue));
                 c.setClassText(t, "GameDate", null, item.GameDate);
-
+               
                 if (item.RewardValue == 0) {
-                    c.setClassText(t, "GameResult", null, `<span style="color:#FF359A">${mlp.getLanguageKey("平")}</span>`);
+                    c.setClassText(t, "GameResult", null, `<span style="color:#F9F900">${mlp.getLanguageKey("平")}</span>`);
                 } else if (item.RewardValue > 0) {
-                    c.setClassText(t, "GameResult", null, `<span style="color:#28FF28">${mlp.getLanguageKey("贏")}</span>`);
+                    c.setClassText(t, "GameResult", null, `<span style="color:#00DB00">${mlp.getLanguageKey("贏")}</span>`);
                 } else {
-                    c.setClassText(t, "GameResult", null, `<span style="color:yellow">${mlp.getLanguageKey("輸")}</span>`);
+                    c.setClassText(t, "GameResult", null, `<span style="color:#FF5151">${mlp.getLanguageKey("輸")}</span>`);
                 }
                 
                 c.setClassText(t, "GameBrand", null, mlp.getLanguageKey(item.GameBrand));

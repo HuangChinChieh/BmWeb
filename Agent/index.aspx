@@ -1205,11 +1205,11 @@
                             <li class="nav-item navbarMenu__catagory" id="li_Member">
                                 <span class="catagory-item"><span class="language_replace">團隊管理</span></span>
                                 <ul class="catagory">
-                                    <li class="nav-item submenu dropdown">
+                                    <%--<li class="nav-item submenu dropdown">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('團隊會員'), 'UserAccount_Maint2_Casino.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-user"></i>
                                             <span class="language_replace">會員</span></a>
-                                    </li>
+                                    </li>--%>
                                     <li class="nav-item submenu dropdown" id="li_TeamAgent">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('團隊代理'), 'UserAccountAgent_Maint2_Casino.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-user"></i>

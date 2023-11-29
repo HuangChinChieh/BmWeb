@@ -592,6 +592,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="ParentAccount" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserAccountType" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="NewUserCount" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="NewAgentCount" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="PointValue" type="s:decimal" />
@@ -2163,6 +2164,12 @@
           <s:element minOccurs="1" maxOccurs="1" name="TipsValue" type="s:decimal" />
           <s:element minOccurs="1" maxOccurs="1" name="LendChipTax" type="s:decimal" />
           <s:element minOccurs="0" maxOccurs="1" name="LoginAccount" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UserRate" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="BuyChipRate" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ManualChipValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ManualRewardValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ManualBuyChipValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ManualTipsValue" type="s:decimal" />
         </s:sequence>
       </s:complexType>
       <s:element name="GetGameSetDetailByID">

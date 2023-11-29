@@ -365,7 +365,6 @@
                 var expandBtn;
                 var parentSortKey = "";
                 c.setClassText(t, "LoginAccount", null, item.LoginAccount);
-                c.setClassText(t, "InsideLevel", null, item.UserAccountInsideLevel);
                 c.setClassText(t, "ParentLoginAccount", null, item.ParentAccount);
                 c.setClassText(t, "CurrencyType", null, SelectedWallet);
                 c.setClassText(t, "AgentCount", null, item.AgentCount);
@@ -376,6 +375,14 @@
                 c.setClassText(t, "LinePoint", null, c.toCurrency(item.LinePoint));
                 
                 var stateDom = t.querySelector(".UserAccountState");
+
+                if (item.UserAccountType == 0) {
+                    c.setClassText(t, "UserAccountType", null, mlp.getLanguageKey("會員"));
+                } else if (item.UserAccountType == 1) {
+                    c.setClassText(t, "UserAccountType", null, mlp.getLanguageKey("代理"));
+                } else {
+                    c.setClassText(t, "UserAccountType", null, mlp.getLanguageKey("股東"));
+                }
 
                 if (item.UserAccountState == 0) {
                     stateDom.innerText = mlp.getLanguageKey("正常");
@@ -468,7 +475,6 @@
                 var t = c.getTemplate("templateTableItem");
                 var expandBtn;
                 c.setClassText(t, "LoginAccount", null, item.LoginAccount);
-                c.setClassText(t, "InsideLevel", null, item.UserAccountInsideLevel);
                 c.setClassText(t, "ParentLoginAccount", null, item.ParentAccount);
                 c.setClassText(t, "CurrencyType", null, SelectedWallet);
                 c.setClassText(t, "AgentCount", null, item.AgentCount);
@@ -478,6 +484,14 @@
                 c.setClassText(t, "PointValue", null, c.toCurrency(item.PointValue));
                 c.setClassText(t, "LinePoint", null, c.toCurrency(item.LinePoint));
                 var stateDom = t.querySelector(".UserAccountState");
+
+                if (item.UserAccountType == 0) {
+                    c.setClassText(t, "UserAccountType", null, mlp.getLanguageKey("會員"));
+                } else if (item.UserAccountType == 1) {
+                    c.setClassText(t, "UserAccountType", null, mlp.getLanguageKey("代理"));
+                } else {
+                    c.setClassText(t, "UserAccountType", null, mlp.getLanguageKey("股東"));
+                }
 
                 if (item.UserAccountState == 0) {
                     stateDom.innerText = mlp.getLanguageKey("正常");
@@ -823,8 +837,8 @@
                                 </span>
                             </div>
                             <div class="tbody__td td-3 nonTitle">
-                                <span class="td__title"><span class="language_replace">層級</span></span>
-                                <span class="td__content"><i class="icon icon-s icon-before"></i><span class="InsideLevel"></span></span>
+                                <span class="td__title"><span class="language_replace">身份</span></span>
+                                <span class="td__content"><i class="icon icon-s icon-before"></i><span class="UserAccountType"></span></span>
                             </div>
                             <div class="tbody__td td-3 nonTitle">
                                 <span class="td__title"><span class="language_replace">上線帳號</span></span>
@@ -877,7 +891,7 @@
                         <!--標題項目單行 -->
                         <div class="thead__tr">
                             <div class="thead__th"><span class="language_replace">帳號</span></div>
-                            <div class="thead__th"><span class="language_replace">層級</span></div>
+                            <div class="thead__th"><span class="language_replace">身份</span></div>
                             <div class="thead__th"><span class="language_replace">上線帳號</span></div>
                             <div class="thead__th"><span class="language_replace">貨幣</span></div>
                             <div class="thead__th"><span class="language_replace">團隊代理數</span></div>

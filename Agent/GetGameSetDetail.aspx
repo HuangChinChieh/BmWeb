@@ -86,8 +86,8 @@
                     c.setClassText(t, "CurrencyType", null, data.CurrencyType);
                     c.setClassText(t, "RoadMapInfo", null, data.RoadMapInfo);
                     c.setClassText(t, "RoadMapNumber", null, data.RoadMapNumber);
-                    c.setClassText(t, "SummaryDate", null, data.SummaryDate);
-                    c.setClassText(t, "CreateDate", null, data.CreateDate);
+                    //c.setClassText(t, "SummaryDate", null, data.SummaryDate);
+                    //c.setClassText(t, "CreateDate", null, data.CreateDate);
                     c.setClassText(t, "LoginAccount", null, data.LoginAccount);
                     c.setClassText(t, "RewardValue", null, toCurrency((data.RewardValue)));
 
@@ -102,31 +102,31 @@
                             k = mlp.getLanguageKey("和");
                             break;
                         case "5":
-                            k = mlp.getLanguageKey("莊") + mlp.getLanguageKey("莊對");
+                            k = mlp.getLanguageKey("莊") + " / " + mlp.getLanguageKey("莊對");
                             break;
                         case "9":
-                            k = mlp.getLanguageKey("莊") + mlp.getLanguageKey("閒對");
+                            k = mlp.getLanguageKey("莊") + " / "  + mlp.getLanguageKey("閒對");
                             break;
                         case "D":
-                            k = mlp.getLanguageKey("莊") + mlp.getLanguageKey("莊對") + mlp.getLanguageKey("閒對");
+                            k = mlp.getLanguageKey("莊") + " / "  + mlp.getLanguageKey("莊對") + " / "  + mlp.getLanguageKey("閒對");
                             break;
                         case "6":
-                            k = mlp.getLanguageKey("閒") + mlp.getLanguageKey("莊對");
+                            k = mlp.getLanguageKey("閒") + " / "  + mlp.getLanguageKey("莊對");
                             break;
                         case "A":
-                            k = mlp.getLanguageKey("閒") + mlp.getLanguageKey("閒對");
+                            k = mlp.getLanguageKey("閒") + " / "  + mlp.getLanguageKey("閒對");
                             break;
                         case "E":
-                            k = mlp.getLanguageKey("閒") + mlp.getLanguageKey("莊對") + mlp.getLanguageKey("閒對");
+                            k = mlp.getLanguageKey("閒") + " / "  + mlp.getLanguageKey("莊對") + " / "  + mlp.getLanguageKey("閒對");
                             break;
                         case "7":
-                            k = mlp.getLanguageKey("和") + mlp.getLanguageKey("莊對");
+                            k = mlp.getLanguageKey("和") + " / "  + mlp.getLanguageKey("莊對");
                             break;
                         case "B":
-                            k = mlp.getLanguageKey("和") + mlp.getLanguageKey("閒對");
+                            k = mlp.getLanguageKey("和") + " / "  + mlp.getLanguageKey("閒對");
                             break;
                         case "F":
-                            k = mlp.getLanguageKey("和") + mlp.getLanguageKey("莊對") + mlp.getLanguageKey("閒對");
+                            k = mlp.getLanguageKey("和") + " / "  + mlp.getLanguageKey("莊對") + " / "  + mlp.getLanguageKey("閒對");
                             break;
                     }
                     c.setClassText(t, "Result", null, k);
@@ -212,14 +212,14 @@
                                 <span class="td__title"><span class="language_replace">結果</span></span>
                                 <span class="td__content"><span class="Result"></span></span>
                             </div>
-                            <div class="tbody__td td-number td-3 td-vertical">
+                            <%--<div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">結算日期</span></span>
                                 <span class="td__content"><span class="SummaryDate"></span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">建立日期</span></span>
                                 <span class="td__content"><span class="CreateDate"></span></span>
-                            </div>
+                            </div>--%>
                         </div>
                     </div>
                     <!-- 標題項目  -->
@@ -232,8 +232,8 @@
                             <div class="thead__th"><span class="language_replace">幣別</span></div>
                             <div class="thead__th"><span class="language_replace">輸贏數</span></div>
                             <div class="thead__th"><span class="language_replace">結果</span></div>
-                            <div class="thead__th"><span class="language_replace">結算日期</span></div>
-                            <div class="thead__th"><span class="language_replace">建立日期</span></div>
+                            <%--<div class="thead__th"><span class="language_replace">結算日期</span></div>
+                            <div class="thead__th"><span class="language_replace">建立日期</span></div>--%>
                         </div>
                     </div>
                     <!-- 表格上下滑動框 -->

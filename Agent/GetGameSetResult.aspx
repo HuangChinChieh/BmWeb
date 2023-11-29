@@ -144,6 +144,26 @@
                 c.setClassText(t, "LoginAccount", null, item.LoginAccount);
                 c.setClassText(t, "CreateDate", null, item.CreateDate);
                 c.setClassText(t, "UserInitChip", null, toCurrency(item.UserInitChip));
+                c.setClassText(t, "UserRate", null, toCurrency(item.UserRate));
+                c.setClassText(t, "BuyChipRate", null, toCurrency(item.BuyChipRate));
+
+                if (item.ManualBuyChipValue == 0) {
+                    c.setClassText(t, "BuyChipValue", null, toCurrency(item.BuyChipValue));
+                } else {
+                    c.setClassText(t, "BuyChipValue", null, toCurrency(item.ManualBuyChipValue));
+                }
+
+                if (item.ManualChipValue == 0) {
+                    c.setClassText(t, "AddChipValue", null, toCurrency(item.ChipValue));
+                } else {
+                    c.setClassText(t, "AddChipValue", null, toCurrency(item.ManualChipValue));
+                }
+
+                if (item.ManualTipsValue == 0) {
+                    c.setClassText(t, "TipsValue", null, toCurrency(item.TipsValue));
+                } else {
+                    c.setClassText(t, "TipsValue", null, toCurrency(item.ManualTipsValue));
+                }
                 
                 btnDetail = t.querySelector(".btnDetail");
                 btnDetail.onclick = new Function("btnDetail_Click('" + item.GameSetID + "')");
@@ -448,6 +468,14 @@
                                 <span class="td__title"><span class="language_replace">幣別</span></span>
                                 <span class="td__content"><i class="icon icon-s icon-before"></i><span class="CurrencyType"></span></span>
                             </div>
+                            <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><i class="icon icon-ewin-default-totalWinLose icon-s icon-before"></i><span class="language_replace">佔成率</span></span>
+                                <span class="td__content"><span class="UserRate">CON4</span></span>
+                            </div>
+                            <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><i class="icon icon-ewin-default-totalWinLose icon-s icon-before"></i><span class="language_replace">轉碼率</span></span>
+                                <span class="td__content"><span class="BuyChipRate">CON4</span></span>
+                            </div>
                             <div class="tbody__td td-3 nonTitle">
                                 <span class="td__title"><span class="language_replace">本金</span></span>
                                 <span class="td__content"><i class="icon icon-s icon-before"></i><span class="UserInitChip"></span></span>
@@ -459,6 +487,18 @@
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><i class="icon icon-ewin-default-totalWinLose icon-s icon-before"></i><span class="language_replace">輸贏數</span></span>
                                 <span class="td__content"><span class="RewardValue">CON4</span></span>
+                            </div>
+                            <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><i class="icon icon-ewin-default-totalWinLose icon-s icon-before"></i><span class="language_replace">轉碼數</span></span>
+                                <span class="td__content"><span class="BuyChipValue">CON4</span></span>
+                            </div>
+                            <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><i class="icon icon-ewin-default-totalWinLose icon-s icon-before"></i><span class="language_replace">加彩</span></span>
+                                <span class="td__content"><span class="AddChipValue">CON4</span></span>
+                            </div>
+                            <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><i class="icon icon-ewin-default-totalWinLose icon-s icon-before"></i><span class="language_replace">小費</span></span>
+                                <span class="td__content"><span class="TipsValue">CON4</span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><i class="icon icon-ewin-default-totalRolling icon-s icon-before"></i><span class="language_replace">建立日期</span></span>
@@ -474,9 +514,14 @@
                             <div class="thead__th"><span class="language_replace">單號</span></div>
                             <div class="thead__th"><span class="language_replace">帳號</span></div>
                             <div class="thead__th"><span class="language_replace">貨幣</span></div>
+                            <div class="thead__th"><span class="language_replace">佔成率</span></div>
+                            <div class="thead__th"><span class="language_replace">轉碼率</span></div>
                             <div class="thead__th"><span class="language_replace">本金</span></div>
                             <div class="thead__th"><span class="language_replace">狀態</span></div>
                             <div class="thead__th"><span class="language_replace">輸贏數</span></div>
+                            <div class="thead__th"><span class="language_replace">轉碼數</span></div>
+                            <div class="thead__th"><span class="language_replace">加彩</span></div>
+                            <div class="thead__th"><span class="language_replace">小費</span></div>
                             <div class="thead__th"><span class="language_replace">建立日期</span></div>
                         </div>
                     </div>
