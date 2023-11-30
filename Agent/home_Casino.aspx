@@ -149,7 +149,8 @@
                         if (o.WalletList != null) {
                             for (var i = 0; i < o.WalletList.length; i++) {
                                 var w = o.WalletList[i];
-                                let t = c.getTemplate("tempWallet");
+                                //let t = c.getTemplate("tempWallet");
+                                let t = c.getTemplate("tempGameAccountingCode");
 
                                 if (w.CurrencyType != DefaultCurrencyType) {
                                     continue;
@@ -161,11 +162,13 @@
                                     $("#idWalletBalance").text(Number(BigNumber(roundDown(w.PointValue, 4))));
                                 }
 
-                                c.setClassText(t, "GameAccountingCode", null, mlp.getLanguageKey(w.CurrencyType));
+                                c.setClassText(t, "CurrencyType", null, mlp.getLanguageKey(w.CurrencyType));
+                                c.setClassText(t, "GameAccountingCode", null, mlp.getLanguageKey("百家樂"));
                                 c.setClassText(t, "UserRate", null, c.toCurrency(w.UserRate) + "%");
                                 c.setClassText(t, "BuyChipRate", null, c.toCurrency(w.BuyChipRate) + "%");
 
-                                $("#tb_Wallet").append(t);
+                                //$("#tb_Wallet").append(t);
+                                $("#tb_GameAccountingCode").append(t);
                             }
 
                         }
@@ -603,6 +606,10 @@
             });
         }
 
+        function showNote() {
+            window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("123"));
+        }
+
         function init() {
             EWinInfo = window.parent.EWinInfo;
             if (EWinInfo) {
@@ -653,13 +660,16 @@
                                                 <div class="item homeitembackground" style="background-image: url(./Images/home/LoginAccount.png); width: 100%; height: 100%; border: hidden">
                                                 </div>
                                             </div>
-                                            <div class="col-9 col-md-9 col-lg-9 col-gx-9 col-xl-9">
+                                            <div class="col-7 col-md-7 col-lg-7 col-gx-7 col-xl-7">
                                                 <div>
                                                     <span class="currency language_replace homeitemtitle">帳號</span>
                                                 </div>
                                                 <div>
                                                     <span class="language_replace homeitemvalue" id="idLoginAccount">0</span>
                                                 </div>
+                                            </div>
+                                            <div class="col-2 col-md-2 col-lg-2 col-gx-2 col-xl-2">
+                                                <btn style="font-size: 12px; right: 5px; position: absolute; border: 2px solid; width: 22px; text-align: center; border-radius: 11px; color: #bba480; cursor: pointer;" onclick="showNote()">!</btn>
                                             </div>
                                         </div>
                                         <div class="row item"  style="border: hidden">
@@ -724,7 +734,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12" style="padding:0px">
+                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12" style="padding:0px;display:none">
                                         <div style="padding-top: 10px">
                                             <div style="text-align: center; padding-bottom: 5px;">
                                                 <span class="currency language_replace homeitemtitle">佔成返水</span>

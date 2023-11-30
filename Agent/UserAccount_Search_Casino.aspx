@@ -67,7 +67,7 @@
 
                         $("#idUserList").empty();
                         $("#idAgentList").empty();
-                        
+
                         if (o.Result == 0) {
                             setItem(o.Datas);
                         } else {
@@ -100,6 +100,11 @@
                             if (o.Result == 0) {
                                 setItem(o.Datas);
                             } else {
+                                $(".agentTitle").text(mlp.getLanguageKey("代理") + ` ( 0 )`);
+                                $(".userTitle").text(mlp.getLanguageKey("會員") + ` ( 0 )`);
+
+                                $(idAgentList).empty();
+                                $(idUserList).empty();
                                 window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey(o.Message));
                             }
                         } else {
@@ -119,6 +124,9 @@
         function setItem(item) {
             let idAgentList = $("#idAgentList");
             let idUserList = $("#idUserList");
+
+            let agentCount = 0;
+            let userCount = 0
 
             $(idAgentList).empty();
             $(idUserList).empty();
@@ -233,11 +241,16 @@
                 }
                 
                 if (k.UserAccountType == 0) {
+                    userCount = userCount + 1;
                     $("#idUserList").append(temp);
                 } else {
+                    agentCount = agentCount + 1;
                     $("#idAgentList").append(temp);
                 }
             }
+
+            $(".agentTitle").text(mlp.getLanguageKey("代理") + ` ( ${agentCount} )`);
+            $(".userTitle").text(mlp.getLanguageKey("會員") + ` ( ${userCount} )`);
         }
 
         function userUpdate(userAccountID) {
@@ -315,10 +328,10 @@
                 <div class="tab-scroller__area">
                     <div id="idParentWalletList" class="tab-scroller__content">
                         <span class="tab-item-half walletList_item itemCurrencyType active" id="tab1" onclick="changeTab(1)">
-                            <a class="language_replace mtCurrencyType">代理</a>
+                            <a class="language_replace mtCurrencyType agentTitle">代理</a>
                         </span>
                         <span class="tab-item-half walletList_item itemCurrencyType" id="tab0" onclick="changeTab(0)">
-                            <a class="language_replace mtCurrencyType">會員</a>
+                            <a class="language_replace mtCurrencyType userTitle">會員</a>
                         </span>
                         <div id="divTabSlide" class="tab-slide-half"></div>
                     </div>

@@ -94,6 +94,8 @@
         var idList = document.getElementById("idList");
         var OrderType = 0;
         var hasNoData = true;
+        let sumAmount = 0;
+        let sumAmount1 = 0;
 
         var div = document.createElement("DIV");
 
@@ -136,7 +138,8 @@
 
                     t.style.display = "none";
                     idList.appendChild(t);
-
+                    sumAmount = sumAmount + item.TransferValue;
+                    sumAmount1 = sumAmount1 + item.DstValue;
                     t.style.display = "";
                     document.getElementById("hasNoData_DIV").style.display = "none";
                     idList.classList.remove("tbody__hasNoData");
@@ -145,6 +148,8 @@
                 }
             }
         }
+        $(".sumAmount").text(sumAmount);
+        $(".sumAmount1").text(sumAmount1);
     }
 
     function setSearchFrame() {
@@ -312,6 +317,12 @@
 
         <!-- 表格 由此開始 ========== -->
         <div class="container-fluid wrapper__TopCollapse orderHistory_userAccount">
+            <h2 class="collapse-header has-arrow zIndex_overMask_SafariFix">
+                <span class="language_replace">總轉出金額</span>
+                <span class="language_replace sumAmount">0</span>
+                <span class="language_replace">總到帳金額</span>
+                <span class="language_replace sumAmount1">0</span>
+            </h2>
             <div class="MT__tableDiv" id="idResultTable">
                 <!-- 自訂表格 -->
                 <div class="MT__table table-col-8 w-200">

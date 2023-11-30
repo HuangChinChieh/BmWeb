@@ -64,7 +64,7 @@
             QueryBeginDate: startDate.value,
             QueryEndDate: endDate.value,
             SearchState: type,
-            CurrencyType : SelectedWallet
+            CurrencyType: SelectedWallet
         };
 
         window.parent.API_ShowLoading();
@@ -94,6 +94,7 @@
         var idList = document.getElementById("idList");
         var OrderType = 0;
         var hasNoData = true;
+        let sumAmount = 0;
 
         var div = document.createElement("DIV");
 
@@ -116,7 +117,7 @@
                     c.setClassText(t, "CreateDate", null, item.CreateDate);
                     c.setClassText(t, "LoginAccountU", null, item.LoginAccountU);
                     c.setClassText(t, "LoginAccountP", null, item.LoginAccountP);
-                    c.setClassText(t, "ProcessStatus", null, item.ProcessStatus == 0 ? mlp.getLanguageKey("申請提款") : (item.ProcessStatus == 1 ? mlp.getLanguageKey("完成轉帳") :mlp.getLanguageKey("拒絕")));
+                    c.setClassText(t, "ProcessStatus", null, item.ProcessStatus == 0 ? mlp.getLanguageKey("申請提款") : (item.ProcessStatus == 1 ? mlp.getLanguageKey("完成轉帳") : mlp.getLanguageKey("拒絕")));
                     c.setClassText(t, "CurrencyType", null, item.CurrencyType);
 
                     if (parseFloat(item.Amount) < 0) {
@@ -127,7 +128,7 @@
 
                     t.style.display = "none";
                     idList.appendChild(t);
-
+                    sumAmount = sumAmount + item.Amount;
                     t.style.display = "";
                     document.getElementById("hasNoData_DIV").style.display = "none";
                     idList.classList.remove("tbody__hasNoData");
@@ -136,6 +137,8 @@
                 }
             }
         }
+
+        $(".sumAmount").text(sumAmount);
     }
 
     function setSearchFrame() {
@@ -172,12 +175,13 @@
         EWinInfo = window.parent.EWinInfo;
         api = window.parent.API_GetAgentAPI();
         setSearchFrame();
-        
+
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
             window.parent.API_CloseLoading();
             SelectedWallet = parent.API_GetSelectedWallet();
             queryData();
+            ac.dataToggleCollapseInit();
         });
     }
 
@@ -259,7 +263,7 @@
                                 </div>
 
                             </div>
-                            
+
                             <div class="col-12 col-md-6 col-lg-4 col-xl-auto">
                                 <!-- 模式 -->
                                 <div class="form-group form-group-s2 ">
@@ -307,6 +311,10 @@
 
         <!-- 表格 由此開始 ========== -->
         <div class="container-fluid wrapper__TopCollapse orderHistory_userAccount">
+            <h2 class="collapse-header has-arrow zIndex_overMask_SafariFix">
+                <span class="language_replace">總金額</span>
+                <span class="language_replace sumAmount">0</span>
+            </h2>
             <div class="MT__tableDiv" id="idResultTable">
                 <!-- 自訂表格 -->
                 <div class="MT__table table-col-8 w-200">

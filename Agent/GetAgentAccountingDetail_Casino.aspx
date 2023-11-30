@@ -231,7 +231,7 @@
         div.classList.add("td__content", "td__hasNoData");
         document.getElementById("idResultTable").classList.add("MT_tableDiv__hasNoData");
         idList.classList.add("tbody__hasNoData");
-        idList.appendChild(div); 
+        idList.appendChild(div);
         if (o != null) {
             if (o.ADList != null) {
                 let hasChild = false;
@@ -243,20 +243,41 @@
                     let t = c.getTemplate("templateTableItem");
                     let expandBtn;
                     let parentSortKey = "";
+                    let ur = data.UserRate / 100;
+                    let bcr = data.BuyChipRate / 100;
+                    let TotalRebateUserRate = (-1 * data.TotalRewardValue) * ur;
+                    let CommissionValue = data.TotalValidBetValue * bcr;
+                    let CommissionCost = CommissionValue * ur;
+                    let ChildenRebateUserRate = 0;
+                    let ChildenRebateCommission = 0;
+
+                    for (var i = 0; i < data.ChildUser.length; i++) {
+                        let kk = data.ChildUser[i];
+                        ChildenRebateUserRate = ChildenRebateUserRate + (-1 * kk.TotalRewardValue * kk.UserRate / 100);
+                        ChildenRebateCommission = ChildenRebateCommission + (kk.TotalValidBetValue * kk.BuyChipRate / 100)
+                    }
 
                     c.setClassText(t, "LoginAccount", null, data.LoginAccount);
                     c.setClassText(t, "CurrencyType", null, data.CurrencyType);
                     c.setClassText(t, "SelfRewardValue", null, toCurrency((data.SelfRewardValue)));
                     c.setClassText(t, "SelfValidBetValue", null, toCurrency((data.SelfValidBetValue)));
-                    c.setClassText(t, "TotalLineRebate", null, toCurrency((data.TotalLineRebate)));
-                        //c.setClassText(t, "CommissionValue", null, toCurrency((data.CommissionValue)));
-                        //c.setClassText(t, "ChildenRebateCommission", null, toCurrency((data.ChildenRebateCommission)));
                     c.setClassText(t, "UserRate", null, data.UserRate + "%");
                     c.setClassText(t, "BuyChipRate", null, data.BuyChipRate + "%");
-                    c.setClassText(t, "AccountingOPValue", null, toCurrency((data.UserRebate)));
+
+                    c.setClassText(t, "TotalRewardValue", null, toCurrency((data.TotalRewardValue)));
+                    c.setClassText(t, "TotalValidBetValue", null, toCurrency((data.TotalValidBetValue)));
+                    c.setClassText(t, "TotalRebateUserRate", null, toCurrency(TotalRebateUserRate));
+                    c.setClassText(t, "CommissionValue", null, toCurrency(CommissionValue));
+                    c.setClassText(t, "CommissionCost", null, toCurrency(CommissionCost));
+                    c.setClassText(t, "ChildenRebateUserRate", null, toCurrency(ChildenRebateUserRate));
+                    c.setClassText(t, "ChildenRebateCommission", null, toCurrency(ChildenRebateCommission));
+                    c.setClassText(t, "SelfRebateUserRate", null, toCurrency(TotalRebateUserRate - data.ChildenRebateUserRate));
+                    c.setClassText(t, "SelfRebateCommission", null, toCurrency(CommissionValue - data.ChildenRebateCommission - CommissionCost));
+                    c.setClassText(t, "UserPaidOPValue", null, toCurrency(data.PaidOPValue));
+                    c.setClassText(t, "UserRebate", null, toCurrency(TotalRebateUserRate - data.ChildenRebateUserRate + CommissionValue - data.ChildenRebateCommission - CommissionCost));
 
                     expandBtn = t.querySelector(".Expand");
-                    
+
                     if (data.ChildUser.length > 0) {
                         hasChild = true;
                         expandBtn.onclick = new Function("agentExpand('" + data.UserAccountSortKey + "')");
@@ -283,17 +304,38 @@
                         let expandBtn;
                         let parentSortKey = "";
                         childBonusPointValue = childBonusPointValue + data.BonusPointValue;
-                        
+                        let ur = data.UserRate / 100;
+                        let bcr = data.BuyChipRate / 100;
+                        let TotalRebateUserRate = (-1 * data.TotalRewardValue) * ur;
+                        let CommissionValue = data.TotalValidBetValue * bcr;
+                        let CommissionCost = CommissionValue * ur;
+                        let ChildenRebateUserRate = 0;
+                        let ChildenRebateCommission = 0;
+
+                        for (var i = 0; i < data.ChildUser.length; i++) {
+                            let kk = data.ChildUser[i];
+                            ChildenRebateUserRate = ChildenRebateUserRate + (-1 * kk.TotalRewardValue * kk.UserRate / 100);
+                            ChildenRebateCommission = ChildenRebateCommission + (kk.TotalValidBetValue * kk.BuyChipRate / 100)
+                        }
+
                         c.setClassText(t, "LoginAccount", null, data.LoginAccount);
                         c.setClassText(t, "CurrencyType", null, data.CurrencyType);
                         c.setClassText(t, "SelfRewardValue", null, toCurrency((data.SelfRewardValue)));
                         c.setClassText(t, "SelfValidBetValue", null, toCurrency((data.SelfValidBetValue)));
-                        c.setClassText(t, "TotalLineRebate", null, toCurrency((data.TotalLineRebate)));
-                        //c.setClassText(t, "CommissionValue", null, toCurrency((data.CommissionValue)));
-                        //c.setClassText(t, "ChildenRebateCommission", null, toCurrency((data.ChildenRebateCommission)));
                         c.setClassText(t, "UserRate", null, data.UserRate + "%");
                         c.setClassText(t, "BuyChipRate", null, data.BuyChipRate + "%");
-                        c.setClassText(t, "AccountingOPValue", null, toCurrency((data.UserRebate)));
+
+                        c.setClassText(t, "TotalRewardValue", null, toCurrency((data.TotalRewardValue)));
+                        c.setClassText(t, "TotalValidBetValue", null, toCurrency((data.TotalValidBetValue)));
+                        c.setClassText(t, "TotalRebateUserRate", null, toCurrency(TotalRebateUserRate));
+                        c.setClassText(t, "CommissionValue", null, toCurrency(CommissionValue));
+                        c.setClassText(t, "CommissionCost", null, toCurrency(CommissionCost));
+                        c.setClassText(t, "ChildenRebateUserRate", null, toCurrency(ChildenRebateUserRate));
+                        c.setClassText(t, "ChildenRebateCommission", null, toCurrency(ChildenRebateCommission));
+                        c.setClassText(t, "SelfRebateUserRate", null, toCurrency(TotalRebateUserRate - data.ChildenRebateUserRate));
+                        c.setClassText(t, "SelfRebateCommission", null, toCurrency(CommissionValue - data.ChildenRebateCommission - CommissionCost));
+                        c.setClassText(t, "UserPaidOPValue", null, toCurrency(data.PaidOPValue));
+                        c.setClassText(t, "UserRebate", null, toCurrency(TotalRebateUserRate - data.ChildenRebateUserRate + CommissionValue - data.ChildenRebateCommission - CommissionCost));
 
                         expandBtn = t.querySelector(".Expand");
 
@@ -415,6 +457,14 @@
                                 <span class="td__content"><span class="BuyChipRate"></span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">總上下數</span></span>
+                                <span class="td__content"><span class="TotalRewardValue"></span></span>
+                            </div>
+                              <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">總轉碼數</span></span>
+                                <span class="td__content"><span class="TotalValidBetValue"></span></span>
+                            </div>
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">個人上下數</span></span>
                                 <span class="td__content"><span class="SelfRewardValue"></span></span>
                             </div>
@@ -422,21 +472,41 @@
                                 <span class="td__title"><span class="language_replace">個人轉碼數</span></span>
                                 <span class="td__content"><span class="SelfValidBetValue"></span></span>
                             </div>
-<%--                              <div class="tbody__td td-number td-3 td-vertical">
+                              <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">總佔成佣金</span></span>
+                                <span class="td__content"><span class="TotalRebateUserRate"></span></span>
+                            </div>
+                              <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">總洗碼佣金</span></span>
                                 <span class="td__content"><span class="CommissionValue"></span></span>
-                            </div>--%>
-                              <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">總線佣金</span></span>
-                                <span class="td__content"><span class="TotalLineRebate"></span></span>
                             </div>
-<%--                              <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">下線洗碼佣金</span></span>
-                                <span class="td__content"><span class="ChildenRebateCommission"></span></span>
-                            </div>--%>
                               <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">應付傭金</span></span>
-                                <span class="td__content"><span class="AccountingOPValue"></span></span>
+                                <span class="td__title"><span class="language_replace">洗碼佣金成本</span></span>
+                                <span class="td__content"><span class="CommissionCost"></span></span>
+                            </div>
+                              <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">下線佔成佣金加總</span></span>
+                                <span class="td__content"><span class="ChildenRebateUserRate"></span></span>
+                            </div>
+                              <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">下線洗碼佣金加總</span></span>
+                                <span class="td__content"><span class="ChildenRebateCommission"></span></span>
+                            </div>
+                              <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">佔成佣金</span></span>
+                                <span class="td__content"><span class="SelfRebateUserRate"></span></span>
+                            </div>
+                              <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">轉碼佣金</span></span>
+                                <span class="td__content"><span class="SelfRebateCommission"></span></span>
+                            </div>
+                              <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">已付佣金</span></span>
+                                <span class="td__content"><span class="UserPaidOPValue"></span></span>
+                            </div>
+                              <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">應付佣金</span></span>
+                                <span class="td__content"><span class="UserRebate"></span></span>
                             </div>
                         </div>
                     </div>
@@ -448,11 +518,18 @@
                             <div class="thead__th"><span class="language_replace">幣別</span></div>
                             <div class="thead__th"><span class="language_replace">佔成率</span></div>
                             <div class="thead__th"><span class="language_replace">轉碼率</span></div>
+                            <div class="thead__th"><span class="language_replace">總上下數</span></div>
+                            <div class="thead__th"><span class="language_replace">總轉碼數</span></div>
                             <div class="thead__th"><span class="language_replace">個人上下數</span></div>
                             <div class="thead__th"><span class="language_replace">個人轉碼數</span></div>
-                            <%--<div class="thead__th"><span class="language_replace">總洗碼佣金</span></div>--%>
-                            <div class="thead__th"><span class="language_replace">總線佣金</span></div>
-                            <%--<div class="thead__th"><span class="language_replace">下線洗碼佣金</span></div>--%>
+                            <div class="thead__th"><span class="language_replace">總佔成佣金</span></div>
+                            <div class="thead__th"><span class="language_replace">總洗碼佣金</span></div>
+                            <div class="thead__th"><span class="language_replace">洗碼佣金成本</span></div>
+                            <div class="thead__th"><span class="language_replace">下線佔成佣金加總</span></div>
+                            <div class="thead__th"><span class="language_replace">下線洗碼佣金加總</span></div>
+                            <div class="thead__th"><span class="language_replace">佔成佣金</span></div>
+                            <div class="thead__th"><span class="language_replace">轉碼佣金</span></div>
+                            <div class="thead__th"><span class="language_replace">已付佣金</span></div>
                             <div class="thead__th"><span class="language_replace">應付傭金</span></div>
                         </div>
                     </div>
