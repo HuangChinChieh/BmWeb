@@ -825,7 +825,7 @@
                                                                 <span class="data UserCount_Under homeitemvalue">0</span>
                                                             </div>
                                                             <div>
-                                                                <span class="language_replace homeitemtitle">直屬</span>
+                                                                <span class="language_replace homeitemtitle">直屬會員</span>
                                                             </div>
                                                         </div>
                                                         <div class="col-6 col-md-6 col-lg-6 col-gx-6 col-xl-6 homeitemborder" style="margin: 0">
@@ -833,7 +833,7 @@
                                                                 <span class="data UserCount_Other homeitemvalue">0</span>
                                                             </div>
                                                             <div>
-                                                                <span class="language_replace homeitemtitle">下線</span>
+                                                                <span class="language_replace homeitemtitle">下線會員</span>
                                                             </div>
                                                         </div>
                                                     </div>
