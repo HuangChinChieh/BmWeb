@@ -661,7 +661,7 @@
                     let BetLimitP = bl.MinBetPlayer + " - " + bl.MaxBet;
                     let BetLimitT = bl.MinBetTie + " - " + bl.MaxBetTie;
                     let BetLimitPair = bl.MinBetPair + " - " + bl.MaxBetPair;
-                    
+
                     $(tmp).find(".tempRadio").attr("data-id", bl.BetLimitID);
                     $(tmp).find(".BetLimitCurrencyType").text(bl.CurrencyType);
                     $(tmp).find(".BetLimitB").text(BetLimitB);
@@ -669,7 +669,7 @@
                     $(tmp).find(".BetLimitT").text(BetLimitT);
                     $(tmp).find(".BetLimitPair").text(BetLimitPair);
                     $(tmp).show();
-
+                    
                     switch (BetLimitType) {
                         case 0:
                             $("#idBetLimit0").append(tmp);
@@ -678,8 +678,10 @@
                             $("#idBetLimit1").append(tmp);
                             break;
                         default:
-                            $("#idBetLimit0").append(tmp);
-                            $("#idBetLimit1").append(tmp);
+                            let tmp1 = $(tmp).clone();
+                            let tmp2 = $(tmp).clone();
+                            $("#idBetLimit0").append(tmp1);
+                            $("#idBetLimit1").append(tmp2);
                             break;
                     }
 

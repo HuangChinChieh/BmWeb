@@ -1260,11 +1260,11 @@
                                             <i class="icon icon-mask icon-ewin-report-wallet"></i>
                                             <span class="language_replace">團隊投注數據</span></a>
                                     </li>
-                                    <li class="nav-item submenu dropdown">
+                                    <%--<li class="nav-item submenu dropdown">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('會員投注數據'), 'GetPlayerTotalSummary_Casino.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-report-wallet"></i>
                                             <span class="language_replace">會員投注數據</span></a>
-                                    </li>
+                                    </li>--%>
                                     <li class="nav-item submenu dropdown" style="display:none">
                                         <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('團隊出入金數據'), 'GetAgentTotalDepositeSummary_Casino.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-report-wallet"></i>

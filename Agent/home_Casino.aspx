@@ -445,9 +445,9 @@
                         $(".AgentCount").text(toCurrency(o.AgentCount));
                         $(".AgentCount_Under").text(toCurrency(o.AgentCount_Under));
                         $(".AgentCount_Other").text(toCurrency(o.AgentCount - o.AgentCount_Under));
-                        //$(".UserCount").text(toCurrency(o.UserCount));
-                        //$(".UserCount_Under").text(toCurrency(o.UserCount_Under));
-                        //$(".UserCount_Other").text(toCurrency(o.UserCount - o.UserCount_Under));
+                        $(".UserCount").text(toCurrency(o.UserCount));
+                        $(".UserCount_Under").text(toCurrency(o.UserCount_Under));
+                        $(".UserCount_Other").text(toCurrency(o.UserCount - o.UserCount_Under));
                     }
                     window.parent.API_CloseLoading();
                 } else {
@@ -565,7 +565,7 @@
 
         function toCurrency(num) {
 
-            num = parseFloat(Number(num).toFixed(4));
+            num = Math.floor(Number(num)*10000)/10000;
             var parts = num.toString().split('.');
             parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
             return parts.join('.');
@@ -801,7 +801,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12" style="display: none">
+                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12">
                                         <div>
                                             <div class="item row" style="text-align: center; align-items: center;">
                                                 <div class="col-2 col-md-2 col-lg-2 col-gx-2 col-xl-2">

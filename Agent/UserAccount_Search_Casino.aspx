@@ -82,6 +82,7 @@
                     }
                 });
             } else {
+                searchUser = searchUser.replace(' ', '');
 
                 if (searchUser == EWinInfo.UserInfo.LoginAccount) {
                     window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("若要修改資料，請聯絡你的上線或客服人員。"));

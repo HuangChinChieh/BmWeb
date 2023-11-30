@@ -369,9 +369,17 @@
                 var t = c.getTemplate("templateTableItem");
                 var expandBtn;
                 c.setClassText(t, "LoginAccount", null, item.LoginAccount);
-                c.setClassText(t, "ParentLoginAccount", null, item.ParentLoginAccount);
-                c.setClassText(t, "InsideLevel", null, DealUserAccountInsideLevel);
+                //c.setClassText(t, "ParentLoginAccount", null, item.ParentLoginAccount);
+                //c.setClassText(t, "InsideLevel", null, DealUserAccountInsideLevel);
                 c.setClassText(t, "CurrencyType", null, SelectedWallet);
+
+                if (item.UserAccountType == 0) {
+                    c.setClassText(t, "UserAccountType", null, mlp.getLanguageKey("會員"));
+                } else if (item.UserAccountType == 1) {
+                    c.setClassText(t, "UserAccountType", null, mlp.getLanguageKey("代理"));
+                } else {
+                    c.setClassText(t, "UserAccountType", null, mlp.getLanguageKey("股東"));
+                }
 
                 if (parseFloat(item.TotalRewardValue) < 0) {
                     t.getElementsByClassName("RewardValue")[0].classList.add("num-negative");
@@ -467,9 +475,17 @@
                 var t = c.getTemplate("templateTableItem");
                 var expandBtn;
                 c.setClassText(t, "LoginAccount", null, item.LoginAccount);
-                c.setClassText(t, "ParentLoginAccount", null, item.ParentLoginAccount);
-                c.setClassText(t, "InsideLevel", null, DealUserAccountInsideLevel);
+                //c.setClassText(t, "ParentLoginAccount", null, item.ParentLoginAccount);
+                //c.setClassText(t, "InsideLevel", null, DealUserAccountInsideLevel);
                 c.setClassText(t, "CurrencyType", null, SelectedWallet);
+
+                if (item.UserAccountType == 0) {
+                    c.setClassText(t, "UserAccountType", null, mlp.getLanguageKey("會員"));
+                } else if (item.UserAccountType == 1) {
+                    c.setClassText(t, "UserAccountType", null, mlp.getLanguageKey("代理"));
+                } else {
+                    c.setClassText(t, "UserAccountType", null, mlp.getLanguageKey("股東"));
+                }
 
                 if (parseFloat(item.TotalRewardValue) < 0) {
                     t.getElementsByClassName("RewardValue")[0].classList.add("num-negative");
@@ -817,13 +833,17 @@
                                     <span class="LoginAccount">CON5</span>
                                 </span>
                             </div>
-                            <div class="tbody__td td-3 nonTitle">
+                            <%--<div class="tbody__td td-3 nonTitle">
                                 <span class="td__title"><span class="language_replace">上線帳號</span></span>
                                 <span class="td__content"><i class="icon icon-s icon-before"></i><span class="ParentLoginAccount"></span></span>
                             </div>
                             <div class="tbody__td td-3 nonTitle">
                                 <span class="td__title"><span class="language_replace">層級</span></span>
                                 <span class="td__content"><i class="icon icon-s icon-before"></i><span class="InsideLevel"></span></span>
+                            </div>--%>
+                            <div class="tbody__td td-3 nonTitle">
+                                <span class="td__title"><span class="language_replace">身份</span></span>
+                                <span class="td__content"><i class="icon icon-s icon-before"></i><span class="UserAccountType"></span></span>
                             </div>
                             <div class="tbody__td td-3 nonTitle">
                                 <span class="td__title"><span class="language_replace">貨幣</span></span>
@@ -856,8 +876,9 @@
                         <!--標題項目單行 -->
                         <div class="thead__tr">
                             <div class="thead__th"><span class="language_replace">帳號</span></div>
-                            <div class="thead__th"><span class="language_replace">上線帳號</span></div>
-                            <div class="thead__th"><span class="language_replace">層級</span></div>
+                            <%--<div class="thead__th"><span class="language_replace">上線帳號</span></div>
+                            <div class="thead__th"><span class="language_replace">層級</span></div>--%>
+                            <div class="thead__th"><span class="language_replace">身份</span></div>
                             <div class="thead__th"><span class="language_replace">貨幣</span></div>
                             <div class="thead__th"><span class="language_replace">團隊輸贏數</span></div>
                             <div class="thead__th"><span class="language_replace">團隊有效注額</span></div>

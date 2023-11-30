@@ -189,9 +189,9 @@
                 var DealUserAccountInsideLevel = item.UserAccountInsideLevel - o.TopInsideLevel;
 
                 c.setClassText(t, "LoginAccount", null, item.LoginAccount);
-                c.setClassText(t, "ParentLoginAccount", null, item.ParentLoginAccount);
+                //c.setClassText(t, "ParentLoginAccount", null, item.ParentLoginAccount);
                 c.setClassText(t, "CurrencyType", null, SelectedWallet);
-                c.setClassText(t, "InsideLevel", null, DealUserAccountInsideLevel);
+                //c.setClassText(t, "InsideLevel", null, DealUserAccountInsideLevel);
                 //if (parseFloat(item.TotalRewardValue) < 0) {
                 //    t.getElementsByClassName("RewardValue")[0].classList.add("num-negative");
                 //}
@@ -511,7 +511,7 @@
                                     <span class="LoginAccount">CON5</span>
                                 </span>
                             </div>
-                            <div class="tbody__td date td-100 nonTitle">
+                            <%--<div class="tbody__td date td-100 nonTitle">
                                 <span class="td__title"><span class="language_replace">上線帳號</span></span>
                                 <span class="td__content Space">
                                     <span class="ParentLoginAccount">CON5</span>
@@ -520,7 +520,7 @@
                             <div class="tbody__td td-3 nonTitle">
                                 <span class="td__title"><span class="language_replace">層級</span></span>
                                 <span class="td__content"><i class="icon icon-s icon-before"></i><span class="InsideLevel"></span></span>
-                            </div>
+                            </div>--%>
                             <div class="tbody__td td-3 nonTitle">
                                 <span class="td__title"><span class="language_replace">貨幣</span></span>
                                 <span class="td__content"><i class="icon icon-ewin-default-currencyType icon-s icon-before"></i><span class="CurrencyType">CON3</span></span>
@@ -552,8 +552,8 @@
                         <!--標題項目單行 -->
                         <div class="thead__tr">
                             <div class="thead__th"><span class="language_replace">帳號</span></div>
-                            <div class="thead__th"><span class="language_replace">上線帳號</span></div>
-                            <div class="thead__th"><span class="language_replace">層級</span></div>
+                            <%--<div class="thead__th"><span class="language_replace">上線帳號</span></div>
+                            <div class="thead__th"><span class="language_replace">層級</span></div>--%>
                             <div class="thead__th"><span class="language_replace">貨幣</span></div>
                             <%--                            <div class="thead__th"><span class="language_replace">團隊輸贏數</span></div>
                             <div class="thead__th"><span class="language_replace">團隊有效注額</span></div>
