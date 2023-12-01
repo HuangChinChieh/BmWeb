@@ -656,7 +656,7 @@
                                 <div class="row">
                                     <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12">
                                         <div class="row item" style="border: hidden">
-                                            <div class="col-3 col-md-3 col-lg-3 col-gx-3 col-xl-3">
+                                            <div class="col-3 col-md-3 col-lg-3 col-gx-3 col-xl-3" style="display:none">
                                                 <div class="item homeitembackground" style="background-image: url(./Images/home/LoginAccount.png); width: 100%; height: 100%; border: hidden">
                                                 </div>
                                             </div>

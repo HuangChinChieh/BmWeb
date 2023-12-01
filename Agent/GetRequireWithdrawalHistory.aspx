@@ -94,7 +94,9 @@
         var idList = document.getElementById("idList");
         var OrderType = 0;
         var hasNoData = true;
-        let sumAmount = 0;
+        let sumAmount0 = 0;
+        let sumAmount1 = 0;
+        let sumAmount2 = 0;
 
         var div = document.createElement("DIV");
 
@@ -128,7 +130,15 @@
 
                     t.style.display = "none";
                     idList.appendChild(t);
-                    sumAmount = sumAmount + item.Amount;
+
+                    if (item.ProcessStatus == 0) {
+                        sumAmount0 = sumAmount0 + item.Amount;
+                    } else if (item.ProcessStatus == 1) {
+                        sumAmount1 = sumAmount1 + item.Amount;
+                    } else {
+                        sumAmount2 = sumAmount2 + item.Amount;
+                    }
+
                     t.style.display = "";
                     document.getElementById("hasNoData_DIV").style.display = "none";
                     idList.classList.remove("tbody__hasNoData");
@@ -138,7 +148,9 @@
             }
         }
 
-        $(".sumAmount").text(sumAmount);
+        $(".sumAmount0").text(sumAmount0);
+        $(".sumAmount1").text(sumAmount1);
+        $(".sumAmount2").text(sumAmount2);
     }
 
     function setSearchFrame() {
@@ -312,8 +324,12 @@
         <!-- 表格 由此開始 ========== -->
         <div class="container-fluid wrapper__TopCollapse orderHistory_userAccount">
             <h2 class="collapse-header has-arrow zIndex_overMask_SafariFix">
-                <span class="language_replace">總金額</span>
-                <span class="language_replace sumAmount">0</span>
+                <span class="language_replace">待處理總金額</span>
+                <span class="language_replace sumAmount0">0</span>
+                <span class="language_replace">已完成總金額</span>
+                <span class="language_replace sumAmount1">0</span>
+                <span class="language_replace">拒絕總金額</span>
+                <span class="language_replace sumAmount2">0</span>
             </h2>
             <div class="MT__tableDiv" id="idResultTable">
                 <!-- 自訂表格 -->
