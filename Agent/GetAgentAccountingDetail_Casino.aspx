@@ -88,7 +88,7 @@
 <script type="text/javascript" src="/Scripts/Common.js"></script>
 <script type="text/javascript" src="/Scripts/bignumber.min.js"></script>
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
-<script type="text/javascript" src="Scripts/MultiLanguage.js"></script> 
+<script type="text/javascript" src="Scripts/MultiLanguage.js"></script>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script>
     var ApiUrl = "GetAgentAccountingDetail_Casino.aspx";
@@ -400,6 +400,21 @@
         }
     }
 
+    function showNote() {
+        window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"),
+
+            `${mlp.getLanguageKey("總佔成佣金: (-1*總上下數)*自身佔成率")}<br />
+                    ${mlp.getLanguageKey("總洗碼佣金: 總洗碼數*自身轉碼率")}<br />
+                    ${mlp.getLanguageKey("洗碼佣金成本: 總洗碼佣金*自身佔成率")}<br />
+                    ${mlp.getLanguageKey("下線佔成佣金加總: 指下線的佔成佣金數合計")}<br />
+                    ${mlp.getLanguageKey("下線洗碼佣金加總: 指下線的轉碼佣金數合計")}<br />
+                    ${mlp.getLanguageKey("佔成佣金: 總佔成佣金-下線佔成佣金加總")}<br />
+                    ${mlp.getLanguageKey("轉碼佣金: 總洗碼佣金-下線洗碼佣金加總-洗碼佣金成本")}<br />
+                    ${mlp.getLanguageKey("已付佣金: 指已經收到的佣金")}<br />
+                    ${mlp.getLanguageKey("應付佣金: 佔成佣金+轉碼佣金")}<br />`
+        );
+    }
+
     window.onload = init;
 </script>
 <body class="innerBody">
@@ -414,11 +429,15 @@
                     <!-- collapse內容 由此開始 ========== -->
                     <div id="searchList" class="collapse-content collapse show">
                         <div id="divSearchContent" class="row searchListContent">
-
-                          <div id="expandDiv" class="col-12 col-md-3 col-lg-1 col-xl-1" style="padding-left:5px">
+                            <div id="expandDiv" class="col-12 col-md-3 col-lg-1 col-xl-1" style="padding-left: 5px">
                                 <div class="form-group wrapper_center row">
                                     <button class="btn2 btn-outline-main language_replace col-6 col-md-12 col-lg-12" onclick="toggleAllRow(true)">展開</button>
                                     <button class="btn2 btn-outline-main language_replace col-6 col-md-12 col-lg-12" onclick="toggleAllRow(false)">收合</button>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-3 col-lg-1 col-xl-1">
+                                <div class="form-group wrapper_center row">
+                                    <button class=" btn-outline-main" style="width: 22px; border-radius: 11px;" onclick="showNote()">!</button>
                                 </div>
                             </div>
                             <!-- iOS Safari Virtual Keyboard Fix--------------->
@@ -448,11 +467,11 @@
                                 <span class="td__title"><span class="language_replace">幣別</span></span>
                                 <span class="td__content"><span class="CurrencyType"></span></span>
                             </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">佔成率</span></span>
                                 <span class="td__content"><span class="UserRate"></span></span>
                             </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">轉碼率</span></span>
                                 <span class="td__content"><span class="BuyChipRate"></span></span>
                             </div>
@@ -460,7 +479,7 @@
                                 <span class="td__title"><span class="language_replace">總上下數</span></span>
                                 <span class="td__content"><span class="TotalRewardValue"></span></span>
                             </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">總轉碼數</span></span>
                                 <span class="td__content"><span class="TotalValidBetValue"></span></span>
                             </div>
@@ -468,43 +487,43 @@
                                 <span class="td__title"><span class="language_replace">個人上下數</span></span>
                                 <span class="td__content"><span class="SelfRewardValue"></span></span>
                             </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">個人轉碼數</span></span>
                                 <span class="td__content"><span class="SelfValidBetValue"></span></span>
                             </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">總佔成佣金</span></span>
                                 <span class="td__content"><span class="TotalRebateUserRate"></span></span>
                             </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">總洗碼佣金</span></span>
                                 <span class="td__content"><span class="CommissionValue"></span></span>
                             </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">洗碼佣金成本</span></span>
                                 <span class="td__content"><span class="CommissionCost"></span></span>
                             </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">下線佔成佣金加總</span></span>
                                 <span class="td__content"><span class="ChildenRebateUserRate"></span></span>
                             </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">下線洗碼佣金加總</span></span>
                                 <span class="td__content"><span class="ChildenRebateCommission"></span></span>
                             </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">佔成佣金</span></span>
                                 <span class="td__content"><span class="SelfRebateUserRate"></span></span>
                             </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">轉碼佣金</span></span>
                                 <span class="td__content"><span class="SelfRebateCommission"></span></span>
                             </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">已付佣金</span></span>
                                 <span class="td__content"><span class="UserPaidOPValue"></span></span>
                             </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">應付佣金</span></span>
                                 <span class="td__content"><span class="UserRebate"></span></span>
                             </div>

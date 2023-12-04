@@ -175,10 +175,10 @@
 
                         if (o.GameCodeList != null) {
                             for (var l = 0; l < o.GameCodeList.length; l++) {
-                                let kk = o.GameCodeList[l]; 
+                                let kk = o.GameCodeList[l];
                                 if (kk.CurrencyType == DefaultCurrencyType) {
                                     let t = c.getTemplate("tempGameAccountingCode");
-                                    
+
                                     c.setClassText(t, "CurrencyType", null, mlp.getLanguageKey(kk.CurrencyType));
                                     c.setClassText(t, "GameAccountingCode", null, mlp.getLanguageKey(kk.GameAccountingCode));
                                     c.setClassText(t, "UserRate", null, c.toCurrency(kk.UserRate) + "%");
@@ -568,7 +568,7 @@
 
         function toCurrency(num) {
 
-            num = Math.floor(Number(num)*10000)/10000;
+            num = Math.floor(Number(num) * 10000) / 10000;
             var parts = num.toString().split('.');
             parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
             return parts.join('.');
@@ -607,7 +607,22 @@
         }
 
         function showNote() {
-            window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("123"));
+            window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"),
+                   
+                    `${ mlp.getLanguageKey("**提醒**") }<br />
+                    ${ mlp.getLanguageKey("若需看各幣別資料，請先於右上方切換幣別。") }<br />
+                    ${ mlp.getLanguageKey("根據切換的時間點，數據展示會有所不同，煩請留意。") }<br /><br />
+                    ${ mlp.getLanguageKey("[欄位說明]") }<br />
+                    ${ mlp.getLanguageKey("直屬代理: 指自身拉進來的代理") }<br />
+                    ${ mlp.getLanguageKey("下線代理: 指自身拉進來的代理去拉的代理") }<br />
+                    ${ mlp.getLanguageKey("直屬會員: 指自身拉進來的會員") }<br />
+                    ${ mlp.getLanguageKey("下線會員: 指自身下線代理們拉進來的會員") }<br />
+                    ${ mlp.getLanguageKey("總投注人數: 該區間內自身下線們有進行投注的人數") }<br />
+                    ${ mlp.getLanguageKey("佔成佣金: 該區間內可拿到的佔成佣金") }<br />
+                    ${ mlp.getLanguageKey("轉碼佣金: 該區間內可拿到的轉碼佣金") }<br />
+                    ${ mlp.getLanguageKey("總線上下數: 該區間內下線們的上下數總計") }<br />
+                    ${ mlp.getLanguageKey("總線轉碼數: 該區間內下線們的轉碼數總計") }<br />`
+            );
         }
 
         function init() {
@@ -647,7 +662,8 @@
         <div class="row" style="width: 99%; margin: auto; margin-top: 20px">
             <div class="col-12 col-md-12 col-lg-12 col-gx-3 col-xl-3">
 
-                <div class="currencyWalletList"><%-- style="margin-top: 20px"--%>
+                <div class="currencyWalletList">
+                    <%-- style="margin-top: 20px"--%>
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12">
@@ -656,7 +672,7 @@
                                 <div class="row">
                                     <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12">
                                         <div class="row item" style="border: hidden">
-                                            <div class="col-3 col-md-3 col-lg-3 col-gx-3 col-xl-3" style="display:none">
+                                            <div class="col-3 col-md-3 col-lg-3 col-gx-3 col-xl-3" style="display: none">
                                                 <div class="item homeitembackground" style="background-image: url(./Images/home/LoginAccount.png); width: 100%; height: 100%; border: hidden">
                                                 </div>
                                             </div>
@@ -672,7 +688,7 @@
                                                 <btn style="font-size: 12px; right: 5px; position: absolute; border: 2px solid; width: 22px; text-align: center; border-radius: 11px; color: #bba480; cursor: pointer;" onclick="showNote()">!</btn>
                                             </div>
                                         </div>
-                                        <div class="row item"  style="border: hidden">
+                                        <div class="row item" style="border: hidden">
                                             <div class="col-3 col-md-3 col-lg-3 col-gx-3 col-xl-3">
                                                 <div class="item homeitembackground" style="background-image: url(./Images/home/Balance.png); width: 100%; height: 100%; border: hidden">
                                                 </div>
@@ -701,7 +717,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12" style="display:none">
+                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12" style="display: none">
                                         <div class="item row">
                                             <div class="col-8 col-md-8 col-lg-8 col-gx-8 col-xl-8">
                                                 <div>
@@ -734,7 +750,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12" style="padding:0px;display:none">
+                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12" style="padding: 0px; display: none">
                                         <div style="padding-top: 10px">
                                             <div style="text-align: center; padding-bottom: 5px;">
                                                 <span class="currency language_replace homeitemtitle">佔成返水</span>
@@ -752,7 +768,7 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12" style="padding:0px">
+                                    <div class="col-12 col-md-12 col-lg-12 col-gx-12 col-xl-12" style="padding: 0px">
                                         <div style="padding-top: 10px">
                                             <div style="text-align: center; padding-bottom: 5px;">
                                                 <span class="currency language_replace homeitemtitle">各遊戲的佔成返水</span>
@@ -760,10 +776,10 @@
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
-                                                <th scope="col" class="language_replace">貨幣</th>
-                                                <th scope="col" class="language_replace">遊戲種類</th>
-                                                <th scope="col" class="language_replace">返水率</th>
-                                                <th scope="col" class="language_replace">佔成率</th>
+                                                        <th scope="col" class="language_replace">貨幣</th>
+                                                        <th scope="col" class="language_replace">遊戲種類</th>
+                                                        <th scope="col" class="language_replace">返水率</th>
+                                                        <th scope="col" class="language_replace">佔成率</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody id="tb_GameAccountingCode">
@@ -882,7 +898,7 @@
                                     <li class="nav-item">
                                         <a onclick="changeDateTab(this,4)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">本月</a>
                                     </li>
-                                      <li class="nav-item">
+                                    <li class="nav-item">
                                         <a onclick="changeDateTab(this,5)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">上月</a>
                                     </li>
                                     <li class="tab-slide"></li>
@@ -895,7 +911,7 @@
                 <div class="currencyWalletList" style="margin-top: 5px">
                     <div class="container-fluid">
                         <div id="idUserInfo" class="row">
-                            
+
                             <div class="col-12 col-md-6 col-lg-4 col-gx-3 col-xl-3">
                                 <div class="item homeitemborder homeitembackground" style="background-image: url(./Images/home/TotalOrderUsers.png); text-align: right">
                                     <div>
@@ -1241,7 +1257,7 @@
                     </div>
                 </div>
 
-                <div class="currencyWalletList" style="margin-top: 20px;display:none" >
+                <div class="currencyWalletList" style="margin-top: 20px; display: none">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 col-md-12 col-lg-6 col-gx-6 col-xl-6">
@@ -1264,7 +1280,7 @@
                                 </div>
 
                             </div>
-                            <div class="col-12 col-md-12 col-lg-6 col-gx-6 col-xl-6" >
+                            <div class="col-12 col-md-12 col-lg-6 col-gx-6 col-xl-6">
                                 <div class="homeitemborder" style="padding: 10px">
                                     <div style="text-align: center; padding-bottom: 5px;">
                                         <span class="currency language_replace homeitemtitle">活躍會員 (前10)</span>

@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="GetAgentAccounting_Casino.aspx.cs" Inherits="GetAgentAccounting_Casino" %>
+
 <%
     string LoginAccount = Request["LoginAccount"];
     string ASID = Request["ASID"];
@@ -15,7 +16,7 @@
         ASI = ASR.AgentSessionInfo;
     }
 
-        %>
+%>
 <!doctype html>
 <html lang="zh-Hant-TW" class="innerHtml">
 <head>
@@ -24,15 +25,14 @@
     <title>傭金結算查詢</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/basic.min.css?<%:AgentVersion%>">
-    <link rel="stylesheet" href="css/main2.css?<%:AgentVersion%>">   
-
+    <link rel="stylesheet" href="css/main2.css?<%:AgentVersion%>">
 </head>
 <!-- <script type="text/javascript" src="js/AgentCommon.js"></script> -->
 <script type="text/javascript" src="js/AgentCommon.js"></script>
 <script type="text/javascript" src="/Scripts/Common.js"></script>
 <script type="text/javascript" src="/Scripts/bignumber.min.js"></script>
 <script type="text/javascript" src="/Scripts/Math.uuid.js"></script>
-<script type="text/javascript" src="Scripts/MultiLanguage.js"></script> 
+<script type="text/javascript" src="Scripts/MultiLanguage.js"></script>
 <script type="text/javascript" src="js/date.js"></script>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script>
@@ -49,7 +49,7 @@
 
     function queryData() {
         var idList = document.getElementById("idList");
-        var CurrencyType= $("input[name='chkCurrencyType']").val();
+        var CurrencyType = $("input[name='chkCurrencyType']").val();
         var startDate = $('#startDate').val();
         var endDate = $('#endDate').val();
         var postData = {
@@ -60,7 +60,7 @@
         };
 
         window.parent.API_ShowLoading();
-            $("#btnSearch").prop('disabled', true);
+        $("#btnSearch").prop('disabled', true);
         c.callService(ApiUrl + "/GetAccountingItem", postData, function (success, o) {
             if (success) {
                 var obj = c.getJSON(o);
@@ -77,8 +77,8 @@
                     window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), o);
                 }
             }
-            
-                $("#btnSearch").prop('disabled', false);
+
+            $("#btnSearch").prop('disabled', false);
             window.parent.API_CloseLoading();
         });
     }
@@ -192,7 +192,7 @@
         $('#ToggleCollapse').click();
         EWinInfo = window.parent.EWinInfo;
         api = window.parent.API_GetAgentAPI();
-     
+
         lang = window.localStorage.getItem("agent_lang");
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
@@ -350,6 +350,21 @@
         document.getElementById("sliderDate").style.display = "none";
     }
 
+    function showNote() {
+        window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"),
+
+            `${mlp.getLanguageKey("總佔成佣金: (-1*總上下數)*自身佔成率")}<br />
+                    ${mlp.getLanguageKey("總洗碼佣金: 總洗碼數*自身轉碼率")}<br />
+                    ${mlp.getLanguageKey("洗碼佣金成本: 總洗碼佣金*自身佔成率")}<br />
+                    ${mlp.getLanguageKey("下線佔成佣金加總: 指下線的佔成佣金數合計")}<br />
+                    ${mlp.getLanguageKey("下線洗碼佣金加總: 指下線的轉碼佣金數合計")}<br />
+                    ${mlp.getLanguageKey("佔成佣金: 總佔成佣金-下線佔成佣金加總")}<br />
+                    ${mlp.getLanguageKey("轉碼佣金: 總洗碼佣金-下線洗碼佣金加總-洗碼佣金成本")}<br />
+                    ${mlp.getLanguageKey("已付佣金: 指已經收到的佣金")}<br />
+                    ${mlp.getLanguageKey("應付佣金: 佔成佣金+轉碼佣金")}<br />`
+        );
+    }
+
     window.onload = init;
 </script>
 <body class="innerBody">
@@ -357,11 +372,11 @@
         <div class="dataList dataList-box fixed top real-fixed">
             <div class="container-fluid">
                 <div class="collapse-box">
-           <h2 id="ToggleCollapse" class="collapse-header has-arrow zIndex_overMask_SafariFix" onclick="ac.dataToggleCollapse(this)" data-toggle="collapse" data-target="#searchList" aria-controls="searchList" aria-expanded="true" aria-label="searchList">
+                    <h2 id="ToggleCollapse" class="collapse-header has-arrow zIndex_overMask_SafariFix" onclick="ac.dataToggleCollapse(this)" data-toggle="collapse" data-target="#searchList" aria-controls="searchList" aria-expanded="true" aria-label="searchList">
                         <span class="language_replace">佣金結算報表</span>
                         <i class="arrow"></i>
-                    </h2>    
-                      <!-- collapse內容 由此開始 ========== -->
+                    </h2>
+                    <!-- collapse內容 由此開始 ========== -->
                     <div id="searchList" class="collapse-content collapse show">
                         <div id="divSearchContent" class="row searchListContent">
                             <div class="col-12 col-md-6 col-lg-4 col-xl-4">
@@ -391,7 +406,7 @@
 
                             </div>
 
-                             <div class="col-12 col-md-12 col-lg-8 col-xl-8">
+                            <div class="col-12 col-md-12 col-lg-8 col-xl-8">
                                 <div id="idTabMainContent">
                                     <ul class="nav-tabs-block nav nav-tabs tab-items-4" role="tablist">
                                         <li class="nav-item">
@@ -434,10 +449,13 @@
                                     </div>
                                 </div>
                             </div>
+                            
+
                             <div class="col-12">
                                 <div class="form-group wrapper_center dataList-process">
-                                    <%--<button class="btn btn-outline-main" onclick="MaskPopUp(this)">取消</button>--%>
+                                    <%--<button class="btn btn-outline-main" onclick="showNote()">!</button>--%>
                                     <button class="btn btn-full-main btn-roundcorner " onclick="queryData()" id="btnSearch"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">確認</span></button>
+                                    <button class=" btn-outline-main" style="width:10%;border-radius: 11px;margin-left:5px" onclick="showNote()">!</button>
                                 </div>
                             </div>
                             <!-- iOS Safari Virtual Keyboard Fix--------------->
@@ -472,15 +490,15 @@
                                 <span class="td__title"><span class="language_replace">總輸贏</span></span>
                                 <span class="td__content"><span class="RewardValue"></span></span>
                             </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">總轉碼</span></span>
                                 <span class="td__content"><span class="ValidBetValue"></span></span>
                             </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">應付傭金</span></span>
                                 <span class="td__content"><span class="AccountingOPValue"></span></span>
                             </div>
-                              <div class="tbody__td td-number td-3 td-vertical">
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">個人已付佣金</span></span>
                                 <span class="td__content"><span class="PaidOPValue"></span></span>
                             </div>
@@ -492,7 +510,7 @@
                                 <span class="td__title"><span class="language_replace">結算結束日期</span></span>
                                 <span class="td__content"><span class="EndDate">CON5</span></span>
                             </div>
-                                <div class="tbody__td td-number td-3 td-vertical">
+                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">建立時間</span></span>
                                 <span class="td__content"><span class="CreateDate">CON5</span></span>
                             </div>
@@ -503,16 +521,16 @@
                         <!--標題項目單行 -->
                         <div class="thead__tr">
                             <div class="thead__th"><span class="language_replace">結算細節</span></div>
-                            <div class="thead__th"><span class="language_replace">結算名稱</span></div>       
-                            <div class="thead__th"><span class="language_replace">幣別</span></div>                                 
+                            <div class="thead__th"><span class="language_replace">結算名稱</span></div>
+                            <div class="thead__th"><span class="language_replace">幣別</span></div>
                             <div class="thead__th"><span class="language_replace">總輸贏</span></div>
                             <div class="thead__th"><span class="language_replace">總轉碼</span></div>
                             <div class="thead__th"><span class="language_replace">應付傭金</span></div>
                             <div class="thead__th"><span class="language_replace">個人已付佣金</span></div>
                             <div class="thead__th"><span class="language_replace">派發狀態</span></div>
-                            <div class="thead__th"><span class="language_replace">結算開始日期</span></div>      
-                            <div class="thead__th"><span class="language_replace">結算結束日期</span></div>     
-                            <div class="thead__th"><span class="language_replace">建立時間</span></div>     
+                            <div class="thead__th"><span class="language_replace">結算開始日期</span></div>
+                            <div class="thead__th"><span class="language_replace">結算結束日期</span></div>
+                            <div class="thead__th"><span class="language_replace">建立時間</span></div>
                         </div>
                     </div>
                     <!-- 表格上下滑動框 -->
@@ -521,14 +539,14 @@
                 </div>
             </div>
         </div>
-    </main>    
+    </main>
 </body>
 <script type="text/javascript">
     ac.listenScreenMove();
 
     function clickMask() {
         // document.getElementById("div_MaskSafariFix").style.display = "none";
-        document.getElementById("div_MaskSafariFix").classList.remove("show") ;
+        document.getElementById("div_MaskSafariFix").classList.remove("show");
     }
 </script>
 </html>
