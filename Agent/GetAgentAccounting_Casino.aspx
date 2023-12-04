@@ -353,15 +353,15 @@
     function showNote() {
         window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"),
 
-            `${mlp.getLanguageKey("總佔成佣金: (-1*總上下數)*自身佔成率")}<br />
-                    ${mlp.getLanguageKey("總洗碼佣金: 總洗碼數*自身轉碼率")}<br />
-                    ${mlp.getLanguageKey("洗碼佣金成本: 總洗碼佣金*自身佔成率")}<br />
-                    ${mlp.getLanguageKey("下線佔成佣金加總: 指下線的佔成佣金數合計")}<br />
-                    ${mlp.getLanguageKey("下線洗碼佣金加總: 指下線的轉碼佣金數合計")}<br />
-                    ${mlp.getLanguageKey("佔成佣金: 總佔成佣金-下線佔成佣金加總")}<br />
-                    ${mlp.getLanguageKey("轉碼佣金: 總洗碼佣金-下線洗碼佣金加總-洗碼佣金成本")}<br />
-                    ${mlp.getLanguageKey("已付佣金: 指已經收到的佣金")}<br />
-                    ${mlp.getLanguageKey("應付佣金: 佔成佣金+轉碼佣金")}<br />`
+            `<span style="line-height:40px">${mlp.getLanguageKey("總佔成佣金: (-1*總上下數)*自身佔成率")}</span><br />
+                    <span style="line-height:40px">${mlp.getLanguageKey("總洗碼佣金: 總洗碼數*自身轉碼率")}</span><br />
+                    <span style="line-height:40px">${mlp.getLanguageKey("洗碼佣金成本: 總洗碼佣金*自身佔成率")}</span><br />
+                    <span style="line-height:40px">${mlp.getLanguageKey("下線佔成佣金加總: 指下線的佔成佣金數合計")}</span><br />
+                    <span style="line-height:40px">${mlp.getLanguageKey("下線洗碼佣金加總: 指下線的轉碼佣金數合計")}</span><br />
+                    <span style="line-height:40px">${mlp.getLanguageKey("佔成佣金: 總佔成佣金-下線佔成佣金加總")}</span><br />
+                    <span style="line-height:40px">${mlp.getLanguageKey("轉碼佣金: 總洗碼佣金-下線洗碼佣金加總-洗碼佣金成本")}</span><br />
+                    <span style="line-height:40px">${mlp.getLanguageKey("已付佣金: 指已經收到的佣金")}</span><br />
+                    <span style="line-height:40px">${mlp.getLanguageKey("應付佣金: 佔成佣金+轉碼佣金")}</span><br />`
         );
     }
 

@@ -610,18 +610,18 @@
             window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"),
                    
                     `${ mlp.getLanguageKey("**提醒**") }<br />
-                    ${ mlp.getLanguageKey("若需看各幣別資料，請先於右上方切換幣別。") }<br />
-                    ${ mlp.getLanguageKey("根據切換的時間點，數據展示會有所不同，煩請留意。") }<br /><br />
-                    ${ mlp.getLanguageKey("[欄位說明]") }<br />
-                    ${ mlp.getLanguageKey("直屬代理: 指自身拉進來的代理") }<br />
-                    ${ mlp.getLanguageKey("下線代理: 指自身拉進來的代理去拉的代理") }<br />
-                    ${ mlp.getLanguageKey("直屬會員: 指自身拉進來的會員") }<br />
-                    ${ mlp.getLanguageKey("下線會員: 指自身下線代理們拉進來的會員") }<br />
-                    ${ mlp.getLanguageKey("總投注人數: 該區間內自身下線們有進行投注的人數") }<br />
-                    ${ mlp.getLanguageKey("佔成佣金: 該區間內可拿到的佔成佣金") }<br />
-                    ${ mlp.getLanguageKey("轉碼佣金: 該區間內可拿到的轉碼佣金") }<br />
-                    ${ mlp.getLanguageKey("總線上下數: 該區間內下線們的上下數總計") }<br />
-                    ${ mlp.getLanguageKey("總線轉碼數: 該區間內下線們的轉碼數總計") }<br />`
+                    <span style="line-height:40px">${ mlp.getLanguageKey("若需看各幣別資料，請先於右上方切換幣別。") }</span><br />
+                    <span style="line-height:40px">${ mlp.getLanguageKey("根據切換的時間點，數據展示會有所不同，煩請留意。") }</span><br /><br />
+                    <span style="line-height:40px">${ mlp.getLanguageKey("[欄位說明]") }</span><br />
+                    <span style="line-height:40px">${ mlp.getLanguageKey("直屬代理: 指自身拉進來的代理") }</span><br />
+                    <span style="line-height:40px">${ mlp.getLanguageKey("下線代理: 指自身拉進來的代理去拉的代理") }</span><br />
+                    <span style="line-height:40px">${ mlp.getLanguageKey("直屬會員: 指自身拉進來的會員") }</span><br />
+                    <span style="line-height:40px">${ mlp.getLanguageKey("下線會員: 指自身下線代理們拉進來的會員") }</span><br />
+                    <span style="line-height:40px">${ mlp.getLanguageKey("總投注人數: 該區間內自身下線們有進行投注的人數") }</span><br />
+                    <span style="line-height:40px">${ mlp.getLanguageKey("佔成佣金: 該區間內可拿到的佔成佣金") }</span><br />
+                    <span style="line-height:40px">${ mlp.getLanguageKey("轉碼佣金: 該區間內可拿到的轉碼佣金") }</span><br />
+                    <span style="line-height:40px">${ mlp.getLanguageKey("總線上下數: 該區間內下線們的上下數總計") }</span><br />
+                    <span style="line-height:40px">${ mlp.getLanguageKey("總線轉碼數: 該區間內下線們的轉碼數總計") }</span><br />`
             );
         }
 

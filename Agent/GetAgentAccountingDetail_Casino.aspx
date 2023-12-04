@@ -235,7 +235,6 @@
         if (o != null) {
             if (o.ADList != null) {
                 let hasChild = false;
-                let childBonusPointValue = 0;
 
                 for (var i = 0; i < o.ADList.length; i++) {
 
@@ -250,6 +249,7 @@
                     let CommissionCost = CommissionValue * ur;
                     let ChildenRebateUserRate = 0;
                     let ChildenRebateCommission = 0;
+                    let UserAccountType = "";
 
                     for (var i = 0; i < data.ChildUser.length; i++) {
                         let kk = data.ChildUser[i];
@@ -257,7 +257,23 @@
                         ChildenRebateCommission = ChildenRebateCommission + (kk.TotalValidBetValue * kk.BuyChipRate / 100)
                     }
 
+                    switch (data.UserAccountType) {
+                        case 0:
+                            UserAccountType = mlp.getLanguageKey("一般帳戶");
+                            break;
+                        case 1:
+                            UserAccountType = mlp.getLanguageKey("代理");
+                            break;
+                        case 2:
+                            UserAccountType = mlp.getLanguageKey("股東");
+                            break;
+                        default:
+                            UserAccountType = mlp.getLanguageKey("一般帳戶");
+                            break;
+                    }
+
                     c.setClassText(t, "LoginAccount", null, data.LoginAccount);
+                    c.setClassText(t, "UserAccountType", null, UserAccountType);
                     c.setClassText(t, "CurrencyType", null, data.CurrencyType);
                     c.setClassText(t, "SelfRewardValue", null, toCurrency((data.SelfRewardValue)));
                     c.setClassText(t, "SelfValidBetValue", null, toCurrency((data.SelfValidBetValue)));
@@ -298,69 +314,86 @@
 
                 if (hasChild) {
                     for (var ii = 0; ii < o.ADList[0].ChildUser.length; ii++) {
-
                         let data = o.ADList[0].ChildUser[ii];
-                        let t = c.getTemplate("templateTableItem");
-                        let expandBtn;
-                        let parentSortKey = "";
-                        childBonusPointValue = childBonusPointValue + data.BonusPointValue;
-                        let ur = data.UserRate / 100;
-                        let bcr = data.BuyChipRate / 100;
-                        let TotalRebateUserRate = (-1 * data.TotalRewardValue) * ur;
-                        let CommissionValue = data.TotalValidBetValue * bcr;
-                        let CommissionCost = CommissionValue * ur;
-                        let ChildenRebateUserRate = 0;
-                        let ChildenRebateCommission = 0;
+                        if (data.TotalRewardValue == 0 && data.TotalValidBetValue == 0) {
 
-                        for (var i = 0; i < data.ChildUser.length; i++) {
-                            let kk = data.ChildUser[i];
-                            ChildenRebateUserRate = ChildenRebateUserRate + (-1 * kk.TotalRewardValue * kk.UserRate / 100);
-                            ChildenRebateCommission = ChildenRebateCommission + (kk.TotalValidBetValue * kk.BuyChipRate / 100)
+                        } else {
+
+                            let t = c.getTemplate("templateTableItem");
+                            let expandBtn;
+                            let parentSortKey = "";
+                            let ur = data.UserRate / 100;
+                            let bcr = data.BuyChipRate / 100;
+                            let TotalRebateUserRate = (-1 * data.TotalRewardValue) * ur;
+                            let CommissionValue = data.TotalValidBetValue * bcr;
+                            let CommissionCost = CommissionValue * ur;
+                            let ChildenRebateUserRate = 0;
+                            let ChildenRebateCommission = 0;
+                            let UserAccountType = "";
+
+                            for (var i = 0; i < data.ChildUser.length; i++) {
+                                let kk = data.ChildUser[i];
+                                ChildenRebateUserRate = ChildenRebateUserRate + (-1 * kk.TotalRewardValue * kk.UserRate / 100);
+                                ChildenRebateCommission = ChildenRebateCommission + (kk.TotalValidBetValue * kk.BuyChipRate / 100)
+                            }
+
+                            switch (data.UserAccountType) {
+                                case 0:
+                                    UserAccountType = mlp.getLanguageKey("一般帳戶");
+                                    break;
+                                case 1:
+                                    UserAccountType = mlp.getLanguageKey("代理");
+                                    break;
+                                case 2:
+                                    UserAccountType = mlp.getLanguageKey("股東");
+                                    break;
+                                default:
+                                    UserAccountType = mlp.getLanguageKey("一般帳戶");
+                                    break;
+                            }
+
+                            c.setClassText(t, "LoginAccount", null, data.LoginAccount);
+                            c.setClassText(t, "UserAccountType", null, UserAccountType);
+                            c.setClassText(t, "CurrencyType", null, data.CurrencyType);
+                            c.setClassText(t, "SelfRewardValue", null, toCurrency((data.SelfRewardValue)));
+                            c.setClassText(t, "SelfValidBetValue", null, toCurrency((data.SelfValidBetValue)));
+                            c.setClassText(t, "UserRate", null, data.UserRate + "%");
+                            c.setClassText(t, "BuyChipRate", null, data.BuyChipRate + "%");
+
+                            c.setClassText(t, "TotalRewardValue", null, toCurrency((data.TotalRewardValue)));
+                            c.setClassText(t, "TotalValidBetValue", null, toCurrency((data.TotalValidBetValue)));
+                            c.setClassText(t, "TotalRebateUserRate", null, toCurrency(TotalRebateUserRate));
+                            c.setClassText(t, "CommissionValue", null, toCurrency(CommissionValue));
+                            c.setClassText(t, "CommissionCost", null, toCurrency(CommissionCost));
+                            c.setClassText(t, "ChildenRebateUserRate", null, toCurrency(ChildenRebateUserRate));
+                            c.setClassText(t, "ChildenRebateCommission", null, toCurrency(ChildenRebateCommission));
+                            c.setClassText(t, "SelfRebateUserRate", null, toCurrency(TotalRebateUserRate - data.ChildenRebateUserRate));
+                            c.setClassText(t, "SelfRebateCommission", null, toCurrency(CommissionValue - data.ChildenRebateCommission - CommissionCost));
+                            c.setClassText(t, "UserPaidOPValue", null, toCurrency(data.PaidOPValue));
+                            c.setClassText(t, "UserRebate", null, toCurrency(TotalRebateUserRate - data.ChildenRebateUserRate + CommissionValue - data.ChildenRebateCommission - CommissionCost));
+
+                            expandBtn = t.querySelector(".Expand");
+
+                            t.querySelector(".Space").style.paddingLeft = "20px";
+
+                            expandBtn.style.display = "none";
+                            t.querySelector(".noChild").style.display = "inline-block";
+
+                            if (data.UserAccountInsideLevel % 2 == 0) {
+                                t.classList.add("switch_tr");
+                            }
+
+                            t.classList.add("row_c_" + data.ParentUserAccountSortKey);
+                            t.classList.add("row_s_" + data.ParentUserAccountSortKey);
+
+                            t.classList.add("row_child");
+                            t.style.display = "none";
+
+                            idList.appendChild(t);
                         }
-
-                        c.setClassText(t, "LoginAccount", null, data.LoginAccount);
-                        c.setClassText(t, "CurrencyType", null, data.CurrencyType);
-                        c.setClassText(t, "SelfRewardValue", null, toCurrency((data.SelfRewardValue)));
-                        c.setClassText(t, "SelfValidBetValue", null, toCurrency((data.SelfValidBetValue)));
-                        c.setClassText(t, "UserRate", null, data.UserRate + "%");
-                        c.setClassText(t, "BuyChipRate", null, data.BuyChipRate + "%");
-
-                        c.setClassText(t, "TotalRewardValue", null, toCurrency((data.TotalRewardValue)));
-                        c.setClassText(t, "TotalValidBetValue", null, toCurrency((data.TotalValidBetValue)));
-                        c.setClassText(t, "TotalRebateUserRate", null, toCurrency(TotalRebateUserRate));
-                        c.setClassText(t, "CommissionValue", null, toCurrency(CommissionValue));
-                        c.setClassText(t, "CommissionCost", null, toCurrency(CommissionCost));
-                        c.setClassText(t, "ChildenRebateUserRate", null, toCurrency(ChildenRebateUserRate));
-                        c.setClassText(t, "ChildenRebateCommission", null, toCurrency(ChildenRebateCommission));
-                        c.setClassText(t, "SelfRebateUserRate", null, toCurrency(TotalRebateUserRate - data.ChildenRebateUserRate));
-                        c.setClassText(t, "SelfRebateCommission", null, toCurrency(CommissionValue - data.ChildenRebateCommission - CommissionCost));
-                        c.setClassText(t, "UserPaidOPValue", null, toCurrency(data.PaidOPValue));
-                        c.setClassText(t, "UserRebate", null, toCurrency(TotalRebateUserRate - data.ChildenRebateUserRate + CommissionValue - data.ChildenRebateCommission - CommissionCost));
-
-                        expandBtn = t.querySelector(".Expand");
-
-                        t.querySelector(".Space").style.paddingLeft = "20px";
-
-                        expandBtn.style.display = "none";
-                        t.querySelector(".noChild").style.display = "inline-block";
-
-                        if (data.UserAccountInsideLevel % 2 == 0) {
-                            t.classList.add("switch_tr");
-                        }
-
-                        t.classList.add("row_c_" + data.ParentUserAccountSortKey);
-                        t.classList.add("row_s_" + data.ParentUserAccountSortKey);
-
-                        t.classList.add("row_child");
-                        t.style.display = "none";
-
-                        idList.appendChild(t);
                     }
                 }
 
-                if (childBonusPointValue != 0) {
-                    $(".row_top .BonusValue_Own").text(toCurrency((childBonusPointValue)));
-                }
             }
         }
     }
@@ -403,15 +436,15 @@
     function showNote() {
         window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"),
 
-            `${mlp.getLanguageKey("總佔成佣金: (-1*總上下數)*自身佔成率")}<br />
-                    ${mlp.getLanguageKey("總洗碼佣金: 總洗碼數*自身轉碼率")}<br />
-                    ${mlp.getLanguageKey("洗碼佣金成本: 總洗碼佣金*自身佔成率")}<br />
-                    ${mlp.getLanguageKey("下線佔成佣金加總: 指下線的佔成佣金數合計")}<br />
-                    ${mlp.getLanguageKey("下線洗碼佣金加總: 指下線的轉碼佣金數合計")}<br />
-                    ${mlp.getLanguageKey("佔成佣金: 總佔成佣金-下線佔成佣金加總")}<br />
-                    ${mlp.getLanguageKey("轉碼佣金: 總洗碼佣金-下線洗碼佣金加總-洗碼佣金成本")}<br />
-                    ${mlp.getLanguageKey("已付佣金: 指已經收到的佣金")}<br />
-                    ${mlp.getLanguageKey("應付佣金: 佔成佣金+轉碼佣金")}<br />`
+            `<span style="line-height:40px">${mlp.getLanguageKey("總佔成佣金: (-1*總上下數)*自身佔成率")}</span><br />
+                    <span style="line-height:40px">${mlp.getLanguageKey("總洗碼佣金: 總洗碼數*自身轉碼率")}</span><br />
+                    <span style="line-height:40px">${mlp.getLanguageKey("洗碼佣金成本: 總洗碼佣金*自身佔成率")}</span><br />
+                    <span style="line-height:40px">${mlp.getLanguageKey("下線佔成佣金加總: 指下線的佔成佣金數合計")}</span><br />
+                    <span style="line-height:40px">${mlp.getLanguageKey("下線洗碼佣金加總: 指下線的轉碼佣金數合計")}</span><br />
+                    <span style="line-height:40px">${mlp.getLanguageKey("佔成佣金: 總佔成佣金-下線佔成佣金加總")}</span><br />
+                    <span style="line-height:40px">${mlp.getLanguageKey("轉碼佣金: 總洗碼佣金-下線洗碼佣金加總-洗碼佣金成本")}</span><br />
+                    <span style="line-height:40px">${mlp.getLanguageKey("已付佣金: 指已經收到的佣金")}</span><br />
+                    <span style="line-height:40px">${mlp.getLanguageKey("應付佣金: 佔成佣金+轉碼佣金")}</span><br />`
         );
     }
 
@@ -462,6 +495,10 @@
                                     <button class="tree-btn Expand">+</button>
                                     <span class="LoginAccount">CON5</span>
                                 </span>
+                            </div>
+                            <div class="tbody__td td-number td-3 td-vertical">
+                                <span class="td__title"><span class="language_replace">身份</span></span>
+                                <span class="td__content"><span class="UserAccountType"></span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">幣別</span></span>
@@ -534,6 +571,7 @@
                         <!--標題項目單行 -->
                         <div class="thead__tr">
                             <div class="thead__th"><span class="language_replace">帳號</span></div>
+                            <div class="thead__th"><span class="language_replace">身份</span></div>
                             <div class="thead__th"><span class="language_replace">幣別</span></div>
                             <div class="thead__th"><span class="language_replace">佔成率</span></div>
                             <div class="thead__th"><span class="language_replace">轉碼率</span></div>
