@@ -25,5 +25,8 @@
   "額度": "Amount",
   "備註": "Remark",
   "確認": "Search",
-  "拒絕": "Rejected"
+  "拒絕": "Rejected",
+  "待處理總金額：": "Pending_Total:",
+  "已完成總金額：": "Done_Total:",
+  "拒絕總金額：": "Rejected_Total:"
 }

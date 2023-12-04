@@ -8,9 +8,11 @@
   "貨幣": "Curr.",
   "補點額度": "Add Points",
   "扣點額度": "Deduction Points",
-  "描述": "Content",
+  "描述": "Remark",
   "驗證帳號": "Verified by",
-  "執行帳號": "Executor",
+  "執行帳號": "Authorizer",
   "網路異常, 請稍後重新嘗試": "Network exception, please try again.",
-  "錯誤": "System Message"
+  "錯誤": "System Message",
+  "總補點額度：": "Total Add Points:",
+  "總扣點額度：": "Total Deduction Points:"
 }

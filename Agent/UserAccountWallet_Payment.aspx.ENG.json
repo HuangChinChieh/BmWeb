@@ -26,5 +26,6 @@
   "將會預先從您的錢包保管額度並通知您的上線處理提款要求": "The reserved amount will be deducted in advance from your wallet, and your upline will be notified to process the withdrawal request.",
   "是否確定進行?": "Do you want to proceed with the withdrawal?",
   "上線代理不存在": "Upline does not exist, please contact customer service directly.",
-  "NoParentExist": "Upline does not exist, please contact customer service directly."
+  "NoParentExist": "Upline does not exist, please contact customer service directly.",
+  "InsufficientBalance": "The requested withdrawal amount is greater than the wallet balance.<br> It is insufficient for deduction, please check."
 }

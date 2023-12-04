@@ -2,8 +2,8 @@
   "網路異常, 請稍後重新嘗試": "Network exception, please try again.",
   "結束日期不可小於起起始日期": "End date cannot be earlier than start date.",
   "請至少選擇一個幣別!!": "Please select at least one currency!!",
-  "無數據": "There is no any data yet.",
-  "團隊投注數據": "Agent Betting Data",
+  "無數據": "There is no any betting data.",
+  "團隊投注數據": "Downline Betting Performance",
   "帳號": "ID",
   "起始日期": "Start Date",
   "結束日期": "End Date",
@@ -29,5 +29,9 @@
   "錯誤": "System Message",
   "完成": "System Message",
   "確認": "Search",
-  "UserNotExist": "This account does not exist, please check again."
+  "UserNotExist": "This account does not exist, please check again.",
+  "身份": "Type",
+  "會員": "User",
+  "代理": "Agent",
+  "股東": "Shareholder"
 }

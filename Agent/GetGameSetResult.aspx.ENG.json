@@ -15,7 +15,7 @@
   "完成": "System Message",
   "細節": "Details",
   "請輸入完整帳號": "Please enter the full ID.",
-  "電投開工記錄": "Telebet Betting History",
+  "電投開工記錄": "Telebet-Game Status View",
   "帳號": "ID",
   "起始日期": "Start date",
   "結束日期": "End date",
@@ -29,9 +29,14 @@
   "確認": "Search",
   "單號": "Game Order No.",
   "狀態": "Status",
-  "輸贏數": "Win/Loss",
+  "輸贏數": "Total Win/Loss",
   "建立日期": "Created Date",
   "更多": "More",
   "貨幣": "Curr.",
-  "本金": "Principal"
+  "本金": "Principal",
+  "佔成率": "Sharing %",
+  "轉碼率": "Rolling %",
+  "轉碼數": "Total Rolling",
+  "加彩": "Top-Up",
+  "小費": "Tips"
 }

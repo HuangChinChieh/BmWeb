@@ -5,7 +5,7 @@
   "正常": "Normal",
   "停用": "Disabled",
   "無數據": "No account information found, please check.",
-  "團隊代理": "Agent Info. Overview",
+  "團隊代理": "Downline Info. Overview",
   "帳號": "ID",
   "起始日期": "Start Date",
   "結束日期": "End Date",
@@ -36,6 +36,11 @@
   "提醒": "System Message",
   "錯誤": "System Message",
   "完成": "System Message",
-  "總線額度": "Total Line Balance",
-  "請輸入完整帳號": "Please enter a complete account."
+  "總線額度": "Current Line Total Balance",
+  "請輸入完整帳號": "Please enter a complete account.",
+  "身份": "Type",
+  "會員": "User",
+  "代理": "Agent",
+  "股東": "Shareholder",
+  "已查無數據": "This account is not exist, please check."
 }

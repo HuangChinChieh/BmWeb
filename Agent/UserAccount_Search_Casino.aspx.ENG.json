@@ -21,7 +21,7 @@
   "會員編輯": "Edit",
   "會員轉帳": "Transfer Service",
   "下線詳細資訊及相關功能": "Downline Settings",
-  "開戶日期 : ": "Creation Date:",
+  "開戶日期 : ": "Created Date:",
   "上次登入 : ": "Last Login:",
   "錢包設定": "Wallet Settings",
   "編輯帳號": "Edit",
@@ -44,7 +44,7 @@
   "下線總額度": "Subordinate Wallet Total",
   "無此錢包": "No this wallet type, please check.",
   "投注": "Records",
-  "帳號": "ID",
+  "帳號": "ID <br>[The number in Agent/Member()indicates the location of the account.]",
   "搜尋": "Search",
   "返水率": "Cashback %",
   "請輸入備註": "Please enter a note.",
@@ -64,5 +64,6 @@
   "Slot": "Slot",
   "修改": "Edit",
   "PS": "BM Sports",
-  "DBES": "BM eSports"
+  "DBES": "BM eSports",
+  "NoData": "This account is not your direct downline, please check."
 }
