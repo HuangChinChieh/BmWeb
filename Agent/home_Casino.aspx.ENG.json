@@ -11,7 +11,7 @@
   "狀態": "Status",
   "姓名": "Name",
   "本日": "Today",
-  "昨天": "Yesterday",
+  "昨天": "YTD",
   "本週": "This Week",
   "上週": "Last Week",
   "本月": "This Month",
@@ -75,5 +75,18 @@
   "總線額度": "My Line Balance<br>(including myself)",
   "PS": "BM Sports",
   "DBES": "BM eSports",
-  "百家樂": "BM Live"
+  "百家樂": "BM Live",
+  "**提醒**": "**Reminder**",
+  "若需看各幣別資料，請先於右上方切換幣別。": "● If you want to view information in different currencies, please switch the currency in the upper right corner first.",
+  "根據切換的時間點，數據展示會有所不同，煩請留意。": "● Please note that depending on the time that you selected, the displayed data will vary.",
+  "[欄位說明]": "[Field Description]",
+  "直屬代理: 指自身拉進來的代理": "● Direct Agents: Refers to agents directly recruited by yourself.",
+  "下線代理: 指自身拉進來的代理去拉的代理": "● Downline Agents: Refers to agents recruited by yourself who recruit other agents.",
+  "直屬會員: 指自身拉進來的會員": "● Direct Users : Refers to users directly recruited by yourself.",
+  "下線會員: 指自身下線代理們拉進來的會員": "● Downline Users : Refers to users recruited by your downline agents.",
+  "總投注人數: 該區間內自身下線們有進行投注的人數": "● Total Betting Users: The number of people who placed bets within the range you selected.",
+  "佔成佣金: 該區間內可拿到的佔成佣金": "● Sharing Commission: The sharing commission that can be received within the range you selected.",
+  "轉碼佣金: 該區間內可拿到的轉碼佣金": "● Rolling Commission: The rolling commission that can be received within the range you selected.",
+  "總線上下數: 該區間內下線們的上下數總計": "● Total Line Win/Loss:  The sum of the total line's win/loss within the range you selected.",
+  "總線轉碼數: 該區間內下線們的轉碼數總計": "● Total Line Rolling: The sum of total the line's rolling within the range you selected."
 }
