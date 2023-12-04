@@ -323,14 +323,14 @@
 
         <!-- 表格 由此開始 ========== -->
         <div class="container-fluid wrapper__TopCollapse orderHistory_userAccount">
-            <h2 class="collapse-header has-arrow zIndex_overMask_SafariFix">
-                <span class="language_replace">待處理總金額</span>
-                <span class="language_replace sumAmount0">0</span>
-                <span class="language_replace">已完成總金額</span>
-                <span class="language_replace sumAmount1">0</span>
-                <span class="language_replace">拒絕總金額</span>
+            <h5 class="collapse-header has-arrow zIndex_overMask_SafariFix">
+                <span class="language_replace">待處理總金額：</span>
+                <span class="language_replace sumAmount0">0</span><br />
+                <span class="language_replace">已完成總金額：</span>
+                <span class="language_replace sumAmount1">0</span><br />
+                <span class="language_replace">拒絕總金額：</span>
                 <span class="language_replace sumAmount2">0</span>
-            </h2>
+            </h5>
             <div class="MT__tableDiv" id="idResultTable">
                 <!-- 自訂表格 -->
                 <div class="MT__table table-col-8 w-200">
