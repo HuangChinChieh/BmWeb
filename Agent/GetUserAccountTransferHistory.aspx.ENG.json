@@ -1,12 +1,12 @@
 {
-  "轉帳紀錄": "Transfer Record",
+  "轉帳紀錄": "Points Transfer Record",
   "起始日期": "Start Date",
   "結束日期": "End Date",
   "確認": "Search",
   "搜尋條件": "Search Criteria",
   "全部": "All",
-  "轉入": "Transfer-In",
-  "轉出": "Transfer-Out",
+  "轉入": "Receipt Records",
+  "轉出": "Transfer Records",
   "狀態": "Transfer Status",
   "確認1": "Done",
   "失敗": "Failed",
@@ -16,7 +16,7 @@
   "收款帳戶": "To",
   "轉出貨幣": "Transfer Curr.",
   "轉入貨幣": "Receive Curr.",
-  "轉出額度": "Transfer Amount",
+  "轉出額度": "Amount",
   "收帳額度": "Receive Amount",
   "備註": "Remarks",
   "登入管理者帳號": "Executor",
@@ -26,5 +26,5 @@
   "錯誤": "System Message",
   "匯出條件": "Search Criteria",
   "總到帳金額：": "Total Receive Amount:",
-  "總轉出金額：": "Total Transfer Amount:"
+  "總轉出金額：": "Total Amount:"
 }
