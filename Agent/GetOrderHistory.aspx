@@ -111,11 +111,11 @@
     var basicSortKey;
     var SelectedWallet;
     var PageNumber = 1;
-    
+
     function querySelfData() {
         startDate = document.getElementById("startDate");
         endDate = document.getElementById("endDate");
-
+        PageNumber = 1;
         queryData();
     }
 
@@ -123,12 +123,13 @@
         if (SelectedWallet != "") {
             var postData = {
                 AID: EWinInfo.ASID,
-                LoginAccount: EWinInfo.LoginAccount,
+                LoginAccount: $("#loginAccount").val(),
                 QueryBeginDate: startDate.value,
                 QueryEndDate: endDate.value,
                 CurrencyType: SelectedWallet,
                 RowsPage: 50, //一頁顯示的比數
-                PageNumber: PageNumber
+                PageNumber: PageNumber,
+                GameBrand: $("#idGameBrandList").val()
             };
 
             if (new Date(postData.QueryBeginDate) <= new Date(postData.QueryEndDate)) {
@@ -167,6 +168,7 @@
 
     function updateList(o) {
         var idList = document.getElementById("idList");
+        $("#btnShowNextData").hide();
         if (o.SearchPageNumber == 1) {
             c.clearChildren(idList);
         }
@@ -182,12 +184,13 @@
                 c.setClassText(t, "OrderHistoryID", null, item.OrderHistoryID);
                 //c.setClassText(t, "GameCode", null, item.GameCode);
                 //c.setClassText(t, "GameCategoryCode", null, mlp.getLanguageKey(item.GameCategoryCode));
+                c.setClassText(t, "LoginAccount", null, item.LoginAccount);
                 c.setClassText(t, "CurrencyType", null, item.CurrencyType);
                 c.setClassText(t, "OrderValue", null, c.toCurrency(item.OrderValue));
                 c.setClassText(t, "RewardValue", null, c.toCurrency(item.RewardValue));
                 c.setClassText(t, "BuyChipValue", null, c.toCurrency(item.BuyChipValue));
                 c.setClassText(t, "GameDate", null, item.GameDate);
-               
+
                 if (item.RewardValue == 0) {
                     c.setClassText(t, "GameResult", null, `<span style="color:#F9F900">${mlp.getLanguageKey("平")}</span>`);
                 } else if (item.RewardValue > 0) {
@@ -195,7 +198,7 @@
                 } else {
                     c.setClassText(t, "GameResult", null, `<span style="color:#FF5151">${mlp.getLanguageKey("輸")}</span>`);
                 }
-                
+
                 c.setClassText(t, "GameBrand", null, mlp.getLanguageKey(item.GameBrand));
                 c.setClassText(t, "UserRate", null, item.UserRate);
                 c.setClassText(t, "BuyChipRate", null, item.BuyChipRate);
@@ -331,6 +334,41 @@
         window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("請輸入完整帳號"));
     }
 
+    function queryCompanyGameBrand() {
+        $("#idGameBrandList").empty();
+        if (EWinInfo.CompanyGameBrand != null) {
+            if (EWinInfo.CompanyGameBrand.length > 0) {
+                var temp = c.getTemplate("templateGameBrandInfo");
+                if (temp != null) {
+                    temp.value = "All";
+                    c.setClassText(temp, "gameBrand", null, mlp.getLanguageKey("All"));
+
+                    $("#idGameBrandList").append(temp);
+
+                }
+
+                for (var i = 0; i < EWinInfo.CompanyGameBrand.length; i++) {
+                    temp = c.getTemplate("templateGameBrandInfo");
+                    var w = EWinInfo.CompanyGameBrand[i];
+
+                    if (temp != null) {
+                        temp.value = w.GameBrand;
+                        c.setClassText(temp, "gameBrand", null, mlp.getLanguageKey(w.GameBrand));
+
+                        $("#idGameBrandList").append(temp);
+
+                    }
+                }
+
+                querySelfData();
+            } else {
+                window.parent.showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("尚未開啟任一遊戲"));
+            }
+        } else {
+            window.parent.showMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("尚未開啟任一遊戲"));
+        }
+    }
+
     function init() {
         var d = new Date();
 
@@ -344,7 +382,7 @@
             window.parent.API_CloseLoading();
             $("#loginAccount").text(EWinInfo.LoginAccount);
             SelectedWallet = parent.API_GetSelectedWallet();
-            querySelfData();
+            queryCompanyGameBrand();
 
             ac.dataToggleCollapseInit();
         });
@@ -373,10 +411,11 @@
                         <span class="language_replace">遊戲紀錄</span>
                         <i class="arrow"></i>
                     </h2>
+
                     <!-- collapse內容 由此開始 ========== -->
                     <div id="searchList" class="collapse-content collapse show">
                         <div id="divSearchContent" class="row searchListContent">
-                            <div id="idSearchButton" class="col-12 col-md-4 col-lg-2 col-xl-2" style="display:none">
+                            <div id="idSearchButton" class="col-12 col-md-4 col-lg-2 col-xl-2">
                                 <div class="form-group form-group-s2 ">
                                     <div class="title hidden shown-md">
                                         <span class="language_replace">帳號</span>
@@ -390,6 +429,24 @@
 
                                 </div>
                             </div>
+
+                            <div class="col-12 col-md-6 col-lg-4 col-xl-auto">
+
+                                <div class="WalletType transferOut">
+                                    <div class="form-group">
+                                        <label class="title">
+                                            <span class="language_replace">遊戲品牌</span>
+                                        </label>
+                                        <select id="idGameBrandList" class="custom-select custom-select-lg">
+                                        </select>
+                                    </div>
+                                    <div id="templateGameBrandInfo" style="display: none">
+                                        <option class="language_replace optCurrenyType" value=""><span class="gameBrand">CNY</span></option>
+                                    </div>
+
+                                </div>
+                            </div>
+
                             <div class="col-12 col-md-5 col-lg-4 col-xl-3">
                                 <!-- 起始日期 / 結束日期 -->
                                 <div class="form-group search_date">
@@ -424,7 +481,6 @@
                                 </div>
                             </div>--%>
 
-
                             <div class="col-12 col-md-12 col-lg-5 col-xl-6">
                                 <div id="idTabMainContent">
                                     <ul class="nav-tabs-block nav nav-tabs tab-items-4" role="tablist">
@@ -437,13 +493,13 @@
                                         <li class="nav-item active">
                                             <a onclick="changeDateTab(this,2)" class="nav-link language_replace active" data-toggle="tab" href="" role="tab" aria-selected="true">本週</a>
                                         </li>
-                                      <%--  <li class="nav-item">
+                                        <%--  <li class="nav-item">
                                             <a onclick="changeDateTab(this,3)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">上週</a>
                                         </li>--%>
                                         <li class="nav-item">
                                             <a onclick="changeDateTab(this,4)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">本月</a>
                                         </li>
-                                       <%-- <li class="nav-item">
+                                        <%-- <li class="nav-item">
                                             <a onclick="changeDateTab(this,5)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">上月</a>
                                         </li>--%>
                                         <li class="tab-slide" id="sliderDate"></li>
@@ -468,6 +524,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-12">
                                 <div class="form-group wrapper_center dataList-process">
                                     <button class="btn btn-full-main btn-roundcorner " onclick="querySelfData()" id="btnSearch"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">確認</span></button>
@@ -493,7 +550,7 @@
                                 <span class="td__title"><span class="language_replace">ID</span></span>
                                 <span class="td__content"><i class="icon icon-s icon-before"></i><span class="OrderHistoryID"></span></span>
                             </div>
-<%--                            <div class="tbody__td td-3 nonTitle">
+                            <%--                            <div class="tbody__td td-3 nonTitle">
                                 <span class="td__title"><span class="language_replace">遊戲代碼</span></span>
                                 <span class="td__content"><i class="icon icon-s icon-before"></i><span class="GameCode"></span></span>
                             </div>
@@ -501,6 +558,10 @@
                                 <span class="td__title"><span class="language_replace">遊戲類型</span></span>
                                 <span class="td__content"><i class="icon icon-s icon-before"></i><span class="GameCategoryCode"></span></span>
                             </div>--%>
+                            <div class="tbody__td td-3 nonTitle">
+                                <span class="td__title"><span class="language_replace">帳號</span></span>
+                                <span class="td__content"><i class="icon icon-s icon-before"></i><span class="LoginAccount"></span></span>
+                            </div>
                             <div class="tbody__td td-3 nonTitle">
                                 <span class="td__title"><span class="language_replace">遊戲品牌</span></span>
                                 <span class="td__content"><i class="icon icon-s icon-before"></i><span class="GameBrand"></span></span>
@@ -548,8 +609,9 @@
                         <!--標題項目單行 -->
                         <div class="thead__tr">
                             <div class="thead__th"><span class="language_replace">ID</span></div>
-<%--                            <div class="thead__th"><span class="language_replace">遊戲代碼</span></div>
+                            <%--                            <div class="thead__th"><span class="language_replace">遊戲代碼</span></div>
                             <div class="thead__th"><span class="language_replace">遊戲類型</span></div>--%>
+                            <div class="thead__th"><span class="language_replace">帳號</span></div>
                             <div class="thead__th"><span class="language_replace">遊戲品牌</span></div>
                             <div class="thead__th"><span class="language_replace">幣別</span></div>
                             <div class="thead__th"><span class="language_replace">投注額度</span></div>
@@ -565,7 +627,7 @@
                     <!-- 表格上下滑動框 -->
                     <div class="tbody" id="idList">
                     </div>
-                    <div class="row" style="position: absolute; left: 0; right: 0; margin: 0 auto; padding-top: 40px;margin-top:15px">
+                    <div class="row" style="position: absolute; left: 0; right: 0; margin: 0 auto; padding-top: 40px; margin-top: 15px">
                         <div class="col-12" id="btnShowNextData" style="display: none;">
                             <div class="form-group wrapper_center dataList-process">
                                 <button style="max-width: 30%;" class="btn btn-full-main btn-roundcorner " onclick="showNextData()"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">查看更多</span></button>

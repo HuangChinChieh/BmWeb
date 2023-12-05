@@ -18,4 +18,11 @@ public partial class index : System.Web.UI.Page {
         EWin.BmAgent.BmAgent api = new EWin.BmAgent.BmAgent();
         return api.GetUserAccountBetLimit(AID);
     }
+
+    [WebMethod]
+    [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+    public static EWin.BmAgent.CompanyGameBrandResult GetCompanyGameBrand(string AID) {
+        EWin.BmAgent.BmAgent api = new EWin.BmAgent.BmAgent();
+        return api.GetCompanyGameBrand(AID);
+    }
 }

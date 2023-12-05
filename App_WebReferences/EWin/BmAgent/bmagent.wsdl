@@ -1560,6 +1560,42 @@
           </s:extension>
         </s:complexContent>
       </s:complexType>
+      <s:element name="GetCompanyGameBrand">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCompanyGameBrandResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCompanyGameBrandResult" type="tns:CompanyGameBrandResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CompanyGameBrandResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Data" type="tns:ArrayOfCompanyGameBrand" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfCompanyGameBrand">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CompanyGameBrand" nillable="true" type="tns:CompanyGameBrand" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CompanyGameBrand">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="forCompanyID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="GameBrand" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="WalletType" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Provider" type="s:string" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="CheckChildAccount">
         <s:complexType>
           <s:sequence>
@@ -2032,6 +2068,8 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SearchLoginAccount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GameBrand" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="QueryBeginDate" type="s:dateTime" />
             <s:element minOccurs="1" maxOccurs="1" name="QueryEndDate" type="s:dateTime" />
             <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
@@ -2235,6 +2273,7 @@
       <s:element name="UserAccountPropertyResult" nillable="true" type="tns:UserAccountPropertyResult" />
       <s:element name="ChildUserInfoResult1" nillable="true" type="tns:ChildUserInfoResult1" />
       <s:element name="UserAccountBetLimit" nillable="true" type="tns:UserAccountBetLimit" />
+      <s:element name="CompanyGameBrandResult" nillable="true" type="tns:CompanyGameBrandResult" />
       <s:element name="UserAccountTransferHistoryResult" nillable="true" type="tns:UserAccountTransferHistoryResult" />
       <s:element name="RequireWithdrawalTableResult" nillable="true" type="tns:RequireWithdrawalTableResult" />
       <s:element name="AgentInfoResult" nillable="true" type="tns:AgentInfoResult" />
@@ -2515,6 +2554,12 @@
   </wsdl:message>
   <wsdl:message name="GetUserAccountBetLimitSoapOut">
     <wsdl:part name="parameters" element="tns:GetUserAccountBetLimitResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyGameBrandSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCompanyGameBrand" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyGameBrandSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCompanyGameBrandResponse" />
   </wsdl:message>
   <wsdl:message name="CheckChildAccountSoapIn">
     <wsdl:part name="parameters" element="tns:CheckChildAccount" />
@@ -3026,6 +3071,12 @@
   <wsdl:message name="GetUserAccountBetLimitHttpGetOut">
     <wsdl:part name="Body" element="tns:UserAccountBetLimit" />
   </wsdl:message>
+  <wsdl:message name="GetCompanyGameBrandHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyGameBrandHttpGetOut">
+    <wsdl:part name="Body" element="tns:CompanyGameBrandResult" />
+  </wsdl:message>
   <wsdl:message name="CheckChildAccountHttpGetIn">
     <wsdl:part name="AID" type="s:string" />
     <wsdl:part name="LoginAccount" type="s:string" />
@@ -3171,6 +3222,8 @@
   </wsdl:message>
   <wsdl:message name="GetGameOrderHistoryHttpGetIn">
     <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="SearchLoginAccount" type="s:string" />
+    <wsdl:part name="GameBrand" type="s:string" />
     <wsdl:part name="QueryBeginDate" type="s:string" />
     <wsdl:part name="QueryEndDate" type="s:string" />
     <wsdl:part name="CurrencyType" type="s:string" />
@@ -3569,6 +3622,12 @@
   <wsdl:message name="GetUserAccountBetLimitHttpPostOut">
     <wsdl:part name="Body" element="tns:UserAccountBetLimit" />
   </wsdl:message>
+  <wsdl:message name="GetCompanyGameBrandHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCompanyGameBrandHttpPostOut">
+    <wsdl:part name="Body" element="tns:CompanyGameBrandResult" />
+  </wsdl:message>
   <wsdl:message name="CheckChildAccountHttpPostIn">
     <wsdl:part name="AID" type="s:string" />
     <wsdl:part name="LoginAccount" type="s:string" />
@@ -3714,6 +3773,8 @@
   </wsdl:message>
   <wsdl:message name="GetGameOrderHistoryHttpPostIn">
     <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="SearchLoginAccount" type="s:string" />
+    <wsdl:part name="GameBrand" type="s:string" />
     <wsdl:part name="QueryBeginDate" type="s:string" />
     <wsdl:part name="QueryEndDate" type="s:string" />
     <wsdl:part name="CurrencyType" type="s:string" />
@@ -3920,6 +3981,10 @@
     <wsdl:operation name="GetUserAccountBetLimit">
       <wsdl:input message="tns:GetUserAccountBetLimitSoapIn" />
       <wsdl:output message="tns:GetUserAccountBetLimitSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyGameBrand">
+      <wsdl:input message="tns:GetCompanyGameBrandSoapIn" />
+      <wsdl:output message="tns:GetCompanyGameBrandSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="CheckChildAccount">
       <wsdl:input message="tns:CheckChildAccountSoapIn" />
@@ -4187,6 +4252,10 @@
       <wsdl:input message="tns:GetUserAccountBetLimitHttpGetIn" />
       <wsdl:output message="tns:GetUserAccountBetLimitHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetCompanyGameBrand">
+      <wsdl:input message="tns:GetCompanyGameBrandHttpGetIn" />
+      <wsdl:output message="tns:GetCompanyGameBrandHttpGetOut" />
+    </wsdl:operation>
     <wsdl:operation name="CheckChildAccount">
       <wsdl:input message="tns:CheckChildAccountHttpGetIn" />
       <wsdl:output message="tns:CheckChildAccountHttpGetOut" />
@@ -4444,6 +4513,10 @@
     <wsdl:operation name="GetUserAccountBetLimit">
       <wsdl:input message="tns:GetUserAccountBetLimitHttpPostIn" />
       <wsdl:output message="tns:GetUserAccountBetLimitHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyGameBrand">
+      <wsdl:input message="tns:GetCompanyGameBrandHttpPostIn" />
+      <wsdl:output message="tns:GetCompanyGameBrandHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="CheckChildAccount">
       <wsdl:input message="tns:CheckChildAccountHttpPostIn" />
@@ -4930,6 +5003,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetUserAccountBetLimit">
       <soap:operation soapAction="http://tempuri.org/GetUserAccountBetLimit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyGameBrand">
+      <soap:operation soapAction="http://tempuri.org/GetCompanyGameBrand" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -5552,6 +5634,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetCompanyGameBrand">
+      <soap12:operation soapAction="http://tempuri.org/GetCompanyGameBrand" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CheckChildAccount">
       <soap12:operation soapAction="http://tempuri.org/CheckChildAccount" style="document" />
       <wsdl:input>
@@ -6149,6 +6240,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetCompanyGameBrand">
+      <http:operation location="/GetCompanyGameBrand" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CheckChildAccount">
       <http:operation location="/CheckChildAccount" />
       <wsdl:input>
@@ -6721,6 +6821,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetUserAccountBetLimit">
       <http:operation location="/GetUserAccountBetLimit" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCompanyGameBrand">
+      <http:operation location="/GetCompanyGameBrand" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

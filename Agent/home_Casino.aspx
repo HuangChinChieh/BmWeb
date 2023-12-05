@@ -611,7 +611,9 @@
                    
                     `${ mlp.getLanguageKey("**提醒**") }<br />
                     <span style="line-height:40px">${ mlp.getLanguageKey("若需看各幣別資料，請先於右上方切換幣別。") }</span><br />
-                    <span style="line-height:40px">${ mlp.getLanguageKey("根據切換的時間點，數據展示會有所不同，煩請留意。") }</span><br /><br />
+                    <span style="line-height:40px">${ mlp.getLanguageKey("根據切換的時間點，數據展示會有所不同，煩請留意。") }</span><br />
+                    <img src="../Agent/Images/theme/dark/icon/icon-ewin-user.svg" style="width: 20px;padding-right: 5px;"><span style="line-height:40px">${ mlp.getLanguageKey("點選後可進行新增代理下線、新增助手帳號、顯示推廣碼(此為代理拉會員用，掃QRCODE即會導到註冊頁面)。") }</span><br />
+                    <img src="../Agent/Images/theme/dark/icon/icon-ewin-user-multi-w.svg" style="width: 20px;padding-right: 5px;"><span style="line-height:40px">${ mlp.getLanguageKey("點選後可進行新增子帳號、切換至子帳號。(注意:此子帳號表示自己帳戶的多帳號。)") }</span><br /><br />
                     <span style="line-height:40px">${ mlp.getLanguageKey("[欄位說明]") }</span><br />
                     <span style="line-height:40px">${ mlp.getLanguageKey("直屬代理: 指自身拉進來的代理") }</span><br />
                     <span style="line-height:40px">${ mlp.getLanguageKey("下線代理: 指自身拉進來的代理去拉的代理") }</span><br />

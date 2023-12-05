@@ -2113,11 +2113,35 @@ public static class RedisCache {
 
             return strRet;
         }
+        public static string GetGameOrderByLoginAccount(string LoginAccount, string GameBramd, string CurrencyType, string StratDate, string EndDate) {
+            string Key;
+            string strRet = string.Empty;
+
+            Key = XMLPath + ":GameOrder:LoginAccount:" + LoginAccount + ":GameBramd:" + GameBramd + ":CurrencyType:" + CurrencyType + ":SearchDate:" + StratDate + "_" + EndDate;
+            if (KeyExists(DBIndex, Key) == true) {
+                strRet = JsonReadFromRedis(DBIndex, Key);
+            }
+
+            return strRet;
+        }
 
         public static void UpdateGameOrderByLoginAccount(string JsonData, string LoginAccount, int ExpireTimeoutSeconds, string CurrencyType, string StratDate, string EndDate) {
             string Key;
 
             Key = XMLPath + ":GameOrder:LoginAccount:" + LoginAccount + ":CurrencyType:" + CurrencyType + ":SearchDate:" + StratDate + "_" + EndDate;
+            for (int I = 0; I <= 3; I++) {
+                try {
+                    JsonStringWriteToRedis(DBIndex, JsonData, Key, ExpireTimeoutSeconds);
+                    break;
+                } catch (Exception ex) {
+                }
+            }
+        }
+
+        public static void UpdateGameOrderByLoginAccount(string JsonData, string LoginAccount, string GameBramd, int ExpireTimeoutSeconds, string CurrencyType, string StratDate, string EndDate) {
+            string Key;
+
+            Key = XMLPath + ":GameOrder:LoginAccount:" + LoginAccount + ":GameBramd:" + GameBramd + ":CurrencyType:" + CurrencyType + ":SearchDate:" + StratDate + "_" + EndDate;
             for (int I = 0; I <= 3; I++) {
                 try {
                     JsonStringWriteToRedis(DBIndex, JsonData, Key, ExpireTimeoutSeconds);

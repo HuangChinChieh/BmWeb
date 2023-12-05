@@ -113,6 +113,7 @@
         CompanyInfo: null,
         CurrencyType: null,
         BetLimitInfo: null,
+        CompanyGameBrand: null,
         UserLevel: <%=UserLevel %>
     };
 
@@ -809,6 +810,7 @@
                     }
 
                     getBetLimitInfo();
+                    getCompanyGameBrand();
                 }
 
                 if (cb != null)
@@ -832,6 +834,24 @@
         c.callService(pageUrl + "/GetBetLimitInfo", postData, function (success, o) {
             if (success) {
                 EWinInfo.BetLimitInfo = c.getJSON(o).Data;
+            } else {
+                if (o == "Timeout") {
+                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請稍後重新嘗試"));
+                } else {
+                    window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), o);
+                }
+            }
+        });
+    }
+
+    function getCompanyGameBrand() {
+        var postData = {
+            AID: EWinInfo.ASID
+        };
+
+        c.callService(pageUrl + "/GetCompanyGameBrand", postData, function (success, o) {
+            if (success) {
+                EWinInfo.CompanyGameBrand = c.getJSON(o).Data;
             } else {
                 if (o == "Timeout") {
                     window.parent.API_ShowMessageOK(mlp.getLanguageKey("錯誤"), mlp.getLanguageKey("網路異常, 請稍後重新嘗試"));
