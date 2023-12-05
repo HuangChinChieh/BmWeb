@@ -88,5 +88,8 @@
   "佔成佣金: 該區間內可拿到的佔成佣金": "● Sharing Commission: The commission that you will be received within the range you selected.(***This is a simulation figures. The actual received commission, please check in the [Commission Report].***)",
   "轉碼佣金: 該區間內可拿到的轉碼佣金": "● Rolling Commission: The commission that you will be received within the range you selected.(***This is a simulation figures. The actual received commission, please check in the [Commission Report].***)",
   "總線上下數: 該區間內下線們的上下數總計": "● Total Line Win/Loss:  The sum of the total line's win/loss within the range you selected.",
-  "總線轉碼數: 該區間內下線們的轉碼數總計": "● Total Line Rolling: The sum of total the line's rolling within the range you selected."
+  "總線轉碼數: 該區間內下線們的轉碼數總計": "● Total Line Rolling: The sum of total the line's rolling within the range you selected.",
+  "點選後可進行新增代理下線、新增助手帳號、顯示推廣碼(此為代理拉會員用，掃QRCODE即會導到註冊頁面)。": "Click the icon on the top right corner of the homepage to add downline agents, add assistant accounts, and display the referral code. <br>(The referral code is for recruiting members. Scan the QR code will direct go to the registration page.)",
+  "點選後可進行新增子帳號、切換至子帳號。(注意:此子帳號表示自己帳戶的多帳號。)": " Click the icon on the top right corner of the homepage to add your sub-ID and switch to the sub-ID. <br>(Please note that the sub-ID means your multiple accounts under your own account.)"
+
 }

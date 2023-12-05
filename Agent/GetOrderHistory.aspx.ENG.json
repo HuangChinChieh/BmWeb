@@ -5,13 +5,13 @@
   "提醒": "System Message",
   "請至少選擇一個幣別!!": "Please select at least one currency!",
   "無數據": "There is no any betting data yet.",
-  "請輸入完整帳號": "Please enter the complete account.",
-  "遊戲紀錄": "My Betting History",
+  "請輸入完整帳號": "1. Please enter the complete account.<br>2. Please note that the betting history can only inquire the betting data of your direct downline.",
+  "遊戲紀錄": "Multi-Game _Betting History",
   "帳號": "ID",
   "起始日期": "Start Date",
   "結束日期": "End Date",
   "本日": "Today",
-  "昨天": "Yesterday",
+  "昨天": "YTD",
   "本週": "This Week",
   "上週": "Last Week",
   "本月": "This Month",
@@ -40,6 +40,8 @@
   "投注時轉碼率": "Sharing % @ The Time",
   "尚未結算": "Pending",
   "已結算": "Settled",
-  "EWin": "BM Live"
+  "EWin": "BM Live",
+  "尚未開啟任一遊戲": "There are currently no games available.",
+  "All": "All"
 
 }
