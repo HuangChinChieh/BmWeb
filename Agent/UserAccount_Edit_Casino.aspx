@@ -806,7 +806,7 @@
                     }
 
                     $(tmp).show();
-
+                    
                     switch (BetLimitType) {
                         case 0:
                             $("#idBetLimit0").append(tmp);
@@ -815,8 +815,10 @@
                             $("#idBetLimit1").append(tmp);
                             break;
                         default:
-                            $("#idBetLimit0").append(tmp);
-                            $("#idBetLimit1").append(tmp);
+                            let tmp1 = $(tmp).clone();
+                            let tmp2 = $(tmp).clone();
+                            $("#idBetLimit0").append(tmp1);
+                            $("#idBetLimit1").append(tmp2);
                             break;
                     }
 

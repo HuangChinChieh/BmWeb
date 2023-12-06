@@ -128,8 +128,8 @@
             let agentCount = 0;
             let userCount = 0
 
-            $(idAgentList).empty();
-            $(idUserList).empty();
+            $("#idAgentList").empty();
+            $("#idUserList").empty();
 
             for (var i = 0; i < item.length; i++) {
                 let k = item[i];

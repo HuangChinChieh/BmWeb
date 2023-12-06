@@ -95,7 +95,6 @@
         var OrderType = 0;
         var hasNoData = true;
         let sumAmount = 0;
-        let sumAmount1 = 0;
 
         var div = document.createElement("DIV");
 
@@ -139,7 +138,6 @@
                     t.style.display = "none";
                     idList.appendChild(t);
                     sumAmount = sumAmount + item.TransferValue;
-                    sumAmount1 = sumAmount1 + item.DstValue;
                     t.style.display = "";
                     document.getElementById("hasNoData_DIV").style.display = "none";
                     idList.classList.remove("tbody__hasNoData");
@@ -149,7 +147,6 @@
             }
         }
         $(".sumAmount").text(sumAmount);
-        $(".sumAmount1").text(sumAmount1);
     }
 
     function setSearchFrame() {
@@ -320,8 +317,6 @@
             <h5 class="collapse-header has-arrow zIndex_overMask_SafariFix">
                 <span class="language_replace">總轉出金額：</span>
                 <span class="language_replace sumAmount">0</span><br />
-                <span class="language_replace">總到帳金額：</span>
-                <span class="language_replace sumAmount1">0</span>
             </h5>
             <div class="MT__tableDiv" id="idResultTable">
                 <!-- 自訂表格 -->
@@ -331,10 +326,6 @@
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">交易日期</span></span>
                                 <span class="td__content"><span class="CreateDate">CON5</span></span>
-                            </div>
-                            <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">收款時間</span></span>
-                                <span class="td__content"><span class="ConfirmDate">CON5</span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">來源帳戶</span></span>
@@ -353,16 +344,8 @@
                                 <span class="td__content"><span class="SrcCurrencyType">CON3</span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">轉入貨幣</span></span>
-                                <span class="td__content"><span class="DstCurrencyType">CON3</span></span>
-                            </div>
-                            <div class="tbody__td td-number td-3 td-vertical">
                                 <span class="td__title"><span class="language_replace">轉出額度</span></span>
                                 <span class="td__content"><span class="TransferValue">CON4</span></span>
-                            </div>
-                            <div class="tbody__td td-number td-3 td-vertical td_DepositValue">
-                                <span class="td__title"></i><span class="language_replace">收帳額度</span></span>
-                                <span class="td__content"><span class="DstValue">CON4</span></span>
                             </div>
                             <div class="tbody__td td-3 " style="display:none">
                                 <span class="td__title"><span class="language_replace">備註</span></span>
@@ -384,14 +367,11 @@
                         <!--標題項目單行 -->
                         <div class="thead__tr">
                             <div class="thead__th"><span class="language_replace">交易日期</span></div>
-                            <div class="thead__th"><span class="language_replace">收款時間</span></div>
                             <div class="thead__th"><span class="language_replace">來源帳戶</span></div>
                             <div class="thead__th"><span class="language_replace">收款帳戶</span></div>
                             <div class="thead__th"><span class="language_replace">狀態</span></div>
                             <div class="thead__th"><span class="language_replace">轉出貨幣</span></div>
-                            <div class="thead__th"><span class="language_replace">轉入貨幣</span></div>
                             <div class="thead__th"><span class="language_replace">轉出額度</span></div>
-                            <div class="thead__th"><span class="language_replace">收帳額度</span></div>
                             <div class="thead__th" style="display:none"><span class="language_replace">備註</span></div>
                             <div class="thead__th" style="display:none"><span class="language_replace">登入管理者帳號</span></div>
                             <div class="thead__th" style="display:none"><span class="language_replace">驗證管理者帳號</span></div>
