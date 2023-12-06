@@ -228,6 +228,12 @@
 
     }
 
+    function showNote() {
+        window.event.stopPropagation();
+        window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"),mlp.getLanguageKey("注意事項")
+        );
+    }
+
     function SetNewPassword(validCode, newPassword) {
 
 
@@ -278,7 +284,12 @@
 <body class="innerBody ">
     <main class="innerMain">
         <div class="container-fluid">
-            <h1 class="page__title "><span class="language_replace">設定登入密碼</span></h1>
+            <div class="collapse-box">
+                <h2 class="collapse-header has-arrow zIndex_overMask_SafariFix">
+                    <span class="language_replace">設定登入密碼</span>
+                    <btn style="font-size: 12px; right: 5px; position: absolute; border: 2px solid; width: 22px; text-align: center; border-radius: 11px; color: #bba480; cursor: pointer;" onclick="showNote()">!</btn>
+                </h2>
+            </div>
 
             <form onsubmit="return false;">
                 <section class="sectionWallet wallet__currency--transfer">

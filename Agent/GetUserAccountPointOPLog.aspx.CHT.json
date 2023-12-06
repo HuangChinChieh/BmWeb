@@ -1,0 +1,46 @@
+{
+  "錢包點數異動記錄": "錢包點數異動記錄 (後台系統進行)",
+  "起始日期": "起始日",
+  "結束日期": "結束日",
+  "確認": "搜尋",
+  "日期": "日期",
+  "帳號": "帳號",
+  "貨幣": "貨幣",
+  "補點額度": "補點額度",
+  "扣點額度": "扣點額度",
+  "描述": "描述",
+  "驗證帳號": "驗證者",
+  "執行帳號": "執行者",
+  "無數據": "目前尚無任何資料",
+  "網路異常, 請稍後重新嘗試": "網路異常, 請稍後重新嘗試",
+  "錯誤": "系統訊息",
+  "總補點額度：": "總補點額度:",
+  "總扣點額度：": "總扣點額度:",
+
+
+
+
+  "類型": "類型",
+  "點數": "點數",
+  "扣點前額度": "扣點前額度",
+  "扣點後額度": "扣點後額度",
+  "UserTransferOut": "UserTransferOut",
+  "BetCancel": "BetCancel",
+  "AccountingCancel": "AccountingCancel",
+  "Bonus": "Bonus",
+  "UserTransferIn": "UserTransferIn",
+  "Bet": "Bet",
+  "BetRefund": "BetRefund",
+  "Result": "Result",
+  "GameTransferIn": "GameTransferIn",
+  "ResultCancel": "ResultCancel",
+  "Withdrawal": "Withdrawal",
+  "GameTransferOut": "GameTransferOut",
+  "Deposit": "Deposit",
+  "PaymentGift": "PaymentGift",
+  "PaymentRefund": "PaymentRefund",
+  "Manual": "Manual",
+  "Accounting": "Accounting"
+
+
+}

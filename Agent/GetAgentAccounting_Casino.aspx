@@ -351,6 +351,7 @@
     }
 
     function showNote() {
+        window.event.stopPropagation();
         window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"),
 
             `<span style="line-height:40px">${mlp.getLanguageKey("總佔成佣金: (-1*總上下數)*自身佔成率")}</span><br />
@@ -374,6 +375,7 @@
                 <div class="collapse-box">
                     <h2 id="ToggleCollapse" class="collapse-header has-arrow zIndex_overMask_SafariFix" onclick="ac.dataToggleCollapse(this)" data-toggle="collapse" data-target="#searchList" aria-controls="searchList" aria-expanded="true" aria-label="searchList">
                         <span class="language_replace">佣金結算報表</span>
+                        <btn style="font-size: 12px; right: 30px; position: absolute; border: 2px solid; width: 22px; text-align: center; border-radius: 11px; color: #bba480; cursor: pointer;" onclick="showNote(this)">!</btn>
                         <i class="arrow"></i>
                     </h2>
                     <!-- collapse內容 由此開始 ========== -->
@@ -455,7 +457,6 @@
                                 <div class="form-group wrapper_center dataList-process">
                                     <%--<button class="btn btn-outline-main" onclick="showNote()">!</button>--%>
                                     <button class="btn btn-full-main btn-roundcorner " onclick="queryData()" id="btnSearch"><i class="icon icon-before icon-ewin-input-submit"></i><span class="language_replace">確認</span></button>
-                                    <button class=" btn-outline-main" style="width:10%;border-radius: 11px;margin-left:5px" onclick="showNote()">!</button>
                                 </div>
                             </div>
                             <!-- iOS Safari Virtual Keyboard Fix--------------->

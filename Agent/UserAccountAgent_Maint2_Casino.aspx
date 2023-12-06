@@ -308,7 +308,7 @@
                     //    moreBtnRowDom.style.display = "none";
                     //}
                     if (o.PageCount > o.Page) {
-                     
+
                     } else {
                         moreBtnRowDom.style.display = "none";
                     }
@@ -373,7 +373,7 @@
                 c.setClassText(t, "NewAgentCount", null, item.NewAgentCount);
                 c.setClassText(t, "PointValue", null, c.toCurrency(item.PointValue));
                 c.setClassText(t, "LinePoint", null, c.toCurrency(item.LinePoint));
-                
+
                 var stateDom = t.querySelector(".UserAccountState");
 
                 if (item.UserAccountType == 0) {
@@ -669,6 +669,12 @@
         window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("請輸入完整帳號"));
     }
 
+    function showNote() {
+        window.event.stopPropagation();
+        window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("注意事項")
+        );
+    }
+
     function init() {
         var d = new Date();
 
@@ -711,6 +717,7 @@
                 <div class="collapse-box">
                     <h2 class="collapse-header has-arrow zIndex_overMask_SafariFix" onclick="ac.dataToggleCollapse(this)" data-toggle="collapse" data-target="#searchList" aria-controls="searchList" aria-expanded="true" aria-label="searchList">
                         <span class="language_replace">團隊代理</span>
+                        <btn style="font-size: 12px; right: 40px; position: absolute; border: 2px solid; width: 22px; text-align: center; border-radius: 11px; color: #bba480; cursor: pointer;" onclick="showNote()">!</btn>
                         <i class="arrow"></i>
                     </h2>
                     <!-- collapse內容 由此開始 ========== -->
@@ -777,13 +784,13 @@
                                         <li class="nav-item active">
                                             <a onclick="changeDateTab(this,2)" class="nav-link language_replace active" data-toggle="tab" href="" role="tab" aria-selected="true">本週</a>
                                         </li>
-                                      <%--  <li class="nav-item">
+                                        <%--  <li class="nav-item">
                                             <a onclick="changeDateTab(this,3)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">上週</a>
                                         </li>--%>
                                         <li class="nav-item">
                                             <a onclick="changeDateTab(this,4)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">本月</a>
                                         </li>
-                                       <%-- <li class="nav-item">
+                                        <%-- <li class="nav-item">
                                             <a onclick="changeDateTab(this,5)" class="nav-link language_replace" data-toggle="tab" href="" role="tab" aria-selected="true">上月</a>
                                         </li>--%>
                                         <li class="tab-slide" id="sliderDate"></li>

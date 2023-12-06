@@ -676,6 +676,12 @@
         window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("請輸入完整帳號"));
     }
 
+    function showNote() {
+        window.event.stopPropagation();
+        window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"),mlp.getLanguageKey("注意事項")
+        );
+    }
+
     function init() {
         var d = new Date();
 
@@ -717,6 +723,7 @@
                 <div class="collapse-box">
                     <h2 class="collapse-header has-arrow zIndex_overMask_SafariFix" onclick="ac.dataToggleCollapse(this)" data-toggle="collapse" data-target="#searchList" aria-controls="searchList" aria-expanded="true" aria-label="searchList">
                         <span class="language_replace">團隊投注數據</span>
+                        <btn style="font-size: 12px;right: 40px;position: absolute;border: 2px solid;width: 22px;text-align: center;border-radius: 11px;color: #bba480;cursor: pointer;" onclick="showNote()">!</btn>
                         <i class="arrow"></i>
                     </h2>
                     <!-- collapse內容 由此開始 ========== -->

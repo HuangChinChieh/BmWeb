@@ -1668,6 +1668,8 @@
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="1" name="SrcLoginAccount" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="DstLoginAccount" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SourceType" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TransferType" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="TransferState" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="SrcCurrencyType" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="DstCurrencyType" type="s:string" />
@@ -1726,6 +1728,51 @@
           <s:element minOccurs="0" maxOccurs="1" name="CreateDate" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="LoginAccountU" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="LoginAccountP" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetUserAccountPointOPLog">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="QueryBeginDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserAccountPointOPLogResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserAccountPointOPLogResult" type="tns:UserAccountPointOPLogResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UserAccountPointOPLogResult">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:APIResult">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Data" type="tns:ArrayOfUserAccountPointOPLog" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ArrayOfUserAccountPointOPLog">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="UserAccountPointOPLog" nillable="true" type="tns:UserAccountPointOPLog" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserAccountPointOPLog">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="forCompanyID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="forUserAccountID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrencyType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OPType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="BeforeValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="AfterValue" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="ThresholdValue" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreateDate" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:element name="CreateUserAccountAgentLogin">
@@ -2276,6 +2323,7 @@
       <s:element name="CompanyGameBrandResult" nillable="true" type="tns:CompanyGameBrandResult" />
       <s:element name="UserAccountTransferHistoryResult" nillable="true" type="tns:UserAccountTransferHistoryResult" />
       <s:element name="RequireWithdrawalTableResult" nillable="true" type="tns:RequireWithdrawalTableResult" />
+      <s:element name="UserAccountPointOPLogResult" nillable="true" type="tns:UserAccountPointOPLogResult" />
       <s:element name="AgentInfoResult" nillable="true" type="tns:AgentInfoResult" />
       <s:element name="UserAgentInfoResult" nillable="true" type="tns:UserAgentInfoResult" />
       <s:element name="RequireWithdrawalResult" nillable="true" type="tns:RequireWithdrawalResult" />
@@ -2584,6 +2632,12 @@
   </wsdl:message>
   <wsdl:message name="GetUserAccountRequireWithdrawalHistorySoapOut">
     <wsdl:part name="parameters" element="tns:GetUserAccountRequireWithdrawalHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountPointOPLogSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserAccountPointOPLog" />
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountPointOPLogSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserAccountPointOPLogResponse" />
   </wsdl:message>
   <wsdl:message name="CreateUserAccountAgentLoginSoapIn">
     <wsdl:part name="parameters" element="tns:CreateUserAccountAgentLogin" />
@@ -3114,6 +3168,14 @@
   </wsdl:message>
   <wsdl:message name="GetUserAccountRequireWithdrawalHistoryHttpGetOut">
     <wsdl:part name="Body" element="tns:RequireWithdrawalTableResult" />
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountPointOPLogHttpGetIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="QueryBeginDate" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountPointOPLogHttpGetOut">
+    <wsdl:part name="Body" element="tns:UserAccountPointOPLogResult" />
   </wsdl:message>
   <wsdl:message name="GeteUserAccountAgentInfoByLoginAccountHttpGetIn">
     <wsdl:part name="AID" type="s:string" />
@@ -3666,6 +3728,14 @@
   <wsdl:message name="GetUserAccountRequireWithdrawalHistoryHttpPostOut">
     <wsdl:part name="Body" element="tns:RequireWithdrawalTableResult" />
   </wsdl:message>
+  <wsdl:message name="GetUserAccountPointOPLogHttpPostIn">
+    <wsdl:part name="AID" type="s:string" />
+    <wsdl:part name="QueryBeginDate" type="s:string" />
+    <wsdl:part name="CurrencyType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserAccountPointOPLogHttpPostOut">
+    <wsdl:part name="Body" element="tns:UserAccountPointOPLogResult" />
+  </wsdl:message>
   <wsdl:message name="GeteUserAccountAgentInfoByLoginAccountHttpPostIn">
     <wsdl:part name="AID" type="s:string" />
     <wsdl:part name="LoginAccount" type="s:string" />
@@ -4002,6 +4072,10 @@
       <wsdl:input message="tns:GetUserAccountRequireWithdrawalHistorySoapIn" />
       <wsdl:output message="tns:GetUserAccountRequireWithdrawalHistorySoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetUserAccountPointOPLog">
+      <wsdl:input message="tns:GetUserAccountPointOPLogSoapIn" />
+      <wsdl:output message="tns:GetUserAccountPointOPLogSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="CreateUserAccountAgentLogin">
       <wsdl:input message="tns:CreateUserAccountAgentLoginSoapIn" />
       <wsdl:output message="tns:CreateUserAccountAgentLoginSoapOut" />
@@ -4272,6 +4346,10 @@
       <wsdl:input message="tns:GetUserAccountRequireWithdrawalHistoryHttpGetIn" />
       <wsdl:output message="tns:GetUserAccountRequireWithdrawalHistoryHttpGetOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetUserAccountPointOPLog">
+      <wsdl:input message="tns:GetUserAccountPointOPLogHttpGetIn" />
+      <wsdl:output message="tns:GetUserAccountPointOPLogHttpGetOut" />
+    </wsdl:operation>
     <wsdl:operation name="GeteUserAccountAgentInfoByLoginAccount">
       <wsdl:input message="tns:GeteUserAccountAgentInfoByLoginAccountHttpGetIn" />
       <wsdl:output message="tns:GeteUserAccountAgentInfoByLoginAccountHttpGetOut" />
@@ -4533,6 +4611,10 @@
     <wsdl:operation name="GetUserAccountRequireWithdrawalHistory">
       <wsdl:input message="tns:GetUserAccountRequireWithdrawalHistoryHttpPostIn" />
       <wsdl:output message="tns:GetUserAccountRequireWithdrawalHistoryHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserAccountPointOPLog">
+      <wsdl:input message="tns:GetUserAccountPointOPLogHttpPostIn" />
+      <wsdl:output message="tns:GetUserAccountPointOPLogHttpPostOut" />
     </wsdl:operation>
     <wsdl:operation name="GeteUserAccountAgentInfoByLoginAccount">
       <wsdl:input message="tns:GeteUserAccountAgentInfoByLoginAccountHttpPostIn" />
@@ -5048,6 +5130,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetUserAccountRequireWithdrawalHistory">
       <soap:operation soapAction="http://tempuri.org/GetUserAccountRequireWithdrawalHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserAccountPointOPLog">
+      <soap:operation soapAction="http://tempuri.org/GetUserAccountPointOPLog" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -5679,6 +5770,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetUserAccountPointOPLog">
+      <soap12:operation soapAction="http://tempuri.org/GetUserAccountPointOPLog" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CreateUserAccountAgentLogin">
       <soap12:operation soapAction="http://tempuri.org/CreateUserAccountAgentLogin" style="document" />
       <wsdl:input>
@@ -6285,6 +6385,15 @@
         <mime:mimeXml part="Body" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetUserAccountPointOPLog">
+      <http:operation location="/GetUserAccountPointOPLog" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GeteUserAccountAgentInfoByLoginAccount">
       <http:operation location="/GeteUserAccountAgentInfoByLoginAccount" />
       <wsdl:input>
@@ -6866,6 +6975,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetUserAccountRequireWithdrawalHistory">
       <http:operation location="/GetUserAccountRequireWithdrawalHistory" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserAccountPointOPLog">
+      <http:operation location="/GetUserAccountPointOPLog" />
       <wsdl:input>
         <mime:content type="application/x-www-form-urlencoded" />
       </wsdl:input>

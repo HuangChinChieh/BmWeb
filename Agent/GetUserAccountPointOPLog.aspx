@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="GetRequireWithdrawalHistory.aspx.cs" Inherits="GetRequireWithdrawalHistory" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="GetUserAccountPointOPLog.aspx.cs" Inherits="Agent_GetUserAccountPointOPLog" %>
 
 <%
     string AgentVersion = EWinWeb.AgentVersion;
@@ -24,7 +24,7 @@
 <script type="text/javascript" src="../Scripts/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/google-libphonenumber/3.2.31/libphonenumber.min.js"></script>
 <script>
-    var ApiUrl = "GetRequireWithdrawalHistory.aspx";
+    var ApiUrl = "GetUserAccountPointOPLog.aspx";
     var c = new common();
     var ac = new AgentCommon();
     var mlp;
@@ -37,38 +37,19 @@
 
     function queryData() {
         var startDate;
-        var endDate;
         var idList = document.getElementById("idList");
-        var type = 0;
-        var typeDoms = document.getElementsByName("type");
 
         c.clearChildren(idList);
-
-        if (typeDoms) {
-            if (typeDoms.length > 0) {
-                for (i = 0; i < typeDoms.length; i++) {
-                    if (typeDoms[i].checked == true) {
-                        type = typeDoms[i].value;
-
-                        break;
-                    }
-                }
-            }
-        }
-
         startDate = document.getElementById("startDate");
-        endDate = document.getElementById("endDate");
 
         postData = {
             AID: EWinInfo.ASID,
             QueryBeginDate: startDate.value,
-            QueryEndDate: endDate.value,
-            SearchState: type,
             CurrencyType: SelectedWallet
         };
 
         window.parent.API_ShowLoading();
-        c.callService(ApiUrl + "/GetOrderSummary", postData, function (success, o) {
+        c.callService(ApiUrl + "/GetPointOPLog", postData, function (success, o) {
             if (success) {
                 var obj = c.getJSON(o);
 
@@ -94,9 +75,6 @@
         var idList = document.getElementById("idList");
         var OrderType = 0;
         var hasNoData = true;
-        let sumAmount0 = 0;
-        let sumAmount1 = 0;
-        let sumAmount2 = 0;
 
         var div = document.createElement("DIV");
 
@@ -108,37 +86,34 @@
         idList.appendChild(div);
 
         if (o != null) {
-            if (o.Datas != null) {
-                //c.clearChildren(idList);
-                //只顯示個人投注
-                for (var i = 0; i < o.Datas.length; i++) {
-                    var item = o.Datas[i];
+            if (o.Data != null) {
+                for (var i = 0; i < o.Data.length; i++) {
+                    var item = o.Data[i];
                     var t = c.getTemplate("templateTableItem");
-                    var btn;
-
+                    $(t).attr("data-OPType", item.OPType);
                     c.setClassText(t, "CreateDate", null, item.CreateDate);
-                    c.setClassText(t, "LoginAccountU", null, item.LoginAccountU);
-                    c.setClassText(t, "LoginAccountP", null, item.LoginAccountP);
-                    c.setClassText(t, "ProcessStatus", null, item.ProcessStatus == 0 ? mlp.getLanguageKey("申請提款") : (item.ProcessStatus == 1 ? mlp.getLanguageKey("完成轉帳") : mlp.getLanguageKey("拒絕")));
                     c.setClassText(t, "CurrencyType", null, item.CurrencyType);
+                    c.setClassText(t, "OPType", null, mlp.getLanguageKey(item.OPType));
 
                     if (parseFloat(item.Amount) < 0) {
                         t.getElementsByClassName("Amount")[0].classList.add("num-negative");
                     }
-                    c.setClassText(t, "Amount", null, c.toCurrency(item.Amount));
+                    c.setClassText(t, "Amount", null, toCurrency(item.Amount));
+
+                    if (parseFloat(item.BeforeValue) < 0) {
+                        t.getElementsByClassName("BeforeValue")[0].classList.add("num-negative");
+                    }
+                    c.setClassText(t, "BeforeValue", null, toCurrency(item.BeforeValue));
+
+                    if (parseFloat(item.AfterValue) < 0) {
+                        t.getElementsByClassName("AfterValue")[0].classList.add("num-negative");
+                    }
+                    c.setClassText(t, "AfterValue", null, toCurrency(item.AfterValue));
+
                     c.setClassText(t, "Description", null, item.Description);
 
                     t.style.display = "none";
                     idList.appendChild(t);
-
-                    if (item.ProcessStatus == 0) {
-                        sumAmount0 = sumAmount0 + item.Amount;
-                    } else if (item.ProcessStatus == 1) {
-                        sumAmount1 = sumAmount1 + item.Amount;
-                    } else {
-                        sumAmount2 = sumAmount2 + item.Amount;
-                    }
-
                     t.style.display = "";
                     document.getElementById("hasNoData_DIV").style.display = "none";
                     idList.classList.remove("tbody__hasNoData");
@@ -147,10 +122,6 @@
                 }
             }
         }
-
-        $(".sumAmount0").text(sumAmount0);
-        $(".sumAmount1").text(sumAmount1);
-        $(".sumAmount2").text(sumAmount2);
     }
 
     function setSearchFrame() {
@@ -159,7 +130,7 @@
         var month = "";
         var date = "";
 
-        startDate.setDate(startDate.getDate() - 7);
+        startDate.setDate(startDate.getDate());
         month = (startDate.getMonth() + 1);
         if (month < 10) {
             month = "0" + month;
@@ -169,16 +140,25 @@
             date = "0" + date;
         }
         document.getElementById("startDate").value = startDate.getFullYear() + "-" + month + "-" + date;
+    }
 
-        month = (nowDate.getMonth() + 1);
-        if (month < 10) {
-            month = "0" + month;
+    function toCurrency(num) {
+
+        num = Math.floor(Number(num) * 10000) / 10000;
+        var parts = num.toString().split('.');
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        return parts.join('.');
+    }
+
+    function SelectOPTypeMethod() {
+        let SelectOPType = $("#SelectOPType").val();
+
+        if (SelectOPType == "All") {
+            $("#idList .result").show();
+        } else {
+            $("#idList .result").hide();
+            $('div[data-optype="' + SelectOPType + '"]').show();
         }
-        date = nowDate.getDate();
-        if (date < 10) {
-            date = "0" + date;
-        }
-        document.getElementById("endDate").value = nowDate.getFullYear() + "-" + month + "-" + date;
     }
 
     function showNote() {
@@ -189,11 +169,12 @@
 
     function init() {
         var d = new Date();
-        lang = window.localStorage.getItem("agent_lang");
+
         EWinInfo = window.parent.EWinInfo;
         api = window.parent.API_GetAgentAPI();
         setSearchFrame();
 
+        lang = window.localStorage.getItem("agent_lang");
         mlp = new multiLanguage();
         mlp.loadLanguage(lang, function () {
             window.parent.API_CloseLoading();
@@ -250,7 +231,7 @@
             <div class="container-fluid">
                 <div class="collapse-box">
                     <h2 class="collapse-header has-arrow zIndex_overMask_SafariFix" onclick="ac.dataToggleCollapse(this)" data-toggle="collapse" data-target="#searchList" aria-controls="searchList" aria-expanded="true" aria-label="searchList">
-                        <span class="language_replace">出款申請記錄</span>
+                        <span class="language_replace">錢包點數異動記錄</span>
                         <btn style="font-size: 12px;right: 40px;position: absolute;border: 2px solid;width: 22px;text-align: center;border-radius: 11px;color: #bba480;cursor: pointer;" onclick="showNote()">!</btn>
                         <i class="arrow"></i>
                     </h2>
@@ -259,7 +240,7 @@
                         <div id="divSearchContent" class="row searchListContent">
                             <div class="col-12 col-md-6 col-lg-4 col-xl-auto">
                                 <!-- 起始日期 / 結束日期 -->
-                                <div class="form-group search_date">
+                                <div class="">
                                     <div class="starDate">
                                         <div class="title"><span class="language_replace">起始日期</span></div>
 
@@ -269,51 +250,28 @@
                                         </div>
 
                                     </div>
-                                    <div class="endDate">
-                                        <div class="title"><span class="language_replace">結束日期</span></div>
-
-                                        <div class="form-control-default">
-                                            <input id="endDate" type="date" class="form-control custom-date" />
-                                            <label for="" class="form-label"><i class="icon icon2020-calendar-o"></i></label>
-                                        </div>
-
-                                    </div>
 
                                 </div>
 
                             </div>
 
+
                             <div class="col-12 col-md-6 col-lg-4 col-xl-auto">
                                 <!-- 模式 -->
-                                <div class="form-group form-group-s2 ">
-                                    <div class="title"><span class="language_replace">搜尋條件</span></div>
-                                    <div id="TypeDiv" class="content">
-                                        <div class="custom-control custom-checkboxValue custom-control-inline check-bg">
-                                            <label class="custom-label">
-                                                <input type="radio" name="type" value="99" class="custom-control-input-hidden" checked>
-                                                <div class="custom-input checkbox"><span class="language_replace tempName">全部</span></div>
-                                            </label>
-                                        </div>
-                                        <div class="custom-control custom-checkboxValue custom-control-inline check-bg">
-                                            <label class="custom-label">
-                                                <input type="radio" name="type" value="0" class="custom-control-input-hidden">
-                                                <div class="custom-input checkbox"><span class="language_replace tempName">申請提款</span></div>
-                                            </label>
-                                        </div>
-                                        <div class="custom-control custom-checkboxValue custom-control-inline check-bg">
-                                            <label class="custom-label">
-                                                <input type="radio" name="type" value="1" class="custom-control-input-hidden">
-                                                <div class="custom-input checkbox"><span class="language_replace tempName">完成轉帳</span></div>
-                                            </label>
-                                        </div>
-                                        <div class="custom-control custom-checkboxValue custom-control-inline check-bg">
-                                            <label class="custom-label">
-                                                <input type="radio" name="type" value="2" class="custom-control-input-hidden">
-                                                <div class="custom-input checkbox"><span class="language_replace tempName">拒絕</span></div>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div class="title"><span class="language_replace">篩選類型</span></div>
+                                <ul class="nav">
+                                    <li id="btnWallet" class="navbar-member nav-item submenu dropdown">
+                                        <select class="custom-select" id="SelectOPType" onchange="SelectOPTypeMethod()">
+                                            <option style="zoom: 1.1" class="language_replace" value="All">全部</option>
+                                            <option style="zoom: 1.1" class="language_replace" value="UserTransferOut">UserTransferOut</option>
+                                            <option style="zoom: 1.1" class="language_replace" value="UserTransferIn">UserTransferIn</option>
+                                            <option style="zoom: 1.1" class="language_replace" value="Withdrawal">Withdrawal</option>
+                                            <option style="zoom: 1.1" class="language_replace" value="Deposit">Deposit</option>
+                                            <option style="zoom: 1.1" class="language_replace" value="Manual">Manual</option>
+                                            <option style="zoom: 1.1" class="language_replace" value="Accounting">Accounting</option>
+                                        </select>
+                                    </li>
+                                </ul>
                             </div>
                             <div class="col-12">
                                 <div class="form-group wrapper_center dataList-process">
@@ -330,60 +288,53 @@
 
         <!-- 表格 由此開始 ========== -->
         <div class="container-fluid wrapper__TopCollapse orderHistory_userAccount">
-            <h5 class="collapse-header has-arrow zIndex_overMask_SafariFix">
-                <span class="language_replace">待處理總金額：</span>
-                <span class="language_replace sumAmount0">0</span><br />
-                <span class="language_replace">已完成總金額：</span>
-                <span class="language_replace sumAmount1">0</span><br />
-                <span class="language_replace">拒絕總金額：</span>
-                <span class="language_replace sumAmount2">0</span>
-            </h5>
             <div class="MT__tableDiv" id="idResultTable">
                 <!-- 自訂表格 -->
                 <div class="MT__table table-col-8 w-200">
                     <div id="templateTableItem" style="display: none">
-                        <div class="tbody__tr td-non-underline-last-2">
-                            <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">交易日期</span></span>
+                        <div class="tbody__tr td-non-underline-last-2 result">
+                            <div class="tbody__td date td-100 nonTitle">
+                                <span class="td__title"><span class="language_replace">日期</span></span>
                                 <span class="td__content"><span class="CreateDate">CON5</span></span>
                             </div>
-                            <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">申請帳戶</span></span>
-                                <span class="td__content"><span class="LoginAccountU">CON5</span></span>
-                            </div>
-                            <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">審核帳戶</span></span>
-                                <span class="td__content"><span class="LoginAccountP">CON5</span></span>
-                            </div>
-                            <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">狀態</span></span>
-                                <span class="td__content"><span class="ProcessStatus">CON5</span></span>
-                            </div>
-                            <div class="tbody__td td-number td-3 td-vertical">
+                            <div class="tbody__td td-3 nonTitle">
                                 <span class="td__title"><span class="language_replace">貨幣</span></span>
-                                <span class="td__content"><span class="CurrencyType">CON3</span></span>
+                                <span class="td__content"><i class="icon icon-ewin-default-currencyType icon-s icon-before"></i><span class="CurrencyType">CON3</span></span>
                             </div>
                             <div class="tbody__td td-number td-3 td-vertical">
-                                <span class="td__title"><span class="language_replace">額度</span></span>
+                                <span class="td__title"><i class="icon icon-ewin-default-totalWinLose icon-s icon-before"></i><span class="language_replace">類型</span></span>
+                                <span class="td__content"><span class="OPType">CON4</span></span>
+                            </div>
+                            <div class="tbody__td td-number td-3 td-vertical td_DepositValue">
+                                <span class="td__title"><i class="icon icon-ewin-default-totalRolling icon-s icon-before"></i><span class="language_replace">點數</span></span>
                                 <span class="td__content"><span class="Amount">CON4</span></span>
                             </div>
+                            <div class="tbody__td td-number td-3 td-vertical td_DepositValue">
+                                <span class="td__title"><i class="icon icon-ewin-default-totalRolling icon-s icon-before"></i><span class="language_replace">扣點前額度</span></span>
+                                <span class="td__content"><span class="BeforeValue">CON4</span></span>
+                            </div>
+                            <div class="tbody__td td-number td-3 td-vertical td_DepositValue">
+                                <span class="td__title"><i class="icon icon-ewin-default-totalRolling icon-s icon-before"></i><span class="language_replace">扣點後額度</span></span>
+                                <span class="td__content"><span class="AfterValue">CON4</span></span>
+                            </div>
                             <div class="tbody__td td-3 ">
-                                <span class="td__title"><span class="language_replace">備註</span></span>
+                                <span class="td__title"><span class="language_replace">描述</span></span>
                                 <span class="td__content"><span class="Description">CON3</span></span>
                             </div>
+
                         </div>
                     </div>
                     <!-- 標題項目  -->
                     <div class="thead">
                         <!--標題項目單行 -->
                         <div class="thead__tr">
-                            <div class="thead__th"><span class="language_replace">交易日期</span></div>
-                            <div class="thead__th"><span class="language_replace">申請帳戶</span></div>
-                            <div class="thead__th"><span class="language_replace">審核帳戶</span></div>
-                            <div class="thead__th"><span class="language_replace">狀態</span></div>
+                            <div class="thead__th"><span class="language_replace">日期</span></div>
                             <div class="thead__th"><span class="language_replace">貨幣</span></div>
-                            <div class="thead__th"><span class="language_replace">額度</span></div>
-                            <div class="thead__th"><span class="language_replace">備註</span></div>
+                            <div class="thead__th"><span class="language_replace">類型</span></div>
+                            <div class="thead__th"><span class="language_replace">點數</span></div>
+                            <div class="thead__th"><span class="language_replace">扣點前額度</span></div>
+                            <div class="thead__th"><span class="language_replace">扣點後額度</span></div>
+                            <div class="thead__th"><span class="language_replace">描述</span></div>
                         </div>
                     </div>
                     <!-- 表格上下滑動框 -->

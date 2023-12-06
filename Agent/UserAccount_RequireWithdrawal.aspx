@@ -270,6 +270,12 @@
         document.getElementById("endDate").value = nowDate.getFullYear() + "-" + month + "-" + date;
     }
 
+    function showNote() {
+        window.event.stopPropagation();
+        window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"),mlp.getLanguageKey("注意事項")
+        );
+    }
+
     function init() {
 
         EWinInfo = window.parent.EWinInfo;
@@ -321,6 +327,7 @@
                 <div class="collapse-box">
                     <h2 class="collapse-header has-arrow" onclick="ac.dataToggleCollapse(this)" data-toggle="collapse" data-target="#searchList" aria-controls="searchList" aria-expanded="true" aria-label="searchList">
                         <span class="language_replace">下線出款記錄</span>
+                        <btn style="font-size: 12px;right: 40px;position: absolute;border: 2px solid;width: 22px;text-align: center;border-radius: 11px;color: #bba480;cursor: pointer;" onclick="showNote()">!</btn>
                         <i class="arrow"></i>
                     </h2>
                     <!-- collapse內容 由此開始 ========== -->

@@ -80,7 +80,7 @@
                             CurrencyType: $("#idWalletList").val(),
                             TransOutValue: $("#idTransOut").val(),
                             WalletPassword: $("#idWalletPassword").val(),
-                            Description: "TransOutToChildAccountFromAgent"
+                            Description: $("#idDescription").val()
                         }
 
                         c.callService(ApiUrl + "/UserAccountTransfer", postObj1, function (success, o) {
@@ -169,6 +169,12 @@
             el.value = el.value.substring(0, 20);
         }
     }
+
+    function showNote() {
+        window.event.stopPropagation();
+        window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"),mlp.getLanguageKey("注意事項")
+        );
+    }
     
     function init() {
         lang = window.localStorage.getItem("agent_lang");
@@ -193,7 +199,14 @@
 <body class="innerBody">
     <main>
         <div class="container-fluid">
-            <h1 class="page__title "><span class="language_replace">會員轉帳</span></h1>
+
+            
+                <div class="collapse-box">
+                    <h2 class="collapse-header has-arrow zIndex_overMask_SafariFix">
+                        <span class="language_replace">會員轉帳</span>
+                        <btn style="font-size: 12px; right: 5px; position: absolute; border: 2px solid; width: 22px; text-align: center; border-radius: 11px; color: #bba480; cursor: pointer;" onclick="showNote()">!</btn>
+                    </h2>
+                </div>
 
             <form onsubmit="return false;">
                 <section class="sectionWallet wallet__currency--transfer">
@@ -258,7 +271,7 @@
                         </div>
 
                         <!-- 備註 -->
-                        <div class="Remarks" style="display: none">
+                        <div class="Remarks">
                             <div class="form-group">
                                 <div class="form-control-underline input-notice form-input-icon">
                                     <textarea class="form-control control-notice" id="idDescription" rows="1" language_replace="placeholder" placeholder="備註" onkeyup="chkTextLength(this)"></textarea>

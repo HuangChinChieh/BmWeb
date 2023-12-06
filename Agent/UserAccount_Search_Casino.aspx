@@ -258,6 +258,12 @@
             window.parent.API_NewWindow(mlp.getLanguageKey("會員編輯"), "UserAccount_Edit_Casino.aspx?UserAccountID=" + userAccountID);
         }
 
+    function showNote() {
+        window.event.stopPropagation();
+        window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"),mlp.getLanguageKey("注意事項")
+        );
+    }
+
         function init() {
             EWinInfo = window.parent.EWinInfo;
             api = window.parent.API_GetAgentAPI();
@@ -301,6 +307,7 @@
             <div class="container-fluid">
                 <div class="breadcrumb__userAccount row">
                     <div id="idParentPath" class="loginUserInfo__accountID heading-1 col language_replace">直屬階層管理</div>
+                    <btn style="font-size: 12px;right: 5px;position: absolute;border: 2px solid;width: 22px;text-align: center;border-radius: 11px;color: #bba480;cursor: pointer;" onclick="showNote()">!</btn>
                 </div>
 
             </div>

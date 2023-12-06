@@ -1306,7 +1306,7 @@
                                             <span class="language_replace">出款申請記錄</span></a>
                                     </li>
                                     <li class="nav-item submenu dropdown">
-                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('錢包點數異動記錄'), 'GetUserAccountPointManualHistory.aspx');ItemClick(this);">
+                                        <a class="nav-link" onclick="API_MainWindow(mlp.getLanguageKey('錢包點數異動記錄'), 'GetUserAccountPointOPLog.aspx');ItemClick(this);">
                                             <i class="icon icon-mask icon-ewin-report-income"></i>
                                             <span class="language_replace">錢包點數異動記錄</span></a>
                                     </li>

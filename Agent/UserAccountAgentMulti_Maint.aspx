@@ -37,7 +37,7 @@
         //function EditAccount(LoginAccount) {
         //    window.parent.API_NewWindow(mlp.getLanguageKey("多重帳號編輯"), "UserAccountAgentMuti_Edit.aspx?LoginAccount=" + LoginAccount);
         //}
-        
+
         function DelAccount(LoginAccount) {
             window.parent.API_ShowMessage(mlp.getLanguageKey("多重帳號移除"), mlp.getLanguageKey("確定移除此帳號"), function () {
                 api.DeleteUserAccountSubUserList(EWinInfo.ASID, LoginAccount, function (success, o) {
@@ -57,7 +57,7 @@
                         }
                     }
                 })
-            },null)
+            }, null)
         }
 
         function setUserAccountAgentMuti(cb) {
@@ -117,6 +117,12 @@
             });
         }
 
+        function showNote() {
+            window.event.stopPropagation();
+            window.parent.API_ShowMessageOK(mlp.getLanguageKey("提醒"), mlp.getLanguageKey("注意事項")
+            );
+        }
+
         function init() {
             EWinInfo = window.parent.EWinInfo;
             api = window.parent.API_GetAgentAPI();
@@ -136,7 +142,13 @@
 <body class="innerBody">
     <main>
         <div class="container-fluid">
-            <h1 class="page__title "><span class="language_replace">多重帳號維護</span></h1>
+
+            <div class="collapse-box">
+                <h2 class="collapse-header has-arrow zIndex_overMask_SafariFix">
+                    <span class="language_replace">多重帳號維護</span>
+                    <btn style="font-size: 12px; right: 5px; position: absolute; border: 2px solid; width: 22px; text-align: center; border-radius: 11px; color: #bba480; cursor: pointer;" onclick="showNote()">!</btn>
+                </h2>
+            </div>
 
             <div class="MemberList MemberList__Assistant">
                 <div id="idUserList" class="row">
